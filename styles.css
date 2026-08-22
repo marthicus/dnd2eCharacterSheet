@@ -30,23 +30,24 @@ html,body{overflow-x:hidden}
 .ability-summary-table{width:100%;table-layout:fixed;border-collapse:collapse;font:11px/1.25 system-ui}
 .ability-summary-table th,.ability-summary-table td{padding:4px 6px;border:1px solid #9b8a73;vertical-align:top;overflow-wrap:anywhere}
 .ability-summary-table th{background:#e9deca;color:var(--ink);font-size:10px;text-transform:uppercase}
-.hit-points-layout{display:grid;grid-template-columns:minmax(430px,2fr) minmax(220px,1fr);gap:10px}
-.hit-points-fields{display:grid;grid-template-columns:150px minmax(0,1fr);grid-template-rows:1fr auto;gap:10px;align-items:stretch;padding:10px;border:1px solid var(--line)}
+.hit-points-layout{display:grid;grid-template-columns:2fr 3fr;gap:10px}
+.hit-points-fields{display:grid;grid-template-columns:150px minmax(0,1fr);grid-template-rows:1fr auto;column-gap:18px;row-gap:10px;align-items:stretch;padding:10px;border:1px solid var(--line)}
 .hit-points-fields .fields{grid-template-columns:repeat(3,minmax(0,1fr))}
 .hit-points-fields .field{min-width:0}
 .hit-points-fields .field label{white-space:nowrap}
+.hit-points-fields .field input{width:5ch;max-width:100%;margin:0 auto}
 .hit-points-fields .fields{width:100%}
 .wounds-field{display:flex;flex-direction:column;min-width:0;padding:10px;border:1px solid var(--line)}
 .wounds-field label{color:var(--muted);font:11px system-ui;text-transform:uppercase;margin-bottom:4px}
 .wounds-field textarea{height:100%;min-height:110px}
-.hp-heart{grid-row:1 / span 2;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:150px;min-height:140px;padding:12px;color:#fff;background:#7a281f;clip-path:polygon(50% 100%,0 35%,0 18%,12% 4%,27% 0,50% 16%,73% 0,88% 4%,100% 18%,100% 35%)}
+.hp-heart{grid-row:1 / span 2;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:150px;min-height:140px;margin-right:10px;padding:12px;color:#fff;background:#7a281f;clip-path:polygon(50% 100%,0 35%,0 18%,12% 4%,27% 0,50% 16%,73% 0,88% 4%,100% 18%,100% 35%)}
 .heart-symbol{font-size:38px;line-height:1;color:#c69c3a;text-shadow:0 1px 1px #0008}
 .hp-total{font:700 15px system-ui;white-space:nowrap}
 .hp-heart small{font:10px system-ui;text-transform:uppercase}
-.hp-actions{grid-column:2;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5px;align-items:center}
+.hp-actions{grid-column:2;display:grid;grid-template-columns:repeat(2,max-content);gap:5px;align-items:center}
 .hp-actions label{color:var(--muted);font:11px system-ui;text-transform:uppercase}
-.hp-action-amount{min-width:0}
-.hp-actions .hp-action{min-width:0}
+.hp-action-amount{width:60px;min-width:0}
+.hp-actions .hp-action{grid-row:2;width:max-content;min-width:92px;padding:6px 10px}
 .hp-action{padding:6px 7px}
 @media(max-width:700px){.hit-points-layout{grid-template-columns:1fr}.hit-points-fields{grid-template-columns:1fr;grid-template-rows:auto auto auto;padding:8px}.hp-heart{grid-row:auto;min-width:0;min-height:130px}.hit-points-fields .fields{grid-template-columns:1fr}.hp-actions{grid-column:auto}.wounds-field textarea{min-height:100px}}
 .stat:hover,.stat:focus-within,.stat.tooltip-pinned{z-index:11}
