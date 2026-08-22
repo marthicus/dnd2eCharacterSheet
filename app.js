@@ -593,6 +593,29 @@ function setupHitPointsSection() {
     updateHitPointDisplay();
 }
 
+function movementRate(base, multiplier) {
+    const value = Number.parseInt(base, 10);
+    return Number.isInteger(value) && value >= 0 ? Math.floor(value * multiplier) : '-';
+}
+
+function setupMovementSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide movement-section';
+    section.innerHTML = `<h2>Movement speed</h2><div class="movement-layout"><div class="movement-base"><label>Base rate</label><input data-section="combat" data-key="movement" value="${esc(data.combat.movement)}" inputmode="numeric"><small>Adjust for race, class, armor, and encumbrance as needed.</small></div><table class="movement-table"><thead><tr><th>Rate</th><th>Multiplier</th><th>Speed</th></tr></thead><tbody><tr><th>Light</th><td>2/3</td><td data-movement-rate="light"></td></tr><tr><th>Moderate</th><td>1/2</td><td data-movement-rate="moderate"></td></tr><tr><th>Heavy</th><td>1/3</td><td data-movement-rate="heavy"></td></tr><tr><th>Severe</th><td>1/6</td><td data-movement-rate="severe"></td></tr><tr><th>Jog</th><td>×2</td><td data-movement-rate="jog"></td></tr><tr><th>Run</th><td>×3</td><td data-movement-rate="run3"></td></tr><tr><th>Run</th><td>×4</td><td data-movement-rate="run4"></td></tr><tr><th>Run</th><td>×5</td><td data-movement-rate="run5"></td></tr></tbody></table></div>`;
+    document.querySelector('.hit-points-section').after(section);
+    updateMovementSection();
+}
+
+function updateMovementSection() {
+    const section = document.querySelector('.movement-section');
+    if (!section) return;
+    const base = data.combat.movement;
+    const rates = { light: 2 / 3, moderate: 1 / 2, heavy: 1 / 3, severe: 1 / 6, jog: 2, run3: 3, run4: 4, run5: 5 };
+    Object.entries(rates).forEach(([key, multiplier]) => {
+        section.querySelector(`[data-movement-rate="${key}"]`).textContent = movementRate(base, multiplier);
+    });
+}
+
 function updateHitPointDisplay() {
     const display = document.querySelector('.hp-total');
     if (!display) return;
@@ -625,6 +648,7 @@ function render() {
     });
     setupAbilitySummary();
     setupHitPointsSection();
+    setupMovementSection();
     setupAbilityTooltips();
     setupCharacterHeader();
     setupSectionToggles();
@@ -647,6 +671,7 @@ function bind() {
             updateAbilitySummary();
         }
         if (e.dataset.section === 'combat' && ['hpMax', 'hpCurrent', 'hpBonus'].includes(e.dataset.key)) updateHitPointDisplay();
+        if (e.dataset.section === 'combat' && e.dataset.key === 'movement') updateMovementSection();
         changed()
     });
     document.querySelectorAll('[data-root]').forEach(e => e.oninput = () => {
