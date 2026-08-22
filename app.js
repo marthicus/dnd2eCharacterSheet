@@ -66,6 +66,23 @@ const FIXED = {
         gems: ''
     },
     weapons: [],
+    henchmen: [],
+    thiefSkills: [
+        { name: 'Pick Pockets', value: '' }, { name: 'Open Locks', value: '' }, { name: 'Find/Remove Traps', value: '' },
+        { name: 'Move Silently', value: '' }, { name: 'Hide in Shadows', value: '' }, { name: 'Detect Noise', value: '' },
+        { name: 'Climb Walls', value: '' }, { name: 'Read Languages', value: '' }, { name: 'Backstab', value: '' }
+    ],
+    undeadTurning: [
+        { name: 'Skeleton or 1 HD', value: '' }, { name: 'Zombie', value: '' }, { name: 'Ghoul or 2 HD', value: '' },
+        { name: 'Shadow or 3-4 HD', value: '' }, { name: 'Wight or 5 HD', value: '' }, { name: 'Ghast', value: '' },
+        { name: 'Wraith or 6 HD', value: '' }, { name: 'Mummy or 7 HD', value: '' }, { name: 'Spectre or 8 HD', value: '' },
+        { name: 'Vampire or 9 HD', value: '' }, { name: 'Ghost or 10 HD', value: '' }, { name: 'Lich or 11+ HD', value: '' },
+        { name: 'Special', value: '' }
+    ],
+    spellLevels: [
+        { name: '1st', value: '' }, { name: '2nd', value: '' }, { name: '3rd', value: '' }, { name: '4th', value: '' },
+        { name: '5th', value: '' }, { name: '6th', value: '' }, { name: '7th', value: '' }, { name: '8th', value: '' }, { name: '9th', value: '' }
+    ],
     proficiencies: [],
     inventory: [],
     spells: [],
@@ -87,7 +104,8 @@ function normalize(x = {}) {
     const d = clone(FIXED);
     for (const section of ['identity', 'abilities', 'details', 'combat', 'saves', 'currency']) Object.assign(d[section], x[section] || {});
     for (const k of ['portraitUrl', 'specialAbilities', 'wounds', 'notes']) d[k] = typeof x[k] === 'string' ? x[k] : '';
-    for (const k of ['weapons', 'proficiencies', 'inventory', 'spells']) d[k] = Array.isArray(x[k]) ? x[k] : [];
+    for (const k of ['weapons', 'henchmen', 'proficiencies', 'inventory', 'spells']) d[k] = Array.isArray(x[k]) ? x[k] : [];
+    for (const k of ['thiefSkills', 'undeadTurning', 'spellLevels']) d[k] = Array.isArray(x[k]) && x[k].length ? x[k] : d[k];
     return d
 }
 const labels = {
@@ -327,7 +345,7 @@ function setupCharacterHeader() {
 }
 
 function setupSectionToggles() {
-    document.querySelectorAll('[data-section="combat"][data-key="hpMax"], [data-section="combat"][data-key="hpCurrent"]').forEach(input => {
+    document.querySelectorAll('[data-section="combat"][data-key="hpMax"], [data-section="combat"][data-key="hpCurrent"], [data-section="combat"][data-key="movement"]').forEach(input => {
         const heading = input.closest('.card')?.querySelector(':scope > h2');
         if (heading?.textContent.includes('Combat')) input.closest('.field')?.remove();
     });
@@ -358,6 +376,51 @@ function setupSectionToggles() {
             heading.append(summary);
         }
     });
+}
+
+let tocSort = 'appearance-asc';
+
+function setupTableOfContents() {
+    document.querySelector('.table-of-contents')?.remove();
+    const sections = [...document.querySelectorAll('.grid > .card, .character-details')];
+    const nav = document.createElement('aside');
+    nav.className = 'table-of-contents';
+    nav.innerHTML = '<button type="button" class="toc-tab" aria-label="Open table of contents">Index</button><div class="toc-panel"><h2>Contents</h2><label class="toc-sort-label" for="toc-sort">Sort sections</label><select id="toc-sort" class="toc-sort"><option value="appearance-asc">Appearance: ascending</option><option value="appearance-desc">Appearance: descending</option><option value="alphabetical">Alphabetical</option></select><nav aria-label="Character sheet sections"></nav></div>';
+    const list = nav.querySelector('nav');
+    const entries = sections.map((section, index) => {
+        const heading = section.querySelector(':scope > h2');
+        if (!heading) return null;
+        const title = heading.textContent.replace(/^[+-]/, '').replace(/Total:\s*\d+/, '').trim();
+        const id = `section-${index}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+        section.id = id;
+        return { section, title, index, id };
+    }).filter(Boolean);
+    const renderLinks = () => {
+        const sorted = [...entries].sort((a, b) => tocSort === 'alphabetical'
+            ? a.title.localeCompare(b.title)
+            : tocSort === 'appearance-desc' ? b.index - a.index : a.index - b.index);
+        list.innerHTML = '';
+        sorted.forEach(({ section, title, id }) => {
+            const link = document.createElement('a');
+            link.href = `#${id}`;
+            link.textContent = title;
+            link.onclick = event => {
+                event.preventDefault();
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                section.classList.add('toc-target');
+                setTimeout(() => section.classList.remove('toc-target'), 3000);
+            };
+            list.append(link);
+        });
+    };
+    const sort = nav.querySelector('.toc-sort');
+    sort.value = tocSort;
+    sort.onchange = () => {
+        tocSort = sort.value;
+        renderLinks();
+    };
+    renderLinks();
+    document.body.append(nav);
 }
 
 function abilityTotal() {
@@ -616,6 +679,24 @@ function updateMovementSection() {
     });
 }
 
+function namedInputTable(key, heading, valueLabel) {
+    return `<div class="class-ability-group"><h3>${heading}</h3><table class="class-ability-table"><thead><tr><th>Ability</th><th>${valueLabel}</th></tr></thead><tbody>${data[key].map((row, index) => `<tr><th scope="row">${row.name}</th><td><input data-array="${key}" data-index="${index}" data-key="value" value="${esc(row.value)}"></td></tr>`).join('')}</tbody></table></div>`;
+}
+
+function setupClassAbilitiesSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide class-abilities-section';
+    section.innerHTML = `<h2>Class abilities</h2><div class="class-abilities-grid">${namedInputTable('thiefSkills', 'Thief skills', 'Percent')} ${namedInputTable('undeadTurning', 'Undead turning', 'Result')} ${namedInputTable('spellLevels', 'Spell levels', 'Value')}</div>`;
+    document.querySelector('.movement-section').after(section);
+}
+
+function setupHenchmenSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide henchmen-section';
+    section.innerHTML = `<h2>Henchmen</h2><div class="tableWrap"><table class="henchmen-table"><thead><tr><th>Type</th><th>Name</th><th>Level / HD</th><th>Role or species</th><th>Loyalty</th><th>Notes</th><th></th></tr></thead><tbody>${data.henchmen.map((row, index) => `<tr><td><select data-array="henchmen" data-index="${index}" data-key="type"><option value="NPC" ${row.type === 'NPC' ? 'selected' : ''}>NPC</option><option value="Animal" ${row.type === 'Animal' ? 'selected' : ''}>Animal</option></select></td><td><input data-array="henchmen" data-index="${index}" data-key="name" value="${esc(row.name)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="levelOrHd" value="${esc(row.levelOrHd)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="role" value="${esc(row.role)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="loyalty" value="${esc(row.loyalty)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="notes" value="${esc(row.notes)}"></td><td><button class="remove" data-remove="henchmen" data-index="${index}">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="henchmen">Add henchman</button>`;
+    document.querySelector('.class-abilities-section').after(section);
+}
+
 function updateHitPointDisplay() {
     const display = document.querySelector('.hp-total');
     if (!display) return;
@@ -649,9 +730,12 @@ function render() {
     setupAbilitySummary();
     setupHitPointsSection();
     setupMovementSection();
+    setupClassAbilitiesSection();
+    setupHenchmenSection();
     setupAbilityTooltips();
     setupCharacterHeader();
     setupSectionToggles();
+    setupTableOfContents();
     bind()
 }
 
@@ -691,6 +775,14 @@ function bind() {
     });
     document.querySelectorAll('[data-add]').forEach(b => b.onclick = () => {
         const templates = {
+            henchmen: {
+                type: 'NPC',
+                name: '',
+                levelOrHd: '',
+                role: '',
+                loyalty: '',
+                notes: ''
+            },
             weapons: {
                 name: '',
                 attacks: '',
