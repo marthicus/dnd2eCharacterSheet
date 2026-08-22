@@ -88,7 +88,8 @@ const FIXED = {
     spells: [],
     specialAbilities: '',
     wounds: '',
-    notes: ''
+    notes: '',
+    sectionStates: {}
 };
 const clone = o => JSON.parse(JSON.stringify(o));
 let data = clone(FIXED);
@@ -104,6 +105,7 @@ function normalize(x = {}) {
     const d = clone(FIXED);
     for (const section of ['identity', 'abilities', 'details', 'combat', 'saves', 'currency']) Object.assign(d[section], x[section] || {});
     for (const k of ['portraitUrl', 'specialAbilities', 'wounds', 'notes']) d[k] = typeof x[k] === 'string' ? x[k] : '';
+    d.sectionStates = x.sectionStates && typeof x.sectionStates === 'object' && !Array.isArray(x.sectionStates) ? x.sectionStates : {};
     for (const k of ['weapons', 'henchmen', 'proficiencies', 'inventory', 'spells']) d[k] = Array.isArray(x[k]) ? x[k] : [];
     for (const k of ['thiefSkills', 'undeadTurning', 'spellLevels']) d[k] = Array.isArray(x[k]) && x[k].length ? x[k] : d[k];
     return d
@@ -353,19 +355,25 @@ function setupSectionToggles() {
         const heading = card.querySelector(':scope > h2');
         if (!heading) return;
         const title = heading.textContent;
+        const stateKey = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        card.dataset.sectionKey = stateKey;
         const toggle = document.createElement('button');
         toggle.type = 'button';
         toggle.className = 'section-toggle';
-        toggle.textContent = '-';
-        toggle.title = `Hide ${title}`;
-        toggle.setAttribute('aria-label', `Hide ${title}`);
-        toggle.setAttribute('aria-expanded', 'true');
+        const collapsed = data.sectionStates[stateKey] === true;
+        card.classList.toggle('section-collapsed', collapsed);
+        toggle.textContent = collapsed ? '+' : '-';
+        toggle.title = `${collapsed ? 'Show' : 'Hide'} ${title}`;
+        toggle.setAttribute('aria-label', `${collapsed ? 'Show' : 'Hide'} ${title}`);
+        toggle.setAttribute('aria-expanded', String(!collapsed));
         toggle.onclick = () => {
             const collapsed = card.classList.toggle('section-collapsed');
+            data.sectionStates[stateKey] = collapsed;
             toggle.textContent = collapsed ? '+' : '-';
             toggle.title = `${collapsed ? 'Show' : 'Hide'} ${title}`;
             toggle.setAttribute('aria-label', `${collapsed ? 'Show' : 'Hide'} ${title}`);
             toggle.setAttribute('aria-expanded', String(!collapsed));
+            changed();
         };
         heading.textContent = '';
         heading.append(toggle, title);
@@ -406,6 +414,17 @@ function setupTableOfContents() {
             link.textContent = title;
             link.onclick = event => {
                 event.preventDefault();
+                if (section.classList.contains('section-collapsed')) {
+                    section.classList.remove('section-collapsed');
+                    data.sectionStates[section.dataset.sectionKey] = false;
+                    const toggle = section.querySelector(':scope > h2 .section-toggle');
+                    if (toggle) {
+                        toggle.textContent = '-';
+                        toggle.setAttribute('aria-expanded', 'true');
+                        toggle.setAttribute('aria-label', `Hide ${title}`);
+                    }
+                    changed();
+                }
                 section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 section.classList.add('toc-target');
                 setTimeout(() => section.classList.remove('toc-target'), 3000);
@@ -744,6 +763,24 @@ function changed() {
     document.querySelector('#status').textContent = 'Saved locally at ' + new Date().toLocaleTimeString()
 }
 
+function syncToolbarOffset() {
+    const toolbar = document.querySelector('.toolbar');
+    if (toolbar) document.body.style.paddingTop = `${toolbar.offsetHeight}px`;
+}
+
+window.addEventListener('resize', syncToolbarOffset);
+syncToolbarOffset();
+const navPin = document.querySelector('#navPinBtn');
+navPin.onclick = () => {
+    const toolbar = document.querySelector('.toolbar');
+    const collapsed = toolbar.classList.toggle('toolbar-nav-collapsed');
+    navPin.classList.toggle('tooltip-pin-muted', collapsed);
+    navPin.setAttribute('aria-pressed', String(collapsed));
+    navPin.setAttribute('aria-label', `${collapsed ? 'Show' : 'Hide'} navigation bar`);
+    navPin.title = `${collapsed ? 'Show' : 'Hide'} navigation bar`;
+    syncToolbarOffset();
+};
+
 function bind() {
     document.querySelectorAll('[data-section]').forEach(e => e.oninput = () => {
         data[e.dataset.section][e.dataset.key] = e.value;
@@ -853,6 +890,21 @@ document.querySelector('#newBtn').onclick = () => {
     }
 };
 document.querySelector('#printBtn').onclick = () => print();
+function setAllSections(collapsed) {
+    document.querySelectorAll('.grid > .card, .character-details').forEach(section => {
+        section.classList.toggle('section-collapsed', collapsed);
+        data.sectionStates[section.dataset.sectionKey] = collapsed;
+        const toggle = section.querySelector(':scope > h2 .section-toggle');
+        if (toggle) {
+            toggle.textContent = collapsed ? '+' : '-';
+            toggle.setAttribute('aria-expanded', String(!collapsed));
+        }
+    });
+    changed();
+}
+document.querySelector('#expandAllBtn').onclick = () => setAllSections(false);
+document.querySelector('#collapseAllBtn').onclick = () => setAllSections(true);
+document.querySelector('#topBtn').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 try {
     data = normalize(JSON.parse(localStorage.getItem('adnd2e-sheet-v1') || '{}'))
 } catch {}
