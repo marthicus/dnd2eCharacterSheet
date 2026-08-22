@@ -12,6 +12,12 @@ const FIXED = {
         nextLevel: '',
         deity: ''
     },
+    raceSelection: '',
+    manualRace: '',
+    racialBonuses: {},
+    selectedBackground: '',
+    racialFeatures: '',
+    racialBonusChoice: '',
     portraitUrl: '',
     abilities: {
         str: '',
@@ -105,9 +111,14 @@ function normalize(x = {}) {
     const d = clone(FIXED);
     for (const section of ['identity', 'abilities', 'details', 'combat', 'saves', 'currency']) Object.assign(d[section], x[section] || {});
     for (const k of ['portraitUrl', 'specialAbilities', 'wounds', 'notes']) d[k] = typeof x[k] === 'string' ? x[k] : '';
+    for (const k of ['raceSelection', 'manualRace', 'selectedBackground', 'racialFeatures', 'racialBonusChoice']) d[k] = typeof x[k] === 'string' ? x[k] : '';
+    d.racialBonuses = x.racialBonuses && typeof x.racialBonuses === 'object' && !Array.isArray(x.racialBonuses) ? x.racialBonuses : {};
     d.sectionStates = x.sectionStates && typeof x.sectionStates === 'object' && !Array.isArray(x.sectionStates) ? x.sectionStates : {};
     for (const k of ['weapons', 'henchmen', 'proficiencies', 'inventory', 'spells']) d[k] = Array.isArray(x[k]) ? x[k] : [];
     for (const k of ['thiefSkills', 'undeadTurning', 'spellLevels']) d[k] = Array.isArray(x[k]) && x[k].length ? x[k] : d[k];
+    const maximumHitPoints = Number.parseInt(d.combat.hpMax, 10);
+    const currentHitPoints = Number.parseInt(d.combat.hpCurrent, 10);
+    if (Number.isInteger(maximumHitPoints) && Number.isInteger(currentHitPoints) && currentHitPoints > maximumHitPoints) d.combat.hpCurrent = String(maximumHitPoints);
     return d
 }
 const labels = {
@@ -118,6 +129,110 @@ const labels = {
     wis: 'WIS',
     cha: 'CHA'
 };
+
+const raceCatalog = {
+    Humans: { classes: ['Fighter', 'Ranger', 'Paladin', 'Cleric', 'Druid', 'Thief', 'Bard', 'Mage', 'Specialist Mage', 'Dual-Class'], bonuses: {}, choiceAbilities: ['str', 'dex', 'con', 'int', 'wis', 'cha'], backgrounds: { 'Saltwind Soul': 'Weather Sense or Navigation; Swimming; Rope Use', 'Silver Halls Noble': 'Etiquette or Dancing; Reading / Writing; 150 starting gold', 'Heart of Harvestfall': 'Agriculture; Animal Handling; Cooking or Brewing', 'Autumn Line Vanguard': 'Survival or Tracking; Fire Building', 'Child of Flame': 'Healing or Herbalism; Religion', 'Oldcraft Disciple': 'Ancient History or Languages; Engineering' }, features: '+1 starting language; +1 non-weapon proficiency; +1 encounter rolls with intelligent creatures. Manifest Destiny: during character creation, roll 9 sets of ability scores and keep the highest 6.' },
+    Elves: { classes: ['Fighter', 'Ranger', 'Cleric', 'Druid', 'Thief', 'Mage', 'Specialist Mage: Diviner', 'Specialist Mage: Enchanter', 'Specialist Mage: Wild Mage', 'Fighter / Mage', 'Fighter / Thief', 'Mage / Thief', 'Fighter / Mage / Thief'], bonuses: {}, choiceAbilities: ['dex', 'con', 'int', 'cha'], backgrounds: { 'Bone Reef Bred': 'Weapon Proficiency; Navigation or Rope Use; Swimming', 'Obsidian Shaped': 'Fast Talking or Bartering; Blacksmithing; 150 starting gold', 'Vel’seraak Pit Caste': 'Animal Handling or Training; Intimidation; Dirty Tricks', 'Black Forest Faithful': 'Herbalism or Healing; Religion', 'Vel’seran Loreborn': 'Ancient History or Languages; Reading / Writing; Agriculture', 'Deadwind Exile': 'Survival or Tracking; Alertness; Hunting' }, features: 'Infravision 60’; 90% immunity to Sleep and Charm spells; enemies receive -4 / -2 to surprise rolls in the listed conditions; +1 to hit/damage with axes and throwing weapons; detect secret doors. Blood-Tide Frenzy: once per adventure, lasts 2 rounds +1 per 3 levels; grants AC and attack effects.' },
+    Goblins: { classes: ['Fighter', 'Cleric', 'Thief', 'Witchdoctor', 'Fighter / Cleric', 'Fighter / Thief', 'Witchdoctor / Thief'], bonuses: {}, choiceAbilities: ['str', 'dex', 'wis', 'cha'], backgrounds: { 'Shallows Scallywag': 'Fishing; Rope Use; Weather Sense or Navigation', 'Underhill Highborn': 'Heraldry or Etiquette; +1 Bonus Language; Dancing or Singing', 'Grublight Devoted': 'Religion; Soothsaying or Herbalism', 'Glitterdeep Stray': 'Gem Cutting or Mining; Direction Sense', 'Rokpokkít Wanderer': 'Gaming or Drinking; Fast Talking; 150 starting gold', 'Gristleborn': 'Weapon Proficiency; Blind-Fighting or Wild Fighting' }, features: 'Infravision 60’; Ogres, Trolls, and Giants receive -4 to hit when targeting goblins; detect underground construction, stonework traps, and nearby crystals/gems. Grabby Lil’ Gremlins: once per adventure when treasure is found, secretly tell the DM to roll 1d6 for the listed outcomes.' },
+    Dwarf: { classes: ['Fighter', 'Paladin', 'Cleric', 'Thief', 'Specialist Mage: Illusionist', 'Fighter / Cleric', 'Fighter / Thief', 'Thief / Illusionist'], bonuses: { con: 1, cha: -1 }, backgrounds: { 'Treeline Tactician': 'Survival or Danger Sense; Danger Sense', 'Stonesail Explorer': 'Swimming; Rope Use; Slow Respiration or Deep Diving', 'Oathbound Defender': 'Endurance or Armorer; Weapon Proficiency', 'Deepvein Touched': 'Stonemasonry or Blacksmithing; Mining or Engineering', 'Stonefaith Devotee': 'Religion; Dwarf Runes; Chanting or Brewing', 'Deephold Ascendant': 'Etiquette or Reading / Writing; Heraldry; 2 gems worth 80 gp each' }, features: 'Infravision 60’; +1 saves per 3.5 points of CON; Ogres, Trolls, and Giants receive -4 to hit; +1 to hit listed humanoids; 20% chance of non-class magic item malfunction; stonework detection. Tough as Rocks: once per adventure when reduced to 0 hit points or below, roll 1d6 for the listed survival result.' },
+    Halfling: { classes: ['Fighter', 'Cleric', 'Thief', 'Bard', 'Fighter / Cleric', 'Fighter / Thief', 'Cleric / Thief'], bonuses: {}, choiceAbilities: ['con', 'int', 'wis', 'cha'], backgrounds: { 'Hearthland Tender': 'Etiquette; Cooking; Brewing or Winemaking', 'Lord of the Fields': 'Weapon Proficiency; Leadership or Oratory; Local History', 'Deep Lake Seeker': 'Fishing or Swimming; Ancient History; Arcanology', 'Woodspirit Watcher': 'Running; Signaling; Alertness or Camouflage', 'Harvest-Rite Follower': 'Religion; Agriculture; Animal Handling or Animal Lore', 'Silver-Tongued Arbiter': 'Fast Talking or Bartering; Gaming; 150 starting gold' }, features: 'Infravision 60’; +1 saves per 3.5 points of CON; Ogres, Trolls, and Giants receive -4 to hit; +1 to hit and damage with thrown weapons or slings; enemies receive -4 / -2 to surprise rolls in listed conditions. Fortune’s Favor: start of adventure, gain 1d4 adventure points that do not carry over.' },
+    'Half-Elf': { classes: ['Fighter', 'Ranger', 'Paladin', 'Cleric', 'Druid', 'Thief', 'Bard', 'Mage', 'Specialist Mage', 'Fighter / Mage', 'Fighter / Thief', 'Mage / Thief', 'Every combination but the kitchen sink'], bonuses: {}, backgrounds: { 'Ink-Stained Scion': 'Ancient History or Arcanology; +1 Bonus Language; Reading / Writing', 'Twice-Scarred Drifter': 'Weapon Proficiency; Survival or Endurance', 'Rust Shallows Outcast': 'Swimming; Rope Use; Weather Sense or Navigation', 'Forged by the Forest': 'Alertness; Fire Building; Foraging or Weather Sense', 'Open-Hand Pilgrim': 'Religion; Cartography or Cryptography; Reading / Writing', 'Wayward Ward': 'Etiquette; Musical Instrument or Singing; 150 starting gold' }, features: 'Infravision 60’; 30% immunity to Sleep and Charm spells; enemies receive -4 / -2 to surprise rolls in listed conditions; +1 to hit with a chosen weapon group; detect secret doors.' },
+    Lizardfolk: { classes: ['Fighter', 'Ranger', 'Druid', 'Witchdoctor', 'Thief', 'Fighter / Thief', 'Druid / Thief'], bonuses: {}, choiceAbilities: ['str', 'dex', 'wis', 'cha'], backgrounds: { 'Broken Coast Castaway': 'Survival or Endurance; Swimming', 'Wyrm-Blood Noble': 'Ancient History; Dancing or Singing; 150 starting gold', 'Fringe-Crest Savage': 'Tracking or Survival; Weapon Proficiency', 'Ophidian Acolyte': 'Astrology or Soothsaying; Religion', 'Marsh Warden': 'Set Snares; Hunting; Local History or Animal Lore' }, features: 'Movement rate of 12 in water; natural AC 5 while unarmored; may hold breath; +1 attack every 2 rounds for 1d6 damage; must wet entire body once per day. Apex Predator: once per adventure, remain still for 1 turn to become invisible with the listed attack benefits.' }
+};
+
+function selectedRaceData() {
+    return data.raceSelection && raceCatalog[data.raceSelection] ? raceCatalog[data.raceSelection] : null;
+}
+
+function raceOptions() {
+    return ['Humans', 'Elves', 'Goblins', 'Dwarf', 'Halfling', 'Half-Elf', 'Lizardfolk'];
+}
+
+function setupRaceSystem() {
+    const raceInput = document.querySelector('[data-section="identity"][data-key="race"]');
+    if (!raceInput || raceInput.dataset.raceReady) return;
+    raceInput.dataset.raceReady = 'true';
+    const field = raceInput.closest('.field');
+    const select = document.createElement('select');
+    select.id = 'race-select';
+    select.innerHTML = `<option value="">Choose a race</option>${raceOptions().map(race => `<option value="${esc(race)}">${esc(race)}</option>`).join('')}<option value="Other">Other</option>`;
+    select.value = data.raceSelection || (raceInput.value && !raceCatalog[raceInput.value] ? 'Other' : raceInput.value);
+    raceInput.replaceWith(select);
+    const manual = document.createElement('input');
+    manual.id = 'manual-race';
+    manual.placeholder = 'Enter custom race';
+    manual.value = data.manualRace;
+    manual.hidden = select.value !== 'Other';
+    field.append(manual);
+    const classInput = document.querySelector('[data-section="identity"][data-key="className"]');
+    const classList = document.createElement('datalist');
+    classList.id = 'legal-classes';
+    classInput?.setAttribute('list', classList.id);
+    classInput?.after(classList);
+    const rules = document.createElement('section');
+    rules.className = 'card wide race-rules';
+    rules.innerHTML = '<h2>Race rules</h2><div class="race-rules-content"></div>';
+    document.querySelector('.grid').prepend(rules);
+    const update = () => {
+        const race = select.value;
+        const preset = raceCatalog[race];
+        manual.hidden = race !== 'Other';
+        data.raceSelection = preset ? race : '';
+        data.manualRace = race === 'Other' ? manual.value : '';
+        data.identity.race = race === 'Other' ? manual.value : race;
+        data.racialBonuses = { ...(preset?.bonuses || {}) };
+        if (preset?.choiceAbilities?.includes(data.racialBonusChoice)) data.racialBonuses[data.racialBonusChoice] = 1;
+        data.racialFeatures = preset?.features || '';
+        data.selectedBackground = preset ? data.selectedBackground : '';
+        classList.innerHTML = (preset?.classes || []).map(className => `<option value="${esc(className)}"></option>`).join('');
+        const backgrounds = preset ? Object.entries(preset.backgrounds) : [];
+        rules.querySelector('.race-rules-content').innerHTML = preset
+            ? `<div class="race-rule-columns"><div><h3>${esc(race)}</h3><p>${esc(preset.features)}</p><p><strong>Ability bonuses:</strong> ${Object.entries(preset.bonuses).map(([ability, bonus]) => `${ability.toUpperCase()} ${bonus >= 0 ? '+' : ''}${bonus}`).join(', ') || (preset.choiceAbilities ? `+1 to ${preset.choiceAbilities.map(ability => ability.toUpperCase()).join(', ')}` : 'None listed')}</p><p><strong>Legal classes:</strong> ${preset.classes.map(esc).join(', ')}</p></div><div>${preset.choiceAbilities ? `<label for="racial-bonus-choice">Choose +1 ability bonus</label><select id="racial-bonus-choice"><option value="">Choose an ability</option>${preset.choiceAbilities.map(ability => `<option value="${ability}">${ability.toUpperCase()}</option>`).join('')}</select>` : ''}<label for="background-select">Background</label><select id="background-select"><option value="">Choose a background</option>${backgrounds.map(([name]) => `<option value="${esc(name)}">${esc(name)}</option>`).join('')}</select><p class="background-benefits"></p><p class="class-validity"></p></div></div>`
+            : '<p>Custom race. Enter the race name manually; class legality, bonuses, and background rules must be entered manually.</p>';
+        const background = rules.querySelector('#background-select');
+        const bonusChoice = rules.querySelector('#racial-bonus-choice');
+        if (bonusChoice) {
+            bonusChoice.value = data.racialBonusChoice;
+            bonusChoice.onchange = () => {
+                data.racialBonusChoice = bonusChoice.value;
+                update();
+            };
+        } else if (!preset?.choiceAbilities) data.racialBonusChoice = '';
+        if (background) {
+            background.value = data.selectedBackground;
+            rules.querySelector('.background-benefits').textContent = preset.backgrounds[data.selectedBackground] || '';
+            background.onchange = () => {
+                data.selectedBackground = background.value;
+                rules.querySelector('.background-benefits').textContent = preset.backgrounds[background.value] || '';
+                changed();
+            };
+        }
+        const validity = rules.querySelector('.class-validity');
+        if (validity && classInput) {
+            const legal = !classInput.value || !preset || preset.classes.includes(classInput.value);
+            validity.textContent = legal ? 'Class is legal for this race or not yet entered.' : 'This class combination is not listed for the selected race.';
+            validity.className = `class-validity ${legal ? 'valid' : 'invalid'}`;
+        }
+        updateRacialBonuses();
+        changed();
+    };
+    select.onchange = update;
+    manual.oninput = update;
+    classInput?.addEventListener('input', update);
+    update();
+}
+
+function updateRacialBonuses() {
+    document.querySelectorAll('.racial-bonus').forEach(element => element.remove());
+    Object.entries(data.racialBonuses).forEach(([ability, bonus]) => {
+        const stat = document.querySelector(`.stat input[data-key="${ability}"]`)?.closest('.stat');
+        if (!stat || typeof bonus !== 'number') return;
+        const display = document.createElement('small');
+        display.className = 'racial-bonus';
+        display.textContent = `Racial ${bonus >= 0 ? '+' : ''}${bonus}`;
+        stat.append(display);
+    });
+}
 
 const abilityModifiers = {
     str: [-5, -3, -3, -2, -2, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 3, 3, 4, 5, 5, 5, 7],
@@ -651,17 +766,22 @@ function setupAbilitySummary() {
 function setupHitPointsSection() {
     const section = document.createElement('section');
     section.className = 'card wide hit-points-section';
-    section.innerHTML = `<h2>Hit points and wounds</h2><div class="hit-points-layout"><div class="hit-points-fields"><div class="hp-heart" aria-live="polite"><span class="heart-symbol" aria-hidden="true">♥</span><strong class="hp-total">0 / 0</strong><small>Total HP</small></div>${fields('combat', [['hpMax', 'Maximum'], ['hpCurrent', 'Current'], ['hpBonus', 'Bonus']])}<div class="hp-actions"><label>Amount</label><input class="hp-action-amount" type="number" min="0" step="1" value="1"><button type="button" class="hp-action" data-hp-action="damage">Take damage</button><button type="button" class="hp-action" data-hp-action="heal">Heal</button></div></div><div class="wounds-field"><label>Wounds</label><textarea data-root="wounds">${esc(data.wounds)}</textarea></div></div>`;
+    section.innerHTML = `<h2>Hit points and wounds</h2><div class="hit-points-layout"><div class="hit-points-fields"><div class="hp-heart health-quarters-0" aria-live="polite"><span class="heart-quarter heart-quarter-tl" aria-hidden="true"></span><span class="heart-quarter heart-quarter-bl" aria-hidden="true"></span><span class="heart-quarter heart-quarter-tr" aria-hidden="true"></span><span class="heart-quarter heart-quarter-br" aria-hidden="true"></span><span class="heart-shine heart-shine-one" aria-hidden="true"></span><span class="heart-shine heart-shine-two" aria-hidden="true"></span><span class="heart-shine heart-shine-three" aria-hidden="true"></span><strong class="hp-total">0 / 0</strong><small>Total HP</small></div>${fields('combat', [['hpMax', 'Maximum'], ['hpCurrent', 'Current'], ['hpBonus', 'Bonus']])}<div class="hp-actions"><label>Amount</label><input class="hp-action-amount" type="number" min="0" step="1" value="1"><button type="button" class="hp-action" data-hp-action="damage">Take damage</button><button type="button" class="hp-action" data-hp-action="heal">Heal</button></div></div><div class="wounds-field"><label>Wounds</label><textarea data-root="wounds">${esc(data.wounds)}</textarea></div></div>`;
     section.querySelectorAll('[data-hp-action]').forEach(button => button.onclick = () => {
+        const previousMaximum = Math.max(0, Number.parseInt(data.combat.hpMax, 10) || 0);
+        const previousCurrent = Math.max(0, Number.parseInt(data.combat.hpCurrent, 10) || 0);
+        const previousBonus = Math.max(0, Number.parseInt(data.combat.hpBonus, 10) || 0);
+        const previousTotal = previousCurrent + previousBonus;
+        const previousEffectiveMaximum = previousMaximum + previousBonus;
         const amount = Math.max(0, Number.parseInt(section.querySelector('.hp-action-amount').value, 10) || 0);
         let bonus = Math.max(0, Number.parseInt(data.combat.hpBonus, 10) || 0);
         let current = Math.max(0, Number.parseInt(data.combat.hpCurrent, 10) || 0);
+        const maximum = Math.max(0, Number.parseInt(data.combat.hpMax, 10) || 0);
         if (button.dataset.hpAction === 'damage') {
             const bonusDamage = Math.min(bonus, amount);
             bonus -= bonusDamage;
             current = Math.max(0, current - (amount - bonusDamage));
         } else {
-            const maximum = Math.max(0, Number.parseInt(data.combat.hpMax, 10) || 0);
             current = Math.min(maximum, current + amount);
         }
         data.combat.hpBonus = String(bonus);
@@ -669,10 +789,23 @@ function setupHitPointsSection() {
         section.querySelector('[data-key="hpBonus"]').value = data.combat.hpBonus;
         section.querySelector('[data-key="hpCurrent"]').value = data.combat.hpCurrent;
         updateHitPointDisplay();
+        const currentTotal = current + bonus;
+        const effectiveMaximum = maximum + bonus;
+        if (button.dataset.hpAction === 'damage' && previousEffectiveMaximum > 0 && previousTotal / previousEffectiveMaximum >= 0.25 && effectiveMaximum > 0 && currentTotal / effectiveMaximum < 0.25) flashHeart('damage');
+        if (button.dataset.hpAction === 'heal' && current > previousCurrent) flashHeart('heal');
         changed();
     });
     document.querySelector('.ability-summary').after(section);
     updateHitPointDisplay();
+}
+
+function flashHeart(type) {
+    const heart = document.querySelector('.hp-heart');
+    if (!heart) return;
+    heart.classList.remove('hp-damage-flash', 'hp-heal-flash');
+    void heart.offsetWidth;
+    heart.classList.add(type === 'damage' ? 'hp-damage-flash' : 'hp-heal-flash');
+    setTimeout(() => heart.classList.remove('hp-damage-flash', 'hp-heal-flash'), 2200);
 }
 
 function movementRate(base, multiplier) {
@@ -723,6 +856,9 @@ function updateHitPointDisplay() {
     const current = Math.max(0, Number.parseInt(data.combat.hpCurrent, 10) || 0);
     const bonus = Math.max(0, Number.parseInt(data.combat.hpBonus, 10) || 0);
     display.textContent = `${current + bonus} / ${maximum + bonus}`;
+    const fill = maximum + bonus ? Math.max(0, Math.min(100, ((current + bonus) / (maximum + bonus)) * 100)) : 0;
+    const heart = document.querySelector('.hp-heart');
+    if (heart) heart.className = `hp-heart health-quarters-${Math.floor(fill / 25)}`;
 }
 
 function fields(section, names) {
@@ -746,6 +882,7 @@ function render() {
         stat.append(output);
         createCarousel(stat, ability);
     });
+    setupRaceSystem();
     setupAbilitySummary();
     setupHitPointsSection();
     setupMovementSection();
@@ -791,7 +928,19 @@ function bind() {
             document.querySelector('.ability-total').textContent = `Total: ${abilityTotal()}`;
             updateAbilitySummary();
         }
-        if (e.dataset.section === 'combat' && ['hpMax', 'hpCurrent', 'hpBonus'].includes(e.dataset.key)) updateHitPointDisplay();
+        if (e.dataset.section === 'combat' && ['hpMax', 'hpCurrent', 'hpBonus'].includes(e.dataset.key)) {
+            const maximumHitPoints = Number.parseInt(data.combat.hpMax, 10);
+            const currentHitPoints = Number.parseInt(data.combat.hpCurrent, 10);
+            if (Number.isInteger(maximumHitPoints) && Number.isInteger(currentHitPoints) && currentHitPoints > maximumHitPoints) {
+                data.combat.hpCurrent = String(maximumHitPoints);
+                const currentInput = document.querySelector('[data-section="combat"][data-key="hpCurrent"]');
+                if (currentInput) {
+                    currentInput.setAttribute('value', data.combat.hpCurrent);
+                    currentInput.value = data.combat.hpCurrent;
+                }
+            }
+            updateHitPointDisplay();
+        }
         if (e.dataset.section === 'combat' && e.dataset.key === 'movement') updateMovementSection();
         changed()
     });
