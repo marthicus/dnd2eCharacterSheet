@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "identity": {
+    "name": "",
+    "player": "",
+    "alignment": "",
+    "race": "",
+    "className": "",
+    "level": "",
+    "xp": "",
+    "nextLevel": "",
+    "deity": ""
+  },
+  "portraitUrl": "",
+  "abilities": {
+    "str": "",
+    "dex": "",
+    "con": "",
+    "int": "",
+    "wis": "",
+    "cha": ""
+  },
+  "combat": {
+    "hpMax": "",
+    "hpCurrent": "",
+    "ac": "",
+    "thac0": "",
+    "initiative": "",
+    "movement": "",
+    "surprisedAc": "",
+    "shieldlessAc": "",
+    "rearAc": ""
+  },
+  "saves": {
+    "paralyzationPoison": "",
+    "rodStaffWand": "",
+    "petrificationPolymorph": "",
+    "breathWeapon": "",
+    "spell": ""
+  },
+  "currency": {
+    "platinum": "",
+    "gold": "",
+    "electrum": "",
+    "silver": "",
+    "copper": "",
+    "gems": ""
+  },
+  "weapons": [],
+  "proficiencies": [],
+  "inventory": [],
+  "spells": [],
+  "specialAbilities": "",
+  "notes": ""
+}

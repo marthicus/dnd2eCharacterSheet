@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Local AD&D 2e Character Sheet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="toolbar">
+  <div><strong>Local AD&D 2e Sheet</strong><span class="badge">offline</span></div>
+  <div class="actions">
+    <button id="newBtn">New</button><button id="saveBtn" class="primary">Save JSON</button>
+    <label class="button">Load JSON<input id="loadInput" type="file" accept="application/json,.json" hidden></label>
+    <button id="printBtn">Print</button>
+  </div>
+</header>
+<div id="status" role="status">Autosaves locally in this browser.</div>
+<main id="app"></main>
+<footer>Fixed schema v1. Unknown imported fields are ignored; missing ones receive defaults.</footer>
+<script src="app.js"></script>
+</body></html>
