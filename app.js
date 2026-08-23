@@ -185,6 +185,40 @@ const classPrimeRequisites = {
     Fighter: 'Strength', Paladin: 'Strength, Wisdom', Ranger: 'Strength, Dexterity, Wisdom', Wizard: 'Intelligence',
     'Specialist Wizard': 'Intelligence', Priest: 'Wisdom', Druid: 'Wisdom, Charisma', Thief: 'Dexterity', Bard: 'Dexterity, Charisma', Psionicist: 'Wisdom, Constitution'
 };
+const experienceTables = {
+    fighter: [0, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 750000, 1000000, 1250000, 1500000, 1750000, 2000000, 2250000, 2500000, 2750000, 3000000],
+    paladinRanger: [0, 2250, 4500, 9000, 18000, 36000, 75000, 150000, 300000, 600000, 900000, 1200000, 1500000, 1800000, 2100000, 2400000, 2700000, 3000000, 3300000, 3600000],
+    mage: [0, 2500, 5000, 10000, 20000, 40000, 60000, 90000, 135000, 250000, 375000, 750000, 1125000, 1500000, 1875000, 2250000, 2625000, 3000000, 3375000, 3750000],
+    cleric: [0, 1500, 3000, 6000, 13000, 27500, 55000, 110000, 225000, 450000, 675000, 900000, 1125000, 1350000, 1575000, 1800000, 2025000, 2250000, 2475000, 2700000],
+    druid: [0, 2000, 4000, 7500, 12500, 20000, 35000, 60000, 90000, 125000, 200000, 300000, 750000, 1500000, 3000000, 3500000, 500000, 1000000, 1500000, 2000000],
+    thief: [0, 1250, 2500, 5000, 10000, 20000, 40000, 80000, 110000, 160000, 220000, 440000, 660000, 880000, 1100000, 1320000, 1540000, 1760000, 1980000, 2200000],
+    psionicist: [0, 2200, 4400, 8800, 16500, 30000, 55000, 100000, 200000, 400000, 600000, 800000, 1000000, 1200000, 1500000, 1800000, 2100000, 2400000, 2700000, 3000000]
+};
+
+function experienceTableId(className) {
+    const name = String(className || '').toLowerCase();
+    if (/fighter|barbarian/.test(name)) return 'fighter';
+    if (/paladin|ranger/.test(name)) return 'paladinRanger';
+    if (/wizard|mage|specialist/.test(name)) return 'mage';
+    if (/priest|cleric/.test(name)) return 'cleric';
+    if (/druid/.test(name)) return 'druid';
+    if (/thief|bard|ninja/.test(name)) return 'thief';
+    if (/psionicist/.test(name)) return 'psionicist';
+    return '';
+}
+
+function formatExperience(value) {
+    return Number.isInteger(value) ? value.toLocaleString('en-US') : '-';
+}
+
+function updateNextLevel(index) {
+    const entry = data.identity.classEntries?.[index];
+    const table = experienceTables[experienceTableId(entry?.className)];
+    const level = Number.parseInt(entry?.level, 10);
+    if (!table || !Number.isInteger(level) || level < 1 || level >= table.length) return;
+    entry.nextLevel = String(table[level]);
+    document.querySelectorAll(`[data-class-entry="${index}"][data-key="nextLevel"]`).forEach(input => { input.value = entry.nextLevel; input.title = `Next level XP: level ${level + 1} threshold from the ${experienceTableId(entry.className)} table = ${formatExperience(table[level])}.`; });
+}
 
 function requirementClassName(className) {
     const name = String(className || '').trim();
@@ -311,7 +345,7 @@ function setupClassInputs() {
         row.querySelectorAll('[data-class-entry]').forEach(input => {
             const key = input.dataset.key;
             input.value = data.identity.classEntries[index][key];
-            input.oninput = () => { data.identity.classEntries[index][key] = input.value; if (index === 0 && key !== 'className') data.identity[key] = input.value; updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
+            input.oninput = () => { data.identity.classEntries[index][key] = input.value; if (index === 0 && key !== 'className') data.identity[key] = input.value; if (key === 'className' || key === 'level' || key === 'xp') updateNextLevel(index); updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
         });
         const select = row.querySelector('select');
         const manual = row.querySelector('.manual-entry-class');
@@ -322,10 +356,11 @@ function setupClassInputs() {
         manual.hidden = select.value !== 'Other';
         specialization.value = data.identity.classEntries[index].specialization;
         specialization.hidden = select.value !== 'Wizard';
-        select.onchange = () => { manual.hidden = select.value !== 'Other'; specialization.hidden = select.value !== 'Wizard'; data.identity.classEntries[index].className = select.value === 'Other' ? manual.value : select.value; if (index === 0) { data.identity.className = data.identity.classEntries[index].className; data.identity.manualClass = select.value === 'Other' ? manual.value : ''; } updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
-        manual.oninput = () => { data.identity.classEntries[index].className = manual.value; if (index === 0) { data.identity.className = manual.value; data.identity.manualClass = manual.value; } updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
+        select.onchange = () => { manual.hidden = select.value !== 'Other'; specialization.hidden = select.value !== 'Wizard'; data.identity.classEntries[index].className = select.value === 'Other' ? manual.value : select.value; if (index === 0) { data.identity.className = data.identity.classEntries[index].className; data.identity.manualClass = select.value === 'Other' ? manual.value : ''; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
+        manual.oninput = () => { data.identity.classEntries[index].className = manual.value; if (index === 0) { data.identity.className = manual.value; data.identity.manualClass = manual.value; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
         specialization.oninput = () => { data.identity.classEntries[index].specialization = specialization.value; changed(); };
         row.querySelector('.remove-class-entry').onclick = () => { if (data.identity.classEntries.length === 1) return; data.identity.classEntries.splice(index, 1); render(); };
+        updateNextLevel(index);
     };
     const initialEntries = data.identity.classEntries.slice();
     initialEntries.forEach(entry => addRow(entry));
@@ -377,8 +412,9 @@ function updateThac0() {
     });
     if (!values.length) return;
     data.combat.thac0 = String(Math.min(...values));
-    document.querySelectorAll('[data-section="combat"][data-key="thac0"]').forEach(input => input.value = data.combat.thac0);
-    document.querySelectorAll('.thac0-summary-value').forEach(output => output.textContent = data.combat.thac0);
+    const calculation = (data.identity.classEntries || []).filter(entry => Number.parseInt(entry.level, 10) >= 1).map(entry => `${entry.className || 'class'} level ${entry.level}`).join('; ');
+    document.querySelectorAll('[data-section="combat"][data-key="thac0"]').forEach(input => { input.value = data.combat.thac0; input.title = `Best THAC0: ${calculation}. The lowest class-table result is selected: ${data.combat.thac0}.`; });
+    document.querySelectorAll('.thac0-summary-value').forEach(output => { output.textContent = data.combat.thac0; output.title = `Best THAC0 from ${calculation}; lowest result selected.`; });
     updateWeaponThac0();
 }
 
@@ -404,9 +440,10 @@ function updateSavingThrows() {
         thac0Families(entry.className).forEach(family => saveValues(family, level).forEach((value, index) => best[index] = Math.min(best[index], value)));
     });
     if (best.some(value => value === Infinity)) return;
+    const calculation = (data.identity.classEntries || []).filter(entry => Number.parseInt(entry.level, 10) >= 1).map(entry => `${entry.className || 'class'} level ${entry.level}`).join('; ');
     saveKeys.forEach((key, index) => {
         data.saves[key] = String(best[index]);
-        document.querySelectorAll(`[data-section="saves"][data-key="${key}"]`).forEach(input => input.value = data.saves[key]);
+        document.querySelectorAll(`[data-section="saves"][data-key="${key}"]`).forEach(input => { input.value = data.saves[key]; input.title = `Best ${key} save from ${calculation}; the lowest target number is selected: ${data.saves[key]}.`; });
     });
 }
 
@@ -992,6 +1029,10 @@ function updateAcTotal() {
     baseValue.textContent = Number.isInteger(base) ? base : '-';
     total.textContent = totalValue === '' ? '-' : totalValue;
     adjustment.textContent = dexAdjustment === '' ? '-' : formatModifier(dexAdjustment);
+    const activeDescription = activeRows.map(item => `${item.name || 'unnamed'} ${item.value || 0}`).join(' + ') || 'none';
+    total.title = `AC total = ${Number.isInteger(base) ? base : 'base AC'} + DEX defense ${dexAdjustment === '' ? '?' : dexAdjustment} + active adjustments (${activeDescription}). Lower AC is better.`;
+    baseValue.title = `Base AC comes from the equipped armor row${armor ? `: ${armor.name || 'unnamed armor'} = ${armor.value}` : ' or the legacy Armor class field'}.`;
+    adjustment.title = `DEX defensive adjustment from DEX ${data.abilities.dex || '?'}: ${dexAdjustment === '' ? 'enter a score from 1 to 25' : dexAdjustment}.`;
     const values = {
         ac: Number.isInteger(base) ? String(base) : '',
         surprisedAc: totalValue === '' || !Number.isInteger(dexAdjustment) ? '' : String(base + itemAdjustment),
@@ -1002,6 +1043,13 @@ function updateAcTotal() {
         data.combat[key] = value;
         document.querySelectorAll(`[data-section="combat"][data-key="${key}"]`).forEach(input => input.value = value);
     });
+    const acTooltips = {
+        ac: `Base AC: ${base === '' ? '-' : base}. This is the equipped armor value before DEX and active adjustments.`,
+        surprisedAc: `Surprised AC = base AC ${base === '' ? '-' : base} + active non-DEX adjustments ${itemAdjustment >= 0 ? '+' : ''}${itemAdjustment}. DEX defense is omitted.`,
+        shieldlessAc: `Shieldless AC = total AC ${totalValue === '' ? '-' : totalValue} - active shield adjustment ${shieldAdjustment}.`,
+        rearAc: `Rear AC = total AC ${totalValue === '' ? '-' : totalValue} + 2 for a rear attack.`
+    };
+    Object.entries(acTooltips).forEach(([key, title]) => document.querySelectorAll(`[data-section="combat"][data-key="${key}"]`).forEach(input => input.title = title));
 }
 
 const acItemPresets = [
@@ -1220,6 +1268,7 @@ function updateWeaponThac0() {
         const attackAdjustment = Number.parseInt(weapon?.attackAdj, 10) || 0;
         const thac0Adjustment = Number.parseInt(weapon?.thac0Adj, 10) || 0;
         output.textContent = Number.isInteger(base) && weapon?.equipped !== false ? base - attackAdjustment + thac0Adjustment : '-';
+        output.title = weapon?.equipped !== false && Number.isInteger(base) ? `Weapon THAC0 = character THAC0 ${base} - attack adjustment ${attackAdjustment} + weapon THAC0 adjustment ${thac0Adjustment} = ${output.textContent}.` : 'Weapon is inactive or character THAC0 is not available.';
     });
 }
 
@@ -1296,6 +1345,11 @@ function setupClassRequirementsReferenceSection() {
     section.className = 'card wide class-requirements-reference-section';
     section.id = 'class-requirements-reference';
     section.innerHTML = `<h2>Class requirements and ability benefits</h2><div class="reference-table-grid"><article><h3>Class minimum requirements</h3><table class="reference-table"><thead><tr><th>Class</th><th>STR</th><th>DEX</th><th>CON</th><th>INT</th><th>WIS</th><th>CHA</th></tr></thead><tbody>${[['Fighter','9','','','','',''],['Paladin','12','', '9','', '13','17'],['Ranger','13','13','14','','14',''],['Wizard','','','','9','',''],['Specialist Wizard','','','','9','',''],['Priest','','','','','9',''],['Druid','','','','','12','15'],['Thief','','9','','','',''],['Bard','','12','','','','13'],['Psionicist','','15','15','','15','']].map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table><small>These are minimum ability scores from the supplied reference. Custom classes and campaign-specific requirements remain manual.</small></article><article><h3>Prime requisites</h3><table class="reference-table"><thead><tr><th>Class</th><th>Prime requisite(s)</th></tr></thead><tbody>${Object.entries(classPrimeRequisites).map(([name, requisites]) => `<tr><td>${esc(name)}</td><td>${esc(requisites)}</td></tr>`).join('')}</tbody></table><small>Characters with all prime requisites at 16+ typically receive a 10% XP bonus.</small></article></div><div class="ability-reference-grid">${Object.entries({str:'Strength: hit and damage adjustments',dex:'Dexterity: missile and AC adjustments',con:'Constitution: hit-point adjustments',int:'Intelligence: spell level and learning chance',wis:'Wisdom: magical defense and bonus priest spells',cha:'Charisma: henchmen, loyalty, and reaction'}).map(([ability, title]) => `<article><h3>${title}</h3><p>${esc(abilityTooltip(ability, data.abilities[ability]))}</p></article>`).join('')}</div>`;
+    section.innerHTML = `<h2>Class requirements and ability benefits</h2><div class="reference-table-grid"><article><h3>Class minimum requirements</h3><table class="reference-table"><thead><tr><th>Class</th><th>STR</th><th>DEX</th><th>CON</th><th>INT</th><th>WIS</th><th>CHA</th></tr></thead><tbody>${[['Fighter','9','','','','',''],['Paladin','12','', '9','', '13','17'],['Ranger','13','13','14','','14',''],['Wizard','','','','9','',''],['Specialist Wizard','','','','9','',''],['Priest','','','','','9',''],['Druid','','','','','12','15'],['Thief','','9','','','',''],['Bard','','12','','','','13'],['Psionicist','','15','15','','15','']].map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table><small>These are minimum ability scores from the supplied reference. Custom classes and campaign-specific requirements remain manual.</small></article><article><h3>Prime requisites</h3><table class="reference-table"><thead><tr><th>Class</th><th>Prime requisite(s)</th></tr></thead><tbody>${Object.entries(classPrimeRequisites).map(([name, requisites]) => `<tr><td>${esc(name)}</td><td>${esc(requisites)}</td></tr>`).join('')}</tbody></table><small>Characters with all prime requisites at 16+ typically receive a 10% XP bonus.</small></article></div><div class="ability-reference-grid">${Object.entries({str:'Strength: hit and damage adjustments',dex:'Dexterity: missile and AC adjustments',con:'Constitution: hit-point adjustments',int:'Intelligence: spell level and learning chance',wis:'Wisdom: magical defense and bonus priest spells',cha:'Charisma: henchmen, loyalty, and reaction'}).map(([ability, title]) => `<article><h3>${title}</h3><p>${esc(abilityTooltip(ability, data.abilities[ability]))}</p></article>`).join('')}</div>`;
+    const experienceReference = document.createElement('article');
+    experienceReference.innerHTML = `<h3>Experience to next level</h3>${Object.entries(experienceTables).map(([id, values]) => `<h4>${id === 'paladinRanger' ? 'Paladin / Ranger' : id[0].toUpperCase() + id.slice(1)}</h4><table class="reference-table"><thead><tr><th>Level</th><th>XP</th></tr></thead><tbody>${values.slice(1).map((xp, index) => `<tr><td>${index + 1}</td><td>${formatExperience(xp)}</td></tr>`).join('')}</tbody></table>`).join('')}<small>Custom class progressions remain manual. Barbarian uses Fighter XP, and Ninja uses Thief-style XP.</small>`;
+    experienceReference.className = 'experience-reference';
+    section.querySelector('.reference-table-grid').append(experienceReference);
     document.querySelector('.grid').append(section);
 }
 
@@ -1319,6 +1373,7 @@ function setupSpellTracking() {
         const available = Number.parseInt(slot.available, 10);
         const used = Math.max(0, Number.parseInt(slot.used, 10) || 0);
         output.textContent = Number.isInteger(available) ? Math.max(0, available - used) : '-';
+        output.title = Number.isInteger(available) ? `Remaining slots = available ${available} - used ${used} = ${Math.max(0, available - used)}.` : 'Remaining slots = available slots - used slots.';
     });
     section.querySelectorAll('[data-spell-slot]').forEach(input => input.oninput = () => {
         const slot = data.spellSlots[+input.dataset.spellSlot];
@@ -1395,6 +1450,7 @@ function render() {
         createCarousel(stat, ability);
     });
     setupClassInputs();
+    data.identity.classEntries.forEach((entry, index) => updateNextLevel(index));
     updateThac0();
     setupRaceSystem();
     setupAbilitySummary();
