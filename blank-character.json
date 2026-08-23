@@ -9,6 +9,7 @@
     "level": "",
     "xp": "",
     "nextLevel": "",
+    "inspiration": 0,
     "deity": ""
   },
   "portraitUrl": "",
@@ -24,6 +25,7 @@
     "hpMax": "",
     "hpCurrent": "",
     "ac": "",
+    "acItems": [],
     "thac0": "",
     "initiative": "",
     "movement": "",

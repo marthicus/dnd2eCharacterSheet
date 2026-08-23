@@ -7,10 +7,16 @@ const FIXED = {
         alignment: '',
         race: '',
         className: '',
+        multiClass: [],
+        manualClass: '',
+        manualMultiClass: '',
+        classKit: '',
+        inspiration: 0,
         level: '',
         xp: '',
         nextLevel: '',
-        deity: ''
+        deity: '',
+        classEntries: [{ className: '', level: '', xp: '', nextLevel: '' }]
     },
     raceSelection: '',
     manualRace: '',
@@ -49,6 +55,7 @@ const FIXED = {
         hpCurrent: '',
         hpBonus: '',
         ac: '',
+        acItems: [],
         thac0: '',
         initiative: '',
         movement: '',
@@ -110,11 +117,33 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
 function normalize(x = {}) {
     const d = clone(FIXED);
     for (const section of ['identity', 'abilities', 'details', 'combat', 'saves', 'currency']) Object.assign(d[section], x[section] || {});
+    d.identity.multiClass = Array.isArray(d.identity.multiClass) ? d.identity.multiClass : [];
+    d.identity.classKit = typeof d.identity.classKit === 'string' ? d.identity.classKit : '';
+    d.identity.manualClass = typeof d.identity.manualClass === 'string' ? d.identity.manualClass : '';
+    d.identity.manualMultiClass = typeof d.identity.manualMultiClass === 'string' ? d.identity.manualMultiClass : '';
+    const inspiration = Number.parseInt(d.identity.inspiration, 10);
+    d.identity.inspiration = Number.isInteger(inspiration) ? Math.max(0, inspiration) : 0;
+        d.identity.classEntries = Array.isArray(d.identity.classEntries) && d.identity.classEntries.length ? d.identity.classEntries : [{ className: d.identity.className, level: d.identity.level, xp: d.identity.xp, nextLevel: d.identity.nextLevel, specialization: '' }];
+        d.identity.classEntries = d.identity.classEntries.map(entry => ({ ...entry, specialization: typeof entry.specialization === 'string' ? entry.specialization : '' }));
+        d.combat.acItems = Array.isArray(d.combat.acItems) ? d.combat.acItems.map(item => ({ name: typeof item.name === 'string' ? item.name : '', type: typeof item.type === 'string' ? item.type : 'other', value: item.value ?? '', equipped: item.equipped !== false })) : [];
     for (const k of ['portraitUrl', 'specialAbilities', 'wounds', 'notes']) d[k] = typeof x[k] === 'string' ? x[k] : '';
     for (const k of ['raceSelection', 'manualRace', 'selectedBackground', 'racialFeatures', 'racialBonusChoice']) d[k] = typeof x[k] === 'string' ? x[k] : '';
     d.racialBonuses = x.racialBonuses && typeof x.racialBonuses === 'object' && !Array.isArray(x.racialBonuses) ? x.racialBonuses : {};
     d.sectionStates = x.sectionStates && typeof x.sectionStates === 'object' && !Array.isArray(x.sectionStates) ? x.sectionStates : {};
     for (const k of ['weapons', 'henchmen', 'proficiencies', 'inventory', 'spells']) d[k] = Array.isArray(x[k]) ? x[k] : [];
+    d.weapons = d.weapons.map(item => ({
+        name: typeof item.name === 'string' ? item.name : '',
+        attackType: typeof item.attackType === 'string' ? item.attackType : typeof item.attacks === 'string' ? item.attacks : '',
+        attackAdj: item.attackAdj ?? '',
+        damageAdj: item.damageAdj ?? '',
+        thac0Adj: item.thac0Adj ?? '',
+        damageSM: item.damageSM ?? item.damage ?? '',
+        damageL: item.damageL ?? item.damage ?? '',
+        range: item.range ?? '',
+        weight: item.weight ?? '',
+        speed: item.speed ?? '',
+        equipped: item.equipped !== false
+    }));
     for (const k of ['thiefSkills', 'undeadTurning', 'spellLevels']) d[k] = Array.isArray(x[k]) && x[k].length ? x[k] : d[k];
     const maximumHitPoints = Number.parseInt(d.combat.hpMax, 10);
     const currentHitPoints = Number.parseInt(d.combat.hpCurrent, 10);
@@ -131,14 +160,48 @@ const labels = {
 };
 
 const raceCatalog = {
-    Humans: { classes: ['Fighter', 'Ranger', 'Paladin', 'Cleric', 'Druid', 'Thief', 'Bard', 'Mage', 'Specialist Mage', 'Dual-Class'], bonuses: {}, choiceAbilities: ['str', 'dex', 'con', 'int', 'wis', 'cha'], backgrounds: { 'Saltwind Soul': 'Weather Sense or Navigation; Swimming; Rope Use', 'Silver Halls Noble': 'Etiquette or Dancing; Reading / Writing; 150 starting gold', 'Heart of Harvestfall': 'Agriculture; Animal Handling; Cooking or Brewing', 'Autumn Line Vanguard': 'Survival or Tracking; Fire Building', 'Child of Flame': 'Healing or Herbalism; Religion', 'Oldcraft Disciple': 'Ancient History or Languages; Engineering' }, features: '+1 starting language; +1 non-weapon proficiency; +1 encounter rolls with intelligent creatures. Manifest Destiny: during character creation, roll 9 sets of ability scores and keep the highest 6.' },
-    Elves: { classes: ['Fighter', 'Ranger', 'Cleric', 'Druid', 'Thief', 'Mage', 'Specialist Mage: Diviner', 'Specialist Mage: Enchanter', 'Specialist Mage: Wild Mage', 'Fighter / Mage', 'Fighter / Thief', 'Mage / Thief', 'Fighter / Mage / Thief'], bonuses: {}, choiceAbilities: ['dex', 'con', 'int', 'cha'], backgrounds: { 'Bone Reef Bred': 'Weapon Proficiency; Navigation or Rope Use; Swimming', 'Obsidian Shaped': 'Fast Talking or Bartering; Blacksmithing; 150 starting gold', 'Vel’seraak Pit Caste': 'Animal Handling or Training; Intimidation; Dirty Tricks', 'Black Forest Faithful': 'Herbalism or Healing; Religion', 'Vel’seran Loreborn': 'Ancient History or Languages; Reading / Writing; Agriculture', 'Deadwind Exile': 'Survival or Tracking; Alertness; Hunting' }, features: 'Infravision 60’; 90% immunity to Sleep and Charm spells; enemies receive -4 / -2 to surprise rolls in the listed conditions; +1 to hit/damage with axes and throwing weapons; detect secret doors. Blood-Tide Frenzy: once per adventure, lasts 2 rounds +1 per 3 levels; grants AC and attack effects.' },
-    Goblins: { classes: ['Fighter', 'Cleric', 'Thief', 'Witchdoctor', 'Fighter / Cleric', 'Fighter / Thief', 'Witchdoctor / Thief'], bonuses: {}, choiceAbilities: ['str', 'dex', 'wis', 'cha'], backgrounds: { 'Shallows Scallywag': 'Fishing; Rope Use; Weather Sense or Navigation', 'Underhill Highborn': 'Heraldry or Etiquette; +1 Bonus Language; Dancing or Singing', 'Grublight Devoted': 'Religion; Soothsaying or Herbalism', 'Glitterdeep Stray': 'Gem Cutting or Mining; Direction Sense', 'Rokpokkít Wanderer': 'Gaming or Drinking; Fast Talking; 150 starting gold', 'Gristleborn': 'Weapon Proficiency; Blind-Fighting or Wild Fighting' }, features: 'Infravision 60’; Ogres, Trolls, and Giants receive -4 to hit when targeting goblins; detect underground construction, stonework traps, and nearby crystals/gems. Grabby Lil’ Gremlins: once per adventure when treasure is found, secretly tell the DM to roll 1d6 for the listed outcomes.' },
-    Dwarf: { classes: ['Fighter', 'Paladin', 'Cleric', 'Thief', 'Specialist Mage: Illusionist', 'Fighter / Cleric', 'Fighter / Thief', 'Thief / Illusionist'], bonuses: { con: 1, cha: -1 }, backgrounds: { 'Treeline Tactician': 'Survival or Danger Sense; Danger Sense', 'Stonesail Explorer': 'Swimming; Rope Use; Slow Respiration or Deep Diving', 'Oathbound Defender': 'Endurance or Armorer; Weapon Proficiency', 'Deepvein Touched': 'Stonemasonry or Blacksmithing; Mining or Engineering', 'Stonefaith Devotee': 'Religion; Dwarf Runes; Chanting or Brewing', 'Deephold Ascendant': 'Etiquette or Reading / Writing; Heraldry; 2 gems worth 80 gp each' }, features: 'Infravision 60’; +1 saves per 3.5 points of CON; Ogres, Trolls, and Giants receive -4 to hit; +1 to hit listed humanoids; 20% chance of non-class magic item malfunction; stonework detection. Tough as Rocks: once per adventure when reduced to 0 hit points or below, roll 1d6 for the listed survival result.' },
-    Halfling: { classes: ['Fighter', 'Cleric', 'Thief', 'Bard', 'Fighter / Cleric', 'Fighter / Thief', 'Cleric / Thief'], bonuses: {}, choiceAbilities: ['con', 'int', 'wis', 'cha'], backgrounds: { 'Hearthland Tender': 'Etiquette; Cooking; Brewing or Winemaking', 'Lord of the Fields': 'Weapon Proficiency; Leadership or Oratory; Local History', 'Deep Lake Seeker': 'Fishing or Swimming; Ancient History; Arcanology', 'Woodspirit Watcher': 'Running; Signaling; Alertness or Camouflage', 'Harvest-Rite Follower': 'Religion; Agriculture; Animal Handling or Animal Lore', 'Silver-Tongued Arbiter': 'Fast Talking or Bartering; Gaming; 150 starting gold' }, features: 'Infravision 60’; +1 saves per 3.5 points of CON; Ogres, Trolls, and Giants receive -4 to hit; +1 to hit and damage with thrown weapons or slings; enemies receive -4 / -2 to surprise rolls in listed conditions. Fortune’s Favor: start of adventure, gain 1d4 adventure points that do not carry over.' },
-    'Half-Elf': { classes: ['Fighter', 'Ranger', 'Paladin', 'Cleric', 'Druid', 'Thief', 'Bard', 'Mage', 'Specialist Mage', 'Fighter / Mage', 'Fighter / Thief', 'Mage / Thief', 'Every combination but the kitchen sink'], bonuses: {}, backgrounds: { 'Ink-Stained Scion': 'Ancient History or Arcanology; +1 Bonus Language; Reading / Writing', 'Twice-Scarred Drifter': 'Weapon Proficiency; Survival or Endurance', 'Rust Shallows Outcast': 'Swimming; Rope Use; Weather Sense or Navigation', 'Forged by the Forest': 'Alertness; Fire Building; Foraging or Weather Sense', 'Open-Hand Pilgrim': 'Religion; Cartography or Cryptography; Reading / Writing', 'Wayward Ward': 'Etiquette; Musical Instrument or Singing; 150 starting gold' }, features: 'Infravision 60’; 30% immunity to Sleep and Charm spells; enemies receive -4 / -2 to surprise rolls in listed conditions; +1 to hit with a chosen weapon group; detect secret doors.' },
-    Lizardfolk: { classes: ['Fighter', 'Ranger', 'Druid', 'Witchdoctor', 'Thief', 'Fighter / Thief', 'Druid / Thief'], bonuses: {}, choiceAbilities: ['str', 'dex', 'wis', 'cha'], backgrounds: { 'Broken Coast Castaway': 'Survival or Endurance; Swimming', 'Wyrm-Blood Noble': 'Ancient History; Dancing or Singing; 150 starting gold', 'Fringe-Crest Savage': 'Tracking or Survival; Weapon Proficiency', 'Ophidian Acolyte': 'Astrology or Soothsaying; Religion', 'Marsh Warden': 'Set Snares; Hunting; Local History or Animal Lore' }, features: 'Movement rate of 12 in water; natural AC 5 while unarmored; may hold breath; +1 attack every 2 rounds for 1d6 damage; must wet entire body once per day. Apex Predator: once per adventure, remain still for 1 turn to become invisible with the listed attack benefits.' }
+    Humans: { classes: ['Fighter', 'Ranger', 'Paladin', 'Cleric', 'Druid', 'Thief', 'Bard', 'Mage', 'Specialist Mage', 'Dual-Class'], bonuses: {}, choiceAbilities: ['str', 'dex', 'con', 'int', 'wis', 'cha'], backgrounds: { 'Saltwind Soul': 'Weather Sense or Navigation; Swimming; Rope Use', 'Silver Halls Noble': 'Etiquette or Dancing; Reading / Writing; 150 starting gold', 'Heart of Harvestfall': 'Agriculture; Animal Handling; Cooking or Brewing', 'Autumn Line Vanguard': 'Survival or Tracking; Fire Building', 'Child of Flame': 'Healing or Herbalism; Religion', 'Oldcraft Disciple': 'Ancient History or Languages; Engineering' }, features: '+1 starting language; +1 non-weapon proficiency; +1 encounter rolls with intelligent creatures.', activeSkill: { name: 'Manifest Destiny', condition: 'One time use only, during character creation.', description: 'Roll 9 sets of ability scores and keep the highest 6.' } },
+    Elves: { classes: ['Fighter', 'Ranger', 'Cleric', 'Druid', 'Thief', 'Mage', 'Specialist Mage: Diviner', 'Specialist Mage: Enchanter', 'Specialist Mage: Wild Mage', 'Fighter / Mage', 'Fighter / Thief', 'Mage / Thief', 'Fighter / Mage / Thief'], bonuses: {}, choiceAbilities: ['dex', 'con', 'int', 'cha'], backgrounds: { 'Bone Reef Bred': 'Weapon Proficiency; Navigation or Rope Use; Swimming', 'Obsidian Shaped': 'Fast Talking or Bartering; Blacksmithing; 150 starting gold', 'Vel’seraak Pit Caste': 'Animal Handling or Training; Intimidation; Dirty Tricks', 'Black Forest Faithful': 'Herbalism or Healing; Religion', 'Vel’seran Loreborn': 'Ancient History or Languages; Reading / Writing; Agriculture', 'Deadwind Exile': 'Survival or Tracking; Alertness; Hunting' }, features: 'Infravision 60’; 90% immunity to Sleep and Charm spells; enemies receive -4 / -2 to surprise rolls in the listed conditions; +1 to hit/damage with axes and throwing weapons; detect secret doors.', activeSkill: { name: 'Blood-Tide Frenzy', condition: 'Once per adventure; lasts 2 rounds plus 1 round per 3 levels.', description: 'Suffer the listed AC penalty and gain the listed attack benefits against spells, melee, and thrown weapons.' } },
+    Goblins: { classes: ['Fighter', 'Cleric', 'Thief', 'Witchdoctor', 'Fighter / Cleric', 'Fighter / Thief', 'Witchdoctor / Thief'], bonuses: {}, choiceAbilities: ['str', 'dex', 'wis', 'cha'], backgrounds: { 'Shallows Scallywag': 'Fishing; Rope Use; Weather Sense or Navigation', 'Underhill Highborn': 'Heraldry or Etiquette; +1 Bonus Language; Dancing or Singing', 'Grublight Devoted': 'Religion; Soothsaying or Herbalism', 'Glitterdeep Stray': 'Gem Cutting or Mining; Direction Sense', 'Rokpokkít Wanderer': 'Gaming or Drinking; Fast Talking; 150 starting gold', 'Gristleborn': 'Weapon Proficiency; Blind-Fighting or Wild Fighting' }, features: 'Infravision 60’; Ogres, Trolls, and Giants receive -4 to hit when targeting goblins; detect underground construction, stonework traps, and nearby crystals/gems.', activeSkill: { name: 'Grabby Lil’ Gremlins', condition: 'Once per adventure, when treasure is found.', description: 'Secretly tell the DM to roll 1d6 for the listed gold, gem, or item outcome.' } },
+    Dwarf: { classes: ['Fighter', 'Paladin', 'Cleric', 'Thief', 'Specialist Mage: Illusionist', 'Fighter / Cleric', 'Fighter / Thief', 'Thief / Illusionist'], bonuses: { con: 1, cha: -1 }, backgrounds: { 'Treeline Tactician': 'Survival or Danger Sense; Danger Sense', 'Stonesail Explorer': 'Swimming; Rope Use; Slow Respiration or Deep Diving', 'Oathbound Defender': 'Endurance or Armorer; Weapon Proficiency', 'Deepvein Touched': 'Stonemasonry or Blacksmithing; Mining or Engineering', 'Stonefaith Devotee': 'Religion; Dwarf Runes; Chanting or Brewing', 'Deephold Ascendant': 'Etiquette or Reading / Writing; Heraldry; 2 gems worth 80 gp each' }, features: 'Infravision 60’; +1 saves per 3.5 points of CON; Ogres, Trolls, and Giants receive -4 to hit; +1 to hit listed humanoids; 20% chance of non-class magic item malfunction; stonework detection.', activeSkill: { name: 'Tough as Rocks', condition: 'Once per adventure, when reduced to 0 hit points or below.', description: 'Roll 1d6 to determine whether you remain unconscious at 0 hit points or survive at 1 hit point.' } },
+    Halfling: { classes: ['Fighter', 'Cleric', 'Thief', 'Bard', 'Fighter / Cleric', 'Fighter / Thief', 'Cleric / Thief'], bonuses: {}, choiceAbilities: ['con', 'int', 'wis', 'cha'], backgrounds: { 'Hearthland Tender': 'Etiquette; Cooking; Brewing or Winemaking', 'Lord of the Fields': 'Weapon Proficiency; Leadership or Oratory; Local History', 'Deep Lake Seeker': 'Fishing or Swimming; Ancient History; Arcanology', 'Woodspirit Watcher': 'Running; Signaling; Alertness or Camouflage', 'Harvest-Rite Follower': 'Religion; Agriculture; Animal Handling or Animal Lore', 'Silver-Tongued Arbiter': 'Fast Talking or Bartering; Gaming; 150 starting gold' }, features: 'Infravision 60’; +1 saves per 3.5 points of CON; Ogres, Trolls, and Giants receive -4 to hit; +1 to hit and damage with thrown weapons or slings; enemies receive -4 / -2 to surprise rolls in listed conditions.', activeSkill: { name: 'Fortune’s Favor', condition: 'At the start of the adventure.', description: 'Gain 1d4 adventure points; these temporary points do not carry over to the next adventure.' } },
+    'Half-Elf': { classes: ['Fighter', 'Ranger', 'Paladin', 'Cleric', 'Druid', 'Thief', 'Bard', 'Mage', 'Specialist Mage', 'Fighter / Mage', 'Fighter / Thief', 'Mage / Thief', 'Every combination but the kitchen sink'], bonuses: {}, choiceAbilities: ['str', 'dex', 'con', 'int', 'wis', 'cha'], backgrounds: { 'Ink-Stained Scion': 'Ancient History or Arcanology; +1 Bonus Language; Reading / Writing', 'Twice-Scarred Drifter': 'Weapon Proficiency; Survival or Endurance', 'Rust Shallows Outcast': 'Swimming; Rope Use; Weather Sense or Navigation', 'Forged by the Forest': 'Alertness; Fire Building; Foraging or Weather Sense', 'Open-Hand Pilgrim': 'Religion; Cartography or Cryptography; Reading / Writing', 'Wayward Ward': 'Etiquette; Musical Instrument or Singing; 150 starting gold' }, features: 'Infravision 60’; 30% immunity to Sleep and Charm spells; enemies receive -4 / -2 to surprise rolls in listed conditions; +1 to hit with a chosen weapon group; detect secret doors.', activeSkill: { name: 'Pilgrim’s Cache', condition: 'Once per adventure.', description: 'Spend 1d4+1 rounds searching your pack to produce one tool or supply worth 5 sp or less; it is used immediately and consumed.' } },
+    Lizardfolk: { classes: ['Fighter', 'Ranger', 'Druid', 'Witchdoctor', 'Thief', 'Fighter / Thief', 'Druid / Thief'], bonuses: {}, choiceAbilities: ['str', 'dex', 'wis', 'cha'], backgrounds: { 'Broken Coast Castaway': 'Survival or Endurance; Swimming', 'Wyrm-Blood Noble': 'Ancient History; Dancing or Singing; 150 starting gold', 'Fringe-Crest Savage': 'Tracking or Survival; Weapon Proficiency', 'Ophidian Acolyte': 'Astrology or Soothsaying; Religion', 'Marsh Warden': 'Set Snares; Hunting; Local History or Animal Lore' }, features: 'Movement rate of 12 in water; natural AC 5 while unarmored; may hold breath; +1 attack every 2 rounds for 1d6 damage; must wet entire body once per day.', activeSkill: { name: 'Apex Predator', condition: 'Once per adventure; remain perfectly still for 1 turn.', description: 'Become invisible while silent and unmoving, then gain the listed attack and surprise benefits.' } }
 };
+
+const classRequirements = {
+    Fighter: { str: 9 }, Paladin: { str: 12, con: 9, wis: 13, cha: 17 }, Ranger: { str: 13, dex: 13, con: 14, wis: 14 },
+    Wizard: { int: 9 }, 'Specialist Wizard': { int: 9 }, Priest: { wis: 9 }, Druid: { wis: 12, cha: 15 },
+    Thief: { dex: 9 }, Bard: { dex: 12, cha: 13 }, Psionicist: { wis: 15, con: 15 }
+};
+const classPrimeRequisites = {
+    Fighter: 'Strength', Paladin: 'Strength, Wisdom', Ranger: 'Strength, Dexterity, Wisdom', Wizard: 'Intelligence',
+    'Specialist Wizard': 'Intelligence', Priest: 'Wisdom', Druid: 'Wisdom, Charisma', Thief: 'Dexterity', Bard: 'Dexterity, Charisma', Psionicist: 'Wisdom, Constitution'
+};
+
+function requirementClassName(className) {
+    const name = String(className || '').trim();
+    return name.toLowerCase().includes('specialist') || name.toLowerCase().includes('mage') ? 'Specialist Wizard' : name;
+}
+
+function classRequirementNotice() {
+    const missing = [];
+    (data.identity.classEntries || []).forEach(entry => {
+        const name = requirementClassName(entry.className);
+        const requirements = classRequirements[name];
+        if (!requirements) return;
+        Object.entries(requirements).forEach(([ability, minimum]) => {
+            const score = Number.parseInt(data.abilities[ability], 10);
+            if (Number.isInteger(score) && score < minimum) missing.push(`${name}: ${ability.toUpperCase()} ${score}/${minimum}`);
+        });
+    });
+    return missing.length ? `Check class requirements: ${missing.join(', ')}.` : 'Class requirements look satisfied or are not yet complete. See the reference below.';
+}
+
+function updateClassRequirementNotice() {
+    const note = document.querySelector('.class-requirements-note');
+    if (note) note.innerHTML = `${esc(classRequirementNotice())} <a href="#class-requirements-reference">Class requirements reference</a>`;
+}
 
 function selectedRaceData() {
     return data.raceSelection && raceCatalog[data.raceSelection] ? raceCatalog[data.raceSelection] : null;
@@ -187,7 +250,7 @@ function setupRaceSystem() {
         classList.innerHTML = (preset?.classes || []).map(className => `<option value="${esc(className)}"></option>`).join('');
         const backgrounds = preset ? Object.entries(preset.backgrounds) : [];
         rules.querySelector('.race-rules-content').innerHTML = preset
-            ? `<div class="race-rule-columns"><div><h3>${esc(race)}</h3><p>${esc(preset.features)}</p><p><strong>Ability bonuses:</strong> ${Object.entries(preset.bonuses).map(([ability, bonus]) => `${ability.toUpperCase()} ${bonus >= 0 ? '+' : ''}${bonus}`).join(', ') || (preset.choiceAbilities ? `+1 to ${preset.choiceAbilities.map(ability => ability.toUpperCase()).join(', ')}` : 'None listed')}</p><p><strong>Legal classes:</strong> ${preset.classes.map(esc).join(', ')}</p></div><div>${preset.choiceAbilities ? `<label for="racial-bonus-choice">Choose +1 ability bonus</label><select id="racial-bonus-choice"><option value="">Choose an ability</option>${preset.choiceAbilities.map(ability => `<option value="${ability}">${ability.toUpperCase()}</option>`).join('')}</select>` : ''}<label for="background-select">Background</label><select id="background-select"><option value="">Choose a background</option>${backgrounds.map(([name]) => `<option value="${esc(name)}">${esc(name)}</option>`).join('')}</select><p class="background-benefits"></p><p class="class-validity"></p></div></div>`
+            ? `<div class="race-rule-columns"><div><h3>${esc(race)}</h3><p>${esc(preset.features)}</p><p><strong>Ability bonuses:</strong> ${Object.entries(preset.bonuses).map(([ability, bonus]) => `${ability.toUpperCase()} ${bonus >= 0 ? '+' : ''}${bonus}`).join(', ') || (preset.choiceAbilities ? `+1 to ${preset.choiceAbilities.map(ability => ability.toUpperCase()).join(', ')}` : 'None listed')}</p><p><strong>Legal classes:</strong> ${preset.classes.map(esc).join(', ')}</p>${preset.activeSkill ? `<div class="racial-ability-skill"><h3>Racial Ability Skill</h3><p><strong>${esc(preset.activeSkill.name)}</strong></p><p><strong>Condition:</strong> ${esc(preset.activeSkill.condition)}</p><p><strong>Effect:</strong> ${esc(preset.activeSkill.description)}</p></div>` : ''}</div><div>${preset.choiceAbilities ? `<label for="racial-bonus-choice">Choose +1 ability bonus</label><select id="racial-bonus-choice"><option value="">Choose an ability</option>${preset.choiceAbilities.map(ability => `<option value="${ability}">${ability.toUpperCase()}</option>`).join('')}</select>` : ''}<label for="background-select">Background</label><select id="background-select"><option value="">Choose a background</option>${backgrounds.map(([name]) => `<option value="${esc(name)}">${esc(name)}</option>`).join('')}</select><p class="background-benefits"></p><p class="class-validity"></p><p class="class-requirements-note"></p></div></div>`
             : '<p>Custom race. Enter the race name manually; class legality, bonuses, and background rules must be entered manually.</p>';
         const background = rules.querySelector('#background-select');
         const bonusChoice = rules.querySelector('#racial-bonus-choice');
@@ -208,8 +271,10 @@ function setupRaceSystem() {
             };
         }
         const validity = rules.querySelector('.class-validity');
+        const requirementNote = rules.querySelector('.class-requirements-note');
+        if (requirementNote) requirementNote.innerHTML = `${esc(classRequirementNotice())} <a href="#class-requirements-reference">Class requirements reference</a>`;
         if (validity && classInput) {
-            const legal = !classInput.value || !preset || preset.classes.includes(classInput.value);
+                const legal = !classInput.value || !preset || race === 'Half-Elf' || preset.classes.includes(classInput.value);
             validity.textContent = legal ? 'Class is legal for this race or not yet entered.' : 'This class combination is not listed for the selected race.';
             validity.className = `class-validity ${legal ? 'valid' : 'invalid'}`;
         }
@@ -220,6 +285,122 @@ function setupRaceSystem() {
     manual.oninput = update;
     classInput?.addEventListener('input', update);
     update();
+}
+
+function setupClassInputs() {
+    const classField = document.querySelector('[data-section="identity"][data-key="className"]')?.closest('.field');
+    if (!classField || document.querySelector('#class-entries')) return;
+    const classOptions = ['Fighter', 'Thief', 'Priest', 'Wizard', 'Psionicist', 'Bard', 'Ranger', 'Paladin', 'Druid', 'Barbarian', 'Ninja'];
+    const identityCard = classField.closest('.card');
+    const classTableField = document.createElement('div');
+    classTableField.className = 'field class-entries-field';
+    classTableField.innerHTML = `<label for="class-entries">Classes</label><table id="class-entries" class="class-entries-table"><thead><tr><th>Class</th><th>Level</th><th>Experience</th><th>Next level</th><th></th></tr></thead><tbody></tbody></table><button type="button" class="add" id="add-class-entry">Add class</button>`;
+    const body = classTableField.querySelector('tbody');
+    const addRow = entry => {
+        const index = entry ? data.identity.classEntries.indexOf(entry) : data.identity.classEntries.push({ className: '', level: '', xp: '', nextLevel: '', specialization: '' }) - 1;
+        const row = document.createElement('tr');
+                row.innerHTML = `<td><select data-class-entry="${index}" ${index === 0 ? 'data-section="identity" data-key="className"' : 'data-key="className"'}><option value="">Choose a class</option>${classOptions.map(className => `<option value="${className}">${className}</option>`).join('')}<option value="Other">Other</option></select><input class="manual-entry-class" placeholder="Enter custom class" hidden><input class="class-specialization" placeholder="Wizard specialization" data-class-entry="${index}" data-key="specialization" hidden></td><td><input data-class-entry="${index}" data-key="level"></td><td><input data-class-entry="${index}" data-key="xp"></td><td><input data-class-entry="${index}" data-key="nextLevel"></td><td><button type="button" class="remove-class-entry" aria-label="Remove class">×</button></td>`;
+        body.append(row);
+        row.querySelectorAll('[data-class-entry]').forEach(input => {
+            const key = input.dataset.key;
+            input.value = data.identity.classEntries[index][key];
+            input.oninput = () => { data.identity.classEntries[index][key] = input.value; if (index === 0 && key !== 'className') data.identity[key] = input.value; updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
+        });
+        const select = row.querySelector('select');
+        const manual = row.querySelector('.manual-entry-class');
+        const specialization = row.querySelector('.class-specialization');
+        const savedName = data.identity.classEntries[index].className;
+        select.value = classOptions.includes(savedName) ? savedName : savedName ? 'Other' : '';
+        manual.value = savedName && !classOptions.includes(savedName) ? savedName : '';
+        manual.hidden = select.value !== 'Other';
+        specialization.value = data.identity.classEntries[index].specialization;
+        specialization.hidden = select.value !== 'Wizard';
+        select.onchange = () => { manual.hidden = select.value !== 'Other'; specialization.hidden = select.value !== 'Wizard'; data.identity.classEntries[index].className = select.value === 'Other' ? manual.value : select.value; if (index === 0) { data.identity.className = data.identity.classEntries[index].className; data.identity.manualClass = select.value === 'Other' ? manual.value : ''; } updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
+        manual.oninput = () => { data.identity.classEntries[index].className = manual.value; if (index === 0) { data.identity.className = manual.value; data.identity.manualClass = manual.value; } updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
+        specialization.oninput = () => { data.identity.classEntries[index].specialization = specialization.value; changed(); };
+        row.querySelector('.remove-class-entry').onclick = () => { if (data.identity.classEntries.length === 1) return; data.identity.classEntries.splice(index, 1); render(); };
+    };
+    const initialEntries = data.identity.classEntries.slice();
+    initialEntries.forEach(entry => addRow(entry));
+    classTableField.querySelector('#add-class-entry').onclick = () => { addRow(); changed(); };
+    const kitField = document.createElement('div');
+    kitField.className = 'field class-kit-field';
+    kitField.innerHTML = `<label for="class-kit">Class kit</label><input id="class-kit" data-section="identity" data-key="classKit" value="${esc(data.identity.classKit)}">`;
+    classField.replaceWith(kitField);
+    const inspirationField = document.createElement('div');
+    inspirationField.className = 'field inspiration-field';
+    inspirationField.innerHTML = `<label for="inspiration-count">Inspiration</label><div class="inspiration-controls"><button type="button" data-inspiration-change="-1" aria-label="Decrease inspiration">-</button><input id="inspiration-count" data-section="identity" data-key="inspiration" type="number" min="0" step="1" value="${data.identity.inspiration}"><button type="button" data-inspiration-change="1" aria-label="Increase inspiration">+</button></div>`;
+    inspirationField.querySelectorAll('[data-inspiration-change]').forEach(button => button.onclick = () => {
+        data.identity.inspiration = Math.max(0, (Number.parseInt(data.identity.inspiration, 10) || 0) + Number(button.dataset.inspirationChange));
+        inspirationField.querySelector('input').value = data.identity.inspiration;
+        changed();
+    });
+    identityCard.append(inspirationField, classTableField);
+    document.querySelectorAll('[data-section="identity"][data-key="level"], [data-section="identity"][data-key="xp"], [data-section="identity"][data-key="nextLevel"]').forEach(input => input.closest('.field')?.remove());
+}
+
+const thac0Tables = {
+    fighter: [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+    priest: [20, 20, 20, 18, 18, 18, 16, 16, 16, 14, 14, 14, 12, 12, 12, 10, 10, 10, 8, 8],
+    wizard: [20, 20, 20, 20, 20, 19, 19, 19, 19, 18, 18, 18, 17, 17, 17, 16, 16, 16, 15, 15],
+    rogue: [20, 20, 20, 19, 19, 19, 18, 18, 18, 17, 17, 17, 16, 16, 16, 15, 15, 15, 14, 14],
+    psionicist: [20, 20, 20, 19, 19, 18, 18, 17, 17, 16, 16, 15, 15, 14, 14, 13, 13, 12, 12, 11]
+};
+
+function thac0Families(className) {
+    const name = String(className || '').toLowerCase();
+    const families = [];
+    if (/fighter|ranger|paladin|barbarian/.test(name)) families.push('fighter');
+    if (/priest|cleric|druid|witchdoctor/.test(name)) families.push('priest');
+    if (/wizard|mage|specialist/.test(name)) families.push('wizard');
+    if (/thief|bard|ninja/.test(name)) families.push('rogue');
+    if (/psionicist/.test(name)) families.push('psionicist');
+    return families;
+}
+
+function updateThac0() {
+    const values = [];
+    (data.identity.classEntries || []).forEach(entry => {
+        const level = Number.parseInt(entry.level, 10);
+        if (!Number.isInteger(level) || level < 1) return;
+        thac0Families(entry.className).forEach(family => {
+            const table = thac0Tables[family];
+            values.push(table[Math.min(level, table.length) - 1]);
+        });
+    });
+    if (!values.length) return;
+    data.combat.thac0 = String(Math.min(...values));
+    document.querySelectorAll('[data-section="combat"][data-key="thac0"]').forEach(input => input.value = data.combat.thac0);
+    document.querySelectorAll('.thac0-summary-value').forEach(output => output.textContent = data.combat.thac0);
+    updateWeaponThac0();
+}
+
+const saveKeys = ['paralyzationPoison', 'rodStaffWand', 'petrificationPolymorph', 'breathWeapon', 'spell'];
+const saveTables = {
+    priest: [[1, 3, [10, 14, 13, 16, 15]], [4, 6, [9, 13, 12, 15, 14]], [7, 9, [7, 11, 10, 13, 12]], [10, 12, [6, 10, 9, 12, 11]], [13, 15, [5, 9, 8, 11, 10]], [16, 18, [4, 8, 7, 10, 9]], [19, 20, [2, 6, 5, 8, 7]]],
+    rogue: [[1, 4, [13, 14, 12, 16, 15]], [5, 8, [12, 12, 11, 15, 13]], [9, 12, [11, 10, 10, 14, 11]], [13, 16, [10, 8, 9, 13, 9]], [17, 20, [9, 6, 8, 12, 7]], [21, 21, [8, 4, 7, 11, 5]]],
+    fighter: [[0, 0, [16, 18, 17, 20, 19]], [1, 2, [14, 16, 15, 17, 17]], [3, 4, [13, 15, 14, 16, 16]], [5, 6, [11, 13, 12, 13, 14]], [7, 8, [10, 12, 11, 12, 13]], [9, 10, [8, 10, 9, 9, 11]], [11, 12, [7, 9, 8, 8, 10]], [13, 14, [5, 7, 6, 5, 8]], [15, 16, [4, 6, 5, 4, 7]], [17, 20, [3, 5, 4, 4, 6]]],
+    wizard: [[1, 5, [14, 11, 13, 15, 12]], [6, 10, [13, 9, 11, 13, 10]], [11, 15, [11, 7, 9, 11, 8]], [16, 20, [10, 5, 7, 9, 6]], [21, 21, [8, 3, 5, 7, 4]]],
+    psionicist: [[1, 4, [13, 15, 10, 16, 15]], [5, 8, [12, 13, 9, 15, 14]], [9, 12, [11, 11, 8, 13, 12]], [13, 16, [10, 9, 7, 12, 11]], [17, 20, [9, 7, 6, 11, 9]], [21, 21, [8, 5, 5, 9, 7]]]
+};
+
+function saveValues(family, level) {
+    const range = saveTables[family]?.find(([minimum, maximum]) => level >= minimum && level <= maximum) || saveTables[family]?.[saveTables[family].length - 1];
+    return range?.[2] || [];
+}
+
+function updateSavingThrows() {
+    const best = Array(saveKeys.length).fill(Infinity);
+    (data.identity.classEntries || []).forEach(entry => {
+        const level = Number.parseInt(entry.level, 10);
+        if (!Number.isInteger(level) || level < 1) return;
+        thac0Families(entry.className).forEach(family => saveValues(family, level).forEach((value, index) => best[index] = Math.min(best[index], value)));
+    });
+    if (best.some(value => value === Infinity)) return;
+    saveKeys.forEach((key, index) => {
+        data.saves[key] = String(best[index]);
+        document.querySelectorAll(`[data-section="saves"][data-key="${key}"]`).forEach(input => input.value = data.saves[key]);
+    });
 }
 
 function updateRacialBonuses() {
@@ -447,8 +628,10 @@ function setupCharacterHeader() {
 
     const details = document.createElement('section');
     details.className = 'card character-details';
-    details.innerHTML = `<h2>Character details</h2>${fields('details', [['age', 'Age'], ['gender', 'Gender'], ['height', 'Height'], ['build', 'Build'], ['complexion', 'Complexion'], ['hair', 'Hair'], ['eyes', 'Eyes'], ['birthplace', 'Birthplace']])}<div class="detail-notes"><label>Personality</label><textarea data-section="details" data-key="personality">${esc(data.details.personality)}</textarea><label>Appearance</label><textarea data-section="details" data-key="appearance">${esc(data.details.appearance)}</textarea><label>Background</label><textarea data-section="details" data-key="background">${esc(data.details.background)}</textarea><label>Goals</label><textarea data-section="details" data-key="goals">${esc(data.details.goals)}</textarea><label>Fears</label><textarea data-section="details" data-key="fears">${esc(data.details.fears)}</textarea><label>Allies</label><textarea data-section="details" data-key="allies">${esc(data.details.allies)}</textarea><label>Enemies</label><textarea data-section="details" data-key="enemies">${esc(data.details.enemies)}</textarea></div>`;
-    document.querySelector('.grid').after(details);
+    details.innerHTML = `<h2>Character details</h2><div class="details-layout"><div class="details-basic">${fields('details', [['age', 'Age'], ['gender', 'Gender'], ['height', 'Height'], ['build', 'Build'], ['complexion', 'Complexion'], ['hair', 'Hair'], ['eyes', 'Eyes'], ['birthplace', 'Birthplace']])}</div><div class="detail-notes"><label>Personality</label><textarea data-section="details" data-key="personality">${esc(data.details.personality)}</textarea><label>Appearance</label><textarea data-section="details" data-key="appearance">${esc(data.details.appearance)}</textarea><label>Background</label><textarea data-section="details" data-key="background">${esc(data.details.background)}</textarea><label>Goals</label><textarea data-section="details" data-key="goals">${esc(data.details.goals)}</textarea><label>Fears</label><textarea data-section="details" data-key="fears">${esc(data.details.fears)}</textarea><label>Allies</label><textarea data-section="details" data-key="allies">${esc(data.details.allies)}</textarea><label>Enemies</label><textarea data-section="details" data-key="enemies">${esc(data.details.enemies)}</textarea></div></div>`;
+    const actionReference = document.querySelector('.action-reference-section');
+    if (actionReference) actionReference.before(details);
+    else document.querySelector('.grid').after(details);
 
     document.querySelector('.lightbox')?.remove();
     const lightbox = document.createElement('div');
@@ -514,7 +697,7 @@ function setupTableOfContents() {
         const heading = section.querySelector(':scope > h2');
         if (!heading) return null;
         const title = heading.textContent.replace(/^[+-]/, '').replace(/Total:\s*\d+/, '').trim();
-        const id = `section-${index}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+        const id = section.id || `section-${index}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
         section.id = id;
         return { section, title, index, id };
     }).filter(Boolean);
@@ -578,21 +761,28 @@ const abilityBenefits = {
         [1, 'Hit -5; damage -4; weight 1; max press 3; open doors 1; bend bars 0%'],
         [2, 'Hit -3; damage -2; weight 1; max press 5; open doors 1; bend bars 0%'],
         [3, 'Hit -3; damage -1; weight 5; max press 10; open doors 2; bend bars 0%'],
-        [4, 'Hit -2; damage -1; weight 10; max press 20; open doors 3; bend bars 0%'],
+        [4, 'Hit -2; damage -1; weight 10; max press 25; open doors 3; bend bars 0%'],
+        [5, 'Hit -2; damage -1; weight 10; max press 25; open doors 3; bend bars 0%'],
         [6, 'Hit -1; damage None; weight 20; max press 55; open doors 4; bend bars 0%'],
+        [7, 'Hit -1; damage None; weight 20; max press 55; open doors 4; bend bars 0%'],
         [8, 'Hit Normal; damage None; weight 35; max press 90; open doors 5; bend bars 1%'],
-        [10, 'Hit Normal; damage None; weight 40; max press 110; open doors 6; bend bars 2%'],
+        [9, 'Hit Normal; damage None; weight 35; max press 90; open doors 5; bend bars 1%'],
+        [10, 'Hit Normal; damage None; weight 40; max press 115; open doors 6; bend bars 2%'],
+        [11, 'Hit Normal; damage None; weight 40; max press 115; open doors 6; bend bars 2%'],
         [12, 'Hit Normal; damage None; weight 45; max press 140; open doors 7; bend bars 4%'],
+        [13, 'Hit Normal; damage None; weight 45; max press 140; open doors 7; bend bars 4%'],
         [14, 'Hit Normal; damage None; weight 55; max press 170; open doors 8; bend bars 7%'],
+        [15, 'Hit Normal; damage None; weight 55; max press 170; open doors 8; bend bars 7%'],
         [16, 'Hit +1; damage +1; weight 70; max press 195; open doors 9; bend bars 10%'],
         [17, 'Hit +1; damage +1; weight 85; max press 220; open doors 10; bend bars 13%'],
-        [18, 'Exceptional Strength 18/01-00 changes hit, damage, max press, and bend bars; enter the percentile as 18/xx'],
+        [18, 'Hit +1; damage +2; weight 110; max press 255; open doors 11; bend bars 16%'],
         [19, 'Hit +3; damage +7; weight 485; max press 640; open doors 16(8); bend bars 50% (Hill Giant)'],
-        [21, 'Hit +4; damage +8; weight 535; max press 700; open doors 17(10); bend bars 60% (Stone Giant)'],
-        [22, 'Hit +5; damage +9; weight 635; max press 810; open doors 17(12); bend bars 70% (Frost Giant)'],
-        [23, 'Hit +5; damage +10; weight 785; max press 970; open doors 18(14); bend bars 80% (Fire Giant)'],
-        [24, 'Hit +5; damage +11; weight 935; max press 1,130; open doors 18(16); bend bars 90% (Cloud Giant)'],
-        [25, 'Hit +7; damage +14; weight 1,535; max press 1,750; open doors 19(17); bend bars 99% (Titan)']
+        [20, 'Hit +3; damage +8; weight 535; max press 700; open doors 17(10); bend bars 60% (Stone Giant)'],
+        [21, 'Hit +4; damage +9; weight 535; max press 700; open doors 17(10); bend bars 60% (Stone Giant)'],
+        [22, 'Hit +4; damage +10; weight 635; max press 810; open doors 17(12); bend bars 70% (Frost Giant)'],
+        [23, 'Hit +5; damage +11; weight 785; max press 970; open doors 18(14); bend bars 80% (Fire Giant)'],
+        [24, 'Hit +6; damage +12; weight 935; max press 1,130; open doors 18(16); bend bars 90% (Cloud Giant)'],
+        [25, 'Hit +7; damage +14; weight 1,535; max press 1,750; open doors 19(18); bend bars 99% (Titan)']
     ],
     dex: [
         [1, 'Reaction -6; missile attack -6; defensive adjustment +5'], [2, 'Reaction -4; missile attack -4; defensive adjustment +5'],
@@ -673,6 +863,8 @@ const abilityBenefits = {
     ]
 };
 
+const exceptionalStrengthNote = 'Exceptional Strength (fighters only): 18/01-50 +1 hit, +3 damage, weight 135, max press 280, open doors 12, bend bars 20%; 18/51-75 +2 hit, +3 damage, weight 160, max press 305, open doors 13, bend bars 25%; 18/76-90 +2 hit, +4 damage, weight 185, max press 330, open doors 14, bend bars 30%; 18/91-99 +2 hit, +5 damage, weight 235, max press 380, open doors 15(3), bend bars 35%; 18/00 +3 hit, +6 damage, weight 335, max press 480, open doors 16(6), bend bars 40%.';
+
 function abilityTooltip(ability, score) {
     const value = Number.parseInt(score, 10);
     const points = abilityBenefits[ability].map(([threshold, text]) => ({ score: threshold, text }));
@@ -688,6 +880,7 @@ function abilityTooltip(ability, score) {
         lines.push('Future breakpoints:');
         lines.push(...future.map(point => `${point.score}: ${point.text}`));
     }
+    if (ability === 'str') lines.push('', exceptionalStrengthNote);
     return lines.join('\n');
 }
 
@@ -722,7 +915,7 @@ function abilityTooltipTable(ability, score) {
         const special = !columns.some(([, key]) => lowerSegments.some(segment => segment.includes(key)));
         return `<tr class="${threshold === activeScore ? 'active-breakpoint' : ''}"><th scope="row">${threshold}</th>${special ? `<td colspan="${columns.length}">${esc(text)}</td>` : cells}</tr>`;
     }).join('');
-    return `<p class="tooltip-intro">Ability scores show strengths and weaknesses; class, race, and roleplay also matter.</p><table class="tooltip-table"><thead><tr><th scope="col">Score</th>${headers}</tr></thead><tbody>${rows}</tbody></table>`;
+    return `<p class="tooltip-intro">Ability scores show strengths and weaknesses; class, race, and roleplay also matter.</p><table class="tooltip-table"><thead><tr><th scope="col">Score</th>${headers}</tr></thead><tbody>${rows}</tbody></table>${ability === 'str' ? `<p class="tooltip-note"><strong>Exceptional Strength:</strong> ${esc(exceptionalStrengthNote.replace('Exceptional Strength (fighters only): ', ''))}</p>` : ''}`;
 }
 
 function currentBenefitValues(ability, score) {
@@ -760,7 +953,145 @@ function setupAbilitySummary() {
     section.className = 'card wide ability-summary';
     section.innerHTML = '<h2>Current ability benefits</h2><div class="ability-summary-content"></div>';
     section.querySelector('.ability-summary-content').innerHTML = abilitySummaryHTML();
-    document.querySelector('.grid > .card').after(section);
+    const abilities = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent === 'Abilities');
+    (abilities || document.querySelector('.grid > .card')).after(section);
+}
+
+function defensiveAdjustment(score) {
+    const value = Number.parseInt(score, 10);
+    if (!Number.isInteger(value) || value < 1 || value > 25) return '';
+    const adjustments = [5, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2, -3, -4, -4, -4, -5, -5, -6, -6, -6];
+    return adjustments[value - 1];
+}
+
+function updateAcTotal() {
+    const total = document.querySelector('.ac-total-value');
+    const baseValue = document.querySelector('.ac-base-value');
+    const adjustment = document.querySelector('.ac-defensive-adjustment');
+    if (!total || !baseValue || !adjustment) return;
+    const rows = data.combat.acItems || [];
+    const activeRows = rows.filter(item => item.equipped !== false);
+    const armor = activeRows.find(item => item.type === 'armor');
+    const armorValue = Number.parseInt(armor?.value, 10);
+    const legacyBase = Number.parseInt(data.combat.ac, 10);
+    const base = Number.isInteger(armorValue) ? armorValue : rows.length ? '' : legacyBase;
+    const dexAdjustment = defensiveAdjustment(data.abilities.dex);
+    const itemAdjustment = activeRows.filter(item => item.type !== 'armor').reduce((sum, item) => {
+        const value = Number.parseInt(item.value, 10);
+        return sum + (Number.isInteger(value) ? value : 0);
+    }, 0);
+    const shieldAdjustment = activeRows.filter(item => item.type === 'shield').reduce((sum, item) => sum + (Number.parseInt(item.value, 10) || 0), 0);
+    const totalValue = Number.isInteger(base) && dexAdjustment !== '' ? base + dexAdjustment + itemAdjustment : '';
+    baseValue.textContent = Number.isInteger(base) ? base : '-';
+    total.textContent = totalValue === '' ? '-' : totalValue;
+    adjustment.textContent = dexAdjustment === '' ? '-' : formatModifier(dexAdjustment);
+    const values = {
+        ac: Number.isInteger(base) ? String(base) : '',
+        surprisedAc: totalValue === '' || !Number.isInteger(dexAdjustment) ? '' : String(base + itemAdjustment),
+        shieldlessAc: totalValue === '' ? '' : String(totalValue - shieldAdjustment),
+        rearAc: totalValue === '' ? '' : String(totalValue + 2)
+    };
+    Object.entries(values).forEach(([key, value]) => {
+        data.combat[key] = value;
+        document.querySelectorAll(`[data-section="combat"][data-key="${key}"]`).forEach(input => input.value = value);
+    });
+}
+
+const acItemPresets = [
+    ['None / unarmored', 'armor', 10], ['Leather / padded', 'armor', 8], ['Studded leather', 'armor', 7], ['Ring mail', 'armor', 7], ['Brigandine', 'armor', 6], ['Scale mail', 'armor', 6], ['Hide', 'armor', 6], ['Chain mail', 'armor', 5], ['Splint mail', 'armor', 4], ['Banded mail', 'armor', 4], ['Bronze plate mail', 'armor', 4], ['Plate mail', 'armor', 3], ['Field plate', 'armor', 2], ['Full plate', 'armor', 1],
+    ['Small shield', 'shield', -1], ['Medium shield', 'shield', -1], ['Large / body shield', 'shield', -1], ['Shield +1', 'shield', -2], ['Ring of protection +1', 'magic', -1], ['Cloak of protection +1', 'magic', -1], ['Armor +1', 'magic', -1], ['Blur', 'spell', -3], ['Cover', 'cover', -2], ['Natural armor', 'natural', 10]
+];
+
+function acItemRowsHTML() {
+    const types = [['shield', 'Shield'], ['magic', 'Magic item'], ['spell', 'Spell'], ['cover', 'Cover'], ['natural', 'Natural armor'], ['other', 'Other']];
+    return (data.combat.acItems || []).map((item, index) => {
+        const presetItem = acItemPresets.some(([name]) => name === item.name);
+        return `<tr><td><input class="ac-active" type="checkbox" data-ac-item="${index}" data-ac-key="equipped" aria-label="Equipped or active" title="Equipped or active" ${item.equipped !== false ? 'checked' : ''}></td><td><select data-ac-preset="${index}"><option value="Other" ${presetItem ? '' : 'selected'}>Other</option>${acItemPresets.map(([name, type, value]) => `<option value="${esc(name)}" ${item.name === name ? 'selected' : ''}>${esc(name)}</option>`).join('')}</select><input data-ac-item="${index}" data-ac-key="name" value="${esc(item.name)}" placeholder="Item or defense" ${presetItem ? 'hidden' : ''}></td><td><select data-ac-item="${index}" data-ac-key="type"><option value="armor" ${item.type === 'armor' ? 'selected' : ''}>Armor</option>${types.map(([value, label]) => `<option value="${value}" ${item.type === value ? 'selected' : ''}>${label}</option>`).join('')}</select></td><td><input class="ac-item-value" type="number" data-ac-item="${index}" data-ac-key="value" value="${esc(item.value)}" step="1" placeholder="0"></td><td><button type="button" class="remove" data-ac-remove="${index}" aria-label="Remove defense">×</button></td></tr>`;
+    }).join('');
+}
+
+function setupAcSection() {
+    const section = document.createElement('div');
+    section.className = 'ac-section';
+    section.innerHTML = `<div class="ac-layout"><div class="ac-shield" aria-label="Armor class total"><span class="ac-shield-label">AC</span><strong class="ac-total-value">-</strong></div><div class="thac0-mark" aria-label="THAC0 total"><span class="thac0-mark-blade thac0-mark-blade-one"></span><span class="thac0-mark-blade thac0-mark-blade-two"></span><span class="thac0-mark-label">THAC0</span><strong class="thac0-summary-value">${esc(data.combat.thac0 || '-')}</strong></div><div class="ac-breakdown"><p><span>Armor class</span><strong class="ac-base-value">-</strong></p><p><span>DEX defense</span><strong class="ac-defensive-adjustment">-</strong></p><small>Lower AC is better.</small><nav class="combat-reference-links" aria-label="Combat breakdown references"><a href="#ac-reference">AC breakdown</a><a href="#thac0-reference">THAC0 breakdown</a></nav></div><div class="ac-items"><h3>Defenses and equipment</h3><table class="ac-items-table"><thead><tr><th>Active</th><th>Item / defense</th><th>Type</th><th>AC change</th><th></th></tr></thead><tbody>${acItemRowsHTML()}</tbody></table><button type="button" class="add" data-ac-add>Add defense</button><small>Only equipped / active entries apply. Armor supplies the base AC; protective bonuses use negative numbers.</small></div></div>`;
+    const referenceLinks = section.querySelector('.combat-reference-links');
+    const acLink = referenceLinks?.querySelector('a[href="#ac-reference"]');
+    const thac0Link = referenceLinks?.querySelector('a[href="#thac0-reference"]');
+    const shield = section.querySelector('.ac-shield');
+    const thac0 = section.querySelector('.thac0-mark');
+    if (acLink) {
+        acLink.className = 'combat-reference-link';
+        const shieldWrap = document.createElement('div');
+        shieldWrap.className = 'combat-emblem';
+        shield.replaceWith(shieldWrap);
+        shieldWrap.append(shield, acLink);
+    }
+    if (thac0Link) {
+        thac0Link.className = 'combat-reference-link';
+        const thac0Wrap = document.createElement('div');
+        thac0Wrap.className = 'combat-emblem';
+        thac0.replaceWith(thac0Wrap);
+        thac0Wrap.append(thac0, thac0Link);
+    }
+    referenceLinks?.remove();
+    const combat = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent === 'Combat');
+    if (combat) {
+        combat.classList.remove('half');
+        combat.classList.add('wide', 'combat-card');
+        combat.append(section);
+        const acLayout = section.querySelector('.ac-layout');
+        const acItems = acLayout.querySelector('.ac-items');
+        const combatFields = combat.querySelector(':scope > .fields');
+        const topLayout = document.createElement('div');
+        topLayout.className = 'combat-top-layout';
+        topLayout.append(acLayout.querySelector('.combat-emblem'), acLayout.querySelector('.combat-emblem:nth-child(2)'), acLayout.querySelector('.ac-breakdown'), combatFields);
+        const equipmentLayout = document.createElement('div');
+        equipmentLayout.className = 'combat-equipment-layout';
+        equipmentLayout.append(acItems);
+        combat.insertBefore(topLayout, section);
+        section.replaceChildren(equipmentLayout);
+    }
+    section.querySelector('[data-ac-add]').onclick = () => {
+        data.combat.acItems.push({ name: '', type: 'other', value: '', equipped: true });
+        changed();
+        render();
+    };
+    section.querySelectorAll('[data-ac-item]').forEach(input => input.oninput = () => {
+        const item = data.combat.acItems[+input.dataset.acItem];
+        item[input.dataset.acKey] = input.type === 'checkbox' ? input.checked : input.value;
+        updateAcTotal();
+        changed();
+    });
+    section.querySelectorAll('[data-ac-item][type="checkbox"]').forEach(input => input.onchange = () => {
+        const item = data.combat.acItems[+input.dataset.acItem];
+        item.equipped = input.checked;
+        if (input.checked && item.type === 'armor') {
+            data.combat.acItems.forEach((other, index) => {
+                if (index !== +input.dataset.acItem && other.type === 'armor') other.equipped = false;
+            });
+        }
+        changed();
+        render();
+    });
+    section.querySelectorAll('[data-ac-preset]').forEach(select => select.onchange = () => {
+        const preset = acItemPresets.find(item => item[0] === select.value);
+        const item = data.combat.acItems[+select.dataset.acPreset];
+        if (!preset) {
+            item.name = '';
+            changed();
+            render();
+            return;
+        }
+        data.combat.acItems[+select.dataset.acPreset] = { name: preset[0], type: preset[1], value: String(preset[2]), equipped: true };
+        changed();
+        render();
+    });
+    section.querySelectorAll('[data-ac-remove]').forEach(button => button.onclick = () => {
+        data.combat.acItems.splice(+button.dataset.acRemove, 1);
+        changed();
+        render();
+    });
+    updateAcTotal();
 }
 
 function setupHitPointsSection() {
@@ -768,11 +1099,9 @@ function setupHitPointsSection() {
     section.className = 'card wide hit-points-section';
     section.innerHTML = `<h2>Hit points and wounds</h2><div class="hit-points-layout"><div class="hit-points-fields"><div class="hp-heart health-quarters-0" aria-live="polite"><span class="heart-quarter heart-quarter-tl" aria-hidden="true"></span><span class="heart-quarter heart-quarter-bl" aria-hidden="true"></span><span class="heart-quarter heart-quarter-tr" aria-hidden="true"></span><span class="heart-quarter heart-quarter-br" aria-hidden="true"></span><span class="heart-shine heart-shine-one" aria-hidden="true"></span><span class="heart-shine heart-shine-two" aria-hidden="true"></span><span class="heart-shine heart-shine-three" aria-hidden="true"></span><strong class="hp-total">0 / 0</strong><small>Total HP</small></div>${fields('combat', [['hpMax', 'Maximum'], ['hpCurrent', 'Current'], ['hpBonus', 'Bonus']])}<div class="hp-actions"><label>Amount</label><input class="hp-action-amount" type="number" min="0" step="1" value="1"><button type="button" class="hp-action" data-hp-action="damage">Take damage</button><button type="button" class="hp-action" data-hp-action="heal">Heal</button></div></div><div class="wounds-field"><label>Wounds</label><textarea data-root="wounds">${esc(data.wounds)}</textarea></div></div>`;
     section.querySelectorAll('[data-hp-action]').forEach(button => button.onclick = () => {
-        const previousMaximum = Math.max(0, Number.parseInt(data.combat.hpMax, 10) || 0);
         const previousCurrent = Math.max(0, Number.parseInt(data.combat.hpCurrent, 10) || 0);
         const previousBonus = Math.max(0, Number.parseInt(data.combat.hpBonus, 10) || 0);
         const previousTotal = previousCurrent + previousBonus;
-        const previousEffectiveMaximum = previousMaximum + previousBonus;
         const amount = Math.max(0, Number.parseInt(section.querySelector('.hp-action-amount').value, 10) || 0);
         let bonus = Math.max(0, Number.parseInt(data.combat.hpBonus, 10) || 0);
         let current = Math.max(0, Number.parseInt(data.combat.hpCurrent, 10) || 0);
@@ -791,11 +1120,19 @@ function setupHitPointsSection() {
         updateHitPointDisplay();
         const currentTotal = current + bonus;
         const effectiveMaximum = maximum + bonus;
-        if (button.dataset.hpAction === 'damage' && previousEffectiveMaximum > 0 && previousTotal / previousEffectiveMaximum >= 0.25 && effectiveMaximum > 0 && currentTotal / effectiveMaximum < 0.25) flashHeart('damage');
+        if (button.dataset.hpAction === 'damage' && effectiveMaximum > 0 && currentTotal < previousTotal && currentTotal / effectiveMaximum < 0.25) flashHeart('damage');
         if (button.dataset.hpAction === 'heal' && current > previousCurrent) flashHeart('heal');
         changed();
     });
     document.querySelector('.ability-summary').after(section);
+    const savingCard = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Saving throws'));
+    if (savingCard) {
+        const savingPanel = document.createElement('div');
+        savingPanel.className = 'saving-throws-panel';
+        savingPanel.append(savingCard.querySelector(':scope > h2'), savingCard.querySelector(':scope > .fields'));
+        section.querySelector('.hit-points-layout').append(savingPanel);
+        savingCard.remove();
+    }
     updateHitPointDisplay();
 }
 
@@ -817,7 +1154,8 @@ function setupMovementSection() {
     const section = document.createElement('section');
     section.className = 'card wide movement-section';
     section.innerHTML = `<h2>Movement speed</h2><div class="movement-layout"><div class="movement-base"><label>Base rate</label><input data-section="combat" data-key="movement" value="${esc(data.combat.movement)}" inputmode="numeric"><small>Adjust for race, class, armor, and encumbrance as needed.</small></div><table class="movement-table"><thead><tr><th>Rate</th><th>Multiplier</th><th>Speed</th></tr></thead><tbody><tr><th>Light</th><td>2/3</td><td data-movement-rate="light"></td></tr><tr><th>Moderate</th><td>1/2</td><td data-movement-rate="moderate"></td></tr><tr><th>Heavy</th><td>1/3</td><td data-movement-rate="heavy"></td></tr><tr><th>Severe</th><td>1/6</td><td data-movement-rate="severe"></td></tr><tr><th>Jog</th><td>×2</td><td data-movement-rate="jog"></td></tr><tr><th>Run</th><td>×3</td><td data-movement-rate="run3"></td></tr><tr><th>Run</th><td>×4</td><td data-movement-rate="run4"></td></tr><tr><th>Run</th><td>×5</td><td data-movement-rate="run5"></td></tr></tbody></table></div>`;
-    document.querySelector('.hit-points-section').after(section);
+    const combatCard = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent === 'Combat');
+    (combatCard || document.querySelector('.hit-points-section')).after(section);
     updateMovementSection();
 }
 
@@ -847,6 +1185,117 @@ function setupHenchmenSection() {
     section.className = 'card wide henchmen-section';
     section.innerHTML = `<h2>Henchmen</h2><div class="tableWrap"><table class="henchmen-table"><thead><tr><th>Type</th><th>Name</th><th>Level / HD</th><th>Role or species</th><th>Loyalty</th><th>Notes</th><th></th></tr></thead><tbody>${data.henchmen.map((row, index) => `<tr><td><select data-array="henchmen" data-index="${index}" data-key="type"><option value="NPC" ${row.type === 'NPC' ? 'selected' : ''}>NPC</option><option value="Animal" ${row.type === 'Animal' ? 'selected' : ''}>Animal</option></select></td><td><input data-array="henchmen" data-index="${index}" data-key="name" value="${esc(row.name)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="levelOrHd" value="${esc(row.levelOrHd)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="role" value="${esc(row.role)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="loyalty" value="${esc(row.loyalty)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="notes" value="${esc(row.notes)}"></td><td><button class="remove" data-remove="henchmen" data-index="${index}">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="henchmen">Add henchman</button>`;
     document.querySelector('.class-abilities-section').after(section);
+}
+
+const weaponCatalog = [
+    ['Battle Axe', 'M', '1d8', '1d8', '-', '7', '7'], ['Hand Axe', 'M/T', '1d6', '1d4', '10/20/30', '5', '4'], ['Throwing Axe', 'T', '1d6', '1d4', '10/20/30', '3', '4'], ['Club', 'M', '1d6', '1d3', '-', '3', '4'],
+    ['Dagger', 'M/T', '1d4', '1d3', '10/20/30', '1', '2'], ['Dirk', 'M/T', '1d4', '1d3', '5/15/25', '1', '2'], ['Knife', 'M/T', '1d3', '1d2', '5/10/20', '0.5', '2'], ['Javelin', 'M/T', '1d6', '1d6', '20/40/60', '2', '4'],
+    ['Spear', 'M/T', '1d6', '1d8', '20/40/60', '5', '6'], ['Short Sword', 'M', '1d6', '1d8', '-', '3', '3'], ['Long Sword', 'M', '1d8', '1d12', '-', '4', '5'], ['Bastard Sword', 'M', '2d4', '2d8', '-', '6', '8'],
+    ['Two-Handed Sword', 'M', '1d10', '3d6', '-', '15', '10'], ['Scimitar', 'M', '1d8', '1d8', '-', '4', '4'], ['Sabre', 'M', '1d6', '1d8', '-', '3', '4'], ['Broad Sword', 'M', '2d4', '1d6+1', '-', '4', '6'],
+    ['Falchion', 'M', '2d4', '2d4', '-', '15', '8'], ['Rapier', 'M', '1d6', '1d4', '-', '2', '3'], ['Mace', 'M', '1d6+1', '1d6', '-', '8', '7'], ['Morning Star', 'M', '2d4', '1d6+1', '-', '6', '7'],
+    ['Flail', 'M', '1d6+1', '2d4', '-', '15', '7'], ['War Hammer', 'M/T', '1d4+1', '1d4', '10/20/30', '5', '4'], ['Quarterstaff', 'M', '1d6', '1d6', '-', '4', '4'], ['Halberd', 'M', '1d10', '2d6', '-', '15', '9'],
+    ['Polearm', 'M', '1d6', '1d6', '-', '15', '7'], ['Glaive', 'M', '1d6', '1d10', '-', '8', '8'], ['Trident', 'M/T', '1d6+1', '3d4', '10/20/30', '5', '7'], ['Bow, Short', 'M', '1d6', '1d6', '50/100/150', '2', '6'],
+    ['Bow, Long', 'M', '1d6', '1d6', '70/140/210', '3', '7'], ['Composite Short Bow', 'M', '1d6', '1d6', '50/100/150', '3', '6'], ['Composite Long Bow', 'M', '1d6', '1d6', '70/140/210', '4', '7'],
+    ['Crossbow, Light', 'M', '1d4+1', '1d4+1', '60/120/180', '5', '7'], ['Crossbow, Heavy', 'M', '1d6+1', '1d10+1', '80/160/240', '16', '10'], ['Crossbow, Hand', 'M', '1d3', '1d2', '20/40/60', '3', '4'], ['Sling', 'M', '1d4', '1d6', '40/80/160', '0', '6'], ['Dart', 'T', '1d3', '1d2', '15/30/60', '0.25', '2']
+];
+
+function weaponRowsHTML() {
+    return data.weapons.map((weapon, index) => {
+        const preset = weaponCatalog.find(entry => entry[0] === weapon.name);
+        return `<tr><td><input class="weapon-equipped" type="checkbox" data-weapon-item="${index}" data-weapon-key="equipped" aria-label="Equipped weapon" ${weapon.equipped !== false ? 'checked' : ''}></td><td><select data-weapon-preset="${index}"><option value="Other" ${preset ? '' : 'selected'}>Other</option>${weaponCatalog.map(entry => `<option value="${esc(entry[0])}" ${weapon.name === entry[0] ? 'selected' : ''}>${esc(entry[0])}</option>`).join('')}</select><input class="weapon-custom-name" data-weapon-item="${index}" data-weapon-key="name" value="${esc(weapon.name)}" placeholder="Weapon name" ${preset ? 'hidden' : ''}></td><td><input data-weapon-item="${index}" data-weapon-key="attackType" value="${esc(weapon.attackType)}" placeholder="M/T"></td><td><input data-weapon-item="${index}" data-weapon-key="attackAdj" type="number" value="${esc(weapon.attackAdj)}" step="1"></td><td><input data-weapon-item="${index}" data-weapon-key="damageAdj" type="number" value="${esc(weapon.damageAdj)}" step="1"></td><td><input data-weapon-item="${index}" data-weapon-key="thac0Adj" type="number" value="${esc(weapon.thac0Adj)}" step="1"></td><td><input data-weapon-item="${index}" data-weapon-key="damageSM" value="${esc(weapon.damageSM)}"></td><td><input data-weapon-item="${index}" data-weapon-key="damageL" value="${esc(weapon.damageL)}"></td><td><input data-weapon-item="${index}" data-weapon-key="range" value="${esc(weapon.range)}"></td><td><input data-weapon-item="${index}" data-weapon-key="weight" value="${esc(weapon.weight)}"></td><td><input data-weapon-item="${index}" data-weapon-key="speed" value="${esc(weapon.speed)}"></td><td><output class="weapon-thac0" data-weapon-thac0="${index}">-</output></td><td><button type="button" class="remove" data-weapon-remove="${index}" aria-label="Remove weapon">×</button></td></tr>`;
+    }).join('');
+}
+
+function updateWeaponThac0() {
+    const base = Number.parseInt(data.combat.thac0, 10);
+    document.querySelectorAll('[data-weapon-thac0]').forEach(output => {
+        const weapon = data.weapons[+output.dataset.weaponThac0];
+        const attackAdjustment = Number.parseInt(weapon?.attackAdj, 10) || 0;
+        const thac0Adjustment = Number.parseInt(weapon?.thac0Adj, 10) || 0;
+        output.textContent = Number.isInteger(base) && weapon?.equipped !== false ? base - attackAdjustment + thac0Adjustment : '-';
+    });
+}
+
+function setupWeaponSection() {
+    const section = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Weapons'));
+    if (!section) return;
+    section.innerHTML = `<h2>Weapons</h2><div class="weapon-best-thac0">Best equipped THAC0: <output>-</output></div><div class="tableWrap"><table class="weapons-table"><thead><tr><th>Active</th><th>Weapon</th><th>AT</th><th>Attack adj</th><th>Damage adj</th><th>THAC0 adj</th><th>Damage S/M</th><th>Damage L</th><th>Range</th><th>Weight</th><th>Speed</th><th>THAC0</th><th></th></tr></thead><tbody>${weaponRowsHTML()}</tbody></table></div><button type="button" class="add" data-weapon-add>Add weapon</button><small class="weapon-key">M = melee, T = thrown, M/T = melee or thrown. Positive attack adjustments improve THAC0.</small>`;
+    const combatEquipment = document.querySelector('.combat-equipment-layout');
+    if (combatEquipment) {
+        section.classList.remove('card', 'wide', 'half');
+        section.classList.add('combat-weapons');
+        combatEquipment.append(section);
+    }
+    const refresh = () => {
+        updateWeaponThac0();
+        const values = [...section.querySelectorAll('[data-weapon-thac0]')].map(output => Number.parseInt(output.textContent, 10)).filter(Number.isInteger);
+        section.querySelector('.weapon-best-thac0 output').textContent = values.length ? Math.min(...values) : '-';
+    };
+    section.querySelector('[data-weapon-add]').onclick = () => {
+        data.weapons.push({ name: '', attackType: '', attackAdj: 0, damageAdj: 0, thac0Adj: 0, damageSM: '', damageL: '', range: '', weight: '', speed: '', equipped: true });
+        changed();
+        render();
+    };
+    section.querySelectorAll('[data-weapon-item]').forEach(input => input.oninput = () => {
+        const weapon = data.weapons[+input.dataset.weaponItem];
+        weapon[input.dataset.weaponKey] = input.type === 'checkbox' ? input.checked : input.value;
+        refresh();
+        changed();
+    });
+    section.querySelectorAll('[data-weapon-preset]').forEach(select => select.onchange = () => {
+        const preset = weaponCatalog.find(entry => entry[0] === select.value);
+        const index = +select.dataset.weaponPreset;
+        if (!preset) {
+            data.weapons[index].name = '';
+        } else {
+            data.weapons[index] = { name: preset[0], attackType: preset[1], attackAdj: 0, damageAdj: 0, thac0Adj: 0, damageSM: preset[2], damageL: preset[3], range: preset[4], weight: preset[5], speed: preset[6], equipped: true };
+        }
+        changed();
+        render();
+    });
+    section.querySelectorAll('[data-weapon-remove]').forEach(button => button.onclick = () => {
+        data.weapons.splice(+button.dataset.weaponRemove, 1);
+        changed();
+        render();
+    });
+    refresh();
+}
+
+function setupActionReferenceSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide action-reference-section';
+    section.innerHTML = `<h2>Combat actions reference</h2><div class="action-reference-flow"><article><h3>Tracking time</h3><p><strong>Turn</strong> = 10 minutes<br><strong>Round</strong> = 1 minute</p><p>Most character actions are measured in turns or rounds. Turns are primarily used for out-of-combat actions while rounds are used for combat actions.</p></article><article><h3>Determine actions</h3><p>At the start of each combat round, each player decides what actions they will take. Events and enemy actions may later alter or interrupt those actions.</p></article><article><h3>Roll initiative</h3><p>Initiative is calculated each combat round using:</p><p><strong>1d10 + effect modifiers + reaction time + weapon or spell speed</strong></p></article><article><h3>Resolve actions</h3><p>Combatant actions are resolved in order of initiative, from lowest to highest.</p></article></div><div class="action-reference-actions"><article class="action-movement"><h3>Movement</h3><p><strong>Full move:</strong> Move your full rate only.</p><p><strong>Half move:</strong> Move up to half your rate and still make one melee attack, use a ranged weapon at half rate of fire, or perform a noncombat action.</p><p><strong>Withdraw move:</strong> Move up to your rate and retreat from melee. Attackers do not get an opportunity attack.</p><p><strong>Charge move:</strong> Increase your movement rate by 50% and make a melee attack against your charged target. Gain +2 to hit, lose all Dexterity bonuses to AC, suffer a -1 AC penalty, and give the target a -2 initiative bonus.</p></article><article class="action-attack"><h3>Attack</h3><p>Melee and ranged attacks use 1d20 plus or minus the applicable modifiers.</p><p>To determine whether an attack hits, subtract the target's armor class from the character's THAC0 and compare that number to the modified attack roll.</p><p>Damage is rolled on a successful hit according to the weapon's damage entry.</p></article><article class="action-spells"><h3>Spells</h3><p>A character may not move while casting a spell. Casting times range from an instant up to 10, and casting time affects initiative.</p><p>If damage is dealt before a spell goes off, the spell may be interrupted, fizzle from memory, or still go off depending on abilities and saves.</p><p>Some spells require saving throws or attack rolls; others automatically affect their targets.</p></article><article class="action-noncombat"><h3>Noncombat / free actions</h3><p>Examples include interacting with the environment, searching a body, using a magical item, bandaging a fallen comrade, recovering a weapon, rummaging through a pack, or drinking a potion already in hand.</p><p>Free actions include shouting a warning, giving brief instructions, changing weapons, dropping equipment, or throwing something already held.</p></article></div>`;
+    document.querySelector('.grid').append(section);
+}
+
+function setupThac0ReferenceSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide thac0-reference-section';
+    section.id = 'thac0-reference';
+    section.innerHTML = `<h2>THAC0 reference</h2><div class="thac0-reference-grid"><article><h3>What is THAC0?</h3><p>THAC0 means To Hit Armor Class 0. It is the number a character must roll on a d20 to hit a target with Armor Class 0. Lower THAC0 values are better.</p><h3>Hit calculation</h3><p class="formula"><strong>Required roll = THAC0 - target AC</strong></p><p>If the attack roll is equal to or greater than the required roll, the attack hits.</p></article><article><h3>Attack modifiers</h3><p>Strength, magic weapons, specialization, spells, and other attack bonuses reduce the roll needed to hit.</p><p class="formula"><strong>Effective THAC0 = THAC0 - attack bonuses</strong></p><p class="formula"><strong>Required roll = effective THAC0 - target AC</strong></p><p>Alternatively, add attack bonuses to the d20 roll and compare it to the unmodified required roll.</p></article><article><h3>Examples</h3><p><strong>THAC0 20 vs AC 5:</strong> 20 - 5 = 15. The attack needs 15 or higher.</p><p><strong>THAC0 16 vs AC 2:</strong> 16 - 2 = 14. The attack needs 14 or higher.</p><p><strong>THAC0 10 vs AC -3:</strong> 10 - (-3) = 13. The attack needs 13 or higher.</p><p><strong>THAC0 18, AC 4, +3 attack bonus:</strong> 18 - 4 - 3 = 11. The attack needs 11 or higher.</p></article><article><h3>Quick reminders</h3><p><strong>Lower THAC0 is better.</strong><br><strong>Lower AC is better.</strong></p><p>THAC0 20 = inexperienced<br>THAC0 15 = competent<br>THAC0 10 = skilled<br>THAC0 5 = veteran<br>THAC0 1 = elite warrior</p><h3>Shortcut</h3><p><strong>AC hit = THAC0 - d20 roll</strong></p><p>A roll of 14 with THAC0 16 hits AC 2 or any worse AC.</p></article></div>`;
+    document.querySelector('.grid').append(section);
+}
+
+function setupAcReferenceSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide ac-reference-section';
+    section.id = 'ac-reference';
+    section.innerHTML = `<h2>Armor Class reference</h2><div class="thac0-reference-grid"><article><h3>What is AC?</h3><p>Armor Class represents how difficult a character is to hit. In AD&amp;D 2e, lower AC is better. Unarmored characters typically start at AC 10.</p><h3>Calculating AC</h3><p class="formula"><strong>Final AC = base AC - armor protection - shield protection - Dexterity bonus - magical bonuses - other defensive modifiers</strong></p></article><article><h3>Common examples</h3><p>No armor: AC 10</p><p>Chain mail: AC 5</p><p>Chain mail + shield: AC 4</p><p>Chain mail + shield + DEX defense -2: AC 2</p><p>Plate mail + shield + DEX defense -4: AC -1</p></article><article><h3>How attacks use AC</h3><p>The attacker compares their THAC0 against the defender's AC.</p><p class="formula"><strong>Required roll = attacker THAC0 - defender AC</strong></p><p>The attack hits when the d20 roll plus attack bonuses equals or exceeds the required roll.</p><p><strong>Example:</strong> THAC0 18 against AC 5 requires 18 - 5 = 13, so the attacker needs 13 or higher.</p></article><article><h3>Modifiers and reminders</h3><p>Strength, magic weapons, specialization, spells, cover, and other effects can improve AC or the attack roll.</p><p><strong>Lower AC = better defense</strong><br><strong>Lower THAC0 = better offense</strong></p><p>AC 10 = unarmored<br>AC 5 = chain mail<br>AC 0 = full plate + shield<br>AC -5 = powerful magical protection</p><h3>Shortcut</h3><p><strong>AC hit = THAC0 - modified attack roll</strong></p></article></div>`;
+    document.querySelector('.grid').append(section);
+}
+
+function setupClassRequirementsReferenceSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide class-requirements-reference-section';
+    section.id = 'class-requirements-reference';
+    section.innerHTML = `<h2>Class requirements and ability benefits</h2><div class="reference-table-grid"><article><h3>Class minimum requirements</h3><table class="reference-table"><thead><tr><th>Class</th><th>STR</th><th>DEX</th><th>CON</th><th>INT</th><th>WIS</th><th>CHA</th></tr></thead><tbody>${[['Fighter','9','','','','',''],['Paladin','12','', '9','', '13','17'],['Ranger','13','13','14','','14',''],['Wizard','','','','9','',''],['Specialist Wizard','','','','9','',''],['Priest','','','','','9',''],['Druid','','','','','12','15'],['Thief','','9','','','',''],['Bard','','12','','','','13'],['Psionicist','','15','15','','15','']].map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table><small>These are minimum ability scores from the supplied reference. Custom classes and campaign-specific requirements remain manual.</small></article><article><h3>Prime requisites</h3><table class="reference-table"><thead><tr><th>Class</th><th>Prime requisite(s)</th></tr></thead><tbody>${Object.entries(classPrimeRequisites).map(([name, requisites]) => `<tr><td>${esc(name)}</td><td>${esc(requisites)}</td></tr>`).join('')}</tbody></table><small>Characters with all prime requisites at 16+ typically receive a 10% XP bonus.</small></article></div><div class="ability-reference-grid">${Object.entries({str:'Strength: hit and damage adjustments',dex:'Dexterity: missile and AC adjustments',con:'Constitution: hit-point adjustments',int:'Intelligence: spell level and learning chance',wis:'Wisdom: magical defense and bonus priest spells',cha:'Charisma: henchmen, loyalty, and reaction'}).map(([ability, title]) => `<article><h3>${title}</h3><p>${esc(abilityTooltip(ability, data.abilities[ability]))}</p></article>`).join('')}</div>`;
+    document.querySelector('.grid').append(section);
+}
+
+function setupSpellSectionPosition() {
+    const combat = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Combat'));
+    const spells = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Spells'));
+    if (combat && spells) combat.after(spells);
 }
 
 function updateHitPointDisplay() {
@@ -882,12 +1331,22 @@ function render() {
         stat.append(output);
         createCarousel(stat, ability);
     });
+    setupClassInputs();
+    updateThac0();
     setupRaceSystem();
     setupAbilitySummary();
     setupHitPointsSection();
+    updateSavingThrows();
     setupMovementSection();
     setupClassAbilitiesSection();
     setupHenchmenSection();
+    setupActionReferenceSection();
+    setupThac0ReferenceSection();
+    setupAcReferenceSection();
+    setupClassRequirementsReferenceSection();
+    setupAcSection();
+    setupWeaponSection();
+    setupSpellSectionPosition();
     setupAbilityTooltips();
     setupCharacterHeader();
     setupSectionToggles();
@@ -927,6 +1386,13 @@ function bind() {
             e.parentElement.querySelector('.stat-tooltip-text').innerHTML = abilityTooltipTable(e.dataset.key, e.value);
             document.querySelector('.ability-total').textContent = `Total: ${abilityTotal()}`;
             updateAbilitySummary();
+            if (e.dataset.key === 'dex') updateAcTotal();
+            updateClassRequirementNotice();
+        }
+        if (e.dataset.section === 'combat' && e.dataset.key === 'ac') {
+            const armor = data.combat.acItems?.find(item => item.type === 'armor');
+            if (armor) armor.value = e.value;
+            updateAcTotal();
         }
         if (e.dataset.section === 'combat' && ['hpMax', 'hpCurrent', 'hpBonus'].includes(e.dataset.key)) {
             const maximumHitPoints = Number.parseInt(data.combat.hpMax, 10);
@@ -971,14 +1437,16 @@ function bind() {
             },
             weapons: {
                 name: '',
-                attacks: '',
+                attackType: '',
                 attackAdj: '',
                 damageAdj: '',
-                thac0: '',
-                damage: '',
+                thac0Adj: '',
+                damageSM: '',
+                damageL: '',
                 range: '',
                 weight: '',
-                speed: ''
+                speed: '',
+                equipped: true
             },
             proficiencies: {
                 name: '',
