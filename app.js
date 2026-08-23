@@ -24,6 +24,7 @@ const FIXED = {
     selectedBackground: '',
     racialFeatures: '',
     racialBonusChoice: '',
+    racialWeaponChoice: '',
     portraitUrl: '',
     abilities: {
         str: '',
@@ -104,6 +105,17 @@ const FIXED = {
     proficiencies: [],
     inventory: [],
     spells: [],
+    resistances: [],
+    surpriseBonus: {
+        active: true,
+        target: 'Enemy',
+        roll: 'Surprise',
+        fullModifier: '-4',
+        reducedModifier: '-2',
+        source: 'Racial',
+        conditions: 'Non-metal armor; eligible party composition or distance',
+        notes: ''
+    },
     specialAbilities: '',
     wounds: '',
     notes: '',
@@ -132,10 +144,13 @@ function normalize(x = {}) {
         d.identity.classEntries = d.identity.classEntries.map(entry => ({ ...entry, specialization: typeof entry.specialization === 'string' ? entry.specialization : '' }));
         d.combat.acItems = Array.isArray(d.combat.acItems) ? d.combat.acItems.map(item => ({ name: typeof item.name === 'string' ? item.name : '', type: typeof item.type === 'string' ? item.type : 'other', value: item.value ?? '', equipped: item.equipped !== false })) : [];
     for (const k of ['portraitUrl', 'specialAbilities', 'wounds', 'notes']) d[k] = typeof x[k] === 'string' ? x[k] : '';
-    for (const k of ['raceSelection', 'manualRace', 'selectedBackground', 'racialFeatures', 'racialBonusChoice']) d[k] = typeof x[k] === 'string' ? x[k] : '';
+    for (const k of ['raceSelection', 'manualRace', 'selectedBackground', 'racialFeatures', 'racialBonusChoice', 'racialWeaponChoice']) d[k] = typeof x[k] === 'string' ? x[k] : '';
     d.racialBonuses = x.racialBonuses && typeof x.racialBonuses === 'object' && !Array.isArray(x.racialBonuses) ? x.racialBonuses : {};
     d.sectionStates = x.sectionStates && typeof x.sectionStates === 'object' && !Array.isArray(x.sectionStates) ? x.sectionStates : {};
-    for (const k of ['weapons', 'henchmen', 'proficiencies', 'inventory', 'spells']) d[k] = Array.isArray(x[k]) ? x[k] : [];
+    for (const k of ['weapons', 'henchmen', 'proficiencies', 'inventory', 'spells', 'resistances']) d[k] = Array.isArray(x[k]) ? x[k] : [];
+    d.proficiencies = d.proficiencies.map(item => ({ ...item, source: item.source ?? '', notes: item.notes ?? '' }));
+    d.resistances = d.resistances.map(item => ({ type: typeof item.type === 'string' ? item.type : 'Other', appliesTo: item.appliesTo ?? '', value: item.value ?? '', source: item.source ?? '', active: item.active !== false, notes: item.notes ?? '' }));
+    d.surpriseBonus = { ...d.surpriseBonus, ...(x.surpriseBonus || {}) };
     d.weapons = d.weapons.map(item => ({
         name: typeof item.name === 'string' ? item.name : '',
         attackType: typeof item.attackType === 'string' ? item.attackType : typeof item.attacks === 'string' ? item.attacks : '',
@@ -170,7 +185,7 @@ const raceCatalog = {
     Humans: { classes: ['Fighter', 'Ranger', 'Paladin', 'Cleric', 'Druid', 'Thief', 'Bard', 'Mage', 'Specialist Mage', 'Dual-Class'], bonuses: {}, choiceAbilities: ['str', 'dex', 'con', 'int', 'wis', 'cha'], backgrounds: { 'Saltwind Soul': 'Weather Sense or Navigation; Swimming; Rope Use', 'Silver Halls Noble': 'Etiquette or Dancing; Reading / Writing; 150 starting gold', 'Heart of Harvestfall': 'Agriculture; Animal Handling; Cooking or Brewing', 'Autumn Line Vanguard': 'Survival or Tracking; Fire Building', 'Child of Flame': 'Healing or Herbalism; Religion', 'Oldcraft Disciple': 'Ancient History or Languages; Engineering' }, features: '+1 starting language; +1 non-weapon proficiency; +1 encounter rolls with intelligent creatures.', activeSkill: { name: 'Manifest Destiny', condition: 'One time use only, during character creation.', description: 'Roll 9 sets of ability scores and keep the highest 6.' } },
     Elves: { classes: ['Fighter', 'Ranger', 'Cleric', 'Druid', 'Thief', 'Mage', 'Specialist Mage: Diviner', 'Specialist Mage: Enchanter', 'Specialist Mage: Wild Mage', 'Fighter / Mage', 'Fighter / Thief', 'Mage / Thief', 'Fighter / Mage / Thief'], bonuses: {}, choiceAbilities: ['dex', 'con', 'int', 'cha'], backgrounds: { 'Bone Reef Bred': 'Weapon Proficiency; Navigation or Rope Use; Swimming', 'Obsidian Shaped': 'Fast Talking or Bartering; Blacksmithing; 150 starting gold', 'Vel’seraak Pit Caste': 'Animal Handling or Training; Intimidation; Dirty Tricks', 'Black Forest Faithful': 'Herbalism or Healing; Religion', 'Vel’seran Loreborn': 'Ancient History or Languages; Reading / Writing; Agriculture', 'Deadwind Exile': 'Survival or Tracking; Alertness; Hunting' }, features: 'Infravision 60’; 90% immunity to Sleep and Charm spells; enemies receive -4 / -2 to surprise rolls in the listed conditions; +1 to hit/damage with axes and throwing weapons; detect secret doors.', activeSkill: { name: 'Blood-Tide Frenzy', condition: 'Once per adventure; lasts 2 rounds plus 1 round per 3 levels.', description: 'Suffer the listed AC penalty and gain the listed attack benefits against spells, melee, and thrown weapons.' } },
     Goblins: { classes: ['Fighter', 'Cleric', 'Thief', 'Witchdoctor', 'Fighter / Cleric', 'Fighter / Thief', 'Witchdoctor / Thief'], bonuses: {}, choiceAbilities: ['str', 'dex', 'wis', 'cha'], backgrounds: { 'Shallows Scallywag': 'Fishing; Rope Use; Weather Sense or Navigation', 'Underhill Highborn': 'Heraldry or Etiquette; +1 Bonus Language; Dancing or Singing', 'Grublight Devoted': 'Religion; Soothsaying or Herbalism', 'Glitterdeep Stray': 'Gem Cutting or Mining; Direction Sense', 'Rokpokkít Wanderer': 'Gaming or Drinking; Fast Talking; 150 starting gold', 'Gristleborn': 'Weapon Proficiency; Blind-Fighting or Wild Fighting' }, features: 'Infravision 60’; Ogres, Trolls, and Giants receive -4 to hit when targeting goblins; detect underground construction, stonework traps, and nearby crystals/gems.', activeSkill: { name: 'Grabby Lil’ Gremlins', condition: 'Once per adventure, when treasure is found.', description: 'Secretly tell the DM to roll 1d6 for the listed gold, gem, or item outcome.' } },
-    Dwarf: { classes: ['Fighter', 'Paladin', 'Cleric', 'Thief', 'Specialist Mage: Illusionist', 'Fighter / Cleric', 'Fighter / Thief', 'Thief / Illusionist'], bonuses: { con: 1, cha: -1 }, backgrounds: { 'Treeline Tactician': 'Survival or Danger Sense; Danger Sense', 'Stonesail Explorer': 'Swimming; Rope Use; Slow Respiration or Deep Diving', 'Oathbound Defender': 'Endurance or Armorer; Weapon Proficiency', 'Deepvein Touched': 'Stonemasonry or Blacksmithing; Mining or Engineering', 'Stonefaith Devotee': 'Religion; Dwarf Runes; Chanting or Brewing', 'Deephold Ascendant': 'Etiquette or Reading / Writing; Heraldry; 2 gems worth 80 gp each' }, features: 'Infravision 60’; +1 saves per 3.5 points of CON; Ogres, Trolls, and Giants receive -4 to hit; +1 to hit listed humanoids; 20% chance of non-class magic item malfunction; stonework detection.', activeSkill: { name: 'Tough as Rocks', condition: 'Once per adventure, when reduced to 0 hit points or below.', description: 'Roll 1d6 to determine whether you remain unconscious at 0 hit points or survive at 1 hit point.' } },
+    Dwarf: { classes: ['Fighter', 'Paladin', 'Cleric', 'Thief', 'Specialist Mage: Illusionist', 'Fighter / Cleric', 'Fighter / Thief', 'Thief / Illusionist'], bonuses: { con: 1, cha: -1 }, choiceAbilities: ['str', 'dex', 'int', 'wis'], backgrounds: { 'Treeline Tactician': 'Survival or Danger Sense; Danger Sense', 'Stonesail Explorer': 'Swimming; Rope Use; Slow Respiration or Deep Diving', 'Oathbound Defender': 'Endurance or Armorer; Weapon Proficiency', 'Deepvein Touched': 'Stonemasonry or Blacksmithing; Mining or Engineering', 'Stonefaith Devotee': 'Religion; Dwarf Runes; Chanting or Brewing', 'Deephold Ascendant': 'Etiquette or Reading / Writing; Heraldry; 2 gems worth 80 gp each' }, features: 'Infravision 60’; +1 saves per 3.5 points of CON; Ogres, Trolls, and Giants receive -4 to hit; +1 to hit listed humanoids; 20% chance of non-class magic item malfunction; stonework detection.', activeSkill: { name: 'Tough as Rocks', condition: 'Once per adventure, when reduced to 0 hit points or below.', description: 'Roll 1d6 to determine whether you remain unconscious at 0 hit points or survive at 1 hit point.' } },
     Halfling: { classes: ['Fighter', 'Cleric', 'Thief', 'Bard', 'Fighter / Cleric', 'Fighter / Thief', 'Cleric / Thief'], bonuses: {}, choiceAbilities: ['con', 'int', 'wis', 'cha'], backgrounds: { 'Hearthland Tender': 'Etiquette; Cooking; Brewing or Winemaking', 'Lord of the Fields': 'Weapon Proficiency; Leadership or Oratory; Local History', 'Deep Lake Seeker': 'Fishing or Swimming; Ancient History; Arcanology', 'Woodspirit Watcher': 'Running; Signaling; Alertness or Camouflage', 'Harvest-Rite Follower': 'Religion; Agriculture; Animal Handling or Animal Lore', 'Silver-Tongued Arbiter': 'Fast Talking or Bartering; Gaming; 150 starting gold' }, features: 'Infravision 60’; +1 saves per 3.5 points of CON; Ogres, Trolls, and Giants receive -4 to hit; +1 to hit and damage with thrown weapons or slings; enemies receive -4 / -2 to surprise rolls in listed conditions.', activeSkill: { name: 'Fortune’s Favor', condition: 'At the start of the adventure.', description: 'Gain 1d4 adventure points; these temporary points do not carry over to the next adventure.' } },
     'Half-Elf': { classes: ['Fighter', 'Ranger', 'Paladin', 'Cleric', 'Druid', 'Thief', 'Bard', 'Mage', 'Specialist Mage', 'Fighter / Mage', 'Fighter / Thief', 'Mage / Thief', 'Every combination but the kitchen sink'], bonuses: {}, choiceAbilities: ['str', 'dex', 'con', 'int', 'wis', 'cha'], backgrounds: { 'Ink-Stained Scion': 'Ancient History or Arcanology; +1 Bonus Language; Reading / Writing', 'Twice-Scarred Drifter': 'Weapon Proficiency; Survival or Endurance', 'Rust Shallows Outcast': 'Swimming; Rope Use; Weather Sense or Navigation', 'Forged by the Forest': 'Alertness; Fire Building; Foraging or Weather Sense', 'Open-Hand Pilgrim': 'Religion; Cartography or Cryptography; Reading / Writing', 'Wayward Ward': 'Etiquette; Musical Instrument or Singing; 150 starting gold' }, features: 'Infravision 60’; 30% immunity to Sleep and Charm spells; enemies receive -4 / -2 to surprise rolls in listed conditions; +1 to hit with a chosen weapon group; detect secret doors.', activeSkill: { name: 'Pilgrim’s Cache', condition: 'Once per adventure.', description: 'Spend 1d4+1 rounds searching your pack to produce one tool or supply worth 5 sp or less; it is used immediately and consumed.' } },
     Lizardfolk: { classes: ['Fighter', 'Ranger', 'Druid', 'Witchdoctor', 'Thief', 'Fighter / Thief', 'Druid / Thief'], bonuses: {}, choiceAbilities: ['str', 'dex', 'wis', 'cha'], backgrounds: { 'Broken Coast Castaway': 'Survival or Endurance; Swimming', 'Wyrm-Blood Noble': 'Ancient History; Dancing or Singing; 150 starting gold', 'Fringe-Crest Savage': 'Tracking or Survival; Weapon Proficiency', 'Ophidian Acolyte': 'Astrology or Soothsaying; Religion', 'Marsh Warden': 'Set Snares; Hunting; Local History or Animal Lore' }, features: 'Movement rate of 12 in water; natural AC 5 while unarmored; may hold breath; +1 attack every 2 rounds for 1d6 damage; must wet entire body once per day.', activeSkill: { name: 'Apex Predator', condition: 'Once per adventure; remain perfectly still for 1 turn.', description: 'Become invisible while silent and unmoving, then gain the listed attack and surprise benefits.' } }
@@ -248,6 +263,23 @@ function selectedRaceData() {
     return data.raceSelection && raceCatalog[data.raceSelection] ? raceCatalog[data.raceSelection] : null;
 }
 
+function updateSurpriseFromRace(race) {
+    const hasSurpriseBonus = ['Elves', 'Half-Elf', 'Halfling'].includes(race);
+    if (hasSurpriseBonus) {
+        data.surpriseBonus = { ...data.surpriseBonus, active: true, target: 'Enemy', roll: 'Surprise', fullModifier: '-4', reducedModifier: '-2', source: 'Racial', conditions: 'Non-metal armor; party consists only of halflings, elves, or half-elves; or character is at least 90 ft. from others' };
+    } else if (data.surpriseBonus.source === 'Racial') {
+        data.surpriseBonus.active = false;
+    }
+    const section = document.querySelector('.surprise-section');
+    if (!section) return;
+    section.querySelectorAll('[data-surprise-key]').forEach(input => {
+        input.value = data.surpriseBonus[input.dataset.surpriseKey];
+        if (input.type === 'checkbox') input.checked = data.surpriseBonus[input.dataset.surpriseKey] !== false;
+    });
+    const summary = section.querySelector('.surprise-summary span');
+    if (summary) summary.textContent = `Enemy surprise: ${data.surpriseBonus.fullModifier} / ${data.surpriseBonus.reducedModifier}`;
+}
+
 function raceOptions() {
     return ['Humans', 'Elves', 'Goblins', 'Dwarf', 'Halfling', 'Half-Elf', 'Lizardfolk'];
 }
@@ -287,11 +319,12 @@ function setupRaceSystem() {
         data.racialBonuses = { ...(preset?.bonuses || {}) };
         if (preset?.choiceAbilities?.includes(data.racialBonusChoice)) data.racialBonuses[data.racialBonusChoice] = 1;
         data.racialFeatures = preset?.features || '';
+        updateSurpriseFromRace(race);
         data.selectedBackground = preset ? data.selectedBackground : '';
         classList.innerHTML = (preset?.classes || []).map(className => `<option value="${esc(className)}"></option>`).join('');
         const backgrounds = preset ? Object.entries(preset.backgrounds) : [];
         rules.querySelector('.race-rules-content').innerHTML = preset
-            ? `<div class="race-rule-columns"><div><h3>${esc(race)}</h3><p>${esc(preset.features)}</p><p><strong>Ability bonuses:</strong> ${Object.entries(preset.bonuses).map(([ability, bonus]) => `${ability.toUpperCase()} ${bonus >= 0 ? '+' : ''}${bonus}`).join(', ') || (preset.choiceAbilities ? `+1 to ${preset.choiceAbilities.map(ability => ability.toUpperCase()).join(', ')}` : 'None listed')}</p><p><strong>Legal classes:</strong> ${preset.classes.map(esc).join(', ')}</p>${preset.activeSkill ? `<div class="racial-ability-skill"><h3>Racial Ability Skill</h3><p><strong>${esc(preset.activeSkill.name)}</strong></p><p><strong>Condition:</strong> ${esc(preset.activeSkill.condition)}</p><p><strong>Effect:</strong> ${esc(preset.activeSkill.description)}</p></div>` : ''}</div><div>${preset.choiceAbilities ? `<label for="racial-bonus-choice">Choose +1 ability bonus</label><select id="racial-bonus-choice"><option value="">Choose an ability</option>${preset.choiceAbilities.map(ability => `<option value="${ability}">${ability.toUpperCase()}</option>`).join('')}</select>` : ''}<label for="background-select">Background</label><select id="background-select"><option value="">Choose a background</option>${backgrounds.map(([name]) => `<option value="${esc(name)}">${esc(name)}</option>`).join('')}</select><p class="background-benefits"></p><p class="class-validity"></p><p class="class-requirements-note"></p></div></div>`
+            ? `<div class="race-rule-columns"><div><h3>${esc(race)}</h3><p>${esc(preset.features)}</p><p><strong>Ability bonuses:</strong> ${Object.entries(preset.bonuses).map(([ability, bonus]) => `${ability.toUpperCase()} ${bonus >= 0 ? '+' : ''}${bonus}`).join(', ') || (preset.choiceAbilities ? `+1 to ${preset.choiceAbilities.map(ability => ability.toUpperCase()).join(', ')}` : 'None listed')}</p><p><strong>Legal classes:</strong> ${preset.classes.map(esc).join(', ')}</p>${preset.activeSkill ? `<div class="racial-ability-skill"><h3>Racial Ability Skill</h3><p><strong>${esc(preset.activeSkill.name)}</strong></p><p><strong>Condition:</strong> ${esc(preset.activeSkill.condition)}</p><p><strong>Effect:</strong> ${esc(preset.activeSkill.description)}</p></div>` : ''}</div><div>${preset.choiceAbilities ? `<label for="racial-bonus-choice">Choose +1 ability bonus</label><select id="racial-bonus-choice"><option value="">Choose an ability</option>${preset.choiceAbilities.map(ability => `<option value="${ability}">${ability.toUpperCase()}</option>`).join('')}</select>` : ''}${race === 'Half-Elf' ? `<label for="racial-weapon-choice">Choose +1 weapon to hit</label><select id="racial-weapon-choice"><option value="">Choose a weapon</option>${[...new Set(halfElfWeaponOptions.map(([, group]) => group))].map(group => `<optgroup label="${esc(group)}">${halfElfWeaponOptions.filter(([, itemGroup]) => itemGroup === group).map(([name,, label]) => `<option value="${esc(name)}">${esc(label || name)}</option>`).join('')}</optgroup>`).join('')}</select><small class="racial-weapon-note">Equipped matching weapon rows receive a separate racial +1 to hit.</small>` : ''}<label for="background-select">Background</label><select id="background-select"><option value="">Choose a background</option>${backgrounds.map(([name]) => `<option value="${esc(name)}">${esc(name)}</option>`).join('')}</select><p class="background-benefits"></p><p class="class-validity"></p><p class="class-requirements-note"></p></div></div>`
             : '<p>Custom race. Enter the race name manually; class legality, bonuses, and background rules must be entered manually.</p>';
         const background = rules.querySelector('#background-select');
         const bonusChoice = rules.querySelector('#racial-bonus-choice');
@@ -302,6 +335,15 @@ function setupRaceSystem() {
                 update();
             };
         } else if (!preset?.choiceAbilities) data.racialBonusChoice = '';
+        const weaponChoice = rules.querySelector('#racial-weapon-choice');
+        if (weaponChoice) {
+            weaponChoice.value = data.racialWeaponChoice;
+            weaponChoice.onchange = () => {
+                data.racialWeaponChoice = weaponChoice.value;
+                updateWeaponThac0();
+                changed();
+            };
+        } else if (race !== 'Half-Elf') data.racialWeaponChoice = '';
         if (background) {
             background.value = data.selectedBackground;
             rules.querySelector('.background-benefits').textContent = preset.backgrounds[data.selectedBackground] || '';
@@ -320,6 +362,7 @@ function setupRaceSystem() {
             validity.className = `class-validity ${legal ? 'valid' : 'invalid'}`;
         }
         updateRacialBonuses();
+        updateWeaponThac0();
         changed();
     };
     select.onchange = update;
@@ -1054,7 +1097,7 @@ function updateAcTotal() {
 
 const acItemPresets = [
     ['None / unarmored', 'armor', 10], ['Leather / padded', 'armor', 8], ['Studded leather', 'armor', 7], ['Ring mail', 'armor', 7], ['Brigandine', 'armor', 6], ['Scale mail', 'armor', 6], ['Hide', 'armor', 6], ['Chain mail', 'armor', 5], ['Splint mail', 'armor', 4], ['Banded mail', 'armor', 4], ['Bronze plate mail', 'armor', 4], ['Plate mail', 'armor', 3], ['Field plate', 'armor', 2], ['Full plate', 'armor', 1],
-    ['Small shield', 'shield', -1], ['Medium shield', 'shield', -1], ['Large / body shield', 'shield', -1], ['Shield +1', 'shield', -2], ['Ring of protection +1', 'magic', -1], ['Cloak of protection +1', 'magic', -1], ['Armor +1', 'magic', -1], ['Blur', 'spell', -3], ['Cover', 'cover', -2], ['Natural armor', 'natural', 10]
+    ['Small shield', 'shield', -1], ['Wooden small shield (crude)', 'shield', -1], ['Medium shield', 'shield', -1], ['Large / body shield', 'shield', -1], ['Shield +1', 'shield', -2], ['Ring of protection +1', 'magic', -1], ['Cloak of protection +1', 'magic', -1], ['Armor +1', 'magic', -1], ['Blur', 'spell', -3], ['Cover', 'cover', -2], ['Natural armor', 'natural', 10]
 ];
 
 function acItemRowsHTML() {
@@ -1214,6 +1257,16 @@ function setupMovementSection() {
     updateMovementSection();
 }
 
+function setupSpecialNotesPosition() {
+    const movement = document.querySelector('.movement-section');
+    if (!movement) return;
+    const cards = [...document.querySelectorAll('.grid > .card')];
+    cards.filter(card => {
+        const title = card.querySelector(':scope > h2')?.textContent || '';
+        return title.includes('Special abilities') || title.includes('Notes');
+    }).forEach(card => movement.before(card));
+}
+
 function updateMovementSection() {
     const section = document.querySelector('.movement-section');
     if (!section) return;
@@ -1244,8 +1297,8 @@ function setupHenchmenSection() {
 
 const weaponCatalog = [
     ['Battle Axe', 'M', '1d8', '1d8', '-', '7', '7'], ['Hand Axe', 'M/T', '1d6', '1d4', '10/20/30', '5', '4'], ['Throwing Axe', 'T', '1d6', '1d4', '10/20/30', '3', '4'], ['Club', 'M', '1d6', '1d3', '-', '3', '4'],
-    ['Dagger', 'M/T', '1d4', '1d3', '10/20/30', '1', '2'], ['Dirk', 'M/T', '1d4', '1d3', '5/15/25', '1', '2'], ['Knife', 'M/T', '1d3', '1d2', '5/10/20', '0.5', '2'], ['Javelin', 'M/T', '1d6', '1d6', '20/40/60', '2', '4'],
-    ['Spear', 'M/T', '1d6', '1d8', '20/40/60', '5', '6'], ['Short Sword', 'M', '1d6', '1d8', '-', '3', '3'], ['Long Sword', 'M', '1d8', '1d12', '-', '4', '5'], ['Bastard Sword', 'M', '2d4', '2d8', '-', '6', '8'],
+    ['Dagger', 'M/T', '1d4', '1d3', '10/20/30', '1', '2'], ['Dirk', 'M/T', '1d4', '1d3', '5/15/25', '1', '2'], ['Knife', 'M/T', '1d3', '1d2', '5/10/20', '0.5', '2'], ['Bone Knife (crude)', 'M/T', '1d3', '1d2', '5/10/20', '0.5', '2'], ['Javelin', 'M/T', '1d6', '1d6', '20/40/60', '2', '4'],
+    ['Spear', 'M/T', '1d6', '1d8', '20/40/60', '5', '6'], ['Wooden Spear (crude)', 'M/T', '1d6', '1d8', '20/40/60', '5', '6'], ['Short Sword', 'M', '1d6', '1d8', '-', '3', '3'], ['Long Sword', 'M', '1d8', '1d12', '-', '4', '5'], ['Bastard Sword', 'M', '2d4', '2d8', '-', '6', '8'],
     ['Two-Handed Sword', 'M', '1d10', '3d6', '-', '15', '10'], ['Scimitar', 'M', '1d8', '1d8', '-', '4', '4'], ['Sabre', 'M', '1d6', '1d8', '-', '3', '4'], ['Broad Sword', 'M', '2d4', '1d6+1', '-', '4', '6'],
     ['Falchion', 'M', '2d4', '2d4', '-', '15', '8'], ['Rapier', 'M', '1d6', '1d4', '-', '2', '3'], ['Mace', 'M', '1d6+1', '1d6', '-', '8', '7'], ['Morning Star', 'M', '2d4', '1d6+1', '-', '6', '7'],
     ['Flail', 'M', '1d6+1', '2d4', '-', '15', '7'], ['War Hammer', 'M/T', '1d4+1', '1d4', '10/20/30', '5', '4'], ['Quarterstaff', 'M', '1d6', '1d6', '-', '4', '4'], ['Halberd', 'M', '1d10', '2d6', '-', '15', '9'],
@@ -1253,6 +1306,34 @@ const weaponCatalog = [
     ['Bow, Long', 'M', '1d6', '1d6', '70/140/210', '3', '7'], ['Composite Short Bow', 'M', '1d6', '1d6', '50/100/150', '3', '6'], ['Composite Long Bow', 'M', '1d6', '1d6', '70/140/210', '4', '7'],
     ['Crossbow, Light', 'M', '1d4+1', '1d4+1', '60/120/180', '5', '7'], ['Crossbow, Heavy', 'M', '1d6+1', '1d10+1', '80/160/240', '16', '10'], ['Crossbow, Hand', 'M', '1d3', '1d2', '20/40/60', '3', '4'], ['Sling', 'M', '1d4', '1d6', '40/80/160', '0', '6'], ['Dart', 'T', '1d3', '1d2', '15/30/60', '0.25', '2']
 ];
+const halfElfWeaponGroups = ['Swords', 'Axes', 'Bows', 'Thrown weapons'];
+const racialWeaponGroupNames = {
+    Swords: ['Long Sword', 'Bastard Sword', 'Two-Handed Sword', 'Short Sword', 'Rapier', 'Scimitar'],
+    Axes: ['Battle Axe', 'Hand Axe'],
+    Bows: ['Bow, Long', 'Bow, Short', 'Composite Long Bow', 'Composite Short Bow'],
+    'Thrown weapons': ['Dagger', 'Dirk', 'Knife', 'Bone Knife (crude)', 'Javelin', 'Spear', 'Wooden Spear (crude)', 'Trident', 'Hand Axe', 'War Hammer', 'Dart', 'Sling']
+};
+
+function halfElfWeaponOptionsHTML() {
+    return halfElfWeaponGroups.map(group => `<option value="${esc(group)}">${esc(group)}</option>`).join('');
+}
+
+const halfElfWeaponOptions = halfElfWeaponGroups.map(group => [group, group]);
+
+function halfElfWeaponApplies(weaponName) {
+    return data.raceSelection === 'Half-Elf' && racialWeaponGroupNames[data.racialWeaponChoice]?.includes(weaponName);
+}
+
+function weaponRacialBonuses(weapon) {
+    const name = weapon?.name || '';
+    const thrown = String(weapon?.attackType || '').includes('T') || name === 'Sling';
+    const axe = /axe/i.test(name);
+    const halflingOrElf = data.raceSelection === 'Halfling' || data.raceSelection === 'Elves';
+    const halfElfHit = halfElfWeaponApplies(name) ? 1 : 0;
+    const hit = halfElfHit + (halflingOrElf && (thrown || (data.raceSelection === 'Elves' && axe)) ? 1 : 0);
+    const damage = data.raceSelection === 'Halfling' && thrown ? 1 : data.raceSelection === 'Elves' && (thrown || axe) ? 1 : 0;
+    return { hit, damage };
+}
 
 function weaponRowsHTML() {
     return data.weapons.map((weapon, index) => {
@@ -1265,10 +1346,13 @@ function updateWeaponThac0() {
     const base = Number.parseInt(data.combat.thac0, 10);
     document.querySelectorAll('[data-weapon-thac0]').forEach(output => {
         const weapon = data.weapons[+output.dataset.weaponThac0];
-        const attackAdjustment = Number.parseInt(weapon?.attackAdj, 10) || 0;
+        const racial = weaponRacialBonuses(weapon);
+        const attackAdjustment = (Number.parseInt(weapon?.attackAdj, 10) || 0) + racial.hit;
         const thac0Adjustment = Number.parseInt(weapon?.thac0Adj, 10) || 0;
         output.textContent = Number.isInteger(base) && weapon?.equipped !== false ? base - attackAdjustment + thac0Adjustment : '-';
-        output.title = weapon?.equipped !== false && Number.isInteger(base) ? `Weapon THAC0 = character THAC0 ${base} - attack adjustment ${attackAdjustment} + weapon THAC0 adjustment ${thac0Adjustment} = ${output.textContent}.` : 'Weapon is inactive or character THAC0 is not available.';
+        output.title = weapon?.equipped !== false && Number.isInteger(base) ? `Weapon THAC0 = character THAC0 ${base} - attack adjustment ${Number.parseInt(weapon?.attackAdj, 10) || 0}${racial.hit ? ` - racial hit bonus ${racial.hit}` : ''} + weapon THAC0 adjustment ${thac0Adjustment} = ${output.textContent}.` : 'Weapon is inactive or character THAC0 is not available.';
+        const damageInput = output.closest('tr')?.querySelector('[data-weapon-key="damageAdj"]');
+        if (damageInput) damageInput.title = racial.damage ? `Manual damage adjustment plus racial ${racial.damage >= 0 ? '+' : ''}${racial.damage} damage from ${data.raceSelection} weapon rules.` : 'Manual weapon damage adjustment. No automatic racial damage bonus applies to this weapon.';
     });
 }
 
@@ -1353,6 +1437,13 @@ function setupClassRequirementsReferenceSection() {
     document.querySelector('.grid').append(section);
 }
 
+function setupSurpriseReferenceSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide surprise-reference-section';
+    section.innerHTML = '<h2>Surprise and ambush reference</h2><div class="thac0-reference-grid"><article><h3>Enemy surprise modifier</h3><p>Use the full modifier when all listed conditions are satisfied. Use the reduced modifier when only some conditions apply.</p><p class="formula"><strong>Enemy surprise roll + modifier</strong></p></article><article><h3>Suggested conditions</h3><p>Non-metal armor; the party consists only of halflings, elves, or half-elves; or the character is at least 90 feet from others.</p><p>The supplied race cards commonly use -4 and -2 for these conditions.</p></article><article><h3>Keep rolls distinct</h3><p><strong>Character surprise modifier:</strong> modifies the character\'s own roll.</p><p><strong>Enemy surprise modifier:</strong> modifies an opponent\'s roll.</p></article><article><h3>Tracker fields</h3><p>Target: Enemy<br>Roll: Surprise<br>Full modifier: -4<br>Reduced modifier: -2<br>Source: Racial</p><p>Use the active toggle and notes to record exceptions for the current encounter.</p></article></div>';
+    document.querySelector('.grid').append(section);
+}
+
 function setupSpellSectionPosition() {
     const combat = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Combat'));
     const spells = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Spells'));
@@ -1416,6 +1507,39 @@ function setupSpellTracking() {
     updateSlots();
 }
 
+const resistancePresets = [
+    ['Elf: Sleep and Charm', 'Spell immunity', 'Sleep and Charm', '90%', 'Racial'], ['Half-Elf: Sleep and Charm', 'Spell immunity', 'Sleep and Charm', '30%', 'Racial'],
+    ['Dwarf: saving throw bonus', 'Saving throw bonus', 'Wands, staves, rods, spells, poison', 'CON-based', 'Racial'], ['Halfling: saving throw bonus', 'Saving throw bonus', 'Wands, staves, rods, spells, poison', 'CON-based', 'Racial'],
+    ['Goblin: enemy attack penalty', 'Enemy attack penalty', 'Ogre, troll, and giant attacks', '-4 to hit', 'Racial'], ['Lizardfolk: hold breath', 'Environmental resistance', 'Holding breath', '1 round + 2/3 CON', 'Racial'],
+    ['Magic resistance', 'Magic resistance', 'Magical effects', '10%', 'Item'], ['Fire resistance', 'Damage resistance', 'Fire damage', 'Half damage', 'Spell / item']
+];
+
+function setupResistanceSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide resistance-section';
+    section.innerHTML = `<h2>Resistances and immunities</h2><div class="tableWrap"><table class="resistance-table"><thead><tr><th>Active</th><th>Preset / type</th><th>Applies to</th><th>Value</th><th>Source</th><th>Notes</th><th></th></tr></thead><tbody>${data.resistances.map((item, index) => `<tr><td><input type="checkbox" data-resistance-item="${index}" data-resistance-key="active" ${item.active !== false ? 'checked' : ''} aria-label="Active resistance"></td><td><select data-resistance-preset="${index}"><option value="Other" ${resistancePresets.some(preset => preset[1] === item.type && preset[2] === item.appliesTo && preset[3] === item.value) ? '' : 'selected'}>Other</option>${resistancePresets.map(preset => `<option value="${esc(preset[0])}" ${item.appliesTo === preset[2] && item.value === preset[3] && item.source === preset[4] ? 'selected' : ''}>${esc(preset[0])}</option>`).join('')}</select><input data-resistance-item="${index}" data-resistance-key="type" value="${esc(item.type)}" placeholder="Resistance type"></td><td><input data-resistance-item="${index}" data-resistance-key="appliesTo" value="${esc(item.appliesTo)}"></td><td><input data-resistance-item="${index}" data-resistance-key="value" value="${esc(item.value)}"></td><td><input data-resistance-item="${index}" data-resistance-key="source" value="${esc(item.source)}"></td><td><input data-resistance-item="${index}" data-resistance-key="notes" value="${esc(item.notes)}"></td><td><button type="button" class="remove" data-resistance-remove="${index}" aria-label="Remove resistance">×</button></td></tr>`).join('')}</tbody></table></div><button type="button" class="add" data-resistance-add>Add resistance</button><small class="resistance-note">Active entries are recorded for reference. Apply percentage resistance, immunity, damage reduction, save bonuses, and enemy penalties according to the listed effect.</small>`;
+    const target = document.querySelector('.combat-card');
+    if (target) target.after(section); else document.querySelector('.grid').append(section);
+    section.querySelector('[data-resistance-add]').onclick = () => { data.resistances.push({ type: 'Other', appliesTo: '', value: '', source: '', active: true, notes: '' }); changed(); render(); };
+    section.querySelectorAll('[data-resistance-item]').forEach(input => input.oninput = () => { const item = data.resistances[+input.dataset.resistanceItem]; item[input.dataset.resistanceKey] = input.type === 'checkbox' ? input.checked : input.value; changed(); });
+    section.querySelectorAll('[data-resistance-preset]').forEach(select => select.onchange = () => { const preset = resistancePresets.find(item => item[0] === select.value); if (!preset) return; data.resistances[+select.dataset.resistancePreset] = { type: preset[1], appliesTo: preset[2], value: preset[3], source: preset[4], active: true, notes: '' }; changed(); render(); });
+    section.querySelectorAll('[data-resistance-remove]').forEach(button => button.onclick = () => { data.resistances.splice(+button.dataset.resistanceRemove, 1); changed(); render(); });
+}
+
+function setupSurpriseSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide surprise-section';
+    const bonus = data.surpriseBonus;
+    section.innerHTML = `<h2>Surprise and ambush</h2><div class="surprise-layout"><div class="surprise-summary"><strong>AMBUSH</strong><span>Enemy surprise: ${esc(bonus.fullModifier)} / ${esc(bonus.reducedModifier)}</span></div><div class="surprise-fields"><label><input type="checkbox" data-surprise-key="active" ${bonus.active !== false ? 'checked' : ''}> Active</label><label>Target<select data-surprise-key="target"><option ${bonus.target === 'Enemy' ? 'selected' : ''}>Enemy</option><option ${bonus.target === 'Character' ? 'selected' : ''}>Character</option></select></label><label>Roll<input data-surprise-key="roll" value="${esc(bonus.roll)}"></label><label>Full modifier<input data-surprise-key="fullModifier" value="${esc(bonus.fullModifier)}"></label><label>Reduced modifier<input data-surprise-key="reducedModifier" value="${esc(bonus.reducedModifier)}"></label><label>Source<input data-surprise-key="source" value="${esc(bonus.source)}"></label><label class="surprise-wide">Conditions<textarea data-surprise-key="conditions">${esc(bonus.conditions)}</textarea></label><label class="surprise-wide">Notes<textarea data-surprise-key="notes">${esc(bonus.notes)}</textarea></label></div></div><small>Enemy modifiers affect the opponent's surprise roll. This tracker does not change character initiative automatically.</small>`;
+    const target = document.querySelector('.resistance-section');
+    if (target) target.after(section); else document.querySelector('.combat-card')?.after(section);
+    section.querySelectorAll('[data-surprise-key]').forEach(input => input.oninput = () => {
+        data.surpriseBonus[input.dataset.surpriseKey] = input.type === 'checkbox' ? input.checked : input.value;
+        section.querySelector('.surprise-summary span').textContent = `Enemy surprise: ${data.surpriseBonus.fullModifier} / ${data.surpriseBonus.reducedModifier}`;
+        changed();
+    });
+}
+
 function updateHitPointDisplay() {
     const display = document.querySelector('.hp-total');
     if (!display) return;
@@ -1434,6 +1558,30 @@ function fields(section, names) {
 
 function table(key, cols) {
     return `<div class="tableWrap"><table><thead><tr>${cols.map(c=>`<th>${c[1]}</th>`).join('')}<th></th></tr></thead><tbody>${data[key].map((r,i)=>`<tr>${cols.map(c=>`<td><input data-array="${key}" data-index="${i}" data-key="${c[0]}" value="${esc(r[c[0]])}"></td>`).join('')}<td><button class="remove" data-remove="${key}" data-index="${i}">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="${key}">Add row</button>`
+}
+
+function setupProficiencyAndInventorySections() {
+    const cards = [...document.querySelectorAll('.grid > .card')];
+    const proficiencyCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Proficiencies'));
+    if (proficiencyCard) {
+        proficiencyCard.classList.remove('half');
+        proficiencyCard.classList.add('wide');
+        proficiencyCard.innerHTML = `<h2>Proficiencies</h2><div class="tableWrap"><table class="proficiencies-table"><thead><tr><th>Proficiency</th><th>Slots</th><th>Score</th><th>Type</th><th>Source</th><th>Notes</th><th></th></tr></thead><tbody>${data.proficiencies.map((row, index) => `<tr>${[['name','Proficiency'],['slots','Slots'],['score','Score'],['type','Type'],['source','Source'],['notes','Notes']].map(([key]) => `<td><input data-array="proficiencies" data-index="${index}" data-key="${key}" value="${esc(row[key])}"></td>`).join('')}<td><button class="remove" data-remove="proficiencies" data-index="${index}" aria-label="Remove proficiency">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="proficiencies">Add proficiency</button>`;
+    }
+    const inventoryCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Inventory'));
+    const currencyCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Currency'));
+    if (inventoryCard && currencyCard) {
+        const currencyFields = currencyCard.querySelector(':scope > .fields');
+        const currencyHeading = document.createElement('h3');
+        currencyHeading.className = 'inventory-currency-heading';
+        currencyHeading.textContent = 'Currency';
+        const inventoryTable = inventoryCard.querySelector(':scope > .tableWrap');
+        if (currencyFields) {
+            inventoryCard.insertBefore(currencyHeading, inventoryTable || null);
+            inventoryCard.insertBefore(currencyFields, inventoryTable || null);
+        }
+        currencyCard.remove();
+    }
 }
 
 function render() {
@@ -1457,6 +1605,7 @@ function render() {
     setupHitPointsSection();
     updateSavingThrows();
     setupMovementSection();
+    setupSpecialNotesPosition();
     setupClassAbilitiesSection();
     setupHenchmenSection();
     setupActionReferenceSection();
@@ -1467,6 +1616,10 @@ function render() {
     setupWeaponSection();
     setupSpellSectionPosition();
     setupSpellTracking();
+    setupResistanceSection();
+    setupSurpriseSection();
+    setupProficiencyAndInventorySections();
+    setupSurpriseReferenceSection();
     setupAbilityTooltips();
     setupCharacterHeader();
     setupSectionToggles();
@@ -1572,7 +1725,9 @@ function bind() {
                 name: '',
                 slots: '',
                 score: '',
-                type: ''
+                type: '',
+                source: '',
+                notes: ''
             },
             inventory: {
                 item: '',

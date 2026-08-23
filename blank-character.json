@@ -13,6 +13,7 @@
     "deity": ""
   },
   "portraitUrl": "",
+  "racialWeaponChoice": "",
   "abilities": {
     "str": "",
     "dex": "",
@@ -52,6 +53,17 @@
   "proficiencies": [],
   "inventory": [],
   "spells": [],
+  "resistances": [],
+    "surpriseBonus": {
+      "active": true,
+      "target": "Enemy",
+      "roll": "Surprise",
+      "fullModifier": "-4",
+      "reducedModifier": "-2",
+      "source": "Racial",
+      "conditions": "Non-metal armor; eligible party composition or distance",
+      "notes": ""
+    },
   "spellSlots": [
     { "level": "1st", "available": "", "used": "" },
     { "level": "2nd", "available": "", "used": "" },
