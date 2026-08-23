@@ -1,0 +1,53 @@
+[
+  {
+    "id": "long-sword",
+    "name": "Long Sword",
+    "category": "weapon",
+    "subcategory": "sword",
+    "cost": { "amount": 15, "currency": "gp" },
+    "weightLb": 4,
+    "quantity": 1,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "Equipment Lists",
+    "notes": [],
+    "size": "M",
+    "damageType": ["S"],
+    "speedFactor": 5,
+    "damage": { "smallMedium": "1d8", "large": "1d12" },
+    "rateOfFire": null,
+    "ranges": null
+  },
+  {
+    "id": "long-bow",
+    "name": "Long Bow",
+    "category": "weapon",
+    "subcategory": null,
+    "cost": {
+      "amount": 75,
+      "currency": "gp"
+    },
+    "weightLb": 3,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "Equipment Lists",
+    "size": "L",
+    "damageType": [
+      "P"
+    ],
+    "speedFactor": 8,
+    "damage": {
+      "smallMedium": "1d6",
+      "large": "1d6"
+    },
+    "rateOfFire": "2/1",
+    "ranges": {
+      "short": 7,
+      "medium": 14,
+      "long": 21
+    },
+    "notes": []
+  }
+]

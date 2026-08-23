@@ -1,0 +1,17 @@
+[
+  {
+    "id": "chain-mail",
+    "name": "Chain mail",
+    "category": "armor",
+    "subcategory": null,
+    "cost": { "amount": 75, "currency": "gp" },
+    "weightLb": 40,
+    "quantity": 1,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "Equipment Lists",
+    "notes": [],
+    "armorClass": 5
+  }
+]

@@ -129,6 +129,13 @@ const FIXED = {
 };
 const clone = o => JSON.parse(JSON.stringify(o));
 let data = clone(FIXED);
+let equipmentCatalogue = [];
+let catalogueValidation = [];
+const gameRules = {
+    currencyConversion: { cp: 1, sp: 10, ep: 50, gp: 100, pp: 500 },
+    wealthCalculations: { baseCurrency: 'cp', displayCurrency: 'gp', allowCurrencyBreakdown: true, autoCalculateInventoryValue: true }
+};
+const copperPerCurrency = gameRules.currencyConversion;
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
     '&': '&amp;',
     '<': '&lt;',
@@ -164,10 +171,14 @@ function normalize(x = {}) {
     d.globalModifiers = Array.isArray(x.globalModifiers) ? x.globalModifiers.map(item => ({ category: typeof item.category === 'string' ? item.category : 'Other', value: item.value ?? '', appliesTo: item.appliesTo ?? '', source: item.source ?? '', active: item.active !== false, condition: item.condition ?? '', notes: item.notes ?? '' })) : [];
     d.xpHistory = Array.isArray(x.xpHistory) ? x.xpHistory : [];
     d.inventory = d.inventory.map(item => ({
+        itemId: typeof item.itemId === 'string' ? item.itemId : '',
         item: typeof item.item === 'string' ? item.item : typeof item.name === 'string' ? item.name : '',
-        location: typeof item.location === 'string' ? item.location : '',
+        location: item.location === 'stored' ? 'stored' : 'carried',
+        equipped: item.equipped !== false,
+        customName: typeof item.customName === 'string' ? item.customName : null,
+        weightOverride: item.weightOverride ?? (item.weight ?? null),
         quantity: item.quantity ?? 1,
-        weight: item.weight ?? ''
+        notes: typeof item.notes === 'string' ? item.notes : ''
     }));
     d.weapons = d.weapons.map(item => ({
         name: typeof item.name === 'string' ? item.name : '',
@@ -244,6 +255,95 @@ function formatExperience(value) {
     return Number.isInteger(value) ? value.toLocaleString('en-US') : '-';
 }
 
+function catalogueItem(item) {
+    const legacyIds = { longsword: 'long-sword' };
+    return equipmentCatalogue.find(record => record.id === (legacyIds[item.itemId] || item.itemId)) || null;
+}
+
+function itemName(item) {
+    return item.customName || catalogueItem(item)?.name || item.item || 'Custom item';
+}
+
+function itemWeight(item) {
+    const override = Number.parseFloat(item.weightOverride);
+    return Number.isFinite(override) ? override : Number.parseFloat(catalogueItem(item)?.weightLb) || 0;
+}
+
+function formatCost(cost) {
+    if (!cost || !Number.isFinite(Number(cost.amount)) || typeof cost.currency !== 'string') return '-';
+    return `${cost.amount} ${cost.currency}`;
+}
+
+function currencyToCopper(amount, currency) {
+    const multiplier = copperPerCurrency[String(currency || '').toLowerCase()];
+    return Number.isFinite(Number(amount)) && multiplier ? Number(amount) * multiplier : 0;
+}
+
+function copperBreakdown(value) {
+    let remaining = Math.max(0, Math.round(Number(value) || 0));
+    const pp = Math.floor(remaining / copperPerCurrency.pp); remaining %= copperPerCurrency.pp;
+    const gp = Math.floor(remaining / copperPerCurrency.gp); remaining %= copperPerCurrency.gp;
+    const ep = Math.floor(remaining / copperPerCurrency.ep); remaining %= copperPerCurrency.ep;
+    const sp = Math.floor(remaining / copperPerCurrency.sp); remaining %= copperPerCurrency.sp;
+    return `${pp} pp / ${gp} gp / ${ep} ep / ${sp} sp / ${remaining} cp`;
+}
+
+function wealthInCopper() {
+    return Object.entries(data.currency || {}).reduce((total, [currency, amount]) => total + currencyToCopper(amount, currency === 'platinum' ? 'pp' : currency === 'electrum' ? 'ep' : currency === 'gold' ? 'gp' : currency === 'silver' ? 'sp' : 'cp'), 0);
+}
+
+function inventoryValue() {
+    let totalCopper = 0;
+    data.inventory.forEach(item => {
+        const cost = catalogueItem(item)?.cost;
+        if (!cost || !Number.isFinite(Number(cost.amount))) return;
+        totalCopper += currencyToCopper(cost.amount, cost.currency) * (Number(item.quantity) || 0);
+    });
+    return copperBreakdown(totalCopper);
+}
+
+function validateCatalogue(records) {
+    const errors = [];
+    const ids = new Set();
+    records.forEach((item, index) => {
+        if (!item || typeof item.name !== 'string' || !item.name.trim()) errors.push(`Record ${index + 1}: missing item name.`);
+        if (!item?.id || ids.has(item.id)) errors.push(`Record ${index + 1}: duplicate or missing ID (${item?.id || 'blank'}).`);
+        ids.add(item?.id);
+        if (item?.cost !== null && (!item?.cost || !Number.isFinite(Number(item.cost.amount)) || !['cp', 'sp', 'ep', 'gp', 'pp'].includes(item.cost.currency))) errors.push(`${item?.id || 'Unnamed item'}: malformed cost.`);
+        const dice = [item?.damage?.smallMedium, item?.damage?.large].filter(value => value != null);
+        dice.forEach(value => { if (!/^\d+(?:d\d+(?:[+-]\d+)?)?$/i.test(String(value))) errors.push(`${item.id}: invalid dice expression (${value}).`); });
+    });
+    return errors;
+}
+
+async function loadEquipmentCatalogue() {
+    try {
+        const response = await fetch('data/equipment-catalog.json');
+        if (!response.ok) throw new Error('Catalogue file unavailable');
+        const catalog = await response.json();
+        const records = Array.isArray(catalog) ? catalog : catalog.items;
+        if (!Array.isArray(records)) throw new Error('Catalogue items are missing');
+        equipmentCatalogue = records.filter(item => item && typeof item === 'object').map(item => ({
+            ...item,
+            id: typeof item.id === 'string' ? item.id : '',
+            name: typeof item.name === 'string' ? item.name : '',
+            category: item.category ?? null,
+            subcategory: item.subcategory ?? null,
+            cost: item.cost && typeof item.cost === 'object' ? { amount: item.cost.amount ?? null, currency: item.cost.currency ?? null } : null,
+            weightLb: item.weightLb ?? null,
+            stackable: item.stackable === true,
+            consumable: item.consumable === true,
+            trackQuantity: item.trackQuantity !== false,
+            source: item.source ?? item.sourceReference ?? null,
+            notes: Array.isArray(item.notes) ? item.notes : item.notes == null ? [] : [String(item.notes)]
+        }));
+        catalogueValidation = validateCatalogue(equipmentCatalogue);
+    } catch (error) {
+        equipmentCatalogue = [];
+        catalogueValidation = [`Could not load equipment catalogue: ${error.message}`];
+    }
+}
+
 function globalModifierTotal(category, appliesTo = '') {
     return (data.globalModifiers || []).filter(item => item.active !== false && item.category === category && (!item.appliesTo || !appliesTo || item.appliesTo.toLowerCase() === appliesTo.toLowerCase())).reduce((total, item) => total + (Number.parseInt(item.value, 10) || 0), 0);
 }
@@ -256,9 +356,9 @@ function updateNextLevel(index) {
     const entry = data.identity.classEntries?.[index];
     const table = experienceTables[experienceTableId(entry?.className)];
     const level = Number.parseInt(entry?.level, 10);
-    if (!table || !Number.isInteger(level) || level < 1 || level >= table.length) return;
-    entry.nextLevel = String(table[level]);
-    document.querySelectorAll(`[data-class-entry="${index}"][data-key="nextLevel"]`).forEach(input => { input.value = entry.nextLevel; input.title = `Next level XP: level ${level + 1} threshold from the ${experienceTableId(entry.className)} table = ${formatExperience(table[level])}.`; });
+    if (!table || !Number.isInteger(level) || level < 1 || level >= table.length - 1) return;
+    entry.nextLevel = String(table[level + 1]);
+    document.querySelectorAll(`[data-class-entry="${index}"][data-key="nextLevel"]`).forEach(input => { input.value = entry.nextLevel; input.title = `Next level XP: level ${level + 1} threshold from the ${experienceTableId(entry.className)} table = ${formatExperience(table[level + 1])}.`; });
 }
 
 function advanceClassLevel(entry) {
@@ -1276,7 +1376,7 @@ function setupAbilitySummary() {
     section.className = 'card wide ability-summary';
     section.innerHTML = '<h2>Current ability benefits</h2><div class="ability-summary-content"></div>';
     section.querySelector('.ability-summary-content').innerHTML = abilitySummaryHTML();
-    const abilities = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent === 'Abilities');
+    const abilities = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('ABILITIES'));
     (abilities || document.querySelector('.grid > .card')).after(section);
 }
 
@@ -1632,10 +1732,20 @@ function updateClassAbilitiesVisibility() {
 }
 
 function setupClassAbilitiesSection() {
-    const section = document.createElement('section');
-    section.className = 'card wide class-abilities-section';
-    section.innerHTML = `<h2>Class abilities</h2><div class="class-abilities-grid">${namedInputTable('thiefSkills', 'Thief skills', 'Percent')} ${namedInputTable('undeadTurning', 'Undead turning', 'Result')}</div>`;
-    document.querySelector('.grid').append(section);
+    const spellsCard = [...document.querySelectorAll('.grid > .card')].find(card => /Spells/i.test(card.querySelector(':scope > h2')?.textContent || ''));
+    if (!spellsCard) return;
+    let section = spellsCard.querySelector('.class-abilities-section');
+    if (!section) {
+        section = document.createElement('div');
+        section.className = 'class-abilities-section';
+        const insertAfter = spellsCard.querySelector('.spell-slots') || spellsCard.querySelector('.manual-spells');
+        section.innerHTML = `<div class="class-abilities-grid">${namedInputTable('thiefSkills', 'Thief skills', 'Percent')} ${namedInputTable('undeadTurning', 'Undead turning', 'Result')}</div>`;
+        if (insertAfter) {
+            insertAfter.after(section);
+        } else {
+            spellsCard.append(section);
+        }
+    }
     updateClassAbilitiesVisibility();
 }
 
@@ -1643,7 +1753,8 @@ function setupHenchmenSection() {
     const section = document.createElement('section');
     section.className = 'card wide henchmen-section';
     section.innerHTML = `<h2>Henchmen</h2><div class="tableWrap"><table class="henchmen-table"><thead><tr><th>Type</th><th>Name</th><th>Level / HD</th><th>Role or species</th><th>Loyalty</th><th>Notes</th><th></th></tr></thead><tbody>${data.henchmen.map((row, index) => `<tr><td><select data-array="henchmen" data-index="${index}" data-key="type"><option value="NPC" ${row.type === 'NPC' ? 'selected' : ''}>NPC</option><option value="Animal" ${row.type === 'Animal' ? 'selected' : ''}>Animal</option></select></td><td><input data-array="henchmen" data-index="${index}" data-key="name" value="${esc(row.name)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="levelOrHd" value="${esc(row.levelOrHd)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="role" value="${esc(row.role)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="loyalty" value="${esc(row.loyalty)}"></td><td><input data-array="henchmen" data-index="${index}" data-key="notes" value="${esc(row.notes)}"></td><td><button class="remove" data-remove="henchmen" data-index="${index}">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="henchmen">Add henchman</button>`;
-    document.querySelector('.class-abilities-section').after(section);
+    const anchor = document.querySelector('.class-abilities-section')?.closest('.card') || [...document.querySelectorAll('.grid > .card')].find(card => /Spells/i.test(card.querySelector(':scope > h2')?.textContent || ''));
+    if (anchor) anchor.after(section); else document.querySelector('.grid')?.append(section);
 }
 
 const weaponCatalog = [
@@ -1909,11 +2020,11 @@ function setupResistanceSection() {
 
 function setupGlobalModifiersSection() {
     const section = document.createElement('section');
-    section.className = 'card wide global-modifiers-section';
+    section.className = 'global-modifiers-section';
     const categories = ['Hit', 'Damage', 'Missile Hit', 'Missile Damage', 'THAC0', 'Armor Class', 'Initiative', 'Saving Throws', 'Spell Slots', 'Surprise', 'Enemy Surprise', 'Resistance', 'Magic Resistance', 'Movement', 'Extra Attacks', 'Other'];
     section.innerHTML = `<h2>Global modifiers</h2><div class="tableWrap"><table class="global-modifiers-table"><thead><tr><th>Active</th><th>Category</th><th>Value</th><th>Applies to</th><th>Source</th><th>Condition</th><th>Notes</th><th></th></tr></thead><tbody>${data.globalModifiers.map((item, index) => `<tr><td><input type="checkbox" data-global-modifier="${index}" data-global-key="active" ${item.active !== false ? 'checked' : ''} aria-label="Active global modifier"></td><td><select data-global-modifier="${index}" data-global-key="category">${categories.map(category => `<option ${item.category === category ? 'selected' : ''}>${category}</option>`).join('')}</select></td><td><input type="number" data-global-modifier="${index}" data-global-key="value" value="${esc(item.value)}" step="1"></td><td><input data-global-modifier="${index}" data-global-key="appliesTo" value="${esc(item.appliesTo)}" placeholder="All or weapon name"></td><td><input data-global-modifier="${index}" data-global-key="source" value="${esc(item.source)}"></td><td><input data-global-modifier="${index}" data-global-key="condition" value="${esc(item.condition)}"></td><td><input data-global-modifier="${index}" data-global-key="notes" value="${esc(item.notes)}"></td><td><button type="button" class="remove" data-global-remove="${index}" aria-label="Remove global modifier">×</button></td></tr>`).join('')}</tbody></table></div><button type="button" class="add" data-global-add>Add modifier</button><small>Active global modifiers feed supported calculations. Use negative values to improve lower-is-better results such as AC, THAC0, and saves; use positive values for bonuses to hit or damage.</small>`;
-    const target = document.querySelector('.surprise-section');
-    if (target) target.after(section); else document.querySelector('.combat-card')?.after(section);
+    const target = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('ABILITIES'));
+    if (target) target.append(section); else document.querySelector('.grid')?.append(section);
     section.querySelector('[data-global-add]').onclick = () => { data.globalModifiers.push({ category: 'Other', value: '', appliesTo: '', source: '', condition: '', active: true, notes: '' }); changed(); render(); };
     section.querySelectorAll('[data-global-modifier]').forEach(input => input.oninput = () => { const item = data.globalModifiers[+input.dataset.globalModifier]; item[input.dataset.globalKey] = input.type === 'checkbox' ? input.checked : input.value; updateThac0(); updateSavingThrows(); updateAcTotal(); updateWeaponThac0(); changed(); });
     section.querySelectorAll('[data-global-remove]').forEach(button => button.onclick = () => { data.globalModifiers.splice(+button.dataset.globalRemove, 1); changed(); render(); });
@@ -1991,7 +2102,11 @@ function encumbranceStrengthKey(score) {
 }
 
 function inventoryWeight() {
-    return data.inventory.reduce((total, item) => total + (Number.parseFloat(item.quantity) || 0) * (Number.parseFloat(item.weight) || 0), 0);
+    return data.inventory.reduce((total, item) => item.location === 'stored' ? total : total + (Number.parseFloat(item.quantity) || 0) * itemWeight(item), 0);
+}
+
+function inventoryTotalWeight() {
+    return data.inventory.reduce((total, item) => total + (Number.parseFloat(item.quantity) || 0) * itemWeight(item), 0);
 }
 
 function encumbranceSummary() {
@@ -2001,12 +2116,24 @@ function encumbranceSummary() {
     const labels = ['Unencumbered', 'Light', 'Moderate', 'Heavy', 'Severe'];
     const index = bands.findIndex(limit => total <= limit);
     const category = index < 0 ? 'Over max carried weight' : labels[index];
-    return `<div class="encumbrance-summary"><strong>Carried weight: ${total % 1 ? total.toFixed(2) : total} lb</strong><span>Strength ${esc(strength)} | ${category}</span><span>Unencumbered through ${bands[0]} lb | Max carried ${bands[5]} lb</span></div>`;
+    const allWeight = inventoryTotalWeight();
+    return `<div class="encumbrance-summary"><strong>Carried weight: ${total % 1 ? total.toFixed(2) : total} lb</strong><span>Total weight: ${allWeight % 1 ? allWeight.toFixed(2) : allWeight} lb</span><span>Strength ${esc(strength)} | ${category}</span><span>Unencumbered through ${bands[0]} lb | Max carried ${bands[5]} lb</span></div>`;
 }
 
 function updateEncumbranceSummary() {
     const summary = document.querySelector('.encumbrance-summary');
     if (summary) summary.outerHTML = encumbranceSummary();
+}
+
+function inventoryCatalogueOptions(search = '', category = '') {
+    const query = search.trim().toLowerCase();
+    return equipmentCatalogue.filter(item => (!category || item.category === category) && (!query || [item.name, ...(item.aliases || [])].join(' ').toLowerCase().includes(query)));
+}
+
+function inventoryMarkup() {
+    const categories = [...new Set(equipmentCatalogue.map(item => item.category).filter(Boolean))].sort();
+    const validation = catalogueValidation.length ? `<div class="catalogue-validation">${catalogueValidation.map(error => `<div>${esc(error)}</div>`).join('')}</div>` : '';
+    return `<div class="inventory-controls"><label>Search catalogue<input id="inventory-search" type="search" placeholder="Search name or alias"></label><label>Category<select id="inventory-category"><option value="">All categories</option>${categories.map(category => `<option value="${esc(category)}">${esc(category)}</option>`).join('')}</select></label></div>${validation}<div id="inventory-results" class="inventory-results" aria-live="polite"></div><div class="tableWrap"><table class="inventory-table"><thead><tr><th>Item</th><th>Category</th><th>Subcategory</th><th>Qty</th><th>Status</th><th>Weight lb</th><th>Value</th><th>Notes</th><th></th></tr></thead><tbody>${data.inventory.map((item, index) => { const record = catalogueItem(item); return `<tr><td><input list="equipment-options" data-array="inventory" data-index="${index}" data-key="item" value="${esc(itemName(item))}" placeholder="Custom item"><input type="hidden" data-array="inventory" data-index="${index}" data-key="itemId" value="${esc(item.itemId)}"></td><td>${esc(record?.category || 'custom')}</td><td>${esc(record?.subcategory || '-')}</td><td><input type="number" min="0" step="1" data-array="inventory" data-index="${index}" data-key="quantity" value="${esc(item.quantity)}"></td><td><select data-array="inventory" data-index="${index}" data-key="location"><option value="carried"${item.location === 'carried' ? ' selected' : ''}>Carried</option><option value="stored"${item.location === 'stored' ? ' selected' : ''}>Stored</option></select></td><td><input type="number" min="0" step="0.01" data-array="inventory" data-index="${index}" data-key="weightOverride" value="${item.weightOverride ?? ''}" placeholder="${itemWeight(item)}"></td><td>${esc(formatCost(record?.cost))}</td><td><input data-array="inventory" data-index="${index}" data-key="notes" value="${esc(item.notes)}"></td><td><button class="remove" data-remove="inventory" data-index="${index}" aria-label="Remove item">×</button></td></tr>`; }).join('')}</tbody></table></div><datalist id="equipment-options">${equipmentCatalogue.map(item => `<option value="${esc(item.name)}">${esc(item.category || '')}</option>`).join('')}</datalist><button class="add" data-add="inventory">Add custom item</button>`;
 }
 
 function setupProficiencyAndInventorySections() {
@@ -2019,32 +2146,42 @@ function setupProficiencyAndInventorySections() {
     }
     const inventoryCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Inventory'));
     const currencyCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Currency'));
-    if (inventoryCard && currencyCard) {
-        const currencyFields = currencyCard.querySelector(':scope > .fields');
-        const currencyHeading = document.createElement('h3');
-        currencyHeading.className = 'inventory-currency-heading';
-        currencyHeading.textContent = 'Currency';
-        const inventoryTable = inventoryCard.querySelector(':scope > .tableWrap');
-        if (currencyFields) {
-            inventoryCard.insertBefore(currencyHeading, inventoryTable || null);
-            inventoryCard.insertBefore(currencyFields, inventoryTable || null);
-        }
-        currencyCard.remove();
-    }
+    const currencyFields = currencyCard?.querySelector(':scope > .fields');
+    if (inventoryCard && currencyCard) currencyCard.remove();
     if (inventoryCard) {
-        inventoryCard.querySelector('.encumbrance-summary')?.remove();
-        const summary = document.createElement('div');
-        summary.innerHTML = encumbranceSummary();
-        inventoryCard.insertBefore(summary.firstElementChild, inventoryCard.querySelector(':scope > .tableWrap') || null);
-        inventoryCard.querySelectorAll('[data-array="inventory"]').forEach(input => input.addEventListener('input', () => {
-            const current = inventoryCard.querySelector('.encumbrance-summary');
-            if (current) current.outerHTML = encumbranceSummary();
-        }));
+        inventoryCard.innerHTML = `<h2>Inventory</h2>${encumbranceSummary()}<div class="inventory-total">Catalogue value: <strong>${esc(inventoryValue())}</strong></div><div class="wealth-total">Wealth: <strong>${esc(copperBreakdown(wealthInCopper()))}</strong></div>${inventoryMarkup()}`;
+        if (currencyFields) {
+            const currencyHeading = document.createElement('h3');
+            currencyHeading.className = 'inventory-currency-heading';
+            currencyHeading.textContent = 'Currency';
+            inventoryCard.insertBefore(currencyHeading, inventoryCard.children[4]);
+            inventoryCard.insertBefore(currencyFields, inventoryCard.children[5]);
+        }
+        const search = inventoryCard.querySelector('#inventory-search');
+        const category = inventoryCard.querySelector('#inventory-category');
+        const refreshOptions = () => {
+            const matches = inventoryCatalogueOptions(search.value, category.value);
+            const list = inventoryCard.querySelector('#equipment-options');
+            list.innerHTML = matches.map(item => `<option value="${esc(item.name)}">${esc(item.category || '')}</option>`).join('');
+            inventoryCard.querySelector('#inventory-results').innerHTML = search.value.trim() || category.value ? `<strong>${matches.length} catalogue result${matches.length === 1 ? '' : 's'}</strong>${matches.slice(0, 25).map(item => `<button type="button" class="inventory-result" data-catalogue-id="${esc(item.id)}"><span>${esc(item.name)}</span><small>${esc(item.category || '')} · ${esc(item.subcategory || '-')} · ${esc(formatCost(item.cost))} · ${item.weightLb == null ? 'weight unknown' : `${item.weightLb} lb`}</small></button>`).join('')}` : '<span>Type to search the catalogue or choose a category.</span>';
+            inventoryCard.querySelectorAll('[data-catalogue-id]').forEach(button => button.onclick = () => {
+                const item = equipmentCatalogue.find(record => record.id === button.dataset.catalogueId);
+                if (!item) return;
+                data.inventory.push({ itemId: item.id, item: '', location: 'carried', equipped: true, customName: null, weightOverride: null, quantity: item.quantity || 1, notes: '' });
+                changed();
+                render();
+            });
+        };
+        search.oninput = refreshOptions;
+        category.onchange = refreshOptions;
+        refreshOptions();
     }
 }
 
 function render() {
     document.querySelector('#app').innerHTML = `<section class="hero"><div class="card wide"><h1>Advanced Dungeons & Dragons 2e</h1>${fields('identity',[['name','Character name'],['player','Player'],['className','Class'],['level','Level'],['race','Race'],['alignment','Alignment'],['xp','Experience'],['nextLevel','Next level'],['deity','Deity']])}</div><img class="portrait" src="${esc(data.portraitUrl)||'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22180%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23e9dfcc%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23756b5d%22%3EPortrait URL%3C/text%3E%3C/svg%3E'}"></section><div class="grid"><section class="card wide"><h2>Abilities</h2><div class="stats">${Object.keys(labels).map(k=>`<div class="stat"><label>${labels[k]}</label><input data-section="abilities" data-key="${k}" value="${esc(data.abilities[k])}"></div>`).join('')}</div></section><section class="card half"><h2>Combat</h2>${fields('combat',[['hpMax','HP max'],['hpCurrent','HP current'],['ac','Armor class'],['thac0','THAC0'],['initiative','Initiative'],['movement','Movement'],['surprisedAc','Surprised AC'],['shieldlessAc','Shieldless AC'],['rearAc','Rear AC']])}</section><section class="card half"><h2>Saving throws</h2>${fields('saves',[['paralyzationPoison','Paralyzation / Poison'],['rodStaffWand','Rod / Staff / Wand'],['petrificationPolymorph','Petrification / Polymorph'],['breathWeapon','Breath Weapon'],['spell','Spell']])}</section><section class="card wide"><h2>Weapons</h2>${table('weapons',[['name','Weapon'],['attacks','AT'],['attackAdj','Attack adj'],['damageAdj','Damage adj'],['thac0','THAC0'],['damage','Damage S/M-L'],['range','Range'],['weight','Weight'],['speed','Speed']])}</section><section class="card half"><h2>Proficiencies</h2>${table('proficiencies',[['name','Name'],['slots','Slots'],['score','Score'],['type','Type']])}</section><section class="card half"><h2>Currency</h2>${fields('currency',[['platinum','Platinum'],['gold','Gold'],['electrum','Electrum'],['silver','Silver'],['copper','Copper'],['gems','Gems']])}</section><section class="card wide"><h2>Inventory</h2>${table('inventory',[['item','Item'],['location','Location'],['quantity','Qty'],['weight','Weight']])}</section><section class="card wide"><h2>Spells</h2>${table('spells',[['name','Spell'],['level','Level'],['school','School'],['memorized','Memorized'],['notes','Notes']])}</section><section class="card half"><h2>Special abilities</h2><textarea data-root="specialAbilities">${esc(data.specialAbilities)}</textarea></section><section class="card half"><h2>Notes</h2><textarea data-root="notes">${esc(data.notes)}</textarea><div class="field"><label>Portrait image URL (optional)</label><input data-root="portraitUrl" value="${esc(data.portraitUrl)}"></div></section></div>`;
+    const abilitiesHeading = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent === 'Abilities')?.querySelector(':scope > h2');
+    if (abilitiesHeading) abilitiesHeading.textContent = 'ABILITIES & MODIFIERS';
     document.querySelectorAll('.stat').forEach((stat, index) => {
         const ability = Object.keys(labels)[index];
         const output = document.createElement('output');
@@ -2066,7 +2203,6 @@ function render() {
     setupHitPointsSection();
     updateSavingThrows();
     setupMovementSection();
-    setupClassAbilitiesSection();
     setupHenchmenSection();
     setupActionReferenceSection();
     setupThac0ReferenceSection();
@@ -2078,6 +2214,7 @@ function render() {
     setupWeaponSection();
     setupSpellSectionPosition();
     setupSpellTracking();
+    setupClassAbilitiesSection();
     setupSpecialNotesPosition();
     setupResistanceSection();
     setupSurpriseSection();
@@ -2156,6 +2293,10 @@ function bind() {
             updateHitPointDisplay();
         }
         if (e.dataset.section === 'combat' && e.dataset.key === 'movement') updateMovementSection();
+        if (e.dataset.section === 'currency') {
+            const wealthTotal = document.querySelector('.wealth-total strong');
+            if (wealthTotal) wealthTotal.textContent = copperBreakdown(wealthInCopper());
+        }
         changed()
     });
     document.querySelectorAll('[data-root]').forEach(e => e.oninput = () => {
@@ -2163,10 +2304,22 @@ function bind() {
         changed()
     });
     document.querySelectorAll('[data-array]').forEach(e => e.oninput = () => {
-        data[e.dataset.array][+e.dataset.index][e.dataset.key] = e.value;
-        if (e.dataset.array === 'inventory') updateEncumbranceSummary();
+        const item = data[e.dataset.array][+e.dataset.index];
+        item[e.dataset.key] = e.value;
+        if (e.dataset.array === 'inventory') {
+            if (e.dataset.key === 'item') {
+                const match = equipmentCatalogue.find(record => record.name.toLowerCase() === e.value.trim().toLowerCase());
+                item.itemId = match?.id || '';
+                item.item = match ? '' : e.value;
+                e.closest('td').querySelector('[data-key="itemId"]').value = item.itemId;
+                e.closest('tr').children[4].textContent = formatCost(match?.cost);
+            }
+            updateEncumbranceSummary();
+            document.querySelector('.inventory-total strong').textContent = inventoryValue();
+        }
         changed()
     });
+    document.querySelectorAll('[data-array="inventory"]').forEach(e => e.onchange = e.oninput);
     document.querySelectorAll('[data-bonus-prev], [data-bonus-next]').forEach(button => button.onclick = () => {
         const ability = button.dataset.bonusPrev || button.dataset.bonusNext;
         const direction = button.dataset.bonusNext ? 1 : -1;
@@ -2206,10 +2359,14 @@ function bind() {
                 notes: ''
             },
             inventory: {
+                itemId: '',
                 item: '',
-                location: '',
-                quantity: '',
-                weight: ''
+                location: 'carried',
+                equipped: true,
+                customName: null,
+                weightOverride: null,
+                quantity: 1,
+                notes: ''
             },
             spells: {
                 name: '',
@@ -2277,3 +2434,4 @@ try {
     data = normalize(JSON.parse(localStorage.getItem('adnd2e-sheet-v1') || '{}'))
 } catch {}
 render();
+loadEquipmentCatalogue().then(() => render());

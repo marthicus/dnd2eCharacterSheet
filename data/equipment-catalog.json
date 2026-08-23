@@ -1,0 +1,6103 @@
+{
+  "schemaVersion": 1,
+  "title": "AD&D 2E Equipment Catalog",
+  "gameRules": {
+    "currencyConversionToCopper": {
+      "cp": 1,
+      "sp": 10,
+      "ep": 50,
+      "gp": 100,
+      "pp": 500
+    },
+    "wealthCalculations": {
+      "baseCurrency": "cp",
+      "allowCurrencyBreakdown": true,
+      "autoCalculateInventoryValue": true,
+      "implementationNote": "Keep catalog prices in their printed currency. For totals, convert cost.amount to copper using currencyConversionToCopper, multiply by inventory quantity, sum in copper, then format the result into PP/GP/EP/SP/CP. Character inventory should reference catalog item IDs instead of duplicating catalog records."
+    },
+    "weightRules": {
+      "tenPerPound": "Ten items weigh one pound; represented as 0.1 lb per item.",
+      "negligible": "No appreciable weight; use zero for ordinary encumbrance unless a large quantity is carried."
+    }
+  },
+  "categories": [
+    "animals",
+    "ammunition",
+    "armor",
+    "clothing",
+    "food-lodging",
+    "household-provisions",
+    "misc-equipment",
+    "tack-harness",
+    "transport",
+    "weapon"
+  ],
+  "items": [
+    {
+      "id": "belt",
+      "name": "Belt",
+      "category": "clothing",
+      "subcategory": null,
+      "cost": {
+        "amount": 3,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "boots-riding",
+      "name": "Boots, Riding",
+      "category": "clothing",
+      "subcategory": "boots",
+      "cost": {
+        "amount": 3,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "boots-soft",
+      "name": "Boots, Soft",
+      "category": "clothing",
+      "subcategory": "boots",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "breeches",
+      "name": "Breeches",
+      "category": "clothing",
+      "subcategory": null,
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "cap-hat",
+      "name": "Cap, Hat",
+      "category": "clothing",
+      "subcategory": null,
+      "cost": {
+        "amount": 1,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "cloak-good-cloth",
+      "name": "Cloak, Good Cloth",
+      "category": "clothing",
+      "subcategory": "cloak",
+      "cost": {
+        "amount": 8,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "cloak-fine-fur",
+      "name": "Cloak, Fine Fur",
+      "category": "clothing",
+      "subcategory": "cloak",
+      "cost": {
+        "amount": 50,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "girdle",
+      "name": "Girdle",
+      "category": "clothing",
+      "subcategory": null,
+      "cost": {
+        "amount": 3,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "gloves",
+      "name": "Gloves",
+      "category": "clothing",
+      "subcategory": null,
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "gown-common",
+      "name": "Gown, Common",
+      "category": "clothing",
+      "subcategory": "gown",
+      "cost": {
+        "amount": 12,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "hose",
+      "name": "Hose",
+      "category": "clothing",
+      "subcategory": null,
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "knife-sheath",
+      "name": "Knife Sheath",
+      "category": "clothing",
+      "subcategory": "accessory",
+      "cost": {
+        "amount": 3,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "mittens",
+      "name": "Mittens",
+      "category": "clothing",
+      "subcategory": null,
+      "cost": {
+        "amount": 3,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "pin",
+      "name": "Pin",
+      "category": "clothing",
+      "subcategory": "accessory",
+      "cost": {
+        "amount": 6,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "plain-brooch",
+      "name": "Plain Brooch",
+      "category": "clothing",
+      "subcategory": "accessory",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "robe-common",
+      "name": "Robe, Common",
+      "category": "clothing",
+      "subcategory": "robe",
+      "cost": {
+        "amount": 9,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "robe-embroidered",
+      "name": "Robe, Embroidered",
+      "category": "clothing",
+      "subcategory": "robe",
+      "cost": {
+        "amount": 20,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "sandals",
+      "name": "Sandals",
+      "category": "clothing",
+      "subcategory": "footwear",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "sash",
+      "name": "Sash",
+      "category": "clothing",
+      "subcategory": null,
+      "cost": {
+        "amount": 2,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "shoes",
+      "name": "Shoes",
+      "category": "clothing",
+      "subcategory": "footwear",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "silk-jacket",
+      "name": "Silk Jacket",
+      "category": "clothing",
+      "subcategory": "outerwear",
+      "cost": {
+        "amount": 80,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "surcoat",
+      "name": "Surcoat",
+      "category": "clothing",
+      "subcategory": "outerwear",
+      "cost": {
+        "amount": 6,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "sword-scabbard-hanger-baldric",
+      "name": "Sword Scabbard, Hanger, Baldric",
+      "category": "clothing",
+      "subcategory": "accessory",
+      "cost": {
+        "amount": 4,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "tabard",
+      "name": "Tabard",
+      "category": "clothing",
+      "subcategory": null,
+      "cost": {
+        "amount": 6,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "toga-coarse",
+      "name": "Toga, Coarse",
+      "category": "clothing",
+      "subcategory": "toga",
+      "cost": {
+        "amount": 8,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "tunic",
+      "name": "Tunic",
+      "category": "clothing",
+      "subcategory": null,
+      "cost": {
+        "amount": 8,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "vest",
+      "name": "Vest",
+      "category": "clothing",
+      "subcategory": null,
+      "cost": {
+        "amount": 6,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "ale",
+      "name": "Ale",
+      "category": "food-lodging",
+      "subcategory": "drink",
+      "cost": {
+        "amount": 2,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "gallon"
+    },
+    {
+      "id": "banquet",
+      "name": "Banquet",
+      "category": "food-lodging",
+      "subcategory": "meal",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "person"
+    },
+    {
+      "id": "bread",
+      "name": "Bread",
+      "category": "food-lodging",
+      "subcategory": "food",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": null
+    },
+    {
+      "id": "cheese",
+      "name": "Cheese",
+      "category": "food-lodging",
+      "subcategory": "food",
+      "cost": {
+        "amount": 4,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": null
+    },
+    {
+      "id": "city-room-common",
+      "name": "City Room, Common",
+      "category": "food-lodging",
+      "subcategory": "lodging",
+      "cost": {
+        "amount": 20,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "month"
+    },
+    {
+      "id": "city-room-poor",
+      "name": "City Room, Poor",
+      "category": "food-lodging",
+      "subcategory": "lodging",
+      "cost": {
+        "amount": 6,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "month"
+    },
+    {
+      "id": "common-wine",
+      "name": "Common Wine",
+      "category": "food-lodging",
+      "subcategory": "drink",
+      "cost": {
+        "amount": 2,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "pitcher"
+    },
+    {
+      "id": "egg-or-fresh-vegetables",
+      "name": "Egg or Fresh Vegetables",
+      "category": "food-lodging",
+      "subcategory": "food",
+      "cost": {
+        "amount": 1,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": null
+    },
+    {
+      "id": "grain-and-stabling-for-horse",
+      "name": "Grain and Stabling for Horse",
+      "category": "food-lodging",
+      "subcategory": "animal-care",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "day"
+    },
+    {
+      "id": "honey",
+      "name": "Honey",
+      "category": "food-lodging",
+      "subcategory": "food",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": null
+    },
+    {
+      "id": "meat",
+      "name": "Meat",
+      "category": "food-lodging",
+      "subcategory": "food",
+      "cost": {
+        "amount": 1,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "meal"
+    },
+    {
+      "id": "meals-good",
+      "name": "Meals, Good",
+      "category": "food-lodging",
+      "subcategory": "meal",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "day"
+    },
+    {
+      "id": "meals-common",
+      "name": "Meals, Common",
+      "category": "food-lodging",
+      "subcategory": "meal",
+      "cost": {
+        "amount": 3,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "day"
+    },
+    {
+      "id": "meals-poor",
+      "name": "Meals, Poor",
+      "category": "food-lodging",
+      "subcategory": "meal",
+      "cost": {
+        "amount": 1,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "day"
+    },
+    {
+      "id": "separate-latrine-for-rooms",
+      "name": "Separate Latrine for Rooms",
+      "category": "food-lodging",
+      "subcategory": "lodging",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "month"
+    },
+    {
+      "id": "small-beer",
+      "name": "Small Beer",
+      "category": "food-lodging",
+      "subcategory": "drink",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "gallon"
+    },
+    {
+      "id": "soup",
+      "name": "Soup",
+      "category": "food-lodging",
+      "subcategory": "food",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": null
+    },
+    {
+      "id": "inn-lodging-common",
+      "name": "Inn Lodging, Common",
+      "category": "food-lodging",
+      "subcategory": "lodging",
+      "cost": null,
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricing": [
+        {
+          "period": "day",
+          "cost": {
+            "amount": 5,
+            "currency": "sp"
+          }
+        },
+        {
+          "period": "week",
+          "cost": {
+            "amount": 3,
+            "currency": "gp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "inn-lodging-poor",
+      "name": "Inn Lodging, Poor",
+      "category": "food-lodging",
+      "subcategory": "lodging",
+      "cost": null,
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricing": [
+        {
+          "period": "day",
+          "cost": {
+            "amount": 5,
+            "currency": "cp"
+          }
+        },
+        {
+          "period": "week",
+          "cost": {
+            "amount": 2,
+            "currency": "sp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "barrel-of-pickled-fish",
+      "name": "Barrel of Pickled Fish",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 3,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": null
+    },
+    {
+      "id": "butter",
+      "name": "Butter",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 2,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "lb"
+    },
+    {
+      "id": "coarse-sugar",
+      "name": "Coarse Sugar",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "lb"
+    },
+    {
+      "id": "dry-rations",
+      "name": "Dry Rations",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "week"
+    },
+    {
+      "id": "eggs",
+      "name": "Eggs",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 8,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "100"
+    },
+    {
+      "id": "eggs-two-dozen",
+      "name": "Eggs, Two Dozen",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 2,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "two dozen"
+    },
+    {
+      "id": "figs",
+      "name": "Figs",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 3,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "lb"
+    },
+    {
+      "id": "firewood",
+      "name": "Firewood",
+      "category": "household-provisions",
+      "subcategory": "fuel",
+      "cost": {
+        "amount": 1,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "day"
+    },
+    {
+      "id": "herbs",
+      "name": "Herbs",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "lb"
+    },
+    {
+      "id": "nuts",
+      "name": "Nuts",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "lb"
+    },
+    {
+      "id": "raisins",
+      "name": "Raisins",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 2,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "lb"
+    },
+    {
+      "id": "rice",
+      "name": "Rice",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 2,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "lb"
+    },
+    {
+      "id": "salt",
+      "name": "Salt",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 1,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "lb"
+    },
+    {
+      "id": "salted-herring",
+      "name": "Salted Herring",
+      "category": "household-provisions",
+      "subcategory": "food",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "100"
+    },
+    {
+      "id": "spice-exotic",
+      "name": "Spice, Exotic",
+      "category": "household-provisions",
+      "subcategory": "spice",
+      "cost": {
+        "amount": 15,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Examples in source: saffron, clove."
+      ],
+      "pricingUnit": "lb"
+    },
+    {
+      "id": "spice-rare",
+      "name": "Spice, Rare",
+      "category": "household-provisions",
+      "subcategory": "spice",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Examples in source: pepper, ginger."
+      ],
+      "pricingUnit": "lb"
+    },
+    {
+      "id": "spice-uncommon",
+      "name": "Spice, Uncommon",
+      "category": "household-provisions",
+      "subcategory": "spice",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Example in source: cinnamon."
+      ],
+      "pricingUnit": "lb"
+    },
+    {
+      "id": "tun-of-cider",
+      "name": "Tun of Cider",
+      "category": "household-provisions",
+      "subcategory": "drink",
+      "cost": {
+        "amount": 8,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "250 gallons"
+    },
+    {
+      "id": "tun-of-good-wine",
+      "name": "Tun of Good Wine",
+      "category": "household-provisions",
+      "subcategory": "drink",
+      "cost": {
+        "amount": 20,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "pricingUnit": "250 gallons"
+    },
+    {
+      "id": "barding-chain",
+      "name": "Barding, Chain",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 500,
+        "currency": "gp"
+      },
+      "weightLb": 70,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "barding-full-plate",
+      "name": "Barding, Full Plate",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 2000,
+        "currency": "gp"
+      },
+      "weightLb": 85,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "barding-full-scale",
+      "name": "Barding, Full Scale",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 1000,
+        "currency": "gp"
+      },
+      "weightLb": 75,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "barding-half-brigandine",
+      "name": "Barding, Half Brigandine",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 500,
+        "currency": "gp"
+      },
+      "weightLb": 45,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "barding-half-padded",
+      "name": "Barding, Half Padded",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 100,
+        "currency": "gp"
+      },
+      "weightLb": 25,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "barding-half-scale",
+      "name": "Barding, Half Scale",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 500,
+        "currency": "gp"
+      },
+      "weightLb": 50,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "barding-leather-or-padded",
+      "name": "Barding, Leather or Padded",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 150,
+        "currency": "gp"
+      },
+      "weightLb": 60,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "bit-and-bridle",
+      "name": "Bit and Bridle",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 15,
+        "currency": "sp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "cart-harness",
+      "name": "Cart Harness",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "halter",
+      "name": "Halter",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "horseshoes-and-shoeing",
+      "name": "Horseshoes and Shoeing",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "saddle-pack",
+      "name": "Saddle, Pack",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 15,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "saddle-riding",
+      "name": "Saddle, Riding",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 35,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "saddle-bags-large",
+      "name": "Saddle Bags, Large",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 4,
+        "currency": "gp"
+      },
+      "weightLb": 8,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "saddle-bags-small",
+      "name": "Saddle Bags, Small",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 3,
+        "currency": "gp"
+      },
+      "weightLb": 5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "saddle-blanket",
+      "name": "Saddle Blanket",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 3,
+        "currency": "sp"
+      },
+      "weightLb": 4,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "yoke-horse",
+      "name": "Yoke, Horse",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 15,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "yoke-ox",
+      "name": "Yoke, Ox",
+      "category": "tack-harness",
+      "subcategory": "animal-gear",
+      "cost": {
+        "amount": 3,
+        "currency": "gp"
+      },
+      "weightLb": 20,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "barge",
+      "name": "Barge",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 500,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "canoe-small",
+      "name": "Canoe, Small",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 30,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "canoe-war",
+      "name": "Canoe, War",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 50,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "caravel",
+      "name": "Caravel",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 10000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "carriage-common",
+      "name": "Carriage, Common",
+      "category": "transport",
+      "subcategory": "land-vehicle",
+      "cost": {
+        "amount": 150,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "carriage-coach-ornamented",
+      "name": "Carriage, Coach, Ornamented",
+      "category": "transport",
+      "subcategory": "land-vehicle",
+      "cost": {
+        "amount": 7000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "chariot-riding",
+      "name": "Chariot, Riding",
+      "category": "transport",
+      "subcategory": "land-vehicle",
+      "cost": {
+        "amount": 200,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "chariot-war",
+      "name": "Chariot, War",
+      "category": "transport",
+      "subcategory": "land-vehicle",
+      "cost": {
+        "amount": 500,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "coaster",
+      "name": "Coaster",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 5000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "cog",
+      "name": "Cog",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 10000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "curragh",
+      "name": "Curragh",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 500,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "drakkar",
+      "name": "Drakkar",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 25000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "dromond",
+      "name": "Dromond",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 15000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "galleon",
+      "name": "Galleon",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 50000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "great-galley",
+      "name": "Great Galley",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 30000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "knarr",
+      "name": "Knarr",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 3000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "longship",
+      "name": "Longship",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 10000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "oar-common",
+      "name": "Oar, Common",
+      "category": "transport",
+      "subcategory": "component",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "oar-galley",
+      "name": "Oar, Galley",
+      "category": "transport",
+      "subcategory": "component",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "raft-or-small-keelboat",
+      "name": "Raft or Small Keelboat",
+      "category": "transport",
+      "subcategory": "watercraft",
+      "cost": {
+        "amount": 100,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "sail",
+      "name": "Sail",
+      "category": "transport",
+      "subcategory": "component",
+      "cost": {
+        "amount": 20,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "sedan-chair",
+      "name": "Sedan Chair",
+      "category": "transport",
+      "subcategory": "land-vehicle",
+      "cost": {
+        "amount": 100,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "wagon-or-cart-wheel",
+      "name": "Wagon or Cart Wheel",
+      "category": "transport",
+      "subcategory": "component",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Movement rates are given in the DMG."
+      ]
+    },
+    {
+      "id": "backpack",
+      "name": "Backpack",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "barrel-small",
+      "name": "Barrel, Small",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": 30,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "basket-large",
+      "name": "Basket, Large",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 3,
+        "currency": "sp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "basket-small",
+      "name": "Basket, Small",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "bell",
+      "name": "Bell",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "belt-pouch-large",
+      "name": "Belt Pouch, Large",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "belt-pouch-small",
+      "name": "Belt Pouch, Small",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 7,
+        "currency": "sp"
+      },
+      "weightLb": 0.5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "block-and-tackle",
+      "name": "Block and Tackle",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "bolt-case",
+      "name": "Bolt Case",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "bucket",
+      "name": "Bucket",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": 3,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "chain-heavy-per-ft",
+      "name": "Chain, Heavy, per ft.",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 4,
+        "currency": "gp"
+      },
+      "weightLb": 3,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "chain-light-per-ft",
+      "name": "Chain, Light, per ft.",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 3,
+        "currency": "gp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "chest-large",
+      "name": "Chest, Large",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": 25,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "chest-small",
+      "name": "Chest, Small",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "cloth-common-per-10-sq-yds",
+      "name": "Cloth, Common, per 10 sq. yds.",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 7,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "cloth-fine-per-10-sq-yds",
+      "name": "Cloth, Fine, per 10 sq. yds.",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 50,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "cloth-rich-per-10-sq-yds",
+      "name": "Cloth, Rich, per 10 sq. yds.",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 100,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "candle",
+      "name": "Candle",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1,
+        "currency": "cp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "canvas-per-sq-yard",
+      "name": "Canvas, per sq. yard",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 4,
+        "currency": "sp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "chalk",
+      "name": "Chalk",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1,
+        "currency": "cp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "crampons",
+      "name": "Crampons",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 4,
+        "currency": "gp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "fishhook",
+      "name": "Fishhook",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1,
+        "currency": "sp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "fishing-net-10-ft-sq",
+      "name": "Fishing Net, 10 ft. sq.",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 4,
+        "currency": "gp"
+      },
+      "weightLb": 5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "flint-and-steel",
+      "name": "Flint and Steel",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "glass-bottle",
+      "name": "Glass Bottle",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "grappling-hook",
+      "name": "Grappling Hook",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 8,
+        "currency": "sp"
+      },
+      "weightLb": 4,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "holy-item-symbol-water-etc",
+      "name": "Holy Item (symbol, water, etc.)",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 25,
+        "currency": "gp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "hourglass",
+      "name": "Hourglass",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 25,
+        "currency": "gp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "iron-pot",
+      "name": "Iron Pot",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "ladder-10-ft",
+      "name": "Ladder, 10 ft.",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": 20,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "lantern-beacon",
+      "name": "Lantern, Beacon",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 150,
+        "currency": "gp"
+      },
+      "weightLb": 50,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "lantern-bullseye",
+      "name": "Lantern, Bullseye",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 12,
+        "currency": "gp"
+      },
+      "weightLb": 3,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "lantern-hooded",
+      "name": "Lantern, Hooded",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 7,
+        "currency": "gp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "lock-good",
+      "name": "Lock, Good",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 100,
+        "currency": "gp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "lock-poor",
+      "name": "Lock, Poor",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 20,
+        "currency": "gp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "magnifying-glass",
+      "name": "Magnifying Glass",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 100,
+        "currency": "gp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "map-or-scroll-case",
+      "name": "Map or Scroll Case",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 8,
+        "currency": "sp"
+      },
+      "weightLb": 0.5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "merchant-s-scale",
+      "name": "Merchant's Scale",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "mirror-small-metal",
+      "name": "Mirror, Small Metal",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 0.5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "musical-instrument",
+      "name": "Musical Instrument",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": "0.5-3",
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "oil-greek-fire-per-flask",
+      "name": "Oil, Greek Fire, per flask",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "oil-lamp-per-flask",
+      "name": "Oil, Lamp, per flask",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 6,
+        "currency": "cp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "paper-per-sheet",
+      "name": "Paper, per sheet",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": 0,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: no appreciable weight; normally not considered for encumbrance unless hundreds are carried."
+      ],
+      "weightRule": "negligible"
+    },
+    {
+      "id": "papyrus-per-sheet",
+      "name": "Papyrus, per sheet",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 8,
+        "currency": "sp"
+      },
+      "weightLb": 0,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: no appreciable weight; normally not considered for encumbrance unless hundreds are carried."
+      ],
+      "weightRule": "negligible"
+    },
+    {
+      "id": "parchment-per-sheet",
+      "name": "Parchment, per sheet",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": 0,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: no appreciable weight; normally not considered for encumbrance unless hundreds are carried."
+      ],
+      "weightRule": "negligible"
+    },
+    {
+      "id": "perfume-per-vial",
+      "name": "Perfume, per vial",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "piton",
+      "name": "Piton",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 3,
+        "currency": "cp"
+      },
+      "weightLb": 0.5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "quiver",
+      "name": "Quiver",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 8,
+        "currency": "sp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "rope-hemp-per-50-ft",
+      "name": "Rope, Hemp, per 50 ft.",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": 20,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "rope-silk-per-50-ft",
+      "name": "Rope, Silk, per 50 ft.",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 8,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "sack-large",
+      "name": "Sack, Large",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 2,
+        "currency": "sp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "sack-small",
+      "name": "Sack, Small",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "sealing-candle-wax-per-lb",
+      "name": "Sealing/Candle Wax, per lb.",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "sewing-needle",
+      "name": "Sewing Needle",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "signal-whistle",
+      "name": "Signal Whistle",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 8,
+        "currency": "sp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "signet-ring-or-personal-seal",
+      "name": "Signet Ring or Personal Seal",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "soap-per-lb",
+      "name": "Soap, per lb.",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "spyglass",
+      "name": "Spyglass",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1000,
+        "currency": "gp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "tent-large",
+      "name": "Tent, Large",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 25,
+        "currency": "gp"
+      },
+      "weightLb": 20,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "tent-pavilion",
+      "name": "Tent, Pavilion",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 100,
+        "currency": "gp"
+      },
+      "weightLb": 50,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "tent-small",
+      "name": "Tent, Small",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "thieves-picks",
+      "name": "Thieves’ Picks",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 30,
+        "currency": "gp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "torch",
+      "name": "Torch",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1,
+        "currency": "cp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "water-clock",
+      "name": "Water Clock",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 1000,
+        "currency": "gp"
+      },
+      "weightLb": 200,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "whetstone",
+      "name": "Whetstone",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 2,
+        "currency": "cp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "wineskin",
+      "name": "Wineskin",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 8,
+        "currency": "sp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "winter-blanket",
+      "name": "Winter Blanket",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": 3,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "weightRule": null
+    },
+    {
+      "id": "writing-ink-per-vial",
+      "name": "Writing Ink, per vial",
+      "category": "misc-equipment",
+      "subcategory": "general",
+      "cost": {
+        "amount": 8,
+        "currency": "gp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": true,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "weightRule": "tenPerPound"
+    },
+    {
+      "id": "boar",
+      "name": "Boar",
+      "category": "animals",
+      "subcategory": "boar",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "bull",
+      "name": "Bull",
+      "category": "animals",
+      "subcategory": "bull",
+      "cost": {
+        "amount": 20,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "calf",
+      "name": "Calf",
+      "category": "animals",
+      "subcategory": "calf",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "camel",
+      "name": "Camel",
+      "category": "animals",
+      "subcategory": "camel",
+      "cost": {
+        "amount": 50,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "capon",
+      "name": "Capon",
+      "category": "animals",
+      "subcategory": "capon",
+      "cost": {
+        "amount": 3,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "cat",
+      "name": "Cat",
+      "category": "animals",
+      "subcategory": "cat",
+      "cost": {
+        "amount": 1,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "chicken",
+      "name": "Chicken",
+      "category": "animals",
+      "subcategory": "chicken",
+      "cost": {
+        "amount": 2,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "cow",
+      "name": "Cow",
+      "category": "animals",
+      "subcategory": "cow",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "dog-guard",
+      "name": "Dog, Guard",
+      "category": "animals",
+      "subcategory": "dog",
+      "cost": {
+        "amount": 25,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "dog-hunting",
+      "name": "Dog, Hunting",
+      "category": "animals",
+      "subcategory": "dog",
+      "cost": {
+        "amount": 17,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "dog-war",
+      "name": "Dog, War",
+      "category": "animals",
+      "subcategory": "dog",
+      "cost": {
+        "amount": 20,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "donkey-mule-or-ass",
+      "name": "Donkey, Mule, or Ass",
+      "category": "animals",
+      "subcategory": "donkey",
+      "cost": {
+        "amount": 8,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "elephant-labor",
+      "name": "Elephant, Labor",
+      "category": "animals",
+      "subcategory": "elephant",
+      "cost": {
+        "amount": 200,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "elephant-war",
+      "name": "Elephant, War",
+      "category": "animals",
+      "subcategory": "elephant",
+      "cost": {
+        "amount": 500,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "falcon-trained",
+      "name": "Falcon, Trained",
+      "category": "animals",
+      "subcategory": "falcon",
+      "cost": {
+        "amount": 1000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "goat",
+      "name": "Goat",
+      "category": "animals",
+      "subcategory": "goat",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "goose",
+      "name": "Goose",
+      "category": "animals",
+      "subcategory": "goose",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "guinea-hen",
+      "name": "Guinea Hen",
+      "category": "animals",
+      "subcategory": "guinea hen",
+      "cost": {
+        "amount": 2,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "horse-draft",
+      "name": "Horse, Draft",
+      "category": "animals",
+      "subcategory": "horse",
+      "cost": {
+        "amount": 200,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "horse-heavy-war",
+      "name": "Horse, Heavy War",
+      "category": "animals",
+      "subcategory": "horse",
+      "cost": {
+        "amount": 400,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "horse-light-war",
+      "name": "Horse, Light War",
+      "category": "animals",
+      "subcategory": "horse",
+      "cost": {
+        "amount": 150,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "horse-medium-war",
+      "name": "Horse, Medium War",
+      "category": "animals",
+      "subcategory": "horse",
+      "cost": {
+        "amount": 225,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "horse-riding",
+      "name": "Horse, Riding",
+      "category": "animals",
+      "subcategory": "horse",
+      "cost": {
+        "amount": 75,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "hunting-cat-jaguar-etc",
+      "name": "Hunting Cat (Jaguar, etc.)",
+      "category": "animals",
+      "subcategory": "hunting cat (jaguar",
+      "cost": {
+        "amount": 5000,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "ox",
+      "name": "Ox",
+      "category": "animals",
+      "subcategory": "ox",
+      "cost": {
+        "amount": 15,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "partridge",
+      "name": "Partridge",
+      "category": "animals",
+      "subcategory": "partridge",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "peacock",
+      "name": "Peacock",
+      "category": "animals",
+      "subcategory": "peacock",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "pig",
+      "name": "Pig",
+      "category": "animals",
+      "subcategory": "pig",
+      "cost": {
+        "amount": 3,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "pigeon",
+      "name": "Pigeon",
+      "category": "animals",
+      "subcategory": "pigeon",
+      "cost": {
+        "amount": 1,
+        "currency": "cp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "pigeon-homing",
+      "name": "Pigeon, Homing",
+      "category": "animals",
+      "subcategory": "pigeon",
+      "cost": {
+        "amount": 100,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "pony",
+      "name": "Pony",
+      "category": "animals",
+      "subcategory": "pony",
+      "cost": {
+        "amount": 30,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "ram",
+      "name": "Ram",
+      "category": "animals",
+      "subcategory": "ram",
+      "cost": {
+        "amount": 4,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "sheep",
+      "name": "Sheep",
+      "category": "animals",
+      "subcategory": "sheep",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "songbird",
+      "name": "Songbird",
+      "category": "animals",
+      "subcategory": "songbird",
+      "cost": {
+        "amount": 10,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "swan",
+      "name": "Swan",
+      "category": "animals",
+      "subcategory": "swan",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": null,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": []
+    },
+    {
+      "id": "banded-mail",
+      "name": "Banded Mail",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 200,
+        "currency": "gp"
+      },
+      "weightLb": 35,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "brigandine",
+      "name": "Brigandine",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 120,
+        "currency": "gp"
+      },
+      "weightLb": 35,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "bronze-plate-mail",
+      "name": "Bronze Plate Mail",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 400,
+        "currency": "gp"
+      },
+      "weightLb": 45,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "chain-mail",
+      "name": "Chain Mail",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 75,
+        "currency": "gp"
+      },
+      "weightLb": 40,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "field-plate",
+      "name": "Field Plate",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 2000,
+        "currency": "gp"
+      },
+      "weightLb": 60,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "full-plate",
+      "name": "Full Plate",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 5000,
+        "currency": "gp"
+      },
+      "weightLb": 70,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "great-helm",
+      "name": "Great Helm",
+      "category": "armor",
+      "subcategory": "helmet",
+      "cost": {
+        "amount": 30,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "basinet",
+      "name": "Basinet",
+      "category": "armor",
+      "subcategory": "helmet",
+      "cost": {
+        "amount": 8,
+        "currency": "gp"
+      },
+      "weightLb": 5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "hide",
+      "name": "Hide",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 15,
+        "currency": "gp"
+      },
+      "weightLb": 30,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "leather",
+      "name": "Leather",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 15,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "padded",
+      "name": "Padded",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 4,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "plate-mail",
+      "name": "Plate Mail",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 600,
+        "currency": "gp"
+      },
+      "weightLb": 50,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "ring-mail",
+      "name": "Ring Mail",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 100,
+        "currency": "gp"
+      },
+      "weightLb": 30,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "scale-mail",
+      "name": "Scale Mail",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 120,
+        "currency": "gp"
+      },
+      "weightLb": 40,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "shield-body",
+      "name": "Shield, Body",
+      "category": "armor",
+      "subcategory": "shield",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 15,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "shield-buckler",
+      "name": "Shield, Buckler",
+      "category": "armor",
+      "subcategory": "shield",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": 3,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "shield-medium",
+      "name": "Shield, Medium",
+      "category": "armor",
+      "subcategory": "shield",
+      "cost": {
+        "amount": 7,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "shield-small",
+      "name": "Shield, Small",
+      "category": "armor",
+      "subcategory": "shield",
+      "cost": {
+        "amount": 3,
+        "currency": "gp"
+      },
+      "weightLb": 5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "splint-mail",
+      "name": "Splint Mail",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 80,
+        "currency": "gp"
+      },
+      "weightLb": 40,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "studded-leather",
+      "name": "Studded Leather",
+      "category": "armor",
+      "subcategory": "armor",
+      "cost": {
+        "amount": 20,
+        "currency": "gp"
+      },
+      "weightLb": 25,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+      ],
+      "armorClass": null
+    },
+    {
+      "id": "arquebus",
+      "name": "Arquebus",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 500,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 15,
+      "damage": {
+        "smallMedium": "1d10",
+        "large": "1d10"
+      },
+      "rateOfFire": "1/3",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 5,
+        "medium": 15,
+        "long": 21
+      }
+    },
+    {
+      "id": "battle-axe",
+      "name": "Battle Axe",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 7,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": "1d8",
+        "large": "1d8"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "blowgun",
+      "name": "Blowgun",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [],
+      "speedFactor": 5,
+      "damage": {
+        "smallMedium": null,
+        "large": null
+      },
+      "rateOfFire": "2/1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 1,
+        "medium": 2,
+        "long": 3
+      }
+    },
+    {
+      "id": "barbed-dart",
+      "name": "Barbed Dart",
+      "category": "ammunition",
+      "subcategory": "dart",
+      "compatibleWeapons": null,
+      "packageQuantity": null,
+      "unitType": "dart",
+      "cost": {
+        "amount": 1,
+        "currency": "sp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "size": "S",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": null,
+      "damage": {
+        "smallMedium": "1d3",
+        "large": "1d2"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "needle",
+      "name": "Needle",
+      "category": "ammunition",
+      "subcategory": "blowgun",
+      "compatibleWeapons": ["blowgun"],
+      "packageQuantity": null,
+      "unitType": "needle",
+      "cost": {
+        "amount": 2,
+        "currency": "cp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "size": "S",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": null,
+      "damage": {
+        "smallMedium": "1",
+        "large": "1"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "composite-long-bow",
+      "name": "Composite Long Bow",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 100,
+        "currency": "gp"
+      },
+      "weightLb": 3,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": null,
+        "large": null
+      },
+      "rateOfFire": "2/1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 6,
+        "medium": 12,
+        "long": 21
+      }
+    },
+    {
+      "id": "composite-short-bow",
+      "name": "Composite Short Bow",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 75,
+        "currency": "gp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [],
+      "speedFactor": 6,
+      "damage": {
+        "smallMedium": null,
+        "large": null
+      },
+      "rateOfFire": "2/1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 5,
+        "medium": 10,
+        "long": 18
+      }
+    },
+    {
+      "id": "flight-arrow-12",
+      "name": "Flight Arrow, 12",
+      "category": "ammunition",
+      "subcategory": "arrow",
+      "compatibleWeapons": null,
+      "packageQuantity": 12,
+      "unitType": "arrow",
+      "cost": {
+        "amount": 3,
+        "currency": "sp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "size": "S",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": null,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "long-bow",
+      "name": "Long Bow",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 75,
+        "currency": "gp"
+      },
+      "weightLb": 3,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [],
+      "speedFactor": 8,
+      "damage": {
+        "smallMedium": null,
+        "large": null
+      },
+      "rateOfFire": "2/1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 7,
+        "medium": 14,
+        "long": 21
+      }
+    },
+    {
+      "id": "sheaf-arrow-6",
+      "name": "Sheaf Arrow, 6",
+      "category": "ammunition",
+      "subcategory": "arrow",
+      "compatibleWeapons": null,
+      "packageQuantity": 6,
+      "unitType": "arrow",
+      "cost": {
+        "amount": 3,
+        "currency": "sp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "size": "S",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": null,
+      "damage": {
+        "smallMedium": "1d8",
+        "large": "1d8"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "short-bow",
+      "name": "Short Bow",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 30,
+        "currency": "gp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": null,
+        "large": null
+      },
+      "rateOfFire": "2/1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 5,
+        "medium": 10,
+        "long": 15
+      }
+    },
+    {
+      "id": "club",
+      "name": "Club",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": null,
+      "weightLb": 3,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "B"
+      ],
+      "speedFactor": 4,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d3"
+      },
+      "rateOfFire": "1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 1,
+        "medium": 2,
+        "long": 3
+      }
+    },
+    {
+      "id": "hand-quarrel",
+      "name": "Hand Quarrel",
+      "category": "ammunition",
+      "subcategory": "quarrel",
+      "compatibleWeapons": null,
+      "packageQuantity": null,
+      "unitType": "quarrel",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "size": "S",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": null,
+      "damage": {
+        "smallMedium": "1d3",
+        "large": "1d2"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "hand-crossbow",
+      "name": "Hand Crossbow",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 300,
+        "currency": "gp"
+      },
+      "weightLb": 3,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "S",
+      "damageType": [],
+      "speedFactor": 5,
+      "damage": {
+        "smallMedium": null,
+        "large": null
+      },
+      "rateOfFire": "1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 2,
+        "medium": 4,
+        "long": 6
+      }
+    },
+    {
+      "id": "heavy-quarrel",
+      "name": "Heavy Quarrel",
+      "category": "ammunition",
+      "subcategory": "quarrel",
+      "compatibleWeapons": null,
+      "packageQuantity": null,
+      "unitType": "quarrel",
+      "cost": {
+        "amount": 2,
+        "currency": "sp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "size": "S",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": null,
+      "damage": {
+        "smallMedium": "1d4+1",
+        "large": "1d6+1"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "heavy-crossbow",
+      "name": "Heavy Crossbow",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 50,
+        "currency": "gp"
+      },
+      "weightLb": 14,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [],
+      "speedFactor": 10,
+      "damage": {
+        "smallMedium": null,
+        "large": null
+      },
+      "rateOfFire": "1/2",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 8,
+        "medium": 16,
+        "long": 24
+      }
+    },
+    {
+      "id": "light-quarrel",
+      "name": "Light Quarrel",
+      "category": "ammunition",
+      "subcategory": "quarrel",
+      "compatibleWeapons": null,
+      "packageQuantity": null,
+      "unitType": "quarrel",
+      "cost": {
+        "amount": 1,
+        "currency": "sp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "size": "S",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": null,
+      "damage": {
+        "smallMedium": "1d4",
+        "large": "1d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "light-crossbow",
+      "name": "Light Crossbow",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 35,
+        "currency": "gp"
+      },
+      "weightLb": 7,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": null,
+        "large": null
+      },
+      "rateOfFire": "1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 6,
+        "medium": 12,
+        "long": 18
+      }
+    },
+    {
+      "id": "dagger-or-dirk",
+      "name": "Dagger or Dirk",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": 1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "S",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 2,
+      "damage": {
+        "smallMedium": "1d4",
+        "large": "1d3"
+      },
+      "rateOfFire": "2/1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 1,
+        "medium": 2,
+        "long": 3
+      }
+    },
+    {
+      "id": "dart",
+      "name": "Dart",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": 0.5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "S",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 2,
+      "damage": {
+        "smallMedium": "1d3",
+        "large": "1d2"
+      },
+      "rateOfFire": "3/1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 1,
+        "medium": 2,
+        "long": 4
+      }
+    },
+    {
+      "id": "footman-s-flail",
+      "name": "Footman's Flail",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 15,
+        "currency": "gp"
+      },
+      "weightLb": 15,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "B"
+      ],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": "1d6+1",
+        "large": "2d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "footman-s-mace",
+      "name": "Footman's Mace",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 8,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "B"
+      ],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": "1d6+1",
+        "large": "1d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "footman-s-pick",
+      "name": "Footman's Pick",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 8,
+        "currency": "gp"
+      },
+      "weightLb": 6,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": "1d6+1",
+        "large": "2d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "hand-or-throwing-axe",
+      "name": "Hand or Throwing Axe",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": 5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 4,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d4"
+      },
+      "rateOfFire": "1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 1,
+        "medium": 2,
+        "long": 3
+      }
+    },
+    {
+      "id": "harpoon",
+      "name": "Harpoon",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 20,
+        "currency": "gp"
+      },
+      "weightLb": 6,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "2d6"
+      },
+      "rateOfFire": "1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 1,
+        "medium": 2,
+        "long": 3
+      }
+    },
+    {
+      "id": "horseman-s-flail",
+      "name": "Horseman's Flail",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 8,
+        "currency": "gp"
+      },
+      "weightLb": 5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "B"
+      ],
+      "speedFactor": 6,
+      "damage": {
+        "smallMedium": "1d4+1",
+        "large": "1d4+1"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "horseman-s-mace",
+      "name": "Horseman's Mace",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 6,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "B"
+      ],
+      "speedFactor": 6,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "horseman-s-pick",
+      "name": "Horseman's Pick",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 7,
+        "currency": "gp"
+      },
+      "weightLb": 4,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 5,
+      "damage": {
+        "smallMedium": "1d4+1",
+        "large": "1d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "javelin",
+      "name": "Javelin",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 4,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d6"
+      },
+      "rateOfFire": "1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 2,
+        "medium": 4,
+        "long": 6
+      }
+    },
+    {
+      "id": "knife",
+      "name": "Knife",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "sp"
+      },
+      "weightLb": 0.5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "S",
+      "damageType": [
+        "P",
+        "S"
+      ],
+      "speedFactor": 2,
+      "damage": {
+        "smallMedium": "1d3",
+        "large": "1d2"
+      },
+      "rateOfFire": "2/1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 1,
+        "medium": 2,
+        "long": 3
+      }
+    },
+    {
+      "id": "heavy-horse-lance",
+      "name": "Heavy Horse Lance",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 15,
+        "currency": "gp"
+      },
+      "weightLb": 15,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 8,
+      "damage": {
+        "smallMedium": "1d8+1",
+        "large": "3d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "light-horse-lance",
+      "name": "Light Horse Lance",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 6,
+        "currency": "gp"
+      },
+      "weightLb": 5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 6,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d8"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "jousting-lance",
+      "name": "Jousting Lance",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 20,
+        "currency": "gp"
+      },
+      "weightLb": 20,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 10,
+      "damage": {
+        "smallMedium": "1d3-1",
+        "large": "1d2-1"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "medium-horse-lance",
+      "name": "Medium Horse Lance",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": "1d6+1",
+        "large": "2d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "mancatcher",
+      "name": "Mancatcher",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 30,
+        "currency": "gp"
+      },
+      "weightLb": 8,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": null,
+        "large": "2d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "morning-star",
+      "name": "Morning Star",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 12,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "B"
+      ],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "1d6+1"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "awl-pike",
+      "name": "Awl Pike",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 12,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 13,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d12"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "bardiche",
+      "name": "Bardiche",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 7,
+        "currency": "gp"
+      },
+      "weightLb": 12,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 9,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "2d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "bec-de-corbin",
+      "name": "Bec de Corbin",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 8,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P",
+        "B"
+      ],
+      "speedFactor": 9,
+      "damage": {
+        "smallMedium": "1d8",
+        "large": "1d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "bill-guisarme",
+      "name": "Bill-Guisarme",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 7,
+        "currency": "gp"
+      },
+      "weightLb": 15,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P",
+        "S"
+      ],
+      "speedFactor": 10,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "1d10"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "fauchard",
+      "name": "Fauchard",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 7,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P",
+        "S"
+      ],
+      "speedFactor": 8,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d8"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "fauchard-fork",
+      "name": "Fauchard-Fork",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 8,
+        "currency": "gp"
+      },
+      "weightLb": 9,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P",
+        "S"
+      ],
+      "speedFactor": 8,
+      "damage": {
+        "smallMedium": "1d8",
+        "large": "1d10"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "glaive",
+      "name": "Glaive",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 6,
+        "currency": "gp"
+      },
+      "weightLb": 8,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 8,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d10"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "glaive-guisarme",
+      "name": "Glaive-Guisarme",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P",
+        "S"
+      ],
+      "speedFactor": 9,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "2d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "guisarme",
+      "name": "Guisarme",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 8,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 8,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "1d8"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "guisarme-voulge",
+      "name": "Guisarme-Voulge",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 8,
+        "currency": "gp"
+      },
+      "weightLb": 15,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P",
+        "S"
+      ],
+      "speedFactor": 10,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "2d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "halberd",
+      "name": "Halberd",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 15,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P",
+        "S"
+      ],
+      "speedFactor": 9,
+      "damage": {
+        "smallMedium": "1d10",
+        "large": "2d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "hook-fauchard",
+      "name": "Hook Fauchard",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 8,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P",
+        "S"
+      ],
+      "speedFactor": 9,
+      "damage": {
+        "smallMedium": "1d4",
+        "large": "1d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "lucern-hammer",
+      "name": "Lucern Hammer",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 7,
+        "currency": "gp"
+      },
+      "weightLb": 15,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P",
+        "B"
+      ],
+      "speedFactor": 9,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "1d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "military-fork",
+      "name": "Military Fork",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 7,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": "1d8",
+        "large": "2d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "partisan",
+      "name": "Partisan",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 8,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 9,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d6+1"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "ranseur",
+      "name": "Ranseur",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 6,
+        "currency": "gp"
+      },
+      "weightLb": 7,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 8,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "2d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "spetum",
+      "name": "Spetum",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 7,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 8,
+      "damage": {
+        "smallMedium": "1d6+1",
+        "large": "2d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "voulge",
+      "name": "Voulge",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "gp"
+      },
+      "weightLb": 12,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 10,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "2d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "quarterstaff",
+      "name": "Quarterstaff",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": null,
+      "weightLb": 4,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "B"
+      ],
+      "speedFactor": 4,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "scourge",
+      "name": "Scourge",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 1,
+        "currency": "gp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "S",
+      "damageType": [],
+      "speedFactor": 5,
+      "damage": {
+        "smallMedium": "1d4",
+        "large": "1d2"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "sickle",
+      "name": "Sickle",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 6,
+        "currency": "sp"
+      },
+      "weightLb": 3,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "S",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 4,
+      "damage": {
+        "smallMedium": "1d4+1",
+        "large": "1d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "sling",
+      "name": "Sling",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 5,
+        "currency": "cp"
+      },
+      "weightLb": 0.1,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [
+        "Source footnote: ten of these items weigh one pound."
+      ],
+      "size": "S",
+      "damageType": [],
+      "speedFactor": 6,
+      "damage": {
+        "smallMedium": null,
+        "large": null
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "sling-bullet",
+      "name": "Sling Bullet",
+      "category": "ammunition",
+      "subcategory": "sling",
+      "compatibleWeapons": ["sling"],
+      "packageQuantity": null,
+      "unitType": "bullet",
+      "cost": {
+        "amount": 1,
+        "currency": "cp"
+      },
+      "weightLb": 0.5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "S",
+      "damageType": [
+        "B"
+      ],
+      "speedFactor": null,
+      "damage": {
+        "smallMedium": "1d4+1",
+        "large": "1d6+1"
+      },
+      "rateOfFire": "1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 5,
+        "medium": 10,
+        "long": 20
+      }
+    },
+    {
+      "id": "sling-stone",
+      "name": "Sling Stone",
+      "category": "ammunition",
+      "subcategory": "sling",
+      "compatibleWeapons": ["sling"],
+      "packageQuantity": null,
+      "unitType": "stone",
+      "cost": null,
+      "weightLb": 0.5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "S",
+      "damageType": [
+        "B"
+      ],
+      "speedFactor": null,
+      "damage": {
+        "smallMedium": "1d4",
+        "large": "1d4"
+      },
+      "rateOfFire": "1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 4,
+        "medium": 8,
+        "long": 16
+      }
+    },
+    {
+      "id": "spear",
+      "name": "Spear",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 8,
+        "currency": "sp"
+      },
+      "weightLb": 5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 6,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d8"
+      },
+      "rateOfFire": "1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 1,
+        "medium": 2,
+        "long": 3
+      }
+    },
+    {
+      "id": "staff-sling",
+      "name": "Staff Sling",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 2,
+        "currency": "sp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [],
+      "speedFactor": 11,
+      "damage": {
+        "smallMedium": null,
+        "large": null
+      },
+      "rateOfFire": "2/1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": null,
+        "medium": "3-6",
+        "long": 9
+      }
+    },
+    {
+      "id": "bastard-sword-one-handed",
+      "name": "Bastard Sword, One-Handed",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 25,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 6,
+      "damage": {
+        "smallMedium": "1d8",
+        "large": "1d12"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "bastard-sword-two-handed",
+      "name": "Bastard Sword, Two-Handed",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 25,
+        "currency": "gp"
+      },
+      "weightLb": 10,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 8,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "2d8"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "broad-sword",
+      "name": "Broad Sword",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 4,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 5,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "1d6+1"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "khopesh",
+      "name": "Khopesh",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 7,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 9,
+      "damage": {
+        "smallMedium": "2d4",
+        "large": "1d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "long-sword",
+      "name": "Long Sword",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 15,
+        "currency": "gp"
+      },
+      "weightLb": 4,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 5,
+      "damage": {
+        "smallMedium": "1d8",
+        "large": "1d12"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "scimitar",
+      "name": "Scimitar",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 15,
+        "currency": "gp"
+      },
+      "weightLb": 4,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 5,
+      "damage": {
+        "smallMedium": "1d8",
+        "large": "1d8"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "short-sword",
+      "name": "Short Sword",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 10,
+        "currency": "gp"
+      },
+      "weightLb": 3,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "S",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 3,
+      "damage": {
+        "smallMedium": "1d6",
+        "large": "1d8"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "two-handed-sword",
+      "name": "Two-Handed Sword",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 50,
+        "currency": "gp"
+      },
+      "weightLb": 15,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "S"
+      ],
+      "speedFactor": 10,
+      "damage": {
+        "smallMedium": "1d10",
+        "large": "3d6"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "trident",
+      "name": "Trident",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 15,
+        "currency": "gp"
+      },
+      "weightLb": 5,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "L",
+      "damageType": [
+        "P"
+      ],
+      "speedFactor": 7,
+      "damage": {
+        "smallMedium": "1d6+1",
+        "large": "3d4"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    },
+    {
+      "id": "warhammer",
+      "name": "Warhammer",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 2,
+        "currency": "gp"
+      },
+      "weightLb": 6,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [
+        "B"
+      ],
+      "speedFactor": 4,
+      "damage": {
+        "smallMedium": "1d4+1",
+        "large": "1d4"
+      },
+      "rateOfFire": "1",
+      "ranges": {
+        "unit": "tens-of-yards",
+        "short": 1,
+        "medium": 2,
+        "long": 3
+      }
+    },
+    {
+      "id": "whip",
+      "name": "Whip",
+      "category": "weapon",
+      "subcategory": "weapon",
+      "cost": {
+        "amount": 1,
+        "currency": "sp"
+      },
+      "weightLb": 2,
+      "stackable": false,
+      "consumable": false,
+      "trackQuantity": true,
+      "source": "AD&D 2E PHB",
+      "notes": [],
+      "size": "M",
+      "damageType": [],
+      "speedFactor": 8,
+      "damage": {
+        "smallMedium": "1d2",
+        "large": "1"
+      },
+      "rateOfFire": null,
+      "ranges": null
+    }
+  ],
+  "implementationNotes": [
+    "A null cost means the table lists no purchase price.",
+    "A null weightLb means the source table does not specify weight.",
+    "Missile ranges are stored in tens of yards, matching Table 45.",
+    "Armor Class values were not present in the supplied armor price-and-weight image, so armorClass remains null.",
+    "No Services table was supplied, so services are not included in this version.",
+    "Review source scans before treating this transcription as a rules authority."
+  ]
+}
