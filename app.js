@@ -64,6 +64,7 @@ const FIXED = {
         surprisedAc: '',
         shieldlessAc: '',
         rearAc: ''
+        ,bladesingerCastingActive: false
     },
     saves: {
         paralyzationPoison: '',
@@ -146,6 +147,7 @@ function normalize(x = {}) {
         d.identity.classEntries = Array.isArray(d.identity.classEntries) && d.identity.classEntries.length ? d.identity.classEntries : [{ className: d.identity.className, level: d.identity.level, xp: d.identity.xp, nextLevel: d.identity.nextLevel, specialization: '' }];
         d.identity.classEntries = d.identity.classEntries.map(entry => ({ ...entry, specialization: typeof entry.specialization === 'string' ? entry.specialization : '' }));
         d.combat.acItems = Array.isArray(d.combat.acItems) ? d.combat.acItems.map(item => ({ name: typeof item.name === 'string' ? item.name : '', type: typeof item.type === 'string' ? item.type : 'other', value: item.value ?? '', equipped: item.equipped !== false })) : [];
+        d.combat.bladesingerCastingActive = d.combat.bladesingerCastingActive === true;
     for (const k of ['portraitUrl', 'specialAbilities', 'wounds', 'notes']) d[k] = typeof x[k] === 'string' ? x[k] : '';
     for (const k of ['raceSelection', 'manualRace', 'selectedBackground', 'racialFeatures', 'racialBonusChoice', 'racialWeaponChoice']) d[k] = typeof x[k] === 'string' ? x[k] : '';
     d.racialBonuses = x.racialBonuses && typeof x.racialBonuses === 'object' && !Array.isArray(x.racialBonuses) ? x.racialBonuses : {};
@@ -292,6 +294,19 @@ function updateSurpriseFromRace(race) {
     if (summary) summary.textContent = `Enemy surprise: ${data.surpriseBonus.fullModifier} / ${data.surpriseBonus.reducedModifier}`;
 }
 
+function updateVisionFromRace(race) {
+    const vision = race === 'Humans' ? 'Normal Vision' : ['Elves', 'Goblins', 'Dwarf', 'Halfling', 'Half-Elf'].includes(race) ? "Infravision 60'" : '';
+    if (!vision) return;
+    data.identity.visionType = vision;
+    const select = document.querySelector('#vision-type');
+    const manual = document.querySelector('#manual-vision-type');
+    if (select) select.value = vision;
+    if (manual) {
+        manual.value = '';
+        manual.hidden = true;
+    }
+}
+
 function raceOptions() {
     return ['Humans', 'Elves', 'Goblins', 'Dwarf', 'Halfling', 'Half-Elf', 'Lizardfolk'];
 }
@@ -328,6 +343,7 @@ function setupRaceSystem() {
         data.raceSelection = preset ? race : '';
         data.manualRace = race === 'Other' ? manual.value : '';
         data.identity.race = race === 'Other' ? manual.value : race;
+        updateVisionFromRace(race);
         data.racialBonuses = { ...(preset?.bonuses || {}) };
         if (preset?.choiceAbilities?.includes(data.racialBonusChoice)) data.racialBonuses[data.racialBonusChoice] = 1;
         data.racialFeatures = preset?.features || '';
@@ -400,7 +416,7 @@ function setupClassInputs() {
         row.querySelectorAll('[data-class-entry]').forEach(input => {
             const key = input.dataset.key;
             input.value = data.identity.classEntries[index][key];
-            input.oninput = () => { data.identity.classEntries[index][key] = input.value; if (index === 0 && key !== 'className') data.identity[key] = input.value; if (key === 'className' || key === 'level' || key === 'xp') updateNextLevel(index); updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
+            input.oninput = () => { data.identity.classEntries[index][key] = input.value; if (index === 0 && key !== 'className') data.identity[key] = input.value; if (key === 'className' || key === 'level' || key === 'xp') updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); changed(); };
         });
         const select = row.querySelector('select');
         const manual = row.querySelector('.manual-entry-class');
@@ -411,8 +427,8 @@ function setupClassInputs() {
         manual.hidden = select.value !== 'Other';
         specialization.value = data.identity.classEntries[index].specialization;
         specialization.hidden = select.value !== 'Wizard';
-        select.onchange = () => { manual.hidden = select.value !== 'Other'; specialization.hidden = select.value !== 'Wizard'; data.identity.classEntries[index].className = select.value === 'Other' ? manual.value : select.value; if (index === 0) { data.identity.className = data.identity.classEntries[index].className; data.identity.manualClass = select.value === 'Other' ? manual.value : ''; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
-        manual.oninput = () => { data.identity.classEntries[index].className = manual.value; if (index === 0) { data.identity.className = manual.value; data.identity.manualClass = manual.value; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateClassRequirementNotice(); changed(); };
+        select.onchange = () => { manual.hidden = select.value !== 'Other'; specialization.hidden = select.value !== 'Wizard'; data.identity.classEntries[index].className = select.value === 'Other' ? manual.value : select.value; if (index === 0) { data.identity.className = data.identity.classEntries[index].className; data.identity.manualClass = select.value === 'Other' ? manual.value : ''; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); changed(); };
+        manual.oninput = () => { data.identity.classEntries[index].className = manual.value; if (index === 0) { data.identity.className = manual.value; data.identity.manualClass = manual.value; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); changed(); };
         specialization.oninput = () => { data.identity.classEntries[index].specialization = specialization.value; changed(); };
         row.querySelector('.remove-class-entry').onclick = () => { if (data.identity.classEntries.length === 1) return; data.identity.classEntries.splice(index, 1); render(); };
         updateNextLevel(index);
@@ -426,7 +442,7 @@ function setupClassInputs() {
     classField.replaceWith(kitField);
     const inspirationField = document.createElement('div');
     inspirationField.className = 'field inspiration-field';
-    inspirationField.innerHTML = `<label for="inspiration-count">Inspiration</label><div class="inspiration-controls"><button type="button" data-inspiration-change="-1" aria-label="Decrease inspiration">-</button><input id="inspiration-count" data-section="identity" data-key="inspiration" type="number" min="0" step="1" value="${data.identity.inspiration}"><button type="button" data-inspiration-change="1" aria-label="Increase inspiration">+</button></div>`;
+    inspirationField.innerHTML = `<label for="inspiration-count">Adventure Points</label><div class="inspiration-controls"><button type="button" data-inspiration-change="-1" aria-label="Decrease adventure points">-</button><input id="inspiration-count" data-section="identity" data-key="inspiration" type="number" min="0" step="1" value="${data.identity.inspiration}"><button type="button" data-inspiration-change="1" aria-label="Increase adventure points">+</button></div>`;
     inspirationField.querySelectorAll('[data-inspiration-change]').forEach(button => button.onclick = () => {
         data.identity.inspiration = Math.max(0, (Number.parseInt(data.identity.inspiration, 10) || 0) + Number(button.dataset.inspirationChange));
         inspirationField.querySelector('input').value = data.identity.inspiration;
@@ -525,17 +541,25 @@ function setupStrengthControl() {
         control.querySelectorAll('[data-ability-step]').forEach(button => button.onclick = () => {
             const current = input.value.trim();
             const exceptional = input.dataset.key === 'str' ? exceptionalStrengthValues(current) : null;
+            const values = input.dataset.key === 'str' && warriorStrengthClass() ? strengthValues : strengthValues.filter(value => !value.includes('/'));
+            const currentIndex = values.indexOf(current);
             const numeric = Number.parseInt(current, 10);
-            if (button.dataset.abilityStep === '1') {
-                if (exceptional || numeric >= 25) return;
-                input.value = input.dataset.key === 'str' && numeric === 17 ? '18/01' : String(Math.max(1, numeric + 1));
-            } else {
-                input.value = exceptional || (input.dataset.key === 'str' && numeric === 18) ? '17' : String(Math.max(1, numeric - 1));
-            }
+            const fallbackIndex = Number.isInteger(numeric) ? values.indexOf(String(Math.max(1, Math.min(25, numeric)))) : -1;
+            const index = currentIndex >= 0 ? currentIndex : fallbackIndex;
+            const direction = Number(button.dataset.abilityStep);
+            const nextIndex = index < 0 ? direction > 0 ? 0 : values.length - 1 : Math.max(0, Math.min(values.length - 1, index + direction));
+            if (nextIndex === index && index >= 0) return;
+            input.value = values[nextIndex];
             input.dispatchEvent(new Event('input', { bubbles: true }));
         });
         stat.append(control);
     });
+}
+
+const strengthValues = [...Array.from({ length: 17 }, (_, index) => String(index + 1)), '18/01-50', '18/51-75', '18/76-90', '18/91-99', '18/00', ...Array.from({ length: 7 }, (_, index) => String(index + 19))];
+
+function warriorStrengthClass() {
+    return (data.identity.classEntries || []).some(entry => thac0Families(entry.className).includes('fighter'));
 }
 
 const visionTypes = ['Normal Vision', 'Low-Light Vision', "Infravision 30'", "Infravision 60'", "Infravision 90'", "Infravision 120'", 'Ultravision', 'Darkvision', 'Blindsight', 'Tremorsense', 'Scent'];
@@ -1013,7 +1037,7 @@ const abilityBenefits = {
 const exceptionalStrengthNote = 'Exceptional Strength (fighters only): 18/01-50 +1 hit, +3 damage, weight 135, max press 280, open doors 12, bend bars 20%; 18/51-75 +2 hit, +3 damage, weight 160, max press 305, open doors 13, bend bars 25%; 18/76-90 +2 hit, +4 damage, weight 185, max press 330, open doors 14, bend bars 30%; 18/91-99 +2 hit, +5 damage, weight 235, max press 380, open doors 15(3), bend bars 35%; 18/00 +3 hit, +6 damage, weight 335, max press 480, open doors 16(6), bend bars 40%.';
 
 function exceptionalStrengthValues(score) {
-    const match = String(score || '').match(/^18\/(\d{2})$/);
+    const match = String(score || '').match(/^18\/(\d{2})(?:-(\d{2}))?$/);
     if (!match) return null;
     const percentile = Number(match[1]);
     if (percentile === 0) return { hit: 3, damage: 6, weight: 335, maxPress: 480, openDoors: '16(6)', bendBars: '40%' };
@@ -1130,6 +1154,18 @@ function defensiveAdjustment(score) {
     return adjustments[value - 1];
 }
 
+function bladesingerLevel() {
+    const isBladesinger = String(data.identity.classKit || '').toLowerCase().includes('bladesinger') || (data.identity.classEntries || []).some(entry => String(entry.className || '').toLowerCase().includes('bladesinger'));
+    if (!isBladesinger) return '';
+    const levels = (data.identity.classEntries || []).filter(entry => String(entry.className || '').toLowerCase().includes('bladesinger')).map(entry => Number.parseInt(entry.level, 10)).filter(Number.isInteger);
+    return levels[0] || Number.parseInt(data.identity.level, 10) || '';
+}
+
+function bladesingerCastingAdjustment() {
+    const level = bladesingerLevel();
+    return Number.isInteger(level) && level > 0 ? -(Math.floor(level / 2) + 1) : '';
+}
+
 function updateAcTotal() {
     const total = document.querySelector('.ac-total-value');
     const baseValue = document.querySelector('.ac-base-value');
@@ -1148,9 +1184,16 @@ function updateAcTotal() {
     }, 0);
     const shieldAdjustment = activeRows.filter(item => item.type === 'shield').reduce((sum, item) => sum + (Number.parseInt(item.value, 10) || 0), 0);
     const totalValue = Number.isInteger(base) && dexAdjustment !== '' ? base + dexAdjustment + itemAdjustment + globalModifierTotal('Armor Class') : '';
+    const castingAdjustment = bladesingerCastingAdjustment();
+    const castingValue = totalValue !== '' && castingAdjustment !== '' && data.combat.bladesingerCastingActive ? totalValue + castingAdjustment : '';
     baseValue.textContent = Number.isInteger(base) ? base : '-';
     total.textContent = totalValue === '' ? '-' : totalValue;
     adjustment.textContent = dexAdjustment === '' ? '-' : formatModifier(dexAdjustment);
+    const castingOutput = document.querySelector('.bladesinger-casting-value');
+    if (castingOutput) {
+        castingOutput.textContent = castingValue === '' ? '-' : castingValue;
+        castingOutput.title = castingAdjustment === '' ? 'Enter a Bladesinger class or kit and level to calculate casting defense.' : `Casting melee AC = normal AC ${totalValue === '' ? '-' : totalValue} + Bladesinger casting adjustment ${castingAdjustment} = ${castingValue === '' ? '-' : castingValue}. Applies only while casting against front or side melee attacks.`;
+    }
     const activeDescription = activeRows.map(item => `${item.name || 'unnamed'} ${item.value || 0}`).join(' + ') || 'none';
     total.title = `AC total = ${Number.isInteger(base) ? base : 'base AC'} + DEX defense ${dexAdjustment === '' ? '?' : dexAdjustment} + active adjustments (${activeDescription}). Lower AC is better.`;
     baseValue.title = `Base AC comes from the equipped armor row${armor ? `: ${armor.name || 'unnamed armor'} = ${armor.value}` : ' or the legacy Armor class field'}.`;
@@ -1190,7 +1233,7 @@ function acItemRowsHTML() {
 function setupAcSection() {
     const section = document.createElement('div');
     section.className = 'ac-section';
-    section.innerHTML = `<div class="ac-layout"><div class="ac-shield" aria-label="Armor class total"><span class="ac-shield-label">AC</span><strong class="ac-total-value">-</strong></div><div class="thac0-mark" aria-label="THAC0 total"><span class="thac0-mark-blade thac0-mark-blade-one"></span><span class="thac0-mark-blade thac0-mark-blade-two"></span><span class="thac0-mark-label">THAC0</span><strong class="thac0-summary-value">${esc(data.combat.thac0 || '-')}</strong></div><div class="ac-breakdown"><p><span>Armor class</span><strong class="ac-base-value">-</strong></p><p><span>DEX defense</span><strong class="ac-defensive-adjustment">-</strong></p><small>Lower AC is better.</small><nav class="combat-reference-links" aria-label="Combat breakdown references"><a href="#ac-reference">AC breakdown</a><a href="#thac0-reference">THAC0 breakdown</a></nav></div><div class="ac-items"><h3>Defenses and equipment</h3><table class="ac-items-table"><thead><tr><th>Active</th><th>Item / defense</th><th>Type</th><th>AC change</th><th></th></tr></thead><tbody>${acItemRowsHTML()}</tbody></table><button type="button" class="add" data-ac-add>Add defense</button><small>Only equipped / active entries apply. Armor supplies the base AC; protective bonuses use negative numbers.</small></div></div>`;
+    section.innerHTML = `<div class="ac-layout"><div class="ac-shield" aria-label="Armor class total"><span class="ac-shield-label">AC</span><strong class="ac-total-value">-</strong></div><div class="thac0-mark" aria-label="THAC0 total"><span class="thac0-mark-blade thac0-mark-blade-one"></span><span class="thac0-mark-blade thac0-mark-blade-two"></span><span class="thac0-mark-label">THAC0</span><strong class="thac0-summary-value">${esc(data.combat.thac0 || '-')}</strong></div><div class="ac-breakdown"><p><span>Armor class</span><strong class="ac-base-value">-</strong></p><p><span>DEX defense</span><strong class="ac-defensive-adjustment">-</strong></p><label class="bladesinger-toggle"><input type="checkbox" data-bladesinger-toggle ${data.combat.bladesingerCastingActive ? 'checked' : ''}> Bladesinger casting defense</label><p><span>Casting melee AC</span><strong class="bladesinger-casting-value">-</strong></p><small>Lower AC is better. Casting defense applies only to front/side melee attacks.</small><nav class="combat-reference-links" aria-label="Combat breakdown references"><a href="#ac-reference">AC breakdown</a><a href="#thac0-reference">THAC0 breakdown</a></nav></div><div class="ac-items"><h3>Defenses and equipment</h3><table class="ac-items-table"><thead><tr><th>Active</th><th>Item / defense</th><th>Type</th><th>AC change</th><th></th></tr></thead><tbody>${acItemRowsHTML()}</tbody></table><button type="button" class="add" data-ac-add>Add defense</button><small>Only equipped / active entries apply. Armor supplies the base AC; protective bonuses use negative numbers.</small></div></div>`;
     const referenceLinks = section.querySelector('.combat-reference-links');
     const acLink = referenceLinks?.querySelector('a[href="#ac-reference"]');
     const thac0Link = referenceLinks?.querySelector('a[href="#thac0-reference"]');
@@ -1211,6 +1254,11 @@ function setupAcSection() {
         thac0Wrap.append(thac0, thac0Link);
     }
     referenceLinks?.remove();
+    section.querySelector('[data-bladesinger-toggle]').onchange = event => {
+        data.combat.bladesingerCastingActive = event.target.checked;
+        updateAcTotal();
+        changed();
+    };
     const combat = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent === 'Combat');
     if (combat) {
         combat.classList.remove('half');
@@ -1524,6 +1572,13 @@ function setupSurpriseReferenceSection() {
     document.querySelector('.grid').append(section);
 }
 
+function setupBladesingerReferenceSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide bladesinger-reference-section';
+    section.innerHTML = `<h2>Bladesinger reference</h2><div class="thac0-reference-grid"><article><h3>Normal AC</h3><p>Keep armor, shield, Dexterity, magical, and other defensive modifiers in the normal AC calculation.</p><p class="formula"><strong>Normal AC = base AC + DEX defense + active AC adjustments</strong></p><p>Example: unarmored base AC 10, DEX 18 defense -4, and Ring of Protection +1 -1 gives normal AC 5.</p></article><article><h3>Casting defense</h3><p>When the Bladesinger casting-defense toggle is active, calculate a separate melee AC improvement.</p><p class="formula"><strong>Casting adjustment = -(floor(Bladesinger level / 2) + 1)</strong></p><p>At level 6, the adjustment is -4. Normal AC 1 becomes Casting Melee AC -3.</p></article><article><h3>When it applies</h3><p>The casting defense applies while casting and defending against incoming melee attacks from the front or sides.</p><p>Use the Combat toggle only for the rounds or situations in which the character is actively casting.</p></article><article><h3>When it does not apply</h3><p>Do not apply this conditional adjustment against missile attacks or rear attacks. It does not change the standard AC, Shieldless AC, Surprised AC, or Rear AC fields.</p><p>The Combat tooltip shows the exact values used in the calculation.</p></article></div>`;
+    document.querySelector('.grid').append(section);
+}
+
 function setupSpellSectionPosition() {
     const combat = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Combat'));
     const spells = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Spells'));
@@ -1715,6 +1770,7 @@ function render() {
     setupGlobalModifiersSection();
     setupProficiencyAndInventorySections();
     setupSurpriseReferenceSection();
+    setupBladesingerReferenceSection();
     setupAbilityTooltips();
     setupCharacterHeader();
     setupSectionToggles();
