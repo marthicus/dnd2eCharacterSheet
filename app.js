@@ -420,10 +420,10 @@ function setupRaceSystem() {
         data.selectedBackground = preset ? data.selectedBackground : '';
         classList.innerHTML = (preset?.classes || []).map(className => `<option value="${esc(className)}"></option>`).join('');
         const backgrounds = preset ? Object.entries(preset.backgrounds) : [];
+        const surpriseSection = rules.querySelector('.surprise-section');
         rules.querySelector('.race-rules-content').innerHTML = preset
             ? `<div class="race-rule-columns"><div><h3>${esc(race)}</h3><p>${esc(preset.features)}</p><p><strong>Ability bonuses:</strong> ${Object.entries(preset.bonuses).map(([ability, bonus]) => `${ability.toUpperCase()} ${bonus >= 0 ? '+' : ''}${bonus}`).join(', ') || (preset.choiceAbilities ? `+1 to ${preset.choiceAbilities.map(ability => ability.toUpperCase()).join(', ')}` : 'None listed')}</p><p><strong>Legal classes:</strong> ${preset.classes.map(esc).join(', ')}</p>${preset.activeSkill ? `<div class="racial-ability-skill"><h3>Racial Ability Skill</h3><p><strong>${esc(preset.activeSkill.name)}</strong></p><p><strong>Condition:</strong> ${esc(preset.activeSkill.condition)}</p><p><strong>Effect:</strong> ${esc(preset.activeSkill.description)}</p></div>` : ''}</div><div>${preset.choiceAbilities ? `<label for="racial-bonus-choice">Choose +1 ability bonus</label><select id="racial-bonus-choice"><option value="">Choose an ability</option>${preset.choiceAbilities.map(ability => `<option value="${ability}">${ability.toUpperCase()}</option>`).join('')}</select>` : ''}${race === 'Half-Elf' ? `<label for="racial-weapon-choice">Choose +1 weapon to hit</label><select id="racial-weapon-choice"><option value="">Choose a weapon</option>${[...new Set(halfElfWeaponOptions.map(([, group]) => group))].map(group => `<optgroup label="${esc(group)}">${halfElfWeaponOptions.filter(([, itemGroup]) => itemGroup === group).map(([name,, label]) => `<option value="${esc(name)}">${esc(label || name)}</option>`).join('')}</optgroup>`).join('')}</select><small class="racial-weapon-note">Equipped matching weapon rows receive a separate racial +1 to hit.</small>` : ''}<label for="background-select">Background</label><select id="background-select"><option value="">Choose a background</option>${backgrounds.map(([name]) => `<option value="${esc(name)}">${esc(name)}</option>`).join('')}</select><p class="background-benefits"></p><p class="class-validity"></p><p class="class-requirements-note"></p></div></div>`
             : '<p>Custom race. Enter the race name manually; class legality, bonuses, and background rules must be entered manually.</p>';
-        const surpriseSection = document.querySelector('.surprise-section');
         if (surpriseSection) {
             surpriseSection.hidden = !['Elves', 'Half-Elf', 'Halfling'].includes(race);
             rules.querySelector('.race-rules-content').append(surpriseSection);
@@ -1920,10 +1920,16 @@ function setupGlobalModifiersSection() {
 }
 
 function setupSurpriseSection() {
+    if (document.querySelector('.surprise-section')) return;
     const section = document.createElement('section');
     section.className = 'surprise-section';
     const bonus = data.surpriseBonus;
     section.innerHTML = `<h2>Surprise and ambush</h2><div class="surprise-layout"><div class="surprise-summary"><strong>AMBUSH</strong><span>Enemy surprise: ${esc(bonus.fullModifier)} / ${esc(bonus.reducedModifier)}</span></div><div class="surprise-fields"><label><input type="checkbox" data-surprise-key="active" ${bonus.active !== false ? 'checked' : ''}> Active</label><label>Target<select data-surprise-key="target"><option ${bonus.target === 'Enemy' ? 'selected' : ''}>Enemy</option><option ${bonus.target === 'Character' ? 'selected' : ''}>Character</option></select></label><label>Roll<input data-surprise-key="roll" value="${esc(bonus.roll)}"></label><label>Full modifier<input data-surprise-key="fullModifier" value="${esc(bonus.fullModifier)}"></label><label>Reduced modifier<input data-surprise-key="reducedModifier" value="${esc(bonus.reducedModifier)}"></label><label>Source<input data-surprise-key="source" value="${esc(bonus.source)}"></label><label class="surprise-wide">Conditions<textarea data-surprise-key="conditions">${esc(bonus.conditions)}</textarea></label><label class="surprise-wide">Notes<textarea data-surprise-key="notes">${esc(bonus.notes)}</textarea></label></div></div><small>Enemy modifiers affect the opponent's surprise roll. This tracker does not change character initiative automatically.</small>`;
+    const activeControl = section.querySelector('[data-surprise-key="active"]')?.closest('label');
+    if (activeControl) {
+        activeControl.className = 'surprise-active-control';
+        section.querySelector('.surprise-summary').append(activeControl);
+    }
     section.hidden = !['Elves', 'Half-Elf', 'Halfling'].includes(data.raceSelection);
     const target = document.querySelector('.race-rules-content');
     if (target) target.append(section); else document.querySelector('.grid')?.append(section);
@@ -2081,6 +2087,7 @@ function render() {
     setupBladesingerReferenceSection();
     setupAbilityTooltips();
     setupCharacterHeader();
+    setupSurpriseSection();
     setupSectionToggles();
     setupSectionOrdering();
     setupTableOfContents();
