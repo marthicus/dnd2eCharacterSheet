@@ -11,7 +11,8 @@
     "nextLevel": "",
     "inspiration": 0,
     "visionType": "",
-    "deity": ""
+    "deity": "",
+    "classEntries": [{ "className": "", "level": "", "xp": "", "nextLevel": "", "specialization": "", "xpBonusEnabled": false }]
   },
   "portraitUrl": "",
   "racialWeaponChoice": "",
@@ -34,6 +35,7 @@
     "surprisedAc": "",
     "shieldlessAc": "",
     "rearAc": ""
+      ,"missileAc": ""
     ,"bladesingerCastingActive": false
   },
   "saves": {
@@ -57,6 +59,7 @@
   "spells": [],
   "resistances": [],
   "globalModifiers": [],
+  "xpHistory": [],
     "surpriseBonus": {
       "active": true,
       "target": "Enemy",

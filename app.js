@@ -17,7 +17,7 @@ const FIXED = {
         xp: '',
         nextLevel: '',
         deity: '',
-        classEntries: [{ className: '', level: '', xp: '', nextLevel: '' }]
+        classEntries: [{ className: '', level: '', xp: '', nextLevel: '', specialization: '', xpBonusEnabled: false }]
     },
     raceSelection: '',
     manualRace: '',
@@ -63,8 +63,9 @@ const FIXED = {
         movement: '',
         surprisedAc: '',
         shieldlessAc: '',
-        rearAc: ''
-        ,bladesingerCastingActive: false
+        rearAc: '',
+        missileAc: '',
+        bladesingerCastingActive: false
     },
     saves: {
         paralyzationPoison: '',
@@ -119,6 +120,7 @@ const FIXED = {
         notes: ''
     },
     globalModifiers: [],
+    xpHistory: [],
     specialAbilities: '',
     wounds: '',
     notes: '',
@@ -146,7 +148,8 @@ function normalize(x = {}) {
     d.identity.visionType = typeof d.identity.visionType === 'string' ? d.identity.visionType : '';
         d.identity.classEntries = Array.isArray(d.identity.classEntries) && d.identity.classEntries.length ? d.identity.classEntries : [{ className: d.identity.className, level: d.identity.level, xp: d.identity.xp, nextLevel: d.identity.nextLevel, specialization: '' }];
         d.identity.classEntries = d.identity.classEntries.map(entry => ({ ...entry, specialization: typeof entry.specialization === 'string' ? entry.specialization : '' }));
-        d.combat.acItems = Array.isArray(d.combat.acItems) ? d.combat.acItems.map(item => ({ name: typeof item.name === 'string' ? item.name : '', type: typeof item.type === 'string' ? item.type : 'other', value: item.value ?? '', equipped: item.equipped !== false })) : [];
+        d.identity.classEntries = d.identity.classEntries.map(entry => ({ ...entry, xpBonusEnabled: entry.xpBonusEnabled === true || (entry.xpBonusMode === 'manual' && Number.parseInt(entry.xpBonusPercent, 10) > 0) }));
+        d.combat.acItems = Array.isArray(d.combat.acItems) ? d.combat.acItems.map(item => ({ name: typeof item.name === 'string' ? item.name : '', type: typeof item.type === 'string' ? item.type : 'other', value: item.value ?? '', appliesTo: typeof item.appliesTo === 'string' ? item.appliesTo : 'Default', equipped: item.equipped !== false })) : [];
         d.combat.bladesingerCastingActive = d.combat.bladesingerCastingActive === true;
     for (const k of ['portraitUrl', 'specialAbilities', 'wounds', 'notes']) d[k] = typeof x[k] === 'string' ? x[k] : '';
     for (const k of ['raceSelection', 'manualRace', 'selectedBackground', 'racialFeatures', 'racialBonusChoice', 'racialWeaponChoice']) d[k] = typeof x[k] === 'string' ? x[k] : '';
@@ -157,6 +160,13 @@ function normalize(x = {}) {
     d.resistances = d.resistances.map(item => ({ type: typeof item.type === 'string' ? item.type : 'Other', appliesTo: item.appliesTo ?? '', value: item.value ?? '', source: item.source ?? '', active: item.active !== false, notes: item.notes ?? '' }));
     d.surpriseBonus = { ...d.surpriseBonus, ...(x.surpriseBonus || {}) };
     d.globalModifiers = Array.isArray(x.globalModifiers) ? x.globalModifiers.map(item => ({ category: typeof item.category === 'string' ? item.category : 'Other', value: item.value ?? '', appliesTo: item.appliesTo ?? '', source: item.source ?? '', active: item.active !== false, condition: item.condition ?? '', notes: item.notes ?? '' })) : [];
+    d.xpHistory = Array.isArray(x.xpHistory) ? x.xpHistory : [];
+    d.inventory = d.inventory.map(item => ({
+        item: typeof item.item === 'string' ? item.item : typeof item.name === 'string' ? item.name : '',
+        location: typeof item.location === 'string' ? item.location : '',
+        quantity: item.quantity ?? 1,
+        weight: item.weight ?? ''
+    }));
     d.weapons = d.weapons.map(item => ({
         name: typeof item.name === 'string' ? item.name : '',
         attackType: typeof item.attackType === 'string' ? item.attackType : typeof item.attacks === 'string' ? item.attacks : '',
@@ -172,7 +182,7 @@ function normalize(x = {}) {
     }));
     for (const k of ['thiefSkills', 'undeadTurning', 'spellLevels']) d[k] = Array.isArray(x[k]) && x[k].length ? x[k] : d[k];
     d.spellSlots = Array.isArray(x.spellSlots) && x.spellSlots.length ? x.spellSlots.map((slot, index) => ({ level: typeof slot.level === 'string' ? slot.level : d.spellSlots[index]?.level || `${index + 1}th`, available: slot.available ?? '', used: slot.used ?? '' })) : clone(d.spellSlots);
-    d.spells = d.spells.map(spell => ({ name: typeof spell.name === 'string' ? spell.name : '', level: spell.level ?? '', type: typeof spell.type === 'string' ? spell.type : 'Spell', school: spell.school ?? '', known: spell.known ?? '', memorized: spell.memorized ?? '', memorizedQty: spell.memorizedQty ?? '', castQty: spell.castQty ?? '', notes: spell.notes ?? '' }));
+    d.spells = d.spells.map(spell => ({ name: typeof spell.name === 'string' ? spell.name : '', level: spell.level ?? '', type: typeof spell.type === 'string' ? spell.type : 'Spell', school: spell.school ?? '', known: spell.known ?? '', memorized: spell.memorized === true || spell.memorized === 'true' || spell.memorized === 'yes' || spell.memorized === '1', memorizedQty: spell.memorizedQty ?? '', castQty: spell.castQty ?? '', notes: spell.notes ?? '' }));
     const maximumHitPoints = Number.parseInt(d.combat.hpMax, 10);
     const currentHitPoints = Number.parseInt(d.combat.hpCurrent, 10);
     if (Number.isInteger(maximumHitPoints) && Number.isInteger(currentHitPoints) && currentHitPoints > maximumHitPoints) d.combat.hpCurrent = String(maximumHitPoints);
@@ -249,6 +259,62 @@ function updateNextLevel(index) {
     document.querySelectorAll(`[data-class-entry="${index}"][data-key="nextLevel"]`).forEach(input => { input.value = entry.nextLevel; input.title = `Next level XP: level ${level + 1} threshold from the ${experienceTableId(entry.className)} table = ${formatExperience(table[level])}.`; });
 }
 
+function advanceClassLevel(entry) {
+    const table = experienceTables[experienceTableId(entry.className)];
+    let level = Number.parseInt(entry.level, 10);
+    const xp = Number.parseInt(entry.xp, 10);
+    if (!table || !Number.isInteger(level) || !Number.isInteger(xp)) return 0;
+    let levelsGained = 0;
+    while (level < table.length && xp >= table[level]) {
+        level += 1;
+        levelsGained += 1;
+    }
+    if (levelsGained) entry.level = String(level);
+    return levelsGained;
+}
+
+function xpBonusPercent(entry) {
+    return entry?.xpBonusEnabled ? 10 : 0;
+}
+
+function xpBonusLabel(entry) {
+    const percent = xpBonusPercent(entry);
+    return percent ? `+${percent}%` : '0%';
+}
+
+function updateXpBonusDisplays() {
+    document.querySelectorAll('.class-xp-bonus').forEach((cell, index) => {
+        const entry = data.identity.classEntries[index];
+        const output = cell.querySelector('.xp-bonus-value');
+        if (entry && output) output.textContent = xpBonusLabel(entry);
+    });
+}
+
+function updateXpAwardOptions() {
+    const select = document.querySelector('#xp-award-class');
+    if (!select) return;
+    const selected = select.value;
+    select.innerHTML = '<option value="">Choose a class</option>' + data.identity.classEntries.map((entry, index) => entry.className ? `<option value="${index}">${esc(entry.className)}</option>` : '').join('');
+    if ([...select.options].some(option => option.value === selected)) select.value = selected;
+}
+
+function awardExperience() {
+    const classSelect = document.querySelector('#xp-award-class');
+    const amountInput = document.querySelector('#xp-award-amount');
+    const index = Number.parseInt(classSelect?.value, 10);
+    const baseAward = Number.parseInt(amountInput?.value, 10);
+    const entry = data.identity.classEntries[index];
+    if (!entry?.className || !Number.isInteger(baseAward) || baseAward <= 0) return;
+    const percent = xpBonusPercent(entry);
+    const bonus = Math.floor(baseAward * percent / 100);
+    entry.xp = String((Number.parseInt(entry.xp, 10) || 0) + baseAward + bonus);
+    const levelsGained = advanceClassLevel(entry);
+    data.xpHistory.unshift({ amount: baseAward, details: `${entry.className}: ${baseAward} + ${bonus} (${percent}%)${levelsGained ? `; level +${levelsGained}` : ''}`, timestamp: new Date().toISOString() });
+    amountInput.value = '';
+    changed();
+    render();
+}
+
 function requirementClassName(className) {
     const name = String(className || '').trim();
     return name.toLowerCase().includes('specialist') || name.toLowerCase().includes('mage') ? 'Specialist Wizard' : name;
@@ -286,6 +352,7 @@ function updateSurpriseFromRace(race) {
     }
     const section = document.querySelector('.surprise-section');
     if (!section) return;
+    section.hidden = !hasSurpriseBonus;
     section.querySelectorAll('[data-surprise-key]').forEach(input => {
         input.value = data.surpriseBonus[input.dataset.surpriseKey];
         if (input.type === 'checkbox') input.checked = data.surpriseBonus[input.dataset.surpriseKey] !== false;
@@ -354,6 +421,11 @@ function setupRaceSystem() {
         rules.querySelector('.race-rules-content').innerHTML = preset
             ? `<div class="race-rule-columns"><div><h3>${esc(race)}</h3><p>${esc(preset.features)}</p><p><strong>Ability bonuses:</strong> ${Object.entries(preset.bonuses).map(([ability, bonus]) => `${ability.toUpperCase()} ${bonus >= 0 ? '+' : ''}${bonus}`).join(', ') || (preset.choiceAbilities ? `+1 to ${preset.choiceAbilities.map(ability => ability.toUpperCase()).join(', ')}` : 'None listed')}</p><p><strong>Legal classes:</strong> ${preset.classes.map(esc).join(', ')}</p>${preset.activeSkill ? `<div class="racial-ability-skill"><h3>Racial Ability Skill</h3><p><strong>${esc(preset.activeSkill.name)}</strong></p><p><strong>Condition:</strong> ${esc(preset.activeSkill.condition)}</p><p><strong>Effect:</strong> ${esc(preset.activeSkill.description)}</p></div>` : ''}</div><div>${preset.choiceAbilities ? `<label for="racial-bonus-choice">Choose +1 ability bonus</label><select id="racial-bonus-choice"><option value="">Choose an ability</option>${preset.choiceAbilities.map(ability => `<option value="${ability}">${ability.toUpperCase()}</option>`).join('')}</select>` : ''}${race === 'Half-Elf' ? `<label for="racial-weapon-choice">Choose +1 weapon to hit</label><select id="racial-weapon-choice"><option value="">Choose a weapon</option>${[...new Set(halfElfWeaponOptions.map(([, group]) => group))].map(group => `<optgroup label="${esc(group)}">${halfElfWeaponOptions.filter(([, itemGroup]) => itemGroup === group).map(([name,, label]) => `<option value="${esc(name)}">${esc(label || name)}</option>`).join('')}</optgroup>`).join('')}</select><small class="racial-weapon-note">Equipped matching weapon rows receive a separate racial +1 to hit.</small>` : ''}<label for="background-select">Background</label><select id="background-select"><option value="">Choose a background</option>${backgrounds.map(([name]) => `<option value="${esc(name)}">${esc(name)}</option>`).join('')}</select><p class="background-benefits"></p><p class="class-validity"></p><p class="class-requirements-note"></p></div></div>`
             : '<p>Custom race. Enter the race name manually; class legality, bonuses, and background rules must be entered manually.</p>';
+        const surpriseSection = document.querySelector('.surprise-section');
+        if (surpriseSection) {
+            surpriseSection.hidden = !['Elves', 'Half-Elf', 'Halfling'].includes(race);
+            rules.querySelector('.race-rules-content').append(surpriseSection);
+        }
         const background = rules.querySelector('#background-select');
         const bonusChoice = rules.querySelector('#racial-bonus-choice');
         if (bonusChoice) {
@@ -406,17 +478,17 @@ function setupClassInputs() {
     const identityCard = classField.closest('.card');
     const classTableField = document.createElement('div');
     classTableField.className = 'field class-entries-field';
-    classTableField.innerHTML = `<label for="class-entries">Classes</label><table id="class-entries" class="class-entries-table"><thead><tr><th>Class</th><th>Level</th><th>Experience</th><th>Next level</th><th></th></tr></thead><tbody></tbody></table><button type="button" class="add" id="add-class-entry">Add class</button>`;
+    classTableField.innerHTML = `<label for="class-entries">Classes</label><table id="class-entries" class="class-entries-table"><thead><tr><th>Class</th><th>Level</th><th>Experience</th><th>XP bonus</th><th>Next level</th><th>Actions</th></tr></thead><tbody></tbody></table><button type="button" class="add" id="add-class-entry">Add class</button><div class="xp-award-controls"><label for="xp-award-class">Award XP to</label><select id="xp-award-class"><option value="">Choose a class</option></select><label for="xp-award-amount">XP awarded</label><input id="xp-award-amount" type="number" min="1" step="1"><button type="button" class="add" id="award-xp">Award XP</button><button type="button" class="add" id="toggle-xp-history" aria-expanded="false">Show XP history</button></div><div class="xp-history" hidden></div>`;
     const body = classTableField.querySelector('tbody');
     const addRow = entry => {
-        const index = entry ? data.identity.classEntries.indexOf(entry) : data.identity.classEntries.push({ className: '', level: '', xp: '', nextLevel: '', specialization: '' }) - 1;
+        const index = entry ? data.identity.classEntries.indexOf(entry) : data.identity.classEntries.push({ className: '', level: '', xp: '', nextLevel: '', specialization: '', xpBonusEnabled: false }) - 1;
         const row = document.createElement('tr');
-                row.innerHTML = `<td><select data-class-entry="${index}" ${index === 0 ? 'data-section="identity" data-key="className"' : 'data-key="className"'}><option value="">Choose a class</option>${classOptions.map(className => `<option value="${className}">${className}</option>`).join('')}<option value="Other">Other</option></select><input class="manual-entry-class" placeholder="Enter custom class" hidden><input class="class-specialization" placeholder="Wizard specialization" data-class-entry="${index}" data-key="specialization" hidden></td><td><input data-class-entry="${index}" data-key="level"></td><td><input data-class-entry="${index}" data-key="xp"></td><td><input data-class-entry="${index}" data-key="nextLevel"></td><td><button type="button" class="remove-class-entry" aria-label="Remove class">×</button></td>`;
+                row.innerHTML = `<td><select data-class-entry="${index}" ${index === 0 ? 'data-section="identity" data-key="className"' : 'data-key="className"'}><option value="">Choose a class</option>${classOptions.map(className => `<option value="${className}">${className}</option>`).join('')}<option value="Other">Other</option></select><input class="manual-entry-class" placeholder="Enter custom class" hidden><input class="class-specialization" placeholder="Wizard specialization" data-class-entry="${index}" data-key="specialization" hidden></td><td><input data-class-entry="${index}" data-key="level"></td><td><input data-class-entry="${index}" data-key="xp"></td><td><input data-class-entry="${index}" data-key="nextLevel"></td>`;
         body.append(row);
         row.querySelectorAll('[data-class-entry]').forEach(input => {
             const key = input.dataset.key;
             input.value = data.identity.classEntries[index][key];
-            input.oninput = () => { data.identity.classEntries[index][key] = input.value; if (index === 0 && key !== 'className') data.identity[key] = input.value; if (key === 'className' || key === 'level' || key === 'xp') updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); changed(); };
+            input.oninput = () => { data.identity.classEntries[index][key] = input.value; if (index === 0 && key !== 'className') data.identity[key] = input.value; if (key === 'className' || key === 'level' || key === 'xp') updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); updateXpBonusDisplays(); if (key === 'className') updateXpAwardOptions(); changed(); };
         });
         const select = row.querySelector('select');
         const manual = row.querySelector('.manual-entry-class');
@@ -427,15 +499,37 @@ function setupClassInputs() {
         manual.hidden = select.value !== 'Other';
         specialization.value = data.identity.classEntries[index].specialization;
         specialization.hidden = select.value !== 'Wizard';
-        select.onchange = () => { manual.hidden = select.value !== 'Other'; specialization.hidden = select.value !== 'Wizard'; data.identity.classEntries[index].className = select.value === 'Other' ? manual.value : select.value; if (index === 0) { data.identity.className = data.identity.classEntries[index].className; data.identity.manualClass = select.value === 'Other' ? manual.value : ''; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); changed(); };
-        manual.oninput = () => { data.identity.classEntries[index].className = manual.value; if (index === 0) { data.identity.className = manual.value; data.identity.manualClass = manual.value; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); changed(); };
+        select.onchange = () => { manual.hidden = select.value !== 'Other'; specialization.hidden = select.value !== 'Wizard'; data.identity.classEntries[index].className = select.value === 'Other' ? manual.value : select.value; if (index === 0) { data.identity.className = data.identity.classEntries[index].className; data.identity.manualClass = select.value === 'Other' ? manual.value : ''; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); updateXpBonusDisplays(); updateClassAbilitiesVisibility(); updateXpAwardOptions(); changed(); };
+        manual.oninput = () => { data.identity.classEntries[index].className = manual.value; if (index === 0) { data.identity.className = manual.value; data.identity.manualClass = manual.value; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); updateXpBonusDisplays(); updateClassAbilitiesVisibility(); updateXpAwardOptions(); changed(); };
         specialization.oninput = () => { data.identity.classEntries[index].specialization = specialization.value; changed(); };
+        const xpCell = document.createElement('td');
+        xpCell.className = 'class-xp-bonus';
+        xpCell.innerHTML = `<label><input type="checkbox" class="xp-bonus-checkbox" aria-label="Enable 10 percent XP bonus"> XP bonus</label><output class="xp-bonus-value">${xpBonusLabel(data.identity.classEntries[index])}</output>`;
+        const actionCell = document.createElement('td');
+        actionCell.className = 'class-actions';
+        actionCell.innerHTML = '<button type="button" class="remove-class-entry" aria-label="Remove class">Remove</button>';
+        row.insertBefore(xpCell, row.children[3]);
+        row.append(actionCell);
         row.querySelector('.remove-class-entry').onclick = () => { if (data.identity.classEntries.length === 1) return; data.identity.classEntries.splice(index, 1); render(); };
+        const checkbox = xpCell.querySelector('.xp-bonus-checkbox');
+        checkbox.checked = data.identity.classEntries[index].xpBonusEnabled === true;
+        checkbox.onchange = () => { data.identity.classEntries[index].xpBonusEnabled = checkbox.checked; xpCell.querySelector('.xp-bonus-value').textContent = xpBonusLabel(data.identity.classEntries[index]); changed(); };
         updateNextLevel(index);
     };
     const initialEntries = data.identity.classEntries.slice();
     initialEntries.forEach(entry => addRow(entry));
-    classTableField.querySelector('#add-class-entry').onclick = () => { addRow(); changed(); };
+    classTableField.querySelector('#add-class-entry').onclick = () => { addRow(); updateXpAwardOptions(); changed(); };
+    updateXpAwardOptions();
+    classTableField.querySelector('#award-xp').onclick = awardExperience;
+    const history = classTableField.querySelector('.xp-history');
+    history.innerHTML = data.xpHistory.length ? `<h4>XP history</h4>${data.xpHistory.map(item => `<div>+${formatExperience(item.amount)} XP | ${esc(item.details)}</div>`).join('')}` : '';
+    const historyToggle = classTableField.querySelector('#toggle-xp-history');
+    historyToggle.onclick = () => {
+        const visible = history.hidden;
+        history.hidden = !visible;
+        historyToggle.textContent = visible ? 'Hide XP history' : 'Show XP history';
+        historyToggle.setAttribute('aria-expanded', String(visible));
+    };
     const kitField = document.createElement('div');
     kitField.className = 'field class-kit-field';
     kitField.innerHTML = `<label for="class-kit">Class kit</label><input id="class-kit" data-section="identity" data-key="classKit" value="${esc(data.identity.classKit)}">`;
@@ -449,6 +543,7 @@ function setupClassInputs() {
         changed();
     });
     identityCard.append(inspirationField, classTableField);
+    updateXpAwardOptions();
     document.querySelectorAll('[data-section="identity"][data-key="level"], [data-section="identity"][data-key="xp"], [data-section="identity"][data-key="nextLevel"]').forEach(input => input.closest('.field')?.remove());
 }
 
@@ -1173,19 +1268,26 @@ function updateAcTotal() {
     if (!total || !baseValue || !adjustment) return;
     const rows = data.combat.acItems || [];
     const activeRows = rows.filter(item => item.equipped !== false);
-    const armor = activeRows.find(item => item.type === 'armor');
+    const appliesTo = (item, target) => !item.appliesTo || item.appliesTo === 'Default' || item.appliesTo === target;
+    const armor = activeRows.find(item => item.type === 'armor' && appliesTo(item, 'AC'));
     const armorValue = Number.parseInt(armor?.value, 10);
     const legacyBase = Number.parseInt(data.combat.ac, 10);
     const base = Number.isInteger(armorValue) ? armorValue : rows.length ? '' : legacyBase;
     const dexAdjustment = defensiveAdjustment(data.abilities.dex);
-    const itemAdjustment = activeRows.filter(item => item.type !== 'armor').reduce((sum, item) => {
+    const itemAdjustment = activeRows.filter(item => item.type !== 'armor' && appliesTo(item, 'AC')).reduce((sum, item) => {
         const value = Number.parseInt(item.value, 10);
         return sum + (Number.isInteger(value) ? value : 0);
     }, 0);
-    const shieldAdjustment = activeRows.filter(item => item.type === 'shield').reduce((sum, item) => sum + (Number.parseInt(item.value, 10) || 0), 0);
+    const shieldAdjustment = activeRows.filter(item => item.type === 'shield' && appliesTo(item, 'AC')).reduce((sum, item) => sum + (Number.parseInt(item.value, 10) || 0), 0);
+    const variantAdjustment = target => activeRows.filter(item => item.type !== 'armor' && item.type !== 'shield' && appliesTo(item, target)).reduce((sum, item) => sum + (Number.parseInt(item.value, 10) || 0), 0);
+    const surprisedAdjustment = variantAdjustment('Surprised AC');
+    const shieldlessAdjustment = variantAdjustment('Shieldless AC');
+    const rearAdjustment = variantAdjustment('Rear AC');
+    const missileAdjustment = variantAdjustment('Missile AC') + activeRows.filter(item => item.type === 'shield' && appliesTo(item, 'Missile AC')).reduce((sum, item) => sum + (Number.parseInt(item.value, 10) || 0), 0);
     const totalValue = Number.isInteger(base) && dexAdjustment !== '' ? base + dexAdjustment + itemAdjustment + globalModifierTotal('Armor Class') : '';
     const castingAdjustment = bladesingerCastingAdjustment();
     const castingValue = totalValue !== '' && castingAdjustment !== '' && data.combat.bladesingerCastingActive ? totalValue + castingAdjustment : '';
+    const missileValue = totalValue === '' ? '' : totalValue + missileAdjustment + targetedGlobalModifierTotal('Armor Class', 'Missile AC');
     baseValue.textContent = Number.isInteger(base) ? base : '-';
     total.textContent = totalValue === '' ? '-' : totalValue;
     adjustment.textContent = dexAdjustment === '' ? '-' : formatModifier(dexAdjustment);
@@ -1200,9 +1302,10 @@ function updateAcTotal() {
     adjustment.title = `DEX defensive adjustment from DEX ${data.abilities.dex || '?'}: ${dexAdjustment === '' ? 'enter a score from 1 to 25' : dexAdjustment}.`;
     const values = {
         ac: Number.isInteger(base) ? String(base) : '',
-        surprisedAc: totalValue === '' || !Number.isInteger(dexAdjustment) ? '' : String(base + itemAdjustment),
-        shieldlessAc: totalValue === '' ? '' : String(totalValue - shieldAdjustment),
-        rearAc: totalValue === '' ? '' : String(totalValue + 2)
+        surprisedAc: totalValue === '' || !Number.isInteger(dexAdjustment) ? '' : String(base + surprisedAdjustment + globalModifierTotal('Armor Class')),
+        shieldlessAc: totalValue === '' ? '' : String(base + dexAdjustment + shieldlessAdjustment + globalModifierTotal('Armor Class')),
+        rearAc: totalValue === '' ? '' : String(base + rearAdjustment + globalModifierTotal('Armor Class') + 2),
+        missileAc: missileValue === '' ? '' : String(missileValue)
     };
     Object.entries(values).forEach(([key, value]) => {
         data.combat[key] = value;
@@ -1212,7 +1315,8 @@ function updateAcTotal() {
         ac: `Base AC: ${base === '' ? '-' : base}. This is the equipped armor value before DEX and active adjustments.`,
         surprisedAc: `Surprised AC = base AC ${base === '' ? '-' : base} + active non-DEX adjustments ${itemAdjustment >= 0 ? '+' : ''}${itemAdjustment}. DEX defense is omitted.`,
         shieldlessAc: `Shieldless AC = total AC ${totalValue === '' ? '-' : totalValue} - active shield adjustment ${shieldAdjustment}.`,
-        rearAc: `Rear AC = total AC ${totalValue === '' ? '-' : totalValue} + 2 for a rear attack.`
+        rearAc: `Rear AC = total AC ${totalValue === '' ? '-' : totalValue} + 2 for a rear attack.`,
+        missileAc: `Missile AC = normal AC ${totalValue === '' ? '-' : totalValue} + missile-specific item adjustments ${missileAdjustment} + global modifiers ${targetedGlobalModifierTotal('Armor Class', 'Missile AC')}.`
     };
     Object.entries(acTooltips).forEach(([key, title]) => document.querySelectorAll(`[data-section="combat"][data-key="${key}"]`).forEach(input => input.title = title));
 }
@@ -1224,16 +1328,17 @@ const acItemPresets = [
 
 function acItemRowsHTML() {
     const types = [['shield', 'Shield'], ['magic', 'Magic item'], ['spell', 'Spell'], ['cover', 'Cover'], ['natural', 'Natural armor'], ['other', 'Other']];
+    const targets = ['Default', 'AC', 'Missile AC', 'Shieldless AC', 'Surprised AC', 'Rear AC', 'Casting Melee AC'];
     return (data.combat.acItems || []).map((item, index) => {
         const presetItem = acItemPresets.some(([name]) => name === item.name);
-        return `<tr><td><input class="ac-active" type="checkbox" data-ac-item="${index}" data-ac-key="equipped" aria-label="Equipped or active" title="Equipped or active" ${item.equipped !== false ? 'checked' : ''}></td><td><select data-ac-preset="${index}"><option value="Other" ${presetItem ? '' : 'selected'}>Other</option>${acItemPresets.map(([name, type, value]) => `<option value="${esc(name)}" ${item.name === name ? 'selected' : ''}>${esc(name)}</option>`).join('')}</select><input data-ac-item="${index}" data-ac-key="name" value="${esc(item.name)}" placeholder="Item or defense" ${presetItem ? 'hidden' : ''}></td><td><select data-ac-item="${index}" data-ac-key="type"><option value="armor" ${item.type === 'armor' ? 'selected' : ''}>Armor</option>${types.map(([value, label]) => `<option value="${value}" ${item.type === value ? 'selected' : ''}>${label}</option>`).join('')}</select></td><td><input class="ac-item-value" type="number" data-ac-item="${index}" data-ac-key="value" value="${esc(item.value)}" step="1" placeholder="0"></td><td><button type="button" class="remove" data-ac-remove="${index}" aria-label="Remove defense">×</button></td></tr>`;
+        return `<tr><td><input class="ac-active" type="checkbox" data-ac-item="${index}" data-ac-key="equipped" aria-label="Equipped or active" title="Equipped or active" ${item.equipped !== false ? 'checked' : ''}></td><td><select data-ac-preset="${index}"><option value="Other" ${presetItem ? '' : 'selected'}>Other</option>${acItemPresets.map(([name, type, value]) => `<option value="${esc(name)}" ${item.name === name ? 'selected' : ''}>${esc(name)}</option>`).join('')}</select><input data-ac-item="${index}" data-ac-key="name" value="${esc(item.name)}" placeholder="Item or defense" ${presetItem ? 'hidden' : ''}></td><td><select data-ac-item="${index}" data-ac-key="type"><option value="armor" ${item.type === 'armor' ? 'selected' : ''}>Armor</option>${types.map(([value, label]) => `<option value="${value}" ${item.type === value ? 'selected' : ''}>${label}</option>`).join('')}</select></td><td><select data-ac-item="${index}" data-ac-key="appliesTo">${targets.map(target => `<option value="${target}" ${item.appliesTo === target || (!item.appliesTo && target === 'Default') ? 'selected' : ''}>${target}</option>`).join('')}</select></td><td><input class="ac-item-value" type="number" data-ac-item="${index}" data-ac-key="value" value="${esc(item.value)}" step="1" placeholder="0"></td><td><button type="button" class="remove" data-ac-remove="${index}" aria-label="Remove defense">×</button></td></tr>`;
     }).join('');
 }
 
 function setupAcSection() {
     const section = document.createElement('div');
     section.className = 'ac-section';
-    section.innerHTML = `<div class="ac-layout"><div class="ac-shield" aria-label="Armor class total"><span class="ac-shield-label">AC</span><strong class="ac-total-value">-</strong></div><div class="thac0-mark" aria-label="THAC0 total"><span class="thac0-mark-blade thac0-mark-blade-one"></span><span class="thac0-mark-blade thac0-mark-blade-two"></span><span class="thac0-mark-label">THAC0</span><strong class="thac0-summary-value">${esc(data.combat.thac0 || '-')}</strong></div><div class="ac-breakdown"><p><span>Armor class</span><strong class="ac-base-value">-</strong></p><p><span>DEX defense</span><strong class="ac-defensive-adjustment">-</strong></p><label class="bladesinger-toggle"><input type="checkbox" data-bladesinger-toggle ${data.combat.bladesingerCastingActive ? 'checked' : ''}> Bladesinger casting defense</label><p><span>Casting melee AC</span><strong class="bladesinger-casting-value">-</strong></p><small>Lower AC is better. Casting defense applies only to front/side melee attacks.</small><nav class="combat-reference-links" aria-label="Combat breakdown references"><a href="#ac-reference">AC breakdown</a><a href="#thac0-reference">THAC0 breakdown</a></nav></div><div class="ac-items"><h3>Defenses and equipment</h3><table class="ac-items-table"><thead><tr><th>Active</th><th>Item / defense</th><th>Type</th><th>AC change</th><th></th></tr></thead><tbody>${acItemRowsHTML()}</tbody></table><button type="button" class="add" data-ac-add>Add defense</button><small>Only equipped / active entries apply. Armor supplies the base AC; protective bonuses use negative numbers.</small></div></div>`;
+    section.innerHTML = `<div class="ac-layout"><div class="ac-shield" aria-label="Armor class total"><span class="ac-shield-label">AC</span><strong class="ac-total-value">-</strong></div><div class="thac0-mark" aria-label="THAC0 total"><span class="thac0-mark-blade thac0-mark-blade-one"></span><span class="thac0-mark-blade thac0-mark-blade-two"></span><span class="thac0-mark-label">THAC0</span><strong class="thac0-summary-value">${esc(data.combat.thac0 || '-')}</strong></div><div class="ac-breakdown"><p><span>Armor class</span><strong class="ac-base-value">-</strong></p><p><span>DEX defense</span><strong class="ac-defensive-adjustment">-</strong></p><p><span>Missile AC</span><strong class="missile-ac-value">-</strong></p><label class="bladesinger-toggle"><input type="checkbox" data-bladesinger-toggle ${data.combat.bladesingerCastingActive ? 'checked' : ''}> Bladesinger casting defense</label><p><span>Casting melee AC</span><strong class="bladesinger-casting-value">-</strong></p><small>Lower AC is better. Casting defense applies only to front/side melee attacks.</small><nav class="combat-reference-links" aria-label="Combat breakdown references"><a href="#ac-reference">AC breakdown</a><a href="#thac0-reference">THAC0 breakdown</a></nav></div><div class="ac-items"><h3>Defenses and equipment</h3><table class="ac-items-table"><thead><tr><th>Active</th><th>Item / defense</th><th>Type</th><th>Applies to</th><th>AC change</th><th></th></tr></thead><tbody>${acItemRowsHTML()}</tbody></table><button type="button" class="add" data-ac-add>Add defense</button><small>Only equipped / active entries apply. Default applies to the normal AC behavior; targeted entries affect only their selected AC mode.</small></div></div>`;
     const referenceLinks = section.querySelector('.combat-reference-links');
     const acLink = referenceLinks?.querySelector('a[href="#ac-reference"]');
     const thac0Link = referenceLinks?.querySelector('a[href="#thac0-reference"]');
@@ -1277,7 +1382,7 @@ function setupAcSection() {
         section.replaceChildren(equipmentLayout);
     }
     section.querySelector('[data-ac-add]').onclick = () => {
-        data.combat.acItems.push({ name: '', type: 'other', value: '', equipped: true });
+        data.combat.acItems.push({ name: '', type: 'other', value: '', appliesTo: 'Default', equipped: true });
         changed();
         render();
     };
@@ -1307,7 +1412,7 @@ function setupAcSection() {
             render();
             return;
         }
-        data.combat.acItems[+select.dataset.acPreset] = { name: preset[0], type: preset[1], value: String(preset[2]), equipped: true };
+        data.combat.acItems[+select.dataset.acPreset] = { name: preset[0], type: preset[1], value: String(preset[2]), appliesTo: 'Default', equipped: true };
         changed();
         render();
     });
@@ -1319,10 +1424,20 @@ function setupAcSection() {
     updateAcTotal();
 }
 
+function setupMissileAcField() {
+    const combat = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Combat'));
+    const fields = combat?.querySelector('.combat-top-layout > .fields, :scope > .fields');
+    if (!fields || fields.querySelector('[data-key="missileAc"]')) return;
+    const field = document.createElement('div');
+    field.className = 'field';
+    field.innerHTML = '<label>Missile AC</label><input data-section="combat" data-key="missileAc" value="">';
+    fields.append(field);
+}
+
 function setupHitPointsSection() {
     const section = document.createElement('section');
     section.className = 'card wide hit-points-section';
-    section.innerHTML = `<h2>Hit points and wounds</h2><div class="hit-points-layout"><div class="hit-points-fields"><div class="hp-heart health-quarters-0" aria-live="polite"><span class="heart-quarter heart-quarter-tl" aria-hidden="true"></span><span class="heart-quarter heart-quarter-bl" aria-hidden="true"></span><span class="heart-quarter heart-quarter-tr" aria-hidden="true"></span><span class="heart-quarter heart-quarter-br" aria-hidden="true"></span><span class="heart-shine heart-shine-one" aria-hidden="true"></span><span class="heart-shine heart-shine-two" aria-hidden="true"></span><span class="heart-shine heart-shine-three" aria-hidden="true"></span><strong class="hp-total">0 / 0</strong><small>Total HP</small></div>${fields('combat', [['hpMax', 'Maximum'], ['hpCurrent', 'Current'], ['hpBonus', 'Bonus']])}<div class="hp-actions"><label>Amount</label><input class="hp-action-amount" type="number" min="0" step="1" value="1"><button type="button" class="hp-action" data-hp-action="damage">Take damage</button><button type="button" class="hp-action" data-hp-action="heal">Heal</button></div></div><div class="wounds-field"><label>Wounds</label><textarea data-root="wounds">${esc(data.wounds)}</textarea></div></div>`;
+    section.innerHTML = `<h2>Hit points, wounds, saves, and resistances</h2><div class="hit-points-layout"><div class="hit-points-fields"><div class="hp-heart health-quarters-0" aria-live="polite"><span class="heart-quarter heart-quarter-tl" aria-hidden="true"></span><span class="heart-quarter heart-quarter-bl" aria-hidden="true"></span><span class="heart-quarter heart-quarter-tr" aria-hidden="true"></span><span class="heart-quarter heart-quarter-br" aria-hidden="true"></span><span class="heart-shine heart-shine-one" aria-hidden="true"></span><span class="heart-shine heart-shine-two" aria-hidden="true"></span><span class="heart-shine heart-shine-three" aria-hidden="true"></span><strong class="hp-total">0 / 0</strong><small>Total HP</small></div>${fields('combat', [['hpMax', 'Maximum'], ['hpCurrent', 'Current'], ['hpBonus', 'Bonus']])}<div class="hp-actions"><label>Amount</label><input class="hp-action-amount" type="number" min="0" step="1" value="1"><button type="button" class="hp-action" data-hp-action="damage">Take damage</button><button type="button" class="hp-action" data-hp-action="heal">Heal</button></div></div><div class="wounds-field"><label>Wounds</label><textarea data-root="wounds">${esc(data.wounds)}</textarea></div></div>`;
     section.querySelectorAll('[data-hp-action]').forEach(button => button.onclick = () => {
         const previousCurrent = Math.max(0, Number.parseInt(data.combat.hpCurrent, 10) || 0);
         const previousBonus = Math.max(0, Number.parseInt(data.combat.hpBonus, 10) || 0);
@@ -1377,25 +1492,77 @@ function movementRate(base, multiplier) {
 
 function setupMovementSection() {
     const section = document.createElement('section');
-    section.className = 'card wide movement-section';
-    section.innerHTML = `<h2>Movement speed</h2><div class="movement-layout"><div class="movement-base"><label>Base rate</label><input data-section="combat" data-key="movement" value="${esc(data.combat.movement)}" inputmode="numeric"><small>Adjust for race, class, armor, and encumbrance as needed.</small></div><table class="movement-table"><thead><tr><th>Rate</th><th>Multiplier</th><th>Speed</th></tr></thead><tbody><tr><th>Light</th><td>2/3</td><td data-movement-rate="light"></td></tr><tr><th>Moderate</th><td>1/2</td><td data-movement-rate="moderate"></td></tr><tr><th>Heavy</th><td>1/3</td><td data-movement-rate="heavy"></td></tr><tr><th>Severe</th><td>1/6</td><td data-movement-rate="severe"></td></tr><tr><th>Jog</th><td>×2</td><td data-movement-rate="jog"></td></tr><tr><th>Run</th><td>×3</td><td data-movement-rate="run3"></td></tr><tr><th>Run</th><td>×4</td><td data-movement-rate="run4"></td></tr><tr><th>Run</th><td>×5</td><td data-movement-rate="run5"></td></tr></tbody></table></div>`;
-    const combatCard = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent === 'Combat');
-    (combatCard || document.querySelector('.hit-points-section')).after(section);
+    section.className = 'field movement-base-field';
+    section.innerHTML = `<label for="movement-base-rate">Base movement rate</label><input id="movement-base-rate" data-section="combat" data-key="movement" value="${esc(data.combat.movement)}" inputmode="numeric"><button type="button" class="movement-tooltip-trigger" aria-label="Show movement rates">Adjust for race, class, armor, and encumbrance as needed.</button><div class="stat-tooltip movement-tooltip"><button type="button" class="tooltip-pin tooltip-pin-muted" aria-label="Pin movement rates" title="Keep movement rates visible">\u{1F4CC}</button><div class="stat-tooltip-text"><table class="movement-table"><thead><tr><th>Rate</th><th>Multiplier</th><th>Speed</th></tr></thead><tbody><tr><th>Light</th><td>2/3</td><td data-movement-rate="light"></td></tr><tr><th>Moderate</th><td>1/2</td><td data-movement-rate="moderate"></td></tr><tr><th>Heavy</th><td>1/3</td><td data-movement-rate="heavy"></td></tr><tr><th>Severe</th><td>1/6</td><td data-movement-rate="severe"></td></tr><tr><th>Jog</th><td>×2</td><td data-movement-rate="jog"></td></tr><tr><th>Run</th><td>×3</td><td data-movement-rate="run3"></td></tr><tr><th>Run</th><td>×4</td><td data-movement-rate="run4"></td></tr><tr><th>Run</th><td>×5</td><td data-movement-rate="run5"></td></tr></tbody></table></div><button type="button" class="tooltip-resize" aria-label="Drag to resize movement rates" title="Drag to resize tooltip">\u{2922}</button></div>`;
+    const characterCard = document.querySelector('.hero > .card');
+    if (characterCard) {
+        const inspirationField = characterCard.querySelector('.inspiration-field');
+        if (inspirationField) {
+            const trackerRow = document.createElement('div');
+            trackerRow.className = 'character-tracker-row';
+            inspirationField.before(trackerRow);
+            trackerRow.append(inspirationField, section);
+        } else characterCard.append(section);
+    }
+    const trigger = section.querySelector('.movement-tooltip-trigger');
+    const tooltip = section.querySelector('.movement-tooltip');
+    const pin = tooltip.querySelector('.tooltip-pin');
+    trigger.onclick = () => trigger.focus();
+    pin.onclick = event => {
+        event.stopPropagation();
+        const pinned = section.classList.toggle('tooltip-pinned');
+        pin.classList.toggle('tooltip-pin-muted', !pinned);
+        pin.title = `${pinned ? 'Return this tooltip to hover behavior' : 'Keep this tooltip visible'}`;
+        pin.setAttribute('aria-label', `${pinned ? 'Unpin' : 'Pin'} movement rates`);
+        if (!pinned) pin.blur();
+    };
+    const resize = tooltip.querySelector('.tooltip-resize');
+    resize.onpointerdown = event => {
+        event.preventDefault();
+        event.stopPropagation();
+        const startY = event.clientY;
+        const startX = event.clientX;
+        const startHeight = tooltip.getBoundingClientRect().height;
+        const startWidth = tooltip.getBoundingClientRect().width;
+        const move = moveEvent => {
+            const height = Math.max(120, Math.min(window.innerHeight - 24, startHeight + moveEvent.clientY - startY));
+            const minimumWidth = tooltip.parentElement.getBoundingClientRect().width * 2.25;
+            const width = Math.max(minimumWidth, Math.min(window.innerWidth - tooltip.getBoundingClientRect().left - 12, startWidth + moveEvent.clientX - startX));
+            tooltip.style.height = `${height}px`;
+            tooltip.style.maxHeight = `${height}px`;
+            tooltip.style.width = `${width}px`;
+            tooltip.style.right = 'auto';
+        };
+        const stop = () => { document.removeEventListener('pointermove', move); document.removeEventListener('pointerup', stop); };
+        document.addEventListener('pointermove', move);
+        document.addEventListener('pointerup', stop, { once: true });
+    };
     updateMovementSection();
 }
 
 function setupSpecialNotesPosition() {
-    const movement = document.querySelector('.movement-section');
-    if (!movement) return;
+    const spells = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Spells and abilities'));
+    if (!spells) return;
     const cards = [...document.querySelectorAll('.grid > .card')];
-    cards.filter(card => {
+    const extraCards = cards.filter(card => {
         const title = card.querySelector(':scope > h2')?.textContent || '';
         return title.includes('Special abilities') || title.includes('Notes');
-    }).forEach(card => movement.before(card));
+    });
+    if (!extraCards.length) return;
+    const extras = document.createElement('div');
+    extras.className = 'spell-extras-grid';
+    extraCards.forEach(card => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'spell-extra-section';
+        while (card.firstChild) wrapper.append(card.firstChild);
+        extras.append(wrapper);
+        card.remove();
+    });
+    spells.append(extras);
 }
 
 function updateMovementSection() {
-    const section = document.querySelector('.movement-section');
+    const section = document.querySelector('.movement-base-field');
     if (!section) return;
     const base = data.combat.movement;
     const rates = { light: 2 / 3, moderate: 1 / 2, heavy: 1 / 3, severe: 1 / 6, jog: 2, run3: 3, run4: 4, run5: 5 };
@@ -1408,11 +1575,30 @@ function namedInputTable(key, heading, valueLabel) {
     return `<div class="class-ability-group"><h3>${heading}</h3><table class="class-ability-table"><thead><tr><th>Ability</th><th>${valueLabel}</th></tr></thead><tbody>${data[key].map((row, index) => `<tr><th scope="row">${row.name}</th><td><input data-array="${key}" data-index="${index}" data-key="value" value="${esc(row.value)}"></td></tr>`).join('')}</tbody></table></div>`;
 }
 
+function classAbilitiesVisibility() {
+    const classNames = (data.identity.classEntries || []).map(entry => String(entry.className || '').toLowerCase());
+    const hasPriest = classNames.some(className => /priest|cleric|druid|paladin/.test(className));
+    const hasRogue = classNames.some(className => /thief|rogue|bard|ranger/.test(className));
+    return { hasPriest, hasRogue, visible: hasPriest || hasRogue };
+}
+
+function updateClassAbilitiesVisibility() {
+    const section = document.querySelector('.class-abilities-section');
+    if (!section) return;
+    const visibility = classAbilitiesVisibility();
+    section.hidden = !visibility.visible;
+    section.querySelectorAll('.class-ability-group').forEach(group => {
+        const heading = group.querySelector('h3')?.textContent || '';
+        group.hidden = heading === 'Thief skills' ? !visibility.hasRogue : !visibility.hasPriest;
+    });
+}
+
 function setupClassAbilitiesSection() {
     const section = document.createElement('section');
     section.className = 'card wide class-abilities-section';
-    section.innerHTML = `<h2>Class abilities</h2><div class="class-abilities-grid">${namedInputTable('thiefSkills', 'Thief skills', 'Percent')} ${namedInputTable('undeadTurning', 'Undead turning', 'Result')} ${namedInputTable('spellLevels', 'Spell levels', 'Value')}</div>`;
-    document.querySelector('.movement-section').after(section);
+    section.innerHTML = `<h2>Class abilities</h2><div class="class-abilities-grid">${namedInputTable('thiefSkills', 'Thief skills', 'Percent')} ${namedInputTable('undeadTurning', 'Undead turning', 'Result')}</div>`;
+    document.querySelector('.grid').append(section);
+    updateClassAbilitiesVisibility();
 }
 
 function setupHenchmenSection() {
@@ -1488,6 +1674,11 @@ function setupWeaponSection() {
     const section = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Weapons'));
     if (!section) return;
     section.innerHTML = `<h2>Weapons</h2><div class="weapon-best-thac0">Best equipped THAC0: <output>-</output></div><div class="tableWrap"><table class="weapons-table"><thead><tr><th>Active</th><th>Weapon</th><th>AT</th><th>Attack adj</th><th>Damage adj</th><th>THAC0 adj</th><th>Damage S/M</th><th>Damage L</th><th>Range</th><th>Weight</th><th>Speed</th><th>THAC0</th><th></th></tr></thead><tbody>${weaponRowsHTML()}</tbody></table></div><button type="button" class="add" data-weapon-add>Add weapon</button><small class="weapon-key">M = melee, T = thrown, M/T = melee or thrown. Positive attack adjustments improve THAC0.</small>`;
+    const weaponHeader = section.querySelector('.weapons-table thead tr');
+    weaponHeader.children[3].textContent = 'HIT BONUS';
+    weaponHeader.children[4].textContent = 'DAMAGE BONUS';
+    weaponHeader.children[5].remove();
+    section.querySelectorAll('.weapons-table tbody tr').forEach(row => row.children[5]?.remove());
     const combatEquipment = document.querySelector('.combat-equipment-layout');
     if (combatEquipment) {
         section.classList.remove('card', 'wide', 'half');
@@ -1594,6 +1785,21 @@ function setupSpellTracking() {
     const section = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Spells'));
     if (!section) return;
     section.innerHTML = `<h2>Spells and abilities</h2><div class="spell-slots"><h3>Spell slots</h3><table class="spell-slots-table"><thead><tr><th>Level</th><th>Available</th><th>Used</th><th>Remaining</th></tr></thead><tbody>${data.spellSlots.map((slot, index) => `<tr><th>${esc(slot.level)}</th><td><input type="number" min="0" step="1" data-spell-slot="${index}" data-spell-slot-key="available" value="${esc(slot.available)}"></td><td><input type="number" min="0" step="1" data-spell-slot="${index}" data-spell-slot-key="used" value="${esc(slot.used)}"></td><td><output data-spell-remaining="${index}">-</output></td></tr>`).join('')}</tbody></table><small>Enter the slots available for this character. Used slots are tracked separately and never exceed the available count.</small></div><div class="manual-spells"><h3>Manual spells and abilities</h3><div class="tableWrap"><table class="spells-table"><thead><tr><th>Name</th><th>Level</th><th>Type</th><th>School / sphere</th><th>Known</th><th>Memorized</th><th>Cast / used</th><th>Notes</th><th></th></tr></thead><tbody>${data.spells.map((spell, index) => { const preset = spellCatalog.some(item => item.name === spell.name); return `<tr><td><select data-spell-preset="${index}"><option value="Other" ${preset ? '' : 'selected'}>Other</option><optgroup label="Wizard 1st level">${spellCatalog.filter(item => item.source === 'Wizard').map(item => `<option value="${esc(item.name)}" ${spell.name === item.name ? 'selected' : ''}>${esc(item.name)}</option>`).join('')}</optgroup><optgroup label="Priest 1st level">${spellCatalog.filter(item => item.source === 'Priest').map(item => `<option value="${esc(item.name)}" ${spell.name === item.name ? 'selected' : ''}>${esc(item.name)}</option>`).join('')}</optgroup></select><input data-spell-item="${index}" data-spell-key="name" value="${esc(spell.name)}" placeholder="Spell or ability" ${preset ? 'hidden' : ''}></td><td><input data-spell-item="${index}" data-spell-key="level" value="${esc(spell.level)}" placeholder="1st"></td><td><select data-spell-item="${index}" data-spell-key="type"><option ${spell.type === 'Spell' ? 'selected' : ''}>Spell</option><option ${spell.type === 'Racial ability' ? 'selected' : ''}>Racial ability</option><option ${spell.type === 'Class ability' ? 'selected' : ''}>Class ability</option><option ${spell.type === 'Other' ? 'selected' : ''}>Other</option></select></td><td><input data-spell-item="${index}" data-spell-key="school" value="${esc(spell.school)}" placeholder="School / sphere"></td><td><input data-spell-item="${index}" data-spell-key="known" value="${esc(spell.known)}"></td><td><input data-spell-item="${index}" data-spell-key="memorizedQty" value="${esc(spell.memorizedQty)}" type="number" min="0" step="1"></td><td><input data-spell-item="${index}" data-spell-key="castQty" value="${esc(spell.castQty)}" type="number" min="0" step="1"></td><td><input data-spell-item="${index}" data-spell-key="notes" value="${esc(spell.notes)}"></td><td><button type="button" class="remove" data-spell-remove="${index}" aria-label="Remove spell or ability">×</button></td></tr>`; }).join('')}</tbody></table></div><button type="button" class="add" data-spell-add>Add spell or ability</button></div>`;
+    const spellHeader = section.querySelector('.spells-table thead tr');
+    const knownColumnIndex = [...spellHeader.children].findIndex(cell => cell.textContent.trim() === 'Known');
+    if (knownColumnIndex >= 0) {
+        spellHeader.children[knownColumnIndex].remove();
+        section.querySelectorAll('.spells-table tbody tr').forEach(row => row.children[knownColumnIndex]?.remove());
+    }
+    const memorizedHeader = [...spellHeader.children].find(cell => cell.textContent.trim() === 'Memorized');
+    if (memorizedHeader) memorizedHeader.textContent = 'Memorized / prepared';
+    section.querySelectorAll('[data-spell-key="memorizedQty"]').forEach(input => {
+        const spell = data.spells[+input.dataset.spellItem];
+        input.dataset.spellKey = 'memorized';
+        input.type = 'checkbox';
+        input.checked = spell.memorized === true || (Number.parseInt(spell.memorizedQty, 10) || 0) > 0;
+        input.value = 'true';
+    });
     const updateSlots = () => section.querySelectorAll('[data-spell-remaining]').forEach(output => {
         const slot = data.spellSlots[+output.dataset.spellRemaining];
         const available = Number.parseInt(slot.available, 10);
@@ -1612,7 +1818,7 @@ function setupSpellTracking() {
         changed();
     });
     section.querySelectorAll('[data-spell-item]').forEach(input => input.oninput = () => {
-        data.spells[+input.dataset.spellItem][input.dataset.spellKey] = input.value;
+        data.spells[+input.dataset.spellItem][input.dataset.spellKey] = input.type === 'checkbox' ? input.checked : input.value;
         changed();
     });
     section.querySelectorAll('[data-spell-preset]').forEach(select => select.onchange = () => {
@@ -1651,10 +1857,12 @@ const resistancePresets = [
 
 function setupResistanceSection() {
     const section = document.createElement('section');
-    section.className = 'card wide resistance-section';
+    section.className = 'resistance-section';
     section.innerHTML = `<h2>Resistances and immunities</h2><div class="tableWrap"><table class="resistance-table"><thead><tr><th>Active</th><th>Preset / type</th><th>Applies to</th><th>Value</th><th>Source</th><th>Notes</th><th></th></tr></thead><tbody>${data.resistances.map((item, index) => `<tr><td><input type="checkbox" data-resistance-item="${index}" data-resistance-key="active" ${item.active !== false ? 'checked' : ''} aria-label="Active resistance"></td><td><select data-resistance-preset="${index}"><option value="Other" ${resistancePresets.some(preset => preset[1] === item.type && preset[2] === item.appliesTo && preset[3] === item.value) ? '' : 'selected'}>Other</option>${resistancePresets.map(preset => `<option value="${esc(preset[0])}" ${item.appliesTo === preset[2] && item.value === preset[3] && item.source === preset[4] ? 'selected' : ''}>${esc(preset[0])}</option>`).join('')}</select><input data-resistance-item="${index}" data-resistance-key="type" value="${esc(item.type)}" placeholder="Resistance type"></td><td><input data-resistance-item="${index}" data-resistance-key="appliesTo" value="${esc(item.appliesTo)}"></td><td><input data-resistance-item="${index}" data-resistance-key="value" value="${esc(item.value)}"></td><td><input data-resistance-item="${index}" data-resistance-key="source" value="${esc(item.source)}"></td><td><input data-resistance-item="${index}" data-resistance-key="notes" value="${esc(item.notes)}"></td><td><button type="button" class="remove" data-resistance-remove="${index}" aria-label="Remove resistance">×</button></td></tr>`).join('')}</tbody></table></div><button type="button" class="add" data-resistance-add>Add resistance</button><small class="resistance-note">Active entries are recorded for reference. Apply percentage resistance, immunity, damage reduction, save bonuses, and enemy penalties according to the listed effect.</small>`;
-    const target = document.querySelector('.combat-card');
-    if (target) target.after(section); else document.querySelector('.grid').append(section);
+    const heading = section.querySelector('h2');
+    if (heading) heading.outerHTML = '<h3>Resistances and immunities</h3>';
+    const target = document.querySelector('.hit-points-section');
+    if (target) target.append(section); else document.querySelector('.grid').append(section);
     section.querySelector('[data-resistance-add]').onclick = () => { data.resistances.push({ type: 'Other', appliesTo: '', value: '', source: '', active: true, notes: '' }); changed(); render(); };
     section.querySelectorAll('[data-resistance-item]').forEach(input => input.oninput = () => { const item = data.resistances[+input.dataset.resistanceItem]; item[input.dataset.resistanceKey] = input.type === 'checkbox' ? input.checked : input.value; changed(); });
     section.querySelectorAll('[data-resistance-preset]').forEach(select => select.onchange = () => { const preset = resistancePresets.find(item => item[0] === select.value); if (!preset) return; data.resistances[+select.dataset.resistancePreset] = { type: preset[1], appliesTo: preset[2], value: preset[3], source: preset[4], active: true, notes: '' }; changed(); render(); });
@@ -1675,11 +1883,12 @@ function setupGlobalModifiersSection() {
 
 function setupSurpriseSection() {
     const section = document.createElement('section');
-    section.className = 'card wide surprise-section';
+    section.className = 'surprise-section';
     const bonus = data.surpriseBonus;
     section.innerHTML = `<h2>Surprise and ambush</h2><div class="surprise-layout"><div class="surprise-summary"><strong>AMBUSH</strong><span>Enemy surprise: ${esc(bonus.fullModifier)} / ${esc(bonus.reducedModifier)}</span></div><div class="surprise-fields"><label><input type="checkbox" data-surprise-key="active" ${bonus.active !== false ? 'checked' : ''}> Active</label><label>Target<select data-surprise-key="target"><option ${bonus.target === 'Enemy' ? 'selected' : ''}>Enemy</option><option ${bonus.target === 'Character' ? 'selected' : ''}>Character</option></select></label><label>Roll<input data-surprise-key="roll" value="${esc(bonus.roll)}"></label><label>Full modifier<input data-surprise-key="fullModifier" value="${esc(bonus.fullModifier)}"></label><label>Reduced modifier<input data-surprise-key="reducedModifier" value="${esc(bonus.reducedModifier)}"></label><label>Source<input data-surprise-key="source" value="${esc(bonus.source)}"></label><label class="surprise-wide">Conditions<textarea data-surprise-key="conditions">${esc(bonus.conditions)}</textarea></label><label class="surprise-wide">Notes<textarea data-surprise-key="notes">${esc(bonus.notes)}</textarea></label></div></div><small>Enemy modifiers affect the opponent's surprise roll. This tracker does not change character initiative automatically.</small>`;
-    const target = document.querySelector('.resistance-section');
-    if (target) target.after(section); else document.querySelector('.combat-card')?.after(section);
+    section.hidden = !['Elves', 'Half-Elf', 'Halfling'].includes(data.raceSelection);
+    const target = document.querySelector('.race-rules-content');
+    if (target) target.append(section); else document.querySelector('.grid')?.append(section);
     section.querySelectorAll('[data-surprise-key]').forEach(input => input.oninput = () => {
         data.surpriseBonus[input.dataset.surpriseKey] = input.type === 'checkbox' ? input.checked : input.value;
         section.querySelector('.surprise-summary span').textContent = `Enemy surprise: ${data.surpriseBonus.fullModifier} / ${data.surpriseBonus.reducedModifier}`;
@@ -1707,13 +1916,62 @@ function table(key, cols) {
     return `<div class="tableWrap"><table><thead><tr>${cols.map(c=>`<th>${c[1]}</th>`).join('')}<th></th></tr></thead><tbody>${data[key].map((r,i)=>`<tr>${cols.map(c=>`<td><input data-array="${key}" data-index="${i}" data-key="${c[0]}" value="${esc(r[c[0]])}"></td>`).join('')}<td><button class="remove" data-remove="${key}" data-index="${i}">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="${key}">Add row</button>`
 }
 
+const encumbranceBands = {
+    '1': [1, 2, 3, 5, 10, 10], '2': [1, 2, 3, 5, 10, 10], '3': [5, 10, 20, 30, 50, 50],
+    '4-5': [10, 20, 30, 40, 50, 50], '6-7': [20, 30, 50, 60, 90, 90], '8-9': [30, 50, 70, 90, 120, 120],
+    '10-11': [40, 50, 70, 90, 110, 110], '12-13': [45, 65, 95, 115, 140, 140], '14-15': [55, 85, 115, 145, 170, 170],
+    '16': [70, 105, 155, 185, 195, 195], '17': [85, 121, 157, 193, 220, 220], '18': [110, 149, 187, 227, 255, 255],
+    '18/01-50': [135, 174, 213, 252, 280, 280], '18/51-75': [160, 199, 239, 278, 305, 305],
+    '18/76-90': [185, 224, 263, 302, 330, 330], '18/91-99': [235, 274, 313, 352, 380, 380], '18/00': [335, 374, 413, 452, 480, 480],
+    '19': [485, 524, 563, 602, 640, 640], '20': [535, 574, 613, 652, 700, 700], '21': [535, 574, 613, 652, 700, 700],
+    '22': [635, 674, 713, 752, 810, 810], '23': [785, 824, 863, 902, 970, 970], '24': [935, 974, 1013, 1052, 1130, 1130],
+    '25': [1535, 1574, 1613, 1652, 1750, 1750]
+};
+
+function encumbranceStrengthKey(score) {
+    const text = String(score ?? '').trim();
+    if (encumbranceBands[text]) return text;
+    const value = Number.parseInt(text, 10);
+    if (!Number.isInteger(value)) return '10-11';
+    if (value >= 25) return '25';
+    if (value >= 19) return String(value);
+    if (value >= 18) return '18';
+    if (value >= 16) return String(value);
+    if (value >= 14) return '14-15';
+    if (value >= 12) return '12-13';
+    if (value >= 10) return '10-11';
+    if (value >= 8) return '8-9';
+    if (value >= 6) return '6-7';
+    if (value >= 4) return '4-5';
+    return String(Math.max(1, value));
+}
+
+function inventoryWeight() {
+    return data.inventory.reduce((total, item) => total + (Number.parseFloat(item.quantity) || 0) * (Number.parseFloat(item.weight) || 0), 0);
+}
+
+function encumbranceSummary() {
+    const strength = encumbranceStrengthKey(data.abilities.str);
+    const bands = encumbranceBands[strength];
+    const total = inventoryWeight();
+    const labels = ['Unencumbered', 'Light', 'Moderate', 'Heavy', 'Severe'];
+    const index = bands.findIndex(limit => total <= limit);
+    const category = index < 0 ? 'Over max carried weight' : labels[index];
+    return `<div class="encumbrance-summary"><strong>Carried weight: ${total % 1 ? total.toFixed(2) : total} lb</strong><span>Strength ${esc(strength)} | ${category}</span><span>Unencumbered through ${bands[0]} lb | Max carried ${bands[5]} lb</span></div>`;
+}
+
+function updateEncumbranceSummary() {
+    const summary = document.querySelector('.encumbrance-summary');
+    if (summary) summary.outerHTML = encumbranceSummary();
+}
+
 function setupProficiencyAndInventorySections() {
     const cards = [...document.querySelectorAll('.grid > .card')];
     const proficiencyCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Proficiencies'));
     if (proficiencyCard) {
         proficiencyCard.classList.remove('half');
         proficiencyCard.classList.add('wide');
-        proficiencyCard.innerHTML = `<h2>Proficiencies</h2><div class="tableWrap"><table class="proficiencies-table"><thead><tr><th>Proficiency</th><th>Slots</th><th>Score</th><th>Type</th><th>Source</th><th>Notes</th><th></th></tr></thead><tbody>${data.proficiencies.map((row, index) => `<tr>${[['name','Proficiency'],['slots','Slots'],['score','Score'],['type','Type'],['source','Source'],['notes','Notes']].map(([key]) => `<td><input data-array="proficiencies" data-index="${index}" data-key="${key}" value="${esc(row[key])}"></td>`).join('')}<td><button class="remove" data-remove="proficiencies" data-index="${index}" aria-label="Remove proficiency">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="proficiencies">Add proficiency</button>`;
+        proficiencyCard.innerHTML = `<h2>Proficiencies</h2><div class="tableWrap"><table class="proficiencies-table"><thead><tr><th>Proficiency</th><th>Slots</th><th>Ability</th><th>Type</th><th>Source</th><th>Notes</th><th></th></tr></thead><tbody>${data.proficiencies.map((row, index) => `<tr>${[['name','Proficiency'],['slots','Slots'],['score','Score'],['type','Type'],['source','Source'],['notes','Notes']].map(([key]) => `<td><input data-array="proficiencies" data-index="${index}" data-key="${key}" value="${esc(row[key])}"></td>`).join('')}<td><button class="remove" data-remove="proficiencies" data-index="${index}" aria-label="Remove proficiency">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="proficiencies">Add proficiency</button>`;
     }
     const inventoryCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Inventory'));
     const currencyCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Currency'));
@@ -1728,6 +1986,16 @@ function setupProficiencyAndInventorySections() {
             inventoryCard.insertBefore(currencyFields, inventoryTable || null);
         }
         currencyCard.remove();
+    }
+    if (inventoryCard) {
+        inventoryCard.querySelector('.encumbrance-summary')?.remove();
+        const summary = document.createElement('div');
+        summary.innerHTML = encumbranceSummary();
+        inventoryCard.insertBefore(summary.firstElementChild, inventoryCard.querySelector(':scope > .tableWrap') || null);
+        inventoryCard.querySelectorAll('[data-array="inventory"]').forEach(input => input.addEventListener('input', () => {
+            const current = inventoryCard.querySelector('.encumbrance-summary');
+            if (current) current.outerHTML = encumbranceSummary();
+        }));
     }
 }
 
@@ -1754,7 +2022,6 @@ function render() {
     setupHitPointsSection();
     updateSavingThrows();
     setupMovementSection();
-    setupSpecialNotesPosition();
     setupClassAbilitiesSection();
     setupHenchmenSection();
     setupActionReferenceSection();
@@ -1762,9 +2029,12 @@ function render() {
     setupAcReferenceSection();
     setupClassRequirementsReferenceSection();
     setupAcSection();
+    setupMissileAcField();
+    updateAcTotal();
     setupWeaponSection();
     setupSpellSectionPosition();
     setupSpellTracking();
+    setupSpecialNotesPosition();
     setupResistanceSection();
     setupSurpriseSection();
     setupGlobalModifiersSection();
@@ -1813,6 +2083,7 @@ function bind() {
             if (e.dataset.key === 'dex') updateAcTotal();
             if (e.dataset.key === 'str') updateWeaponThac0();
             updateClassRequirementNotice();
+            if (e.dataset.key === 'str') updateEncumbranceSummary();
         }
         if (e.dataset.section === 'combat' && e.dataset.key === 'ac') {
             const armor = data.combat.acItems?.find(item => item.type === 'armor');
@@ -1841,6 +2112,7 @@ function bind() {
     });
     document.querySelectorAll('[data-array]').forEach(e => e.oninput = () => {
         data[e.dataset.array][+e.dataset.index][e.dataset.key] = e.value;
+        if (e.dataset.array === 'inventory') updateEncumbranceSummary();
         changed()
     });
     document.querySelectorAll('[data-bonus-prev], [data-bonus-next]').forEach(button => button.onclick = () => {
