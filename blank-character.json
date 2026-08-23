@@ -52,6 +52,17 @@
   "proficiencies": [],
   "inventory": [],
   "spells": [],
+  "spellSlots": [
+    { "level": "1st", "available": "", "used": "" },
+    { "level": "2nd", "available": "", "used": "" },
+    { "level": "3rd", "available": "", "used": "" },
+    { "level": "4th", "available": "", "used": "" },
+    { "level": "5th", "available": "", "used": "" },
+    { "level": "6th", "available": "", "used": "" },
+    { "level": "7th", "available": "", "used": "" },
+    { "level": "8th", "available": "", "used": "" },
+    { "level": "9th", "available": "", "used": "" }
+  ],
   "specialAbilities": "",
   "notes": ""
 }

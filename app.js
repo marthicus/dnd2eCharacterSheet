@@ -96,6 +96,11 @@ const FIXED = {
         { name: '1st', value: '' }, { name: '2nd', value: '' }, { name: '3rd', value: '' }, { name: '4th', value: '' },
         { name: '5th', value: '' }, { name: '6th', value: '' }, { name: '7th', value: '' }, { name: '8th', value: '' }, { name: '9th', value: '' }
     ],
+    spellSlots: [
+        { level: '1st', available: '', used: '' }, { level: '2nd', available: '', used: '' }, { level: '3rd', available: '', used: '' },
+        { level: '4th', available: '', used: '' }, { level: '5th', available: '', used: '' }, { level: '6th', available: '', used: '' },
+        { level: '7th', available: '', used: '' }, { level: '8th', available: '', used: '' }, { level: '9th', available: '', used: '' }
+    ],
     proficiencies: [],
     inventory: [],
     spells: [],
@@ -145,6 +150,8 @@ function normalize(x = {}) {
         equipped: item.equipped !== false
     }));
     for (const k of ['thiefSkills', 'undeadTurning', 'spellLevels']) d[k] = Array.isArray(x[k]) && x[k].length ? x[k] : d[k];
+    d.spellSlots = Array.isArray(x.spellSlots) && x.spellSlots.length ? x.spellSlots.map((slot, index) => ({ level: typeof slot.level === 'string' ? slot.level : d.spellSlots[index]?.level || `${index + 1}th`, available: slot.available ?? '', used: slot.used ?? '' })) : clone(d.spellSlots);
+    d.spells = d.spells.map(spell => ({ name: typeof spell.name === 'string' ? spell.name : '', level: spell.level ?? '', type: typeof spell.type === 'string' ? spell.type : 'Spell', school: spell.school ?? '', known: spell.known ?? '', memorized: spell.memorized ?? '', memorizedQty: spell.memorizedQty ?? '', castQty: spell.castQty ?? '', notes: spell.notes ?? '' }));
     const maximumHitPoints = Number.parseInt(d.combat.hpMax, 10);
     const currentHitPoints = Number.parseInt(d.combat.hpCurrent, 10);
     if (Number.isInteger(maximumHitPoints) && Number.isInteger(currentHitPoints) && currentHitPoints > maximumHitPoints) d.combat.hpCurrent = String(maximumHitPoints);
@@ -1298,6 +1305,62 @@ function setupSpellSectionPosition() {
     if (combat && spells) combat.after(spells);
 }
 
+const spellCatalog = [
+    ...['Affect Normal Fires', 'Alarm', 'Armor', 'Audible Glamer', 'Burning Hands', 'Cantrip', 'Change Self', 'Charm Person', 'Chill Touch', 'Color Spray', 'Comprehend Languages', 'Dancing Lights', 'Detect Magic', 'Detect Undead', 'Enlarge', 'Erase', 'Feather Fall', 'Find Familiar', 'Friends', 'Gaze Reflection', 'Grease', 'Hold Portal', 'Hypnotism', 'Identify', 'Jump', 'Light', 'Magic Missile', 'Mending', 'Message', 'Mount', "Nystul's Magical Aura", 'Phantasmal Force', 'Protection from Evil', 'Read Magic', 'Shield', 'Shocking Grasp', 'Sleep', 'Spider Climb', 'Spook', 'Taunt', "Tenser's Floating Disc", 'Unseen Servant', 'Ventriloquism', 'Wall of Fog', 'Wizard Mark'].map(name => ({ name, level: '1st', source: 'Wizard' })),
+    ...['Animal Friendship', 'Bless', 'Combine', 'Command', 'Create Water', 'Cure Light Wounds', 'Detect Evil', 'Detect Magic', 'Detect Poison', 'Detect Snares and Pits', 'Endure Cold/Endure Heat', 'Entangle', 'Faerie Fire', 'Invisibility to Animals', 'Invisibility to Undead', 'Light', 'Locate Animals or Plants', 'Magical Stone', 'Pass Without Trace', 'Protection from Evil', 'Purify Food and Drink', 'Remove Fear', 'Sanctuary', 'Shillelagh'].map(name => ({ name, level: '1st', source: 'Priest' }))
+];
+
+function setupSpellTracking() {
+    const section = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Spells'));
+    if (!section) return;
+    section.innerHTML = `<h2>Spells and abilities</h2><div class="spell-slots"><h3>Spell slots</h3><table class="spell-slots-table"><thead><tr><th>Level</th><th>Available</th><th>Used</th><th>Remaining</th></tr></thead><tbody>${data.spellSlots.map((slot, index) => `<tr><th>${esc(slot.level)}</th><td><input type="number" min="0" step="1" data-spell-slot="${index}" data-spell-slot-key="available" value="${esc(slot.available)}"></td><td><input type="number" min="0" step="1" data-spell-slot="${index}" data-spell-slot-key="used" value="${esc(slot.used)}"></td><td><output data-spell-remaining="${index}">-</output></td></tr>`).join('')}</tbody></table><small>Enter the slots available for this character. Used slots are tracked separately and never exceed the available count.</small></div><div class="manual-spells"><h3>Manual spells and abilities</h3><div class="tableWrap"><table class="spells-table"><thead><tr><th>Name</th><th>Level</th><th>Type</th><th>School / sphere</th><th>Known</th><th>Memorized</th><th>Cast / used</th><th>Notes</th><th></th></tr></thead><tbody>${data.spells.map((spell, index) => { const preset = spellCatalog.some(item => item.name === spell.name); return `<tr><td><select data-spell-preset="${index}"><option value="Other" ${preset ? '' : 'selected'}>Other</option><optgroup label="Wizard 1st level">${spellCatalog.filter(item => item.source === 'Wizard').map(item => `<option value="${esc(item.name)}" ${spell.name === item.name ? 'selected' : ''}>${esc(item.name)}</option>`).join('')}</optgroup><optgroup label="Priest 1st level">${spellCatalog.filter(item => item.source === 'Priest').map(item => `<option value="${esc(item.name)}" ${spell.name === item.name ? 'selected' : ''}>${esc(item.name)}</option>`).join('')}</optgroup></select><input data-spell-item="${index}" data-spell-key="name" value="${esc(spell.name)}" placeholder="Spell or ability" ${preset ? 'hidden' : ''}></td><td><input data-spell-item="${index}" data-spell-key="level" value="${esc(spell.level)}" placeholder="1st"></td><td><select data-spell-item="${index}" data-spell-key="type"><option ${spell.type === 'Spell' ? 'selected' : ''}>Spell</option><option ${spell.type === 'Racial ability' ? 'selected' : ''}>Racial ability</option><option ${spell.type === 'Class ability' ? 'selected' : ''}>Class ability</option><option ${spell.type === 'Other' ? 'selected' : ''}>Other</option></select></td><td><input data-spell-item="${index}" data-spell-key="school" value="${esc(spell.school)}" placeholder="School / sphere"></td><td><input data-spell-item="${index}" data-spell-key="known" value="${esc(spell.known)}"></td><td><input data-spell-item="${index}" data-spell-key="memorizedQty" value="${esc(spell.memorizedQty)}" type="number" min="0" step="1"></td><td><input data-spell-item="${index}" data-spell-key="castQty" value="${esc(spell.castQty)}" type="number" min="0" step="1"></td><td><input data-spell-item="${index}" data-spell-key="notes" value="${esc(spell.notes)}"></td><td><button type="button" class="remove" data-spell-remove="${index}" aria-label="Remove spell or ability">×</button></td></tr>`; }).join('')}</tbody></table></div><button type="button" class="add" data-spell-add>Add spell or ability</button></div>`;
+    const updateSlots = () => section.querySelectorAll('[data-spell-remaining]').forEach(output => {
+        const slot = data.spellSlots[+output.dataset.spellRemaining];
+        const available = Number.parseInt(slot.available, 10);
+        const used = Math.max(0, Number.parseInt(slot.used, 10) || 0);
+        output.textContent = Number.isInteger(available) ? Math.max(0, available - used) : '-';
+    });
+    section.querySelectorAll('[data-spell-slot]').forEach(input => input.oninput = () => {
+        const slot = data.spellSlots[+input.dataset.spellSlot];
+        slot[input.dataset.spellSlotKey] = input.value;
+        if (input.dataset.spellSlotKey === 'available') {
+            const used = Number.parseInt(slot.used, 10);
+            if (Number.isInteger(used) && Number.isInteger(Number.parseInt(slot.available, 10)) && used > Number.parseInt(slot.available, 10)) slot.used = slot.available;
+        }
+        updateSlots();
+        changed();
+    });
+    section.querySelectorAll('[data-spell-item]').forEach(input => input.oninput = () => {
+        data.spells[+input.dataset.spellItem][input.dataset.spellKey] = input.value;
+        changed();
+    });
+    section.querySelectorAll('[data-spell-preset]').forEach(select => select.onchange = () => {
+        const preset = spellCatalog.find(item => item.name === select.value);
+        const index = +select.dataset.spellPreset;
+        if (!preset) {
+            data.spells[index].name = '';
+        } else {
+            data.spells[index].name = preset.name;
+            data.spells[index].level = preset.level;
+            data.spells[index].type = 'Spell';
+            data.spells[index].school = preset.source;
+        }
+        changed();
+        render();
+    });
+    section.querySelector('[data-spell-add]').onclick = () => {
+        data.spells.push({ name: '', level: '', type: 'Spell', school: '', known: '', memorizedQty: '', castQty: '', notes: '' });
+        changed();
+        render();
+    };
+    section.querySelectorAll('[data-spell-remove]').forEach(button => button.onclick = () => {
+        data.spells.splice(+button.dataset.spellRemove, 1);
+        changed();
+        render();
+    });
+    updateSlots();
+}
+
 function updateHitPointDisplay() {
     const display = document.querySelector('.hp-total');
     if (!display) return;
@@ -1347,6 +1410,7 @@ function render() {
     setupAcSection();
     setupWeaponSection();
     setupSpellSectionPosition();
+    setupSpellTracking();
     setupAbilityTooltips();
     setupCharacterHeader();
     setupSectionToggles();
