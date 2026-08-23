@@ -106,6 +106,8 @@ const FIXED = {
         { level: '7th', available: '', used: '' }, { level: '8th', available: '', used: '' }, { level: '9th', available: '', used: '' }
     ],
     proficiencies: [],
+    languages: [],
+    nwpSettings: { autoCalculate: false, exemptBonusProficiencies: true, availableSlots: 0 },
     inventory: [],
     spells: [],
     resistances: [],
@@ -131,6 +133,9 @@ const clone = o => JSON.parse(JSON.stringify(o));
 let data = clone(FIXED);
 let equipmentCatalogue = [];
 let catalogueValidation = [];
+let nonweaponCatalog = [];
+let nonweaponRules = {};
+let nonweaponClassCrossovers = {};
 const gameRules = {
     currencyConversion: { cp: 1, sp: 10, ep: 50, gp: 100, pp: 500 },
     wealthCalculations: { baseCurrency: 'cp', displayCurrency: 'gp', allowCurrencyBreakdown: true, autoCalculateInventoryValue: true }
@@ -165,7 +170,21 @@ function normalize(x = {}) {
     d.sectionStates = x.sectionStates && typeof x.sectionStates === 'object' && !Array.isArray(x.sectionStates) ? x.sectionStates : {};
     d.sectionOrder = Array.isArray(x.sectionOrder) ? x.sectionOrder.filter(key => typeof key === 'string') : [];
     for (const k of ['weapons', 'henchmen', 'proficiencies', 'inventory', 'spells', 'resistances']) d[k] = Array.isArray(x[k]) ? x[k] : [];
-    d.proficiencies = d.proficiencies.map(item => ({ ...item, source: item.source ?? '', notes: item.notes ?? '' }));
+    d.proficiencies = d.proficiencies.map(item => ({
+        ...item,
+        id: item.id ?? '',
+        name: typeof item.name === 'string' ? item.name : '',
+        slotCost: item.slotCost ?? item.slots ?? 1,
+        acquisition: ['purchased', 'class', 'kit', 'race', 'language', 'campaign', 'custom'].includes(item.acquisition) ? item.acquisition : 'purchased',
+        usesNwpSlot: item.usesNwpSlot === false || item.usesNwpSlot === 'false' ? false : item.usesNwpSlot ?? !['class', 'kit', 'race', 'language', 'campaign'].includes(item.acquisition),
+        exemptFromNwpLimits: item.exemptFromNwpLimits === true || item.exemptFromNwpLimits === 'true',
+        ability: item.ability ?? item.score ?? '',
+        checkModifier: item.checkModifier ?? null,
+        source: item.source ?? '',
+        notes: item.notes ?? ''
+    }));
+    d.languages = Array.isArray(x.languages) ? x.languages.map(language => ({ name: typeof language.name === 'string' ? language.name : '', source: typeof language.source === 'string' ? language.source : '', countsAgainstLanguageLimit: language.countsAgainstLanguageLimit === true })) : [];
+    d.nwpSettings = { ...d.nwpSettings, ...(x.nwpSettings || {}) };
     d.resistances = d.resistances.map(item => ({ type: typeof item.type === 'string' ? item.type : 'Other', appliesTo: item.appliesTo ?? '', value: item.value ?? '', source: item.source ?? '', active: item.active !== false, notes: item.notes ?? '' }));
     d.surpriseBonus = { ...d.surpriseBonus, ...(x.surpriseBonus || {}) };
     d.globalModifiers = Array.isArray(x.globalModifiers) ? x.globalModifiers.map(item => ({ category: typeof item.category === 'string' ? item.category : 'Other', value: item.value ?? '', appliesTo: item.appliesTo ?? '', source: item.source ?? '', active: item.active !== false, condition: item.condition ?? '', notes: item.notes ?? '' })) : [];
@@ -209,6 +228,8 @@ const labels = {
     wis: 'WIS',
     cha: 'CHA'
 };
+const abilityAbbreviations = { strength: 'STR', dexterity: 'DEX', constitution: 'CON', intelligence: 'INT', wisdom: 'WIS', charisma: 'CHA' };
+const abilityAbbreviation = ability => abilityAbbreviations[String(ability || '').toLowerCase()] || ability || '';
 
 const raceCatalog = {
     Humans: { classes: ['Fighter', 'Ranger', 'Paladin', 'Cleric', 'Druid', 'Thief', 'Bard', 'Mage', 'Specialist Mage', 'Dual-Class'], bonuses: {}, choiceAbilities: ['str', 'dex', 'con', 'int', 'wis', 'cha'], backgrounds: { 'Saltwind Soul': 'Weather Sense or Navigation; Swimming; Rope Use', 'Silver Halls Noble': 'Etiquette or Dancing; Reading / Writing; 150 starting gold', 'Heart of Harvestfall': 'Agriculture; Animal Handling; Cooking or Brewing', 'Autumn Line Vanguard': 'Survival or Tracking; Fire Building', 'Child of Flame': 'Healing or Herbalism; Religion', 'Oldcraft Disciple': 'Ancient History or Languages; Engineering' }, features: '+1 starting language; +1 non-weapon proficiency; +1 encounter rolls with intelligent creatures.', activeSkill: { name: 'Manifest Destiny', condition: 'One time use only, during character creation.', description: 'Roll 9 sets of ability scores and keep the highest 6.' } },
@@ -344,6 +365,19 @@ async function loadEquipmentCatalogue() {
     }
 }
 
+async function loadNonweaponCatalog() {
+    try {
+        const response = await fetch('data/nonweapon-proficiencies.json');
+        if (!response.ok) throw new Error('Proficiency catalogue unavailable');
+        const catalog = await response.json();
+        nonweaponCatalog = Array.isArray(catalog) ? catalog : Array.isArray(catalog.proficiencies) ? catalog.proficiencies : [];
+        nonweaponRules = catalog.slotProgression || {};
+        nonweaponClassCrossovers = catalog.classGroupCrossovers || {};
+    } catch {
+        nonweaponCatalog = [];
+    }
+}
+
 function globalModifierTotal(category, appliesTo = '') {
     return (data.globalModifiers || []).filter(item => item.active !== false && item.category === category && (!item.appliesTo || !appliesTo || item.appliesTo.toLowerCase() === appliesTo.toLowerCase())).reduce((total, item) => total + (Number.parseInt(item.value, 10) || 0), 0);
 }
@@ -447,11 +481,17 @@ function selectedRaceData() {
 
 function updateSurpriseFromRace(race) {
     const hasSurpriseBonus = ['Elves', 'Half-Elf', 'Halfling'].includes(race);
-    if (hasSurpriseBonus) {
-        data.surpriseBonus = { ...data.surpriseBonus, active: true, target: 'Enemy', roll: 'Surprise', fullModifier: '-4', reducedModifier: '-2', source: 'Racial', conditions: 'Non-metal armor; party consists only of halflings, elves, or half-elves; or character is at least 90 ft. from others' };
-    } else if (data.surpriseBonus.source === 'Racial') {
-        data.surpriseBonus.active = false;
-    }
+        if (hasSurpriseBonus) { 
+            data.surpriseBonus.active = true; 
+            data.surpriseBonus.target = 'Enemy'; 
+            data.surpriseBonus.roll = 'Surprise'; 
+            data.surpriseBonus.fullModifier = '-4'; 
+            data.surpriseBonus.reducedModifier = '-2'; 
+            data.surpriseBonus.source = 'Racial'; 
+            data.surpriseBonus.conditions = 'Non-metal armor; party consists only of halflings, elves, or half-elves; or character is at least 90 ft. from others'; 
+        } else if (data.surpriseBonus.source === 'Racial') { 
+            data.surpriseBonus.active = false; 
+        } 
     const section = document.querySelector('.surprise-section');
     if (!section) return;
     section.hidden = !hasSurpriseBonus;
@@ -1724,7 +1764,6 @@ function updateClassAbilitiesVisibility() {
     const section = document.querySelector('.class-abilities-section');
     if (!section) return;
     const visibility = classAbilitiesVisibility();
-    section.hidden = !visibility.visible;
     section.querySelectorAll('.class-ability-group').forEach(group => {
         const heading = group.querySelector('h3')?.textContent || '';
         group.hidden = heading === 'Thief skills' ? !visibility.hasRogue : !visibility.hasPriest;
@@ -1739,12 +1778,30 @@ function setupClassAbilitiesSection() {
         section = document.createElement('div');
         section.className = 'class-abilities-section';
         const insertAfter = spellsCard.querySelector('.spell-slots') || spellsCard.querySelector('.manual-spells');
-        section.innerHTML = `<div class="class-abilities-grid">${namedInputTable('thiefSkills', 'Thief skills', 'Percent')} ${namedInputTable('undeadTurning', 'Undead turning', 'Result')}</div>`;
+        section.innerHTML = `<div class="class-abilities-header"><h3><button type="button" class="section-toggle class-abilities-toggle" aria-expanded="true">-</button>Class abilities</h3></div><div class="class-abilities-content"><div class="class-abilities-grid">${namedInputTable('thiefSkills', 'Thief skills', 'Percent')} ${namedInputTable('undeadTurning', 'Undead turning', 'Result')}</div></div>`;
         if (insertAfter) {
             insertAfter.after(section);
         } else {
             spellsCard.append(section);
         }
+    }
+    const toggle = section.querySelector('.class-abilities-toggle');
+    const collapsed = data.sectionStates['class-abilities'] === true;
+    section.classList.toggle('class-abilities-collapsed', collapsed);
+    if (toggle) {
+        toggle.textContent = collapsed ? '+' : '-';
+        toggle.title = `${collapsed ? 'Show' : 'Hide'} class abilities`;
+        toggle.setAttribute('aria-label', `${collapsed ? 'Show' : 'Hide'} class abilities`);
+        toggle.setAttribute('aria-expanded', String(!collapsed));
+        toggle.onclick = () => {
+            const isCollapsed = section.classList.toggle('class-abilities-collapsed');
+            data.sectionStates['class-abilities'] = isCollapsed;
+            toggle.textContent = isCollapsed ? '+' : '-';
+            toggle.title = `${isCollapsed ? 'Show' : 'Hide'} class abilities`;
+            toggle.setAttribute('aria-label', `${isCollapsed ? 'Show' : 'Hide'} class abilities`);
+            toggle.setAttribute('aria-expanded', String(!isCollapsed));
+            changed();
+        };
     }
     updateClassAbilitiesVisibility();
 }
@@ -2136,6 +2193,43 @@ function inventoryMarkup() {
     return `<div class="inventory-controls"><label>Search catalogue<input id="inventory-search" type="search" placeholder="Search name or alias"></label><label>Category<select id="inventory-category"><option value="">All categories</option>${categories.map(category => `<option value="${esc(category)}">${esc(category)}</option>`).join('')}</select></label></div>${validation}<div id="inventory-results" class="inventory-results" aria-live="polite"></div><div class="tableWrap"><table class="inventory-table"><thead><tr><th>Item</th><th>Category</th><th>Subcategory</th><th>Qty</th><th>Status</th><th>Weight lb</th><th>Value</th><th>Notes</th><th></th></tr></thead><tbody>${data.inventory.map((item, index) => { const record = catalogueItem(item); return `<tr><td><input list="equipment-options" data-array="inventory" data-index="${index}" data-key="item" value="${esc(itemName(item))}" placeholder="Custom item"><input type="hidden" data-array="inventory" data-index="${index}" data-key="itemId" value="${esc(item.itemId)}"></td><td>${esc(record?.category || 'custom')}</td><td>${esc(record?.subcategory || '-')}</td><td><input type="number" min="0" step="1" data-array="inventory" data-index="${index}" data-key="quantity" value="${esc(item.quantity)}"></td><td><select data-array="inventory" data-index="${index}" data-key="location"><option value="carried"${item.location === 'carried' ? ' selected' : ''}>Carried</option><option value="stored"${item.location === 'stored' ? ' selected' : ''}>Stored</option></select></td><td><input type="number" min="0" step="0.01" data-array="inventory" data-index="${index}" data-key="weightOverride" value="${item.weightOverride ?? ''}" placeholder="${itemWeight(item)}"></td><td>${esc(formatCost(record?.cost))}</td><td><input data-array="inventory" data-index="${index}" data-key="notes" value="${esc(item.notes)}"></td><td><button class="remove" data-remove="inventory" data-index="${index}" aria-label="Remove item">×</button></td></tr>`; }).join('')}</tbody></table></div><datalist id="equipment-options">${equipmentCatalogue.map(item => `<option value="${esc(item.name)}">${esc(item.category || '')}</option>`).join('')}</datalist><button class="add" data-add="inventory">Add custom item</button>`;
 }
 
+const nwpAcquisitionLabels = { purchased: 'Purchased', class: 'Class Bonuses', kit: 'Kit Bonuses', race: 'Racial Bonuses', language: 'Languages', campaign: 'Campaign Awards', custom: 'Custom' };
+function nwpUsesSlot(item) {
+    return item.usesNwpSlot !== false && item.exemptFromNwpLimits !== true && !(data.nwpSettings.exemptBonusProficiencies && ['class', 'kit', 'race', 'language', 'campaign'].includes(item.acquisition));
+}
+function nwpAvailableSlots() {
+    if (!data.nwpSettings.autoCalculate) return Number.parseInt(data.nwpSettings.availableSlots, 10) || 0;
+    const entry = data.identity.classEntries?.[0] || {};
+    const className = String(entry.className || data.identity.className || '').toLowerCase();
+    const classKey = className.includes('specialist mage') ? 'mage' : className.split(/\s|\//)[0];
+    const group = nonweaponClassCrossovers[classKey]?.find(value => value !== 'general') || (className.includes('fighter') || className.includes('ranger') || className.includes('paladin') ? 'warrior' : className.includes('mage') || className.includes('wizard') ? 'wizard' : className.includes('cleric') || className.includes('priest') || className.includes('druid') ? 'priest' : className.includes('thief') || className.includes('bard') ? 'rogue' : '');
+    const progression = nonweaponRules[group];
+    const level = Number.parseInt(entry.level || data.identity.level, 10);
+    if (!progression || !Number.isInteger(level) || level < 1) return 0;
+    return progression.initial + Math.floor((level - 1) / progression.additionalEveryLevels);
+}
+function nwpSummaryMarkup() {
+    const used = data.proficiencies.reduce((total, item) => total + (nwpUsesSlot(item) ? Number(item.slotCost) || 0 : 0), 0);
+    const available = nwpAvailableSlots();
+    const remaining = available - used;
+    const counts = Object.fromEntries(Object.keys(nwpAcquisitionLabels).map(key => [key, data.proficiencies.filter(item => item.acquisition === key).length]));
+    return `<div class="nwp-summary"><h3>NWP Summary</h3><div class="nwp-summary-totals"><strong>Available Slots: ${available}</strong><strong>Used Slots: ${used}</strong><strong class="nwp-remaining nwp-remaining-${remaining < 0 ? 'negative' : remaining === 1 ? 'warning' : 'positive'}">Remaining Slots: ${remaining}</strong></div><div class="nwp-acquisition-counts">${Object.entries(nwpAcquisitionLabels).map(([key, label]) => `<span>${label}: <strong>${counts[key]}</strong></span>`).join('')}</div><div class="nwp-settings"><label><input id="nwp-auto-calculate" type="checkbox" ${data.nwpSettings.autoCalculate ? 'checked' : ''}> Automatically Calculate NWP Slots</label><label><input id="nwp-exempt-bonuses" type="checkbox" ${data.nwpSettings.exemptBonusProficiencies ? 'checked' : ''}> Exempt bonus proficiencies from NWP limits</label>${data.nwpSettings.autoCalculate ? '' : '<label>Available Slots<input id="nwp-available-slots" type="number" min="0" step="1" value="' + esc(data.nwpSettings.availableSlots || 0) + '"></label>'}</div></div>`;
+}
+
+function updateNwpTargets() {
+    document.querySelectorAll('[data-nwp-target]').forEach(output => {
+        const item = data.proficiencies[+output.dataset.nwpTarget];
+        const ability = String(item?.ability || '').toLowerCase();
+        const abilityKey = Object.entries(abilityAbbreviations).find(([name, abbreviation]) => ability === name || ability === abbreviation.toLowerCase())?.[0];
+        const score = Number.parseInt(abilityKey ? data.abilities[abilityKey.slice(0, 3)] : '', 10);
+        const modifier = Number.parseInt(item?.checkModifier, 10);
+        output.textContent = Number.isInteger(score) && Number.isInteger(modifier) ? `Target: ${score + modifier}` : 'Target: Special';
+    });
+}
+function languagesMarkup() {
+    return `<section class="card wide languages-section"><h2>Languages</h2><div class="language-summary">Languages Known: <strong>${data.languages.length}</strong><span>Bonus Languages From Intelligence: 0 <small>(intelligence language data not supplied)</small></span></div><div class="tableWrap"><table class="languages-table"><thead><tr><th>Language</th><th>Source</th><th>Counts Against Language Limit</th><th></th></tr></thead><tbody>${data.languages.map((language, index) => `<tr><td><input data-array="languages" data-index="${index}" data-key="name" value="${esc(language.name)}"></td><td><input data-array="languages" data-index="${index}" data-key="source" value="${esc(language.source)}"></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="countsAgainstLanguageLimit" ${language.countsAgainstLanguageLimit ? 'checked' : ''}></td><td><button class="remove" data-remove="languages" data-index="${index}" aria-label="Remove language">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="languages">Add language</button></section>`;
+}
+
 function setupProficiencyAndInventorySections() {
     const cards = [...document.querySelectorAll('.grid > .card')];
     const proficiencyCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Proficiencies'));
@@ -2143,6 +2237,97 @@ function setupProficiencyAndInventorySections() {
         proficiencyCard.classList.remove('half');
         proficiencyCard.classList.add('wide');
         proficiencyCard.innerHTML = `<h2>Proficiencies</h2><div class="tableWrap"><table class="proficiencies-table"><thead><tr><th>Proficiency</th><th>Slots</th><th>Ability</th><th>Type</th><th>Source</th><th>Notes</th><th></th></tr></thead><tbody>${data.proficiencies.map((row, index) => `<tr>${[['name','Proficiency'],['slots','Slots'],['score','Score'],['type','Type'],['source','Source'],['notes','Notes']].map(([key]) => `<td><input data-array="proficiencies" data-index="${index}" data-key="${key}" value="${esc(row[key])}"></td>`).join('')}<td><button class="remove" data-remove="proficiencies" data-index="${index}" aria-label="Remove proficiency">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="proficiencies">Add proficiency</button>`;
+        const table = proficiencyCard.querySelector('.proficiencies-table');
+        table.innerHTML = `<thead><tr><th>Proficiency</th><th>Slot Cost</th><th>Ability</th><th>Modifier</th><th>Acquisition</th><th>Uses NWP Slot</th><th>Notes</th><th></th></tr></thead><tbody>${data.proficiencies.map((item, index) => `<tr><td><input data-array="proficiencies" data-index="${index}" data-key="name" value="${esc(item.name)}"></td><td><input type="number" min="0" step="1" data-array="proficiencies" data-index="${index}" data-key="slotCost" value="${esc(item.slotCost)}"></td><td><input data-array="proficiencies" data-index="${index}" data-key="ability" value="${esc(abilityAbbreviation(item.ability))}"></td><td>${item.checkModifier == null ? 'N/A' : `<input type="number" data-array="proficiencies" data-index="${index}" data-key="checkModifier" value="${esc(item.checkModifier)}" step="1">`}<output data-nwp-target="${index}">${item.checkModifier == null ? 'Target: Special' : ''}</output></td><td><select data-array="proficiencies" data-index="${index}" data-key="acquisition">${Object.entries(nwpAcquisitionLabels).map(([key, label]) => `<option value="${key}"${item.acquisition === key ? ' selected' : ''}>${label.replace(' Bonuses', '')}</option>`).join('')}</select></td><td><select data-array="proficiencies" data-index="${index}" data-key="usesNwpSlot"><option value="true"${item.usesNwpSlot !== false ? ' selected' : ''}>Yes</option><option value="false"${item.usesNwpSlot === false ? ' selected' : ''}>No</option></select></td><td><input data-array="proficiencies" data-index="${index}" data-key="notes" value="${esc(item.notes)}"></td><td><button class="remove" data-remove="proficiencies" data-index="${index}" aria-label="Remove proficiency">×</button></td></tr>`).join('')}</tbody>`;
+        const headerRow = table.querySelector('thead tr');
+        const targetHeader = document.createElement('th');
+        targetHeader.textContent = 'Target';
+        headerRow.insertBefore(targetHeader, headerRow.children[4]);
+        table.querySelectorAll('tbody tr').forEach(row => {
+            const targetCell = document.createElement('td');
+            const target = row.querySelector('[data-nwp-target]');
+            if (target) targetCell.append(target);
+            row.insertBefore(targetCell, row.children[4]);
+            const usesSelect = row.querySelector('[data-key="usesNwpSlot"]');
+            if (usesSelect) {
+                const usesCheckbox = document.createElement('input');
+                usesCheckbox.type = 'checkbox';
+                usesCheckbox.checked = usesSelect.value !== 'false';
+                usesCheckbox.dataset.array = 'proficiencies';
+                usesCheckbox.dataset.index = usesSelect.dataset.index;
+                usesCheckbox.dataset.key = 'usesNwpSlot';
+                usesCheckbox.setAttribute('aria-label', 'Uses NWP Slot');
+                usesSelect.replaceWith(usesCheckbox);
+            }
+        });
+        const exemptHeader = document.createElement('th');
+        exemptHeader.textContent = 'Exempt';
+        table.querySelector('thead tr').insertBefore(exemptHeader, table.querySelector('thead tr').children[7]);
+        table.querySelectorAll('tbody tr').forEach((row, index) => {
+            const cell = document.createElement('td');
+            cell.innerHTML = `<label class="nwp-exempt-control"><input type="checkbox" data-array="proficiencies" data-index="${index}" data-key="exemptFromNwpLimits" ${data.proficiencies[index].exemptFromNwpLimits ? 'checked' : ''} aria-label="Exempt bonus proficiencies from NWP limits"></label>`;
+            row.insertBefore(cell, row.children[7]);
+        });
+        const summary = document.createElement('div');
+        summary.id = 'nwp-summary';
+        summary.innerHTML = nwpSummaryMarkup();
+        proficiencyCard.insertBefore(summary, proficiencyCard.querySelector('.tableWrap'));
+    }
+    if (proficiencyCard) {
+        const picker = document.createElement('div');
+        picker.className = 'proficiency-picker';
+        picker.innerHTML = '<label for="proficiency-search">Find proficiency</label><input id="proficiency-search" type="search" placeholder="Type a name to search"><div id="proficiency-results" class="proficiency-results" aria-live="polite"></div>';
+        proficiencyCard.insertBefore(picker, proficiencyCard.querySelector('.tableWrap'));
+        const search = picker.querySelector('#proficiency-search');
+        const results = picker.querySelector('#proficiency-results');
+        const renderProficiencyResults = () => {
+            const query = search.value.trim().toLowerCase();
+            const matches = nonweaponCatalog.filter(item => !query || item.name.toLowerCase().includes(query)).slice(0, 30);
+            results.innerHTML = `${matches.length} result${matches.length === 1 ? '' : 's'}${matches.map(item => `<button type="button" class="proficiency-result" data-proficiency-id="${esc(item.id)}"><strong>${esc(item.name)}</strong><small>${esc((item.groups || []).join(', '))} · ${esc(item.relevantAbility || 'N/A')} · ${item.checkModifier == null ? 'N/A' : `check ${item.checkModifier >= 0 ? '+' : ''}${item.checkModifier}`}</small></button>`).join('')}`;
+            results.querySelectorAll('[data-proficiency-id]').forEach(button => button.onclick = () => {
+                const item = nonweaponCatalog.find(record => record.id === button.dataset.proficiencyId);
+                if (!item) return;
+                data.proficiencies.push({ id: item.id, name: item.name, slotCost: item.slotsRequired, acquisition: 'purchased', usesNwpSlot: true, exemptFromNwpLimits: false, ability: abilityAbbreviation(item.relevantAbility), checkModifier: item.checkModifier, notes: '' });
+                changed();
+                render();
+            });
+        };
+        search.oninput = renderProficiencyResults;
+        renderProficiencyResults();
+        const datalist = document.createElement('datalist');
+        datalist.id = 'nonweapon-proficiency-options';
+        datalist.innerHTML = nonweaponCatalog.map(item => `<option value="${esc(item.name)}">${esc((item.groups || []).join(', '))}</option>`).join('');
+        proficiencyCard.append(datalist);
+        proficiencyCard.querySelectorAll('[data-array="proficiencies"][data-key="name"]').forEach(input => {
+            input.setAttribute('list', datalist.id);
+            input.onchange = () => {
+                const preset = nonweaponCatalog.find(item => item.name.toLowerCase() === input.value.trim().toLowerCase());
+                if (!preset) return;
+                const row = data.proficiencies[+input.dataset.index];
+                row.name = preset.name;
+                row.slotCost = preset.slotsRequired;
+                row.ability = abilityAbbreviation(preset.relevantAbility);
+                row.acquisition = 'purchased';
+                row.usesNwpSlot = true;
+                row.checkModifier = preset.checkModifier;
+                changed();
+                render();
+            };
+        });
+    }
+    if (proficiencyCard) {
+        const autoCalculate = proficiencyCard.querySelector('#nwp-auto-calculate');
+        const exemptBonuses = proficiencyCard.querySelector('#nwp-exempt-bonuses');
+        if (autoCalculate) autoCalculate.onchange = () => { data.nwpSettings.autoCalculate = autoCalculate.checked; changed(); render(); };
+        if (exemptBonuses) exemptBonuses.onchange = () => { data.nwpSettings.exemptBonusProficiencies = exemptBonuses.checked; changed(); render(); };
+        const availableSlots = proficiencyCard.querySelector('#nwp-available-slots');
+        if (availableSlots) availableSlots.oninput = () => { data.nwpSettings.availableSlots = availableSlots.value; const summary = proficiencyCard.querySelector('#nwp-summary'); summary.innerHTML = nwpSummaryMarkup(); changed(); };
+        updateNwpTargets();
+        const languageSection = document.querySelector('.languages-section');
+        if (languageSection) languageSection.remove();
+        const languageWrapper = document.createElement('div');
+        languageWrapper.innerHTML = languagesMarkup();
+        proficiencyCard.after(languageWrapper.firstElementChild);
     }
     const inventoryCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Inventory'));
     const currencyCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Currency'));
@@ -2273,6 +2458,7 @@ function bind() {
             if (e.dataset.key === 'str') updateWeaponThac0();
             updateClassRequirementNotice();
             if (e.dataset.key === 'str') updateEncumbranceSummary();
+            updateNwpTargets();
         }
         if (e.dataset.section === 'combat' && e.dataset.key === 'ac') {
             const armor = data.combat.acItems?.find(item => item.type === 'armor');
@@ -2305,7 +2491,11 @@ function bind() {
     });
     document.querySelectorAll('[data-array]').forEach(e => e.oninput = () => {
         const item = data[e.dataset.array][+e.dataset.index];
-        item[e.dataset.key] = e.value;
+        item[e.dataset.key] = e.type === 'checkbox' ? e.checked : e.dataset.key === 'usesNwpSlot' ? e.value === 'true' : e.value;
+        if (e.dataset.array === 'proficiencies') {
+            document.querySelector('#nwp-summary').innerHTML = nwpSummaryMarkup();
+            updateNwpTargets();
+        }
         if (e.dataset.array === 'inventory') {
             if (e.dataset.key === 'item') {
                 const match = equipmentCatalogue.find(record => record.name.toLowerCase() === e.value.trim().toLowerCase());
@@ -2356,7 +2546,14 @@ function bind() {
                 score: '',
                 type: '',
                 source: '',
+                checkModifier: null,
+                exemptFromNwpLimits: false,
                 notes: ''
+            },
+            languages: {
+                name: '',
+                source: 'custom',
+                countsAgainstLanguageLimit: false
             },
             inventory: {
                 itemId: '',
@@ -2434,4 +2631,4 @@ try {
     data = normalize(JSON.parse(localStorage.getItem('adnd2e-sheet-v1') || '{}'))
 } catch {}
 render();
-loadEquipmentCatalogue().then(() => render());
+Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog()]).then(() => render());

@@ -1,0 +1,874 @@
+{
+  "schemaVersion": 1,
+  "dataNotes": [
+    "Transcribed from the user-provided reference image.",
+    "Null relevantAbility and checkModifier represent entries shown as NA.",
+    "Proficiencies repeated across groups are merged into one record."
+  ],
+  "slotProgression": {
+    "warrior": {
+      "initial": 3,
+      "additionalEveryLevels": 3
+    },
+    "wizard": {
+      "initial": 4,
+      "additionalEveryLevels": 3
+    },
+    "priest": {
+      "initial": 4,
+      "additionalEveryLevels": 3
+    },
+    "rogue": {
+      "initial": 3,
+      "additionalEveryLevels": 4
+    }
+  },
+  "classGroupCrossovers": {
+    "fighter": [
+      "warrior",
+      "general"
+    ],
+    "paladin": [
+      "warrior",
+      "priest",
+      "general"
+    ],
+    "ranger": [
+      "warrior",
+      "wizard",
+      "general"
+    ],
+    "cleric": [
+      "priest",
+      "general"
+    ],
+    "druid": [
+      "priest",
+      "warrior",
+      "general"
+    ],
+    "mage": [
+      "wizard",
+      "general"
+    ],
+    "illusionist": [
+      "wizard",
+      "general"
+    ],
+    "thief": [
+      "rogue",
+      "general"
+    ],
+    "bard": [
+      "rogue",
+      "warrior",
+      "wizard",
+      "general"
+    ]
+  },
+  "rules": {
+    "outsideAllowedGroupAdditionalSlots": 1,
+    "additionalSlotCheckBonus": 1,
+    "checkMethod": "Roll 1d20; result succeeds when less than or equal to relevant ability plus modifiers.",
+    "natural20AlwaysFails": true
+  },
+  "proficiencies": [
+    {
+      "id": "agriculture",
+      "name": "Agriculture",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "ancient-history",
+      "name": "Ancient History",
+      "groups": [
+        "priest",
+        "rogue",
+        "wizard"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "animal-handling",
+      "name": "Animal Handling",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "animal-lore",
+      "name": "Animal Lore",
+      "groups": [
+        "warrior"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "animal-training",
+      "name": "Animal Training",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "appraising",
+      "name": "Appraising",
+      "groups": [
+        "rogue"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "armorer",
+      "name": "Armorer",
+      "groups": [
+        "warrior"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "artistic-ability",
+      "name": "Artistic Ability",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "astrology",
+      "name": "Astrology",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "blacksmithing",
+      "name": "Blacksmithing",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "strength",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "blind-fighting",
+      "name": "Blind-fighting",
+      "groups": [
+        "rogue",
+        "warrior"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": null,
+      "checkModifier": null,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "bowyer-fletcher",
+      "name": "Bowyer/Fletcher",
+      "groups": [
+        "warrior"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "brewing",
+      "name": "Brewing",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "carpentry",
+      "name": "Carpentry",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "strength",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "charioteering",
+      "name": "Charioteering",
+      "groups": [
+        "warrior"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": 2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "cobbling",
+      "name": "Cobbling",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "cooking",
+      "name": "Cooking",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "dancing",
+      "name": "Dancing",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "direction-sense",
+      "name": "Direction Sense",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "wisdom",
+      "checkModifier": 1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "disguise",
+      "name": "Disguise",
+      "groups": [
+        "rogue"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "charisma",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "endurance",
+      "name": "Endurance",
+      "groups": [
+        "warrior"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "constitution",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "engineering",
+      "name": "Engineering",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "intelligence",
+      "checkModifier": -3,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "etiquette",
+      "name": "Etiquette",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "charisma",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "fire-building",
+      "name": "Fire-building",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "fishing",
+      "name": "Fishing",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "forgery",
+      "name": "Forgery",
+      "groups": [
+        "rogue"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "gaming",
+      "name": "Gaming",
+      "groups": [
+        "rogue",
+        "warrior"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "charisma",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "gem-cutting",
+      "name": "Gem Cutting",
+      "groups": [
+        "rogue",
+        "wizard"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "dexterity",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "healing",
+      "name": "Healing",
+      "groups": [
+        "priest"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "wisdom",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "heraldry",
+      "name": "Heraldry",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "herbalism",
+      "name": "Herbalism",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "hunting",
+      "name": "Hunting",
+      "groups": [
+        "warrior"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "juggling",
+      "name": "Juggling",
+      "groups": [
+        "rogue"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "jumping",
+      "name": "Jumping",
+      "groups": [
+        "rogue"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "strength",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "languages-ancient",
+      "name": "Languages, Ancient",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "languages-modern",
+      "name": "Languages, Modern",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "leatherworking",
+      "name": "Leatherworking",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "local-history",
+      "name": "Local History",
+      "groups": [
+        "priest",
+        "rogue"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "charisma",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "mining",
+      "name": "Mining",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "wisdom",
+      "checkModifier": -3,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "mountaineering",
+      "name": "Mountaineering",
+      "groups": [
+        "warrior"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": null,
+      "checkModifier": null,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "musical-instrument",
+      "name": "Musical Instrument",
+      "groups": [
+        "priest",
+        "rogue"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "navigation",
+      "name": "Navigation",
+      "groups": [
+        "priest",
+        "warrior",
+        "wizard"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "pottery",
+      "name": "Pottery",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "reading-lips",
+      "name": "Reading Lips",
+      "groups": [
+        "rogue"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "reading-writing",
+      "name": "Reading/Writing",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": 1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "religion",
+      "name": "Religion",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "riding-airborne",
+      "name": "Riding, Airborne",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "wisdom",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "riding-land-based",
+      "name": "Riding, Land-based",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "wisdom",
+      "checkModifier": 3,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "rope-use",
+      "name": "Rope Use",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "running",
+      "name": "Running",
+      "groups": [
+        "warrior"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "constitution",
+      "checkModifier": -6,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "seamanship",
+      "name": "Seamanship",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": 1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "seamstress-tailor",
+      "name": "Seamstress/Tailor",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "set-snares",
+      "name": "Set Snares",
+      "groups": [
+        "rogue",
+        "warrior"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "singing",
+      "name": "Singing",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "charisma",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "spellcraft",
+      "name": "Spellcraft",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "stonemasonry",
+      "name": "Stonemasonry",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "strength",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "survival",
+      "name": "Survival",
+      "groups": [
+        "warrior"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "swimming",
+      "name": "Swimming",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "strength",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "tightrope-walking",
+      "name": "Tightrope Walking",
+      "groups": [
+        "rogue"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "tracking",
+      "name": "Tracking",
+      "groups": [
+        "warrior"
+      ],
+      "slotsRequired": 2,
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "tumbling",
+      "name": "Tumbling",
+      "groups": [
+        "rogue"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "ventriloquism",
+      "name": "Ventriloquism",
+      "groups": [
+        "rogue"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "weaponsmithing",
+      "name": "Weaponsmithing",
+      "groups": [
+        "warrior"
+      ],
+      "slotsRequired": 3,
+      "relevantAbility": "intelligence",
+      "checkModifier": -3,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "weather-sense",
+      "name": "Weather Sense",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    },
+    {
+      "id": "weaving",
+      "name": "Weaving",
+      "groups": [
+        "general"
+      ],
+      "slotsRequired": 1,
+      "relevantAbility": "intelligence",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37
+    }
+  ]
+}
