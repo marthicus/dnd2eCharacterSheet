@@ -12,6 +12,7 @@ const FIXED = {
         manualMultiClass: '',
         classKit: '',
         inspiration: 0,
+        visionType: '',
         level: '',
         xp: '',
         nextLevel: '',
@@ -116,6 +117,7 @@ const FIXED = {
         conditions: 'Non-metal armor; eligible party composition or distance',
         notes: ''
     },
+    globalModifiers: [],
     specialAbilities: '',
     wounds: '',
     notes: '',
@@ -140,6 +142,7 @@ function normalize(x = {}) {
     d.identity.manualMultiClass = typeof d.identity.manualMultiClass === 'string' ? d.identity.manualMultiClass : '';
     const inspiration = Number.parseInt(d.identity.inspiration, 10);
     d.identity.inspiration = Number.isInteger(inspiration) ? Math.max(0, inspiration) : 0;
+    d.identity.visionType = typeof d.identity.visionType === 'string' ? d.identity.visionType : '';
         d.identity.classEntries = Array.isArray(d.identity.classEntries) && d.identity.classEntries.length ? d.identity.classEntries : [{ className: d.identity.className, level: d.identity.level, xp: d.identity.xp, nextLevel: d.identity.nextLevel, specialization: '' }];
         d.identity.classEntries = d.identity.classEntries.map(entry => ({ ...entry, specialization: typeof entry.specialization === 'string' ? entry.specialization : '' }));
         d.combat.acItems = Array.isArray(d.combat.acItems) ? d.combat.acItems.map(item => ({ name: typeof item.name === 'string' ? item.name : '', type: typeof item.type === 'string' ? item.type : 'other', value: item.value ?? '', equipped: item.equipped !== false })) : [];
@@ -151,6 +154,7 @@ function normalize(x = {}) {
     d.proficiencies = d.proficiencies.map(item => ({ ...item, source: item.source ?? '', notes: item.notes ?? '' }));
     d.resistances = d.resistances.map(item => ({ type: typeof item.type === 'string' ? item.type : 'Other', appliesTo: item.appliesTo ?? '', value: item.value ?? '', source: item.source ?? '', active: item.active !== false, notes: item.notes ?? '' }));
     d.surpriseBonus = { ...d.surpriseBonus, ...(x.surpriseBonus || {}) };
+    d.globalModifiers = Array.isArray(x.globalModifiers) ? x.globalModifiers.map(item => ({ category: typeof item.category === 'string' ? item.category : 'Other', value: item.value ?? '', appliesTo: item.appliesTo ?? '', source: item.source ?? '', active: item.active !== false, condition: item.condition ?? '', notes: item.notes ?? '' })) : [];
     d.weapons = d.weapons.map(item => ({
         name: typeof item.name === 'string' ? item.name : '',
         attackType: typeof item.attackType === 'string' ? item.attackType : typeof item.attacks === 'string' ? item.attacks : '',
@@ -224,6 +228,14 @@ function experienceTableId(className) {
 
 function formatExperience(value) {
     return Number.isInteger(value) ? value.toLocaleString('en-US') : '-';
+}
+
+function globalModifierTotal(category, appliesTo = '') {
+    return (data.globalModifiers || []).filter(item => item.active !== false && item.category === category && (!item.appliesTo || !appliesTo || item.appliesTo.toLowerCase() === appliesTo.toLowerCase())).reduce((total, item) => total + (Number.parseInt(item.value, 10) || 0), 0);
+}
+
+function targetedGlobalModifierTotal(category, appliesTo) {
+    return (data.globalModifiers || []).filter(item => item.active !== false && item.category === category && item.appliesTo && item.appliesTo.toLowerCase() === String(appliesTo || '').toLowerCase()).reduce((total, item) => total + (Number.parseInt(item.value, 10) || 0), 0);
 }
 
 function updateNextLevel(index) {
@@ -454,7 +466,7 @@ function updateThac0() {
         });
     });
     if (!values.length) return;
-    data.combat.thac0 = String(Math.min(...values));
+    data.combat.thac0 = String(Math.min(...values) + globalModifierTotal('THAC0'));
     const calculation = (data.identity.classEntries || []).filter(entry => Number.parseInt(entry.level, 10) >= 1).map(entry => `${entry.className || 'class'} level ${entry.level}`).join('; ');
     document.querySelectorAll('[data-section="combat"][data-key="thac0"]').forEach(input => { input.value = data.combat.thac0; input.title = `Best THAC0: ${calculation}. The lowest class-table result is selected: ${data.combat.thac0}.`; });
     document.querySelectorAll('.thac0-summary-value').forEach(output => { output.textContent = data.combat.thac0; output.title = `Best THAC0 from ${calculation}; lowest result selected.`; });
@@ -485,7 +497,7 @@ function updateSavingThrows() {
     if (best.some(value => value === Infinity)) return;
     const calculation = (data.identity.classEntries || []).filter(entry => Number.parseInt(entry.level, 10) >= 1).map(entry => `${entry.className || 'class'} level ${entry.level}`).join('; ');
     saveKeys.forEach((key, index) => {
-        data.saves[key] = String(best[index]);
+        data.saves[key] = String(best[index] + globalModifierTotal('Saving Throws', key));
         document.querySelectorAll(`[data-section="saves"][data-key="${key}"]`).forEach(input => { input.value = data.saves[key]; input.title = `Best ${key} save from ${calculation}; the lowest target number is selected: ${data.saves[key]}.`; });
     });
 }
@@ -500,6 +512,54 @@ function updateRacialBonuses() {
         display.textContent = `Racial ${bonus >= 0 ? '+' : ''}${bonus}`;
         stat.append(display);
     });
+}
+
+function setupStrengthControl() {
+    document.querySelectorAll('.stat input[data-section="abilities"]').forEach(input => {
+        const stat = input.closest('.stat');
+        const ability = input.dataset.key.toUpperCase();
+        if (!stat || stat.querySelector('.ability-step-control')) return;
+        const control = document.createElement('div');
+        control.className = 'ability-step-control';
+        control.innerHTML = `<div class="ability-step-buttons"><button type="button" data-ability-step="1" aria-label="Increase ${ability}" title="Increase ${ability}">↑</button><button type="button" data-ability-step="-1" aria-label="Decrease ${ability}" title="Decrease ${ability}">↓</button></div>`;
+        control.querySelectorAll('[data-ability-step]').forEach(button => button.onclick = () => {
+            const current = input.value.trim();
+            const exceptional = input.dataset.key === 'str' ? exceptionalStrengthValues(current) : null;
+            const numeric = Number.parseInt(current, 10);
+            if (button.dataset.abilityStep === '1') {
+                if (exceptional || numeric >= 25) return;
+                input.value = input.dataset.key === 'str' && numeric === 17 ? '18/01' : String(Math.max(1, numeric + 1));
+            } else {
+                input.value = exceptional || (input.dataset.key === 'str' && numeric === 18) ? '17' : String(Math.max(1, numeric - 1));
+            }
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+        stat.append(control);
+    });
+}
+
+const visionTypes = ['Normal Vision', 'Low-Light Vision', "Infravision 30'", "Infravision 60'", "Infravision 90'", "Infravision 120'", 'Ultravision', 'Darkvision', 'Blindsight', 'Tremorsense', 'Scent'];
+
+function setupVisionInput() {
+    const identityCard = document.querySelector('.hero > .wide');
+    if (!identityCard || identityCard.querySelector('#vision-type')) return;
+    const field = document.createElement('div');
+    field.className = 'field vision-field';
+    const isPreset = visionTypes.includes(data.identity.visionType);
+    field.innerHTML = `<label for="vision-type">Vision type</label><select id="vision-type"><option value="">Choose vision type</option>${visionTypes.map(type => `<option value="${esc(type)}" ${data.identity.visionType === type ? 'selected' : ''}>${esc(type)}</option>`).join('')}<option value="Other" ${isPreset || !data.identity.visionType ? '' : 'selected'}>Other</option></select><input id="manual-vision-type" placeholder="Enter custom vision or sense" value="${isPreset ? '' : esc(data.identity.visionType)}" ${isPreset || !data.identity.visionType ? 'hidden' : ''}>`;
+    const select = field.querySelector('#vision-type');
+    const manual = field.querySelector('#manual-vision-type');
+    select.onchange = () => {
+        manual.hidden = select.value !== 'Other';
+        data.identity.visionType = select.value === 'Other' ? manual.value : select.value;
+        changed();
+    };
+    manual.oninput = () => {
+        data.identity.visionType = manual.value;
+        changed();
+    };
+    const classTable = identityCard.querySelector('.class-entries-field');
+    identityCard.insertBefore(field, classTable || null);
 }
 
 const abilityModifiers = {
@@ -563,7 +623,7 @@ function carouselText(ability, score) {
     const views = bonusViews[ability];
     const index = bonusIndex[ability] || 0;
     const [label, key] = views[index];
-    const segment = currentBenefitText(ability, score).split('; ').find(item => item.toLowerCase().startsWith(key));
+    const segment = abilityBenefitText(ability, score).split('; ').find(item => item.toLowerCase().startsWith(key));
     return `${label}: ${segment ? segment.slice(segment.indexOf(' ') + 1) : '-'}`;
 }
 
@@ -952,14 +1012,33 @@ const abilityBenefits = {
 
 const exceptionalStrengthNote = 'Exceptional Strength (fighters only): 18/01-50 +1 hit, +3 damage, weight 135, max press 280, open doors 12, bend bars 20%; 18/51-75 +2 hit, +3 damage, weight 160, max press 305, open doors 13, bend bars 25%; 18/76-90 +2 hit, +4 damage, weight 185, max press 330, open doors 14, bend bars 30%; 18/91-99 +2 hit, +5 damage, weight 235, max press 380, open doors 15(3), bend bars 35%; 18/00 +3 hit, +6 damage, weight 335, max press 480, open doors 16(6), bend bars 40%.';
 
+function exceptionalStrengthValues(score) {
+    const match = String(score || '').match(/^18\/(\d{2})$/);
+    if (!match) return null;
+    const percentile = Number(match[1]);
+    if (percentile === 0) return { hit: 3, damage: 6, weight: 335, maxPress: 480, openDoors: '16(6)', bendBars: '40%' };
+    if (percentile <= 50) return { hit: 1, damage: 3, weight: 135, maxPress: 280, openDoors: '12', bendBars: '20%' };
+    if (percentile <= 75) return { hit: 2, damage: 3, weight: 160, maxPress: 305, openDoors: '13', bendBars: '25%' };
+    if (percentile <= 90) return { hit: 2, damage: 4, weight: 185, maxPress: 330, openDoors: '14', bendBars: '30%' };
+    return { hit: 2, damage: 5, weight: 235, maxPress: 380, openDoors: '15(3)', bendBars: '35%' };
+}
+
+function abilityBenefitText(ability, score) {
+    const exceptional = ability === 'str' ? exceptionalStrengthValues(score) : null;
+    if (exceptional) return `Hit +${exceptional.hit}; damage +${exceptional.damage}; weight ${exceptional.weight}; max press ${exceptional.maxPress}; open doors ${exceptional.openDoors}; bend bars ${exceptional.bendBars}`;
+    return currentBenefitText(ability, score);
+}
+
 function abilityTooltip(ability, score) {
     const value = Number.parseInt(score, 10);
     const points = abilityBenefits[ability].map(([threshold, text]) => ({ score: threshold, text }));
-    const active = Number.isInteger(value) && value >= 1 && value <= 25
+    const exceptional = ability === 'str' ? exceptionalStrengthValues(score) : null;
+    const active = exceptional ? { score: score, text: abilityBenefitText(ability, score) } : Number.isInteger(value) && value >= 1 && value <= 25
         ? points.filter(point => point.score <= value).pop()
         : null;
     const future = points.filter(point => !active || point.score > value);
     const lines = ['Ability scores show strengths and weaknesses; class, race, and roleplay also matter.', ''];
+    if (ability === 'str') lines.push('Enter exceptional Strength as 18/01-00. At 17, use the up arrow to start 18/01, then edit the percentile manually.', '');
     lines.push(...(active
         ? [`Enabled at ${active.score}:`, active.text]
         : ['Enter a score from 1 to 25.']));
@@ -982,7 +1061,7 @@ const benefitColumns = {
 
 function abilityTooltipTable(ability, score) {
     const value = Number.parseInt(score, 10);
-    const activeScore = Number.isInteger(value) && value >= 1 && value <= 25
+    const activeScore = exceptionalStrengthValues(score) ? 18 : Number.isInteger(value) && value >= 1 && value <= 25
         ? abilityBenefits[ability].filter(([threshold]) => threshold <= value).pop()?.[0]
         : null;
     const columns = benefitColumns[ability];
@@ -1002,12 +1081,12 @@ function abilityTooltipTable(ability, score) {
         const special = !columns.some(([, key]) => lowerSegments.some(segment => segment.includes(key)));
         return `<tr class="${threshold === activeScore ? 'active-breakpoint' : ''}"><th scope="row">${threshold}</th>${special ? `<td colspan="${columns.length}">${esc(text)}</td>` : cells}</tr>`;
     }).join('');
-    return `<p class="tooltip-intro">Ability scores show strengths and weaknesses; class, race, and roleplay also matter.</p><table class="tooltip-table"><thead><tr><th scope="col">Score</th>${headers}</tr></thead><tbody>${rows}</tbody></table>${ability === 'str' ? `<p class="tooltip-note"><strong>Exceptional Strength:</strong> ${esc(exceptionalStrengthNote.replace('Exceptional Strength (fighters only): ', ''))}</p>` : ''}`;
+    return `<p class="tooltip-intro">Ability scores show strengths and weaknesses; class, race, and roleplay also matter.</p>${ability === 'str' ? '<p class="tooltip-note"><strong>Format:</strong> Enter exceptional Strength as 18/01-00. At 17, use the up arrow to start 18/01, then edit the percentile manually.</p>' : ''}<table class="tooltip-table"><thead><tr><th scope="col">Score</th>${headers}</tr></thead><tbody>${rows}</tbody></table>${ability === 'str' ? `<p class="tooltip-note"><strong>Exceptional Strength:</strong> ${esc(exceptionalStrengthNote.replace('Exceptional Strength (fighters only): ', ''))}</p>` : ''}`;
 }
 
 function currentBenefitValues(ability, score) {
     const value = Number.parseInt(score, 10);
-    const active = Number.isInteger(value) && value >= 1 && value <= 25
+    const active = exceptionalStrengthValues(score) ? [18, abilityBenefitText(ability, score)] : Number.isInteger(value) && value >= 1 && value <= 25
         ? abilityBenefits[ability].filter(([threshold]) => threshold <= value).pop()
         : null;
     if (!active) return { score: '-', values: benefitColumns[ability].map(() => '-') };
@@ -1068,7 +1147,7 @@ function updateAcTotal() {
         return sum + (Number.isInteger(value) ? value : 0);
     }, 0);
     const shieldAdjustment = activeRows.filter(item => item.type === 'shield').reduce((sum, item) => sum + (Number.parseInt(item.value, 10) || 0), 0);
-    const totalValue = Number.isInteger(base) && dexAdjustment !== '' ? base + dexAdjustment + itemAdjustment : '';
+    const totalValue = Number.isInteger(base) && dexAdjustment !== '' ? base + dexAdjustment + itemAdjustment + globalModifierTotal('Armor Class') : '';
     baseValue.textContent = Number.isInteger(base) ? base : '-';
     total.textContent = totalValue === '' ? '-' : totalValue;
     adjustment.textContent = dexAdjustment === '' ? '-' : formatModifier(dexAdjustment);
@@ -1326,12 +1405,13 @@ function halfElfWeaponApplies(weaponName) {
 
 function weaponRacialBonuses(weapon) {
     const name = weapon?.name || '';
+    const exceptional = exceptionalStrengthValues(data.abilities.str);
     const thrown = String(weapon?.attackType || '').includes('T') || name === 'Sling';
     const axe = /axe/i.test(name);
     const halflingOrElf = data.raceSelection === 'Halfling' || data.raceSelection === 'Elves';
     const halfElfHit = halfElfWeaponApplies(name) ? 1 : 0;
-    const hit = halfElfHit + (halflingOrElf && (thrown || (data.raceSelection === 'Elves' && axe)) ? 1 : 0);
-    const damage = data.raceSelection === 'Halfling' && thrown ? 1 : data.raceSelection === 'Elves' && (thrown || axe) ? 1 : 0;
+    const hit = halfElfHit + (halflingOrElf && (thrown || (data.raceSelection === 'Elves' && axe)) ? 1 : 0) + (exceptional?.hit || 0);
+    const damage = (data.raceSelection === 'Halfling' && thrown ? 1 : data.raceSelection === 'Elves' && (thrown || axe) ? 1 : 0) + (exceptional?.damage || 0);
     return { hit, damage };
 }
 
@@ -1347,9 +1427,9 @@ function updateWeaponThac0() {
     document.querySelectorAll('[data-weapon-thac0]').forEach(output => {
         const weapon = data.weapons[+output.dataset.weaponThac0];
         const racial = weaponRacialBonuses(weapon);
-        const attackAdjustment = (Number.parseInt(weapon?.attackAdj, 10) || 0) + racial.hit;
+        const attackAdjustment = (Number.parseInt(weapon?.attackAdj, 10) || 0) + racial.hit + globalModifierTotal('Hit', weapon?.name || '');
         const thac0Adjustment = Number.parseInt(weapon?.thac0Adj, 10) || 0;
-        output.textContent = Number.isInteger(base) && weapon?.equipped !== false ? base - attackAdjustment + thac0Adjustment : '-';
+        output.textContent = Number.isInteger(base) && weapon?.equipped !== false ? base - attackAdjustment + thac0Adjustment + targetedGlobalModifierTotal('THAC0', weapon?.name) : '-';
         output.title = weapon?.equipped !== false && Number.isInteger(base) ? `Weapon THAC0 = character THAC0 ${base} - attack adjustment ${Number.parseInt(weapon?.attackAdj, 10) || 0}${racial.hit ? ` - racial hit bonus ${racial.hit}` : ''} + weapon THAC0 adjustment ${thac0Adjustment} = ${output.textContent}.` : 'Weapon is inactive or character THAC0 is not available.';
         const damageInput = output.closest('tr')?.querySelector('[data-weapon-key="damageAdj"]');
         if (damageInput) damageInput.title = racial.damage ? `Manual damage adjustment plus racial ${racial.damage >= 0 ? '+' : ''}${racial.damage} damage from ${data.raceSelection} weapon rules.` : 'Manual weapon damage adjustment. No automatic racial damage bonus applies to this weapon.';
@@ -1526,6 +1606,18 @@ function setupResistanceSection() {
     section.querySelectorAll('[data-resistance-remove]').forEach(button => button.onclick = () => { data.resistances.splice(+button.dataset.resistanceRemove, 1); changed(); render(); });
 }
 
+function setupGlobalModifiersSection() {
+    const section = document.createElement('section');
+    section.className = 'card wide global-modifiers-section';
+    const categories = ['Hit', 'Damage', 'Missile Hit', 'Missile Damage', 'THAC0', 'Armor Class', 'Initiative', 'Saving Throws', 'Spell Slots', 'Surprise', 'Enemy Surprise', 'Resistance', 'Magic Resistance', 'Movement', 'Extra Attacks', 'Other'];
+    section.innerHTML = `<h2>Global modifiers</h2><div class="tableWrap"><table class="global-modifiers-table"><thead><tr><th>Active</th><th>Category</th><th>Value</th><th>Applies to</th><th>Source</th><th>Condition</th><th>Notes</th><th></th></tr></thead><tbody>${data.globalModifiers.map((item, index) => `<tr><td><input type="checkbox" data-global-modifier="${index}" data-global-key="active" ${item.active !== false ? 'checked' : ''} aria-label="Active global modifier"></td><td><select data-global-modifier="${index}" data-global-key="category">${categories.map(category => `<option ${item.category === category ? 'selected' : ''}>${category}</option>`).join('')}</select></td><td><input type="number" data-global-modifier="${index}" data-global-key="value" value="${esc(item.value)}" step="1"></td><td><input data-global-modifier="${index}" data-global-key="appliesTo" value="${esc(item.appliesTo)}" placeholder="All or weapon name"></td><td><input data-global-modifier="${index}" data-global-key="source" value="${esc(item.source)}"></td><td><input data-global-modifier="${index}" data-global-key="condition" value="${esc(item.condition)}"></td><td><input data-global-modifier="${index}" data-global-key="notes" value="${esc(item.notes)}"></td><td><button type="button" class="remove" data-global-remove="${index}" aria-label="Remove global modifier">×</button></td></tr>`).join('')}</tbody></table></div><button type="button" class="add" data-global-add>Add modifier</button><small>Active global modifiers feed supported calculations. Use negative values to improve lower-is-better results such as AC, THAC0, and saves; use positive values for bonuses to hit or damage.</small>`;
+    const target = document.querySelector('.surprise-section');
+    if (target) target.after(section); else document.querySelector('.combat-card')?.after(section);
+    section.querySelector('[data-global-add]').onclick = () => { data.globalModifiers.push({ category: 'Other', value: '', appliesTo: '', source: '', condition: '', active: true, notes: '' }); changed(); render(); };
+    section.querySelectorAll('[data-global-modifier]').forEach(input => input.oninput = () => { const item = data.globalModifiers[+input.dataset.globalModifier]; item[input.dataset.globalKey] = input.type === 'checkbox' ? input.checked : input.value; updateThac0(); updateSavingThrows(); updateAcTotal(); updateWeaponThac0(); changed(); });
+    section.querySelectorAll('[data-global-remove]').forEach(button => button.onclick = () => { data.globalModifiers.splice(+button.dataset.globalRemove, 1); changed(); render(); });
+}
+
 function setupSurpriseSection() {
     const section = document.createElement('section');
     section.className = 'card wide surprise-section';
@@ -1597,6 +1689,8 @@ function render() {
         stat.append(output);
         createCarousel(stat, ability);
     });
+    setupStrengthControl();
+    setupVisionInput();
     setupClassInputs();
     data.identity.classEntries.forEach((entry, index) => updateNextLevel(index));
     updateThac0();
@@ -1618,6 +1712,7 @@ function render() {
     setupSpellTracking();
     setupResistanceSection();
     setupSurpriseSection();
+    setupGlobalModifiersSection();
     setupProficiencyAndInventorySections();
     setupSurpriseReferenceSection();
     setupAbilityTooltips();
@@ -1660,6 +1755,7 @@ function bind() {
             document.querySelector('.ability-total').textContent = `Total: ${abilityTotal()}`;
             updateAbilitySummary();
             if (e.dataset.key === 'dex') updateAcTotal();
+            if (e.dataset.key === 'str') updateWeaponThac0();
             updateClassRequirementNotice();
         }
         if (e.dataset.section === 'combat' && e.dataset.key === 'ac') {

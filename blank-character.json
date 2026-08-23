@@ -10,6 +10,7 @@
     "xp": "",
     "nextLevel": "",
     "inspiration": 0,
+    "visionType": "",
     "deity": ""
   },
   "portraitUrl": "",
@@ -54,6 +55,7 @@
   "inventory": [],
   "spells": [],
   "resistances": [],
+  "globalModifiers": [],
     "surpriseBonus": {
       "active": true,
       "target": "Enemy",
