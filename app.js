@@ -124,7 +124,8 @@ const FIXED = {
     specialAbilities: '',
     wounds: '',
     notes: '',
-    sectionStates: {}
+    sectionStates: {},
+    sectionOrder: []
 };
 const clone = o => JSON.parse(JSON.stringify(o));
 let data = clone(FIXED);
@@ -155,6 +156,7 @@ function normalize(x = {}) {
     for (const k of ['raceSelection', 'manualRace', 'selectedBackground', 'racialFeatures', 'racialBonusChoice', 'racialWeaponChoice']) d[k] = typeof x[k] === 'string' ? x[k] : '';
     d.racialBonuses = x.racialBonuses && typeof x.racialBonuses === 'object' && !Array.isArray(x.racialBonuses) ? x.racialBonuses : {};
     d.sectionStates = x.sectionStates && typeof x.sectionStates === 'object' && !Array.isArray(x.sectionStates) ? x.sectionStates : {};
+    d.sectionOrder = Array.isArray(x.sectionOrder) ? x.sectionOrder.filter(key => typeof key === 'string') : [];
     for (const k of ['weapons', 'henchmen', 'proficiencies', 'inventory', 'spells', 'resistances']) d[k] = Array.isArray(x[k]) ? x[k] : [];
     d.proficiencies = d.proficiencies.map(item => ({ ...item, source: item.source ?? '', notes: item.notes ?? '' }));
     d.resistances = d.resistances.map(item => ({ type: typeof item.type === 'string' ? item.type : 'Other', appliesTo: item.appliesTo ?? '', value: item.value ?? '', source: item.source ?? '', active: item.active !== false, notes: item.notes ?? '' }));
@@ -947,6 +949,42 @@ function setupSectionToggles() {
             summary.textContent = `Total: ${abilityTotal()}`;
             heading.append(summary);
         }
+    });
+}
+
+function setupSectionOrdering() {
+    const cards = [...document.querySelectorAll('.grid > .card')];
+    const defaultOrder = cards.map(card => card.dataset.sectionKey);
+    const savedOrder = data.sectionOrder.filter(key => defaultOrder.includes(key));
+    const order = [...savedOrder, ...defaultOrder.filter(key => !savedOrder.includes(key))];
+    order.forEach(key => {
+        const card = cards.find(item => item.dataset.sectionKey === key);
+        if (card) document.querySelector('.grid').append(card);
+    });
+    const orderedCards = [...document.querySelectorAll('.grid > .card')];
+    orderedCards.forEach(card => {
+        card.draggable = true;
+        card.classList.add('section-reorderable');
+        card.ondragstart = event => {
+            event.dataTransfer.effectAllowed = 'move';
+            event.dataTransfer.setData('text/plain', card.dataset.sectionKey);
+            card.classList.add('section-dragging');
+        };
+        card.ondragend = () => card.classList.remove('section-dragging');
+        card.ondragover = event => {
+            event.preventDefault();
+            event.dataTransfer.dropEffect = 'move';
+        };
+        card.ondrop = event => {
+            event.preventDefault();
+            const dragged = orderedCards.find(item => item.dataset.sectionKey === event.dataTransfer.getData('text/plain'));
+            if (!dragged || dragged === card) return;
+            const box = card.getBoundingClientRect();
+            card.parentElement.insertBefore(dragged, event.clientY < box.top + box.height / 2 ? card : card.nextSibling);
+            data.sectionOrder = [...document.querySelectorAll('.grid > .card')].map(item => item.dataset.sectionKey);
+            changed();
+            setupTableOfContents();
+        };
     });
 }
 
@@ -2044,6 +2082,7 @@ function render() {
     setupAbilityTooltips();
     setupCharacterHeader();
     setupSectionToggles();
+    setupSectionOrdering();
     setupTableOfContents();
     bind()
 }
@@ -2069,6 +2108,12 @@ navPin.onclick = () => {
     navPin.setAttribute('aria-label', `${collapsed ? 'Show' : 'Hide'} navigation bar`);
     navPin.title = `${collapsed ? 'Show' : 'Hide'} navigation bar`;
     syncToolbarOffset();
+};
+const resetOrderButton = document.querySelector('#resetOrderBtn');
+if (resetOrderButton) resetOrderButton.onclick = () => {
+    data.sectionOrder = [];
+    changed();
+    render();
 };
 
 function bind() {

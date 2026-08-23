@@ -59,6 +59,7 @@
   "spells": [],
   "resistances": [],
   "globalModifiers": [],
+  "sectionOrder": [],
   "xpHistory": [],
     "surpriseBonus": {
       "active": true,
