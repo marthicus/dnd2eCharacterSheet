@@ -1153,14 +1153,16 @@ function setupSectionOrdering() {
     });
     const orderedCards = [...document.querySelectorAll('.grid > .card')];
     orderedCards.forEach(card => {
-        card.draggable = true;
+        const heading = card.querySelector(':scope > h2');
+        card.draggable = false;
         card.classList.add('section-reorderable');
-        card.ondragstart = event => {
+        if (heading) heading.draggable = true;
+        if (heading) heading.ondragstart = event => {
             event.dataTransfer.effectAllowed = 'move';
             event.dataTransfer.setData('text/plain', card.dataset.sectionKey);
             card.classList.add('section-dragging');
         };
-        card.ondragend = () => card.classList.remove('section-dragging');
+        if (heading) heading.ondragend = () => card.classList.remove('section-dragging');
         card.ondragover = event => {
             event.preventDefault();
             event.dataTransfer.dropEffect = 'move';
