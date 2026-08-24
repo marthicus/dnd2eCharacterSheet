@@ -5,4 +5,4 @@ LOCAL AD&D 2E CHARACTER SHEET
 3. Use Save JSON to export and Load JSON to restore a character.
 4. The browser also autosaves one working copy in localStorage.
 
-The file schema is fixed at schemaVersion 1. Imports are normalized: missing standard attributes get defaults and unknown attributes are ignored.
+Character files use schemaVersion 2. Older imports are migrated: missing standard attributes get defaults and unknown attributes are ignored.

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "identity": {
     "name": "",
     "player": "",
@@ -55,6 +55,10 @@
   },
   "weapons": [],
   "proficiencies": [],
+  "weaponProficiencies": [],
+  "weaponProficiencySettings": { "autoCalculate": true, "availableSlots": 0 },
+  "languages": [],
+  "nwpSettings": { "autoCalculate": false, "exemptBonusProficiencies": true, "availableSlots": 0 },
   "inventory": [],
   "spells": [],
   "resistances": [],
