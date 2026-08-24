@@ -106,6 +106,8 @@ const FIXED = {
         { level: '7th', available: '', used: '' }, { level: '8th', available: '', used: '' }, { level: '9th', available: '', used: '' }
     ],
     proficiencies: [],
+    weaponProficiencies: [],
+    weaponProficiencySettings: { autoCalculate: true, availableSlots: 0 },
     languages: [],
     nwpSettings: { autoCalculate: false, exemptBonusProficiencies: true, availableSlots: 0 },
     inventory: [],
@@ -136,6 +138,9 @@ let catalogueValidation = [];
 let nonweaponCatalog = [];
 let nonweaponRules = {};
 let nonweaponClassCrossovers = {};
+let classAbilitiesCatalog = {};
+let weaponProficiencyCatalog = [];
+let proficiencyRules = {};
 const gameRules = {
     currencyConversion: { cp: 1, sp: 10, ep: 50, gp: 100, pp: 500 },
     wealthCalculations: { baseCurrency: 'cp', displayCurrency: 'gp', allowCurrencyBreakdown: true, autoCalculateInventoryValue: true }
@@ -183,6 +188,8 @@ function normalize(x = {}) {
         source: item.source ?? '',
         notes: item.notes ?? ''
     }));
+    d.weaponProficiencies = Array.isArray(x.weaponProficiencies) ? x.weaponProficiencies.map(item => ({ proficiencyId: typeof item.proficiencyId === 'string' ? item.proficiencyId : null, weaponId: typeof item.weaponId === 'string' ? item.weaponId : null, proficient: item.proficient === true || item.proficient === 'true', specialization: typeof item.specialization === 'string' ? item.specialization : 'none' })) : [];
+    d.weaponProficiencySettings = { ...d.weaponProficiencySettings, ...(x.weaponProficiencySettings || {}) };
     d.languages = Array.isArray(x.languages) ? x.languages.map(language => ({ name: typeof language.name === 'string' ? language.name : '', source: typeof language.source === 'string' ? language.source : '', countsAgainstLanguageLimit: language.countsAgainstLanguageLimit === true })) : [];
     d.nwpSettings = { ...d.nwpSettings, ...(x.nwpSettings || {}) };
     d.resistances = d.resistances.map(item => ({ type: typeof item.type === 'string' ? item.type : 'Other', appliesTo: item.appliesTo ?? '', value: item.value ?? '', source: item.source ?? '', active: item.active !== false, notes: item.notes ?? '' }));
@@ -214,7 +221,7 @@ function normalize(x = {}) {
     }));
     for (const k of ['thiefSkills', 'undeadTurning', 'spellLevels']) d[k] = Array.isArray(x[k]) && x[k].length ? x[k] : d[k];
     d.spellSlots = Array.isArray(x.spellSlots) && x.spellSlots.length ? x.spellSlots.map((slot, index) => ({ level: typeof slot.level === 'string' ? slot.level : d.spellSlots[index]?.level || `${index + 1}th`, available: slot.available ?? '', used: slot.used ?? '' })) : clone(d.spellSlots);
-    d.spells = d.spells.map(spell => ({ name: typeof spell.name === 'string' ? spell.name : '', level: spell.level ?? '', type: typeof spell.type === 'string' ? spell.type : 'Spell', school: spell.school ?? '', known: spell.known ?? '', memorized: spell.memorized === true || spell.memorized === 'true' || spell.memorized === 'yes' || spell.memorized === '1', memorizedQty: spell.memorizedQty ?? '', castQty: spell.castQty ?? '', notes: spell.notes ?? '' }));
+    d.spells = d.spells.map(spell => ({ ...spell, name: typeof spell.name === 'string' ? spell.name : '', level: spell.level ?? '', type: typeof spell.type === 'string' ? spell.type : 'Spell', school: spell.school ?? '', known: spell.known ?? '', memorized: spell.memorized === true || spell.memorized === 'true' || spell.memorized === 'yes' || spell.memorized === '1', memorizedQty: spell.memorizedQty ?? '', castQty: spell.castQty ?? '', verbal: spell.verbal === true, somatic: spell.somatic === true, material: spell.material === true, materialComponents: typeof spell.materialComponents === 'string' ? spell.materialComponents : '', notes: spell.notes ?? '' }));
     const maximumHitPoints = Number.parseInt(d.combat.hpMax, 10);
     const currentHitPoints = Number.parseInt(d.combat.hpCurrent, 10);
     if (Number.isInteger(maximumHitPoints) && Number.isInteger(currentHitPoints) && currentHitPoints > maximumHitPoints) d.combat.hpCurrent = String(maximumHitPoints);
@@ -375,6 +382,49 @@ async function loadNonweaponCatalog() {
         nonweaponClassCrossovers = catalog.classGroupCrossovers || {};
     } catch {
         nonweaponCatalog = [];
+    }
+}
+
+async function loadSpellCatalog() {
+    try {
+        const response = await fetch('data/spells.json');
+        if (!response.ok) throw new Error('Spell catalogue unavailable');
+        const records = await response.json();
+        spellCatalog = (Array.isArray(records) ? records : Array.isArray(records.spells) ? records.spells : []).map(item => ({ ...item, source: item.school || item.source || '' }));
+    } catch {
+        spellCatalog = [];
+    }
+}
+
+async function loadClassAbilitiesCatalog() {
+    try {
+        const response = await fetch('data/class-abilities.json');
+        if (!response.ok) throw new Error('Class abilities catalogue unavailable');
+        const catalog = await response.json();
+        classAbilitiesCatalog = catalog.abilities || {};
+    } catch {
+        classAbilitiesCatalog = {};
+    }
+}
+
+async function loadWeaponProficiencyCatalog() {
+    try {
+        const response = await fetch('data/weapon-proficiencies.json');
+        if (!response.ok) throw new Error('Weapon proficiency catalogue unavailable');
+        const records = await response.json();
+        weaponProficiencyCatalog = Array.isArray(records) ? records : [];
+    } catch {
+        weaponProficiencyCatalog = [];
+    }
+}
+
+async function loadProficiencyRules() {
+    try {
+        const response = await fetch('data/proficiency-rules.json');
+        if (!response.ok) throw new Error('Proficiency rules unavailable');
+        proficiencyRules = await response.json();
+    } catch {
+        proficiencyRules = {};
     }
 }
 
@@ -1750,7 +1800,9 @@ function updateMovementSection() {
 }
 
 function namedInputTable(key, heading, valueLabel) {
-    return `<div class="class-ability-group"><h3>${heading}</h3><table class="class-ability-table"><thead><tr><th>Ability</th><th>${valueLabel}</th></tr></thead><tbody>${data[key].map((row, index) => `<tr><th scope="row">${row.name}</th><td><input data-array="${key}" data-index="${index}" data-key="value" value="${esc(row.value)}"></td></tr>`).join('')}</tbody></table></div>`;
+    const catalog = classAbilitiesCatalog[key] || {};
+    const entries = catalog.entries || [];
+    return `<div class="class-ability-group"><h3>${catalog.heading || heading}</h3><table class="class-ability-table"><thead><tr><th>Ability</th><th>${catalog.valueLabel || valueLabel}</th></tr></thead><tbody>${data[key].map((row, index) => `<tr><th scope="row">${esc(entries[index] || row.name)}</th><td><input data-array="${key}" data-index="${index}" data-key="value" value="${esc(row.value)}"></td></tr>`).join('')}</tbody></table></div>`;
 }
 
 function classAbilitiesVisibility() {
@@ -1982,16 +2034,30 @@ function setupSpellSectionPosition() {
     if (combat && spells) combat.after(spells);
 }
 
-const spellCatalog = [
+let spellCatalog = [];
+/*
     ...['Affect Normal Fires', 'Alarm', 'Armor', 'Audible Glamer', 'Burning Hands', 'Cantrip', 'Change Self', 'Charm Person', 'Chill Touch', 'Color Spray', 'Comprehend Languages', 'Dancing Lights', 'Detect Magic', 'Detect Undead', 'Enlarge', 'Erase', 'Feather Fall', 'Find Familiar', 'Friends', 'Gaze Reflection', 'Grease', 'Hold Portal', 'Hypnotism', 'Identify', 'Jump', 'Light', 'Magic Missile', 'Mending', 'Message', 'Mount', "Nystul's Magical Aura", 'Phantasmal Force', 'Protection from Evil', 'Read Magic', 'Shield', 'Shocking Grasp', 'Sleep', 'Spider Climb', 'Spook', 'Taunt', "Tenser's Floating Disc", 'Unseen Servant', 'Ventriloquism', 'Wall of Fog', 'Wizard Mark'].map(name => ({ name, level: '1st', source: 'Wizard' })),
     ...['Animal Friendship', 'Bless', 'Combine', 'Command', 'Create Water', 'Cure Light Wounds', 'Detect Evil', 'Detect Magic', 'Detect Poison', 'Detect Snares and Pits', 'Endure Cold/Endure Heat', 'Entangle', 'Faerie Fire', 'Invisibility to Animals', 'Invisibility to Undead', 'Light', 'Locate Animals or Plants', 'Magical Stone', 'Pass Without Trace', 'Protection from Evil', 'Purify Food and Drink', 'Remove Fear', 'Sanctuary', 'Shillelagh'].map(name => ({ name, level: '1st', source: 'Priest' }))
 ];
+*/
 
 function setupSpellTracking() {
     const section = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Spells'));
     if (!section) return;
     section.innerHTML = `<h2>Spells and abilities</h2><div class="spell-slots"><h3>Spell slots</h3><table class="spell-slots-table"><thead><tr><th>Level</th><th>Available</th><th>Used</th><th>Remaining</th></tr></thead><tbody>${data.spellSlots.map((slot, index) => `<tr><th>${esc(slot.level)}</th><td><input type="number" min="0" step="1" data-spell-slot="${index}" data-spell-slot-key="available" value="${esc(slot.available)}"></td><td><input type="number" min="0" step="1" data-spell-slot="${index}" data-spell-slot-key="used" value="${esc(slot.used)}"></td><td><output data-spell-remaining="${index}">-</output></td></tr>`).join('')}</tbody></table><small>Enter the slots available for this character. Used slots are tracked separately and never exceed the available count.</small></div><div class="manual-spells"><h3>Manual spells and abilities</h3><div class="tableWrap"><table class="spells-table"><thead><tr><th>Name</th><th>Level</th><th>Type</th><th>School / sphere</th><th>Known</th><th>Memorized</th><th>Cast / used</th><th>Notes</th><th></th></tr></thead><tbody>${data.spells.map((spell, index) => { const preset = spellCatalog.some(item => item.name === spell.name); return `<tr><td><select data-spell-preset="${index}"><option value="Other" ${preset ? '' : 'selected'}>Other</option><optgroup label="Wizard 1st level">${spellCatalog.filter(item => item.source === 'Wizard').map(item => `<option value="${esc(item.name)}" ${spell.name === item.name ? 'selected' : ''}>${esc(item.name)}</option>`).join('')}</optgroup><optgroup label="Priest 1st level">${spellCatalog.filter(item => item.source === 'Priest').map(item => `<option value="${esc(item.name)}" ${spell.name === item.name ? 'selected' : ''}>${esc(item.name)}</option>`).join('')}</optgroup></select><input data-spell-item="${index}" data-spell-key="name" value="${esc(spell.name)}" placeholder="Spell or ability" ${preset ? 'hidden' : ''}></td><td><input data-spell-item="${index}" data-spell-key="level" value="${esc(spell.level)}" placeholder="1st"></td><td><select data-spell-item="${index}" data-spell-key="type"><option ${spell.type === 'Spell' ? 'selected' : ''}>Spell</option><option ${spell.type === 'Racial ability' ? 'selected' : ''}>Racial ability</option><option ${spell.type === 'Class ability' ? 'selected' : ''}>Class ability</option><option ${spell.type === 'Other' ? 'selected' : ''}>Other</option></select></td><td><input data-spell-item="${index}" data-spell-key="school" value="${esc(spell.school)}" placeholder="School / sphere"></td><td><input data-spell-item="${index}" data-spell-key="known" value="${esc(spell.known)}"></td><td><input data-spell-item="${index}" data-spell-key="memorizedQty" value="${esc(spell.memorizedQty)}" type="number" min="0" step="1"></td><td><input data-spell-item="${index}" data-spell-key="castQty" value="${esc(spell.castQty)}" type="number" min="0" step="1"></td><td><input data-spell-item="${index}" data-spell-key="notes" value="${esc(spell.notes)}"></td><td><button type="button" class="remove" data-spell-remove="${index}" aria-label="Remove spell or ability">×</button></td></tr>`; }).join('')}</tbody></table></div><button type="button" class="add" data-spell-add>Add spell or ability</button></div>`;
     const spellHeader = section.querySelector('.spells-table thead tr');
+    const castHeader = [...spellHeader.children].find(cell => cell.textContent.trim() === 'Cast / used');
+    if (castHeader) {
+        const headerAnchor = castHeader.nextSibling;
+        ['V', 'S', 'M', 'Materials'].forEach(label => { const header = document.createElement('th'); header.textContent = label; spellHeader.insertBefore(header, headerAnchor); });
+        section.querySelectorAll('.spells-table tbody tr').forEach((row, index) => {
+            const anchor = row.children[castHeader.cellIndex + 1];
+            [['verbal', 'Verbal component'], ['somatic', 'Somatic component'], ['material', 'Material component']].forEach(([key, label]) => { const cell = document.createElement('td'); cell.innerHTML = `<input type="checkbox" data-spell-item="${index}" data-spell-key="${key}" aria-label="${label}" ${data.spells[index][key] ? 'checked' : ''}>`; row.insertBefore(cell, anchor); });
+            const materials = document.createElement('td');
+            materials.innerHTML = `<input data-spell-item="${index}" data-spell-key="materialComponents" value="${esc(data.spells[index].materialComponents)}" placeholder="Required materials" title="${esc(data.spells[index].materialComponents || 'No material requirements recorded')}">`;
+            row.insertBefore(materials, anchor);
+        });
+    }
     const knownColumnIndex = [...spellHeader.children].findIndex(cell => cell.textContent.trim() === 'Known');
     if (knownColumnIndex >= 0) {
         spellHeader.children[knownColumnIndex].remove();
@@ -2025,8 +2091,11 @@ function setupSpellTracking() {
     });
     section.querySelectorAll('[data-spell-item]').forEach(input => input.oninput = () => {
         data.spells[+input.dataset.spellItem][input.dataset.spellKey] = input.type === 'checkbox' ? input.checked : input.value;
+        if (['notes', 'materialComponents'].includes(input.dataset.spellKey)) input.title = input.value;
         changed();
     });
+    section.querySelectorAll('[data-spell-key="notes"]').forEach(input => input.title = input.value || 'No notes');
+    section.querySelectorAll('[data-spell-key="materialComponents"]').forEach(input => input.title = input.value || 'No material requirements recorded');
     section.querySelectorAll('[data-spell-preset]').forEach(select => select.onchange = () => {
         const preset = spellCatalog.find(item => item.name === select.value);
         const index = +select.dataset.spellPreset;
@@ -2042,7 +2111,7 @@ function setupSpellTracking() {
         render();
     });
     section.querySelector('[data-spell-add]').onclick = () => {
-        data.spells.push({ name: '', level: '', type: 'Spell', school: '', known: '', memorizedQty: '', castQty: '', notes: '' });
+        data.spells.push({ name: '', level: '', type: 'Spell', school: '', known: '', memorizedQty: '', castQty: '', verbal: false, somatic: false, material: false, materialComponents: '', notes: '' });
         changed();
         render();
     };
@@ -2230,6 +2299,39 @@ function languagesMarkup() {
     return `<section class="card wide languages-section"><h2>Languages</h2><div class="language-summary">Languages Known: <strong>${data.languages.length}</strong><span>Bonus Languages From Intelligence: 0 <small>(intelligence language data not supplied)</small></span></div><div class="tableWrap"><table class="languages-table"><thead><tr><th>Language</th><th>Source</th><th>Counts Against Language Limit</th><th></th></tr></thead><tbody>${data.languages.map((language, index) => `<tr><td><input data-array="languages" data-index="${index}" data-key="name" value="${esc(language.name)}"></td><td><input data-array="languages" data-index="${index}" data-key="source" value="${esc(language.source)}"></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="countsAgainstLanguageLimit" ${language.countsAgainstLanguageLimit ? 'checked' : ''}></td><td><button class="remove" data-remove="languages" data-index="${index}" aria-label="Remove language">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="languages">Add language</button></section>`;
 }
 
+function setupWeaponProficiencySection() {
+    const nwpCard = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Proficiencies'));
+    if (!nwpCard) return;
+    document.querySelector('.weapon-proficiencies-section')?.remove();
+    const section = document.createElement('section');
+    section.className = 'card wide weapon-proficiencies-section';
+    const available = data.weaponProficiencySettings.autoCalculate ? (() => { const entry = data.identity.classEntries?.[0] || {}; const key = String(entry.className || '').toLowerCase().split(/\s|\//)[0]; const group = proficiencyRules.classMappings?.[key]; const rules = proficiencyRules.groups?.[group]?.weaponProficiencies; const level = Number.parseInt(entry.level || data.identity.level, 10); return rules && Number.isInteger(level) && level >= 1 ? rules.initialSlots + Math.floor((level - 1) / rules.additionalSlotEveryLevels) : 0; })() : Number(data.weaponProficiencySettings.availableSlots) || 0;
+    const used = data.weaponProficiencies.filter(item => item.proficient).length;
+    section.innerHTML = `<h2>Weapon Proficiencies</h2><div class="weapon-proficiency-summary"><strong>Available Slots: ${available}</strong><strong>Used Slots: ${used}</strong><strong>Remaining Slots: ${available - used}</strong><label><input id="weapon-auto-calculate" type="checkbox" ${data.weaponProficiencySettings.autoCalculate ? 'checked' : ''}> Automatically Calculate Weapon Proficiency Slots</label>${data.weaponProficiencySettings.autoCalculate ? '' : '<label>Available Slots <input id="weapon-available-slots" type="number" min="0" step="1" value="' + esc(data.weaponProficiencySettings.availableSlots || 0) + '"></label>'}</div><div class="weapon-proficiency-picker"><label for="weapon-proficiency-search">Search weapon proficiencies</label><input id="weapon-proficiency-search" type="search" placeholder="Search by weapon name"><div id="weapon-proficiency-results" class="weapon-proficiency-results"></div></div><div class="tableWrap"><table class="weapon-proficiencies-table"><thead><tr><th>Weapon</th><th>Catalog data</th><th>Proficient</th><th>Specialization</th><th></th></tr></thead><tbody>${data.weaponProficiencies.map((state, index) => { const entry = weaponProficiencyCatalog.find(item => item.proficiencyId === state.proficiencyId || item.weaponId === state.weaponId); const record = equipmentCatalogue.find(item => item.id === state.weaponId); return `<tr><th scope="row">${esc(entry?.name || record?.name || state.weaponId || 'Custom weapon')}</th><td>${esc(record ? [record.category, record.size, record.damage?.smallMedium, record.damage?.large].filter(Boolean).join(' / ') : '-')}</td><td><input type="checkbox" data-weapon-proficiency-index="${index}" data-weapon-proficiency-key="proficient" ${state.proficient ? 'checked' : ''} aria-label="${esc(entry?.name || 'Weapon')} proficient"></td><td><select data-weapon-proficiency-index="${index}" data-weapon-proficiency-key="specialization"><option value="none"${state.specialization === 'none' ? ' selected' : ''}>None</option><option value="specialized"${state.specialization === 'specialized' ? ' selected' : ''}>Specialized</option></select></td><td><button type="button" class="remove" data-weapon-proficiency-remove="${index}" aria-label="Remove weapon proficiency">×</button></td></tr>`; }).join('')}</tbody></table></div><small>Weapon proficiency state is stored separately from weapons. Statistics are read from the equipment catalogue.</small>`;
+    nwpCard.after(section);
+    const picker = section.querySelector('#weapon-proficiency-search');
+    const results = section.querySelector('#weapon-proficiency-results');
+    const renderPicker = () => { const query = picker.value.trim().toLowerCase(); const matches = weaponProficiencyCatalog.filter(item => !query || item.name.toLowerCase().includes(query)); results.innerHTML = matches.map(item => `<button type="button" data-weapon-proficiency-add="${esc(item.proficiencyId || item.weaponId)}">${esc(item.name)}</button>`).join(''); results.querySelectorAll('[data-weapon-proficiency-add]').forEach(button => button.onclick = () => { const entry = weaponProficiencyCatalog.find(item => (item.proficiencyId || item.weaponId) === button.dataset.weaponProficiencyAdd); if (!entry) return; data.weaponProficiencies.push({ proficiencyId: entry.proficiencyId || null, weaponId: entry.weaponId || null, proficient: false, specialization: 'none' }); changed(); render(); }); };
+    picker.oninput = renderPicker;
+    renderPicker();
+    section.querySelectorAll('[data-weapon-proficiency-index]').forEach(input => input.onchange = () => {
+        const state = data.weaponProficiencies[+input.dataset.weaponProficiencyIndex];
+        state[input.dataset.weaponProficiencyKey] = input.type === 'checkbox' ? input.checked : input.value;
+        const summary = section.querySelector('.weapon-proficiency-summary');
+        if (summary) {
+            const used = data.weaponProficiencies.filter(item => item.proficient).length;
+            const available = data.weaponProficiencySettings.autoCalculate ? (() => { const entry = data.identity.classEntries?.[0] || {}; const key = String(entry.className || '').toLowerCase().split(/\s|\//)[0]; const group = proficiencyRules.classMappings?.[key]; const rules = proficiencyRules.groups?.[group]?.weaponProficiencies; const level = Number.parseInt(entry.level || data.identity.level, 10); return rules && Number.isInteger(level) && level >= 1 ? rules.initialSlots + Math.floor((level - 1) / rules.additionalSlotEveryLevels) : 0; })() : Number(data.weaponProficiencySettings.availableSlots) || 0;
+            summary.querySelector('strong:nth-child(1)').textContent = `Available Slots: ${available}`;
+            summary.querySelector('strong:nth-child(2)').textContent = `Used Slots: ${used}`;
+            summary.querySelector('strong:nth-child(3)').textContent = `Remaining Slots: ${available - used}`;
+        }
+        changed();
+    });
+    section.querySelectorAll('[data-weapon-proficiency-remove]').forEach(button => button.onclick = () => { data.weaponProficiencies.splice(+button.dataset.weaponProficiencyRemove, 1); changed(); render(); });
+    section.querySelector('#weapon-auto-calculate').onchange = event => { data.weaponProficiencySettings.autoCalculate = event.target.checked; changed(); render(); };
+    section.querySelector('#weapon-available-slots')?.addEventListener('input', event => { data.weaponProficiencySettings.availableSlots = event.target.value; changed(); });
+}
+
 function setupProficiencyAndInventorySections() {
     const cards = [...document.querySelectorAll('.grid > .card')];
     const proficiencyCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Proficiencies'));
@@ -2405,6 +2507,7 @@ function render() {
     setupSurpriseSection();
     setupGlobalModifiersSection();
     setupProficiencyAndInventorySections();
+    setupWeaponProficiencySection();
     setupSurpriseReferenceSection();
     setupBladesingerReferenceSection();
     setupAbilityTooltips();
@@ -2631,4 +2734,4 @@ try {
     data = normalize(JSON.parse(localStorage.getItem('adnd2e-sheet-v1') || '{}'))
 } catch {}
 render();
-Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog()]).then(() => render());
+Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules()]).then(() => render());
