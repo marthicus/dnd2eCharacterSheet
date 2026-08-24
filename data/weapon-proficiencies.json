@@ -23,5 +23,6 @@
   {"weaponId":"short-sword","name":"Sword, Short"},
   {"weaponId":"two-handed-sword","name":"Sword, Two-Handed"},
   {"weaponId":"warhammer","name":"Warhammer"},
-  {"weaponId":"whip","name":"Whip"}
+  {"weaponId":"whip","name":"Whip"},
+  {"proficiencyId":"two-weapon-fighting","weaponId":null,"name":"Two Weapon Fighting"}
 ]

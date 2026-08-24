@@ -109,6 +109,7 @@ const FIXED = {
     weaponProficiencies: [],
     weaponProficiencySettings: { autoCalculate: true, availableSlots: 0 },
     languages: [],
+    languageTracking: { availableBonusLanguages: null },
     nwpSettings: { autoCalculate: false, exemptBonusProficiencies: true, availableSlots: 0 },
     inventory: [],
     spells: [],
@@ -141,6 +142,11 @@ let nonweaponClassCrossovers = {};
 let classAbilitiesCatalog = {};
 let weaponProficiencyCatalog = [];
 let proficiencyRules = {};
+let languageCatalog = [];
+let languageCategories = [];
+let languageSourceTypes = [];
+let intelligenceBonusLanguages = [];
+let languageRaceRules = {};
 const gameRules = {
     currencyConversion: { cp: 1, sp: 10, ep: 50, gp: 100, pp: 500 },
     wealthCalculations: { baseCurrency: 'cp', displayCurrency: 'gp', allowCurrencyBreakdown: true, autoCalculateInventoryValue: true }
@@ -196,7 +202,8 @@ function normalize(x = {}) {
     if ((!Array.isArray(x.languages) || !x.languages.length) && legacyLanguageRows.length) d.languages = legacyLanguageRows.map(item => ({ name: item.name || '', source: item.source || 'legacy', countsAgainstLanguageLimit: false }));
     if (legacyWeaponRows.length || legacyLanguageRows.length) d.proficiencies = d.proficiencies.filter(item => !legacyWeaponRows.includes(item) && !legacyLanguageRows.includes(item));
     d.weaponProficiencySettings = { ...d.weaponProficiencySettings, ...(x.weaponProficiencySettings || {}) };
-    d.languages = Array.isArray(x.languages) && x.languages.length ? x.languages.map(language => ({ name: typeof language.name === 'string' ? language.name : '', source: typeof language.source === 'string' ? language.source : '', countsAgainstLanguageLimit: language.countsAgainstLanguageLimit === true })) : d.languages;
+    d.languages = Array.isArray(x.languages) && x.languages.length ? x.languages.map(language => ({ id: typeof language.id === 'string' ? language.id : '', name: typeof language.name === 'string' ? language.name : '', category: language.category ?? null, sourceType: ['native', 'racial', 'bonus', 'class', 'kit', 'campaign', 'magic'].includes(language.sourceType) ? language.sourceType : language.source === 'racial' ? 'racial' : 'native', isAutomatic: language.isAutomatic === true, speaks: language.speaks !== false, reads: language.reads === true, writes: language.writes === true, usesLanguageSlot: language.usesLanguageSlot === true, countsAgainstLanguageLimit: language.countsAgainstLanguageLimit === true, notes: language.notes ?? '' })) : d.languages;
+    d.languageTracking = { ...d.languageTracking, ...(x.languageTracking || {}) };
     d.nwpSettings = { ...d.nwpSettings, ...(x.nwpSettings || {}) };
     d.resistances = d.resistances.map(item => ({ type: typeof item.type === 'string' ? item.type : 'Other', appliesTo: item.appliesTo ?? '', value: item.value ?? '', source: item.source ?? '', active: item.active !== false, notes: item.notes ?? '' }));
     d.surpriseBonus = { ...d.surpriseBonus, ...(x.surpriseBonus || {}) };
@@ -434,6 +441,25 @@ async function loadProficiencyRules() {
     }
 }
 
+async function loadLanguageCatalog() {
+    try {
+        const response = await fetch('data/languages.json');
+        if (!response.ok) throw new Error('Language catalogue unavailable');
+        const catalog = await response.json();
+        languageCatalog = Array.isArray(catalog) ? catalog : catalog.languages || [];
+        languageCategories = catalog.categories || [];
+        languageSourceTypes = catalog.sourceTypes || [];
+        intelligenceBonusLanguages = catalog.intelligenceBonusLanguages || [];
+        languageRaceRules = catalog.raceRules || {};
+    } catch {
+        languageCatalog = [];
+        languageCategories = [];
+        languageSourceTypes = [];
+        intelligenceBonusLanguages = [];
+        languageRaceRules = {};
+    }
+}
+
 function globalModifierTotal(category, appliesTo = '') {
     return (data.globalModifiers || []).filter(item => item.active !== false && item.category === category && (!item.appliesTo || !appliesTo || item.appliesTo.toLowerCase() === appliesTo.toLowerCase())).reduce((total, item) => total + (Number.parseInt(item.value, 10) || 0), 0);
 }
@@ -608,6 +634,8 @@ function setupRaceSystem() {
         data.raceSelection = preset ? race : '';
         data.manualRace = race === 'Other' ? manual.value : '';
         data.identity.race = race === 'Other' ? manual.value : race;
+        syncAutomaticLanguages(race);
+        if (document.querySelector('.languages-section')) { changed(); render(); return; }
         updateVisionFromRace(race);
         data.racialBonuses = { ...(preset?.bonuses || {}) };
         if (preset?.choiceAbilities?.includes(data.racialBonusChoice)) data.racialBonuses[data.racialBonusChoice] = 1;
@@ -1321,18 +1349,18 @@ const abilityBenefits = {
         [25, 'Hit point +2 (warrior +7); system shock 100%; resurrection survival 100%; poison save +4; regeneration 1/1 turn']
     ],
     int: [
-        [1, '0 languages; no spell level, spell learning, or additional spells'], [9, '2 languages; spells up to 4th level; 35% chance to learn; 7 spells per level'],
-        [10, '2 languages; spells up to 5th level; 40% chance to learn; 7 spells per level'], [11, '3 languages; spells up to 6th level; 50% chance to learn; 9 spells per level'],
-        [12, '3 languages; spells up to 6th level; 55% chance to learn; 9 spells per level'], [13, '4 languages; spells up to 7th level; 60% chance to learn; 9 spells per level'],
-        [14, '4 languages; spells up to 7th level; 65% chance to learn; 11 spells per level'], [15, '5 languages; spells up to 8th level; 70% chance to learn; 11 spells per level'],
-        [16, '5 languages; spells up to 8th level; 75% chance to learn; 11 spells per level'], [17, '6 languages; spells up to 9th level; 85% chance to learn; all spells per level'],
-        [18, '7 languages; spells up to 9th level; 90% chance to learn; all spells per level'], [19, '8 languages; spells up to 9th level; 95% chance to learn; all spells; immune to 1st-level illusions'],
-        [20, '9 languages; spells up to 9th level; 96% chance to learn; all spells; immune to 1st- and 2nd-level illusions'],
-        [21, '10 languages; spells up to 9th level; 97% chance to learn; all spells; immune through 3rd-level illusions'],
-        [22, '11 languages; spells up to 9th level; 98% chance to learn; all spells; immune through 4th-level illusions'],
-        [23, '12 languages; spells up to 9th level; 99% chance to learn; all spells; immune through 5th-level illusions'],
-        [24, '15 languages; spells up to 9th level; 100% chance to learn; all spells; immune through 6th-level illusions'],
-        [25, '20 languages; spells up to 9th level; 100% chance to learn; all spells; immune through 7th-level illusions']
+        [1, '0 bonus languages; no spell level, spell learning, or additional spells'], [9, '2 bonus languages; spells up to 4th level; 35% chance to learn; 7 spells per level'],
+        [10, '2 bonus languages; spells up to 5th level; 40% chance to learn; 7 spells per level'], [11, '3 bonus languages; spells up to 6th level; 50% chance to learn; 9 spells per level'],
+        [12, '3 bonus languages; spells up to 6th level; 55% chance to learn; 9 spells per level'], [13, '4 bonus languages; spells up to 7th level; 60% chance to learn; 9 spells per level'],
+        [14, '4 bonus languages; spells up to 7th level; 65% chance to learn; 11 spells per level'], [15, '5 bonus languages; spells up to 8th level; 70% chance to learn; 11 spells per level'],
+        [16, '5 bonus languages; spells up to 8th level; 75% chance to learn; 11 spells per level'], [17, '6 bonus languages; spells up to 9th level; 85% chance to learn; all spells per level'],
+        [18, '7 bonus languages; spells up to 9th level; 90% chance to learn; all spells per level'], [19, '8 bonus languages; spells up to 9th level; 95% chance to learn; all spells; immune to 1st-level illusions'],
+        [20, '9 bonus languages; spells up to 9th level; 96% chance to learn; all spells; immune to 1st- and 2nd-level illusions'],
+        [21, '10 bonus languages; spells up to 9th level; 97% chance to learn; all spells; immune through 3rd-level illusions'],
+        [22, '11 bonus languages; spells up to 9th level; 98% chance to learn; all spells; immune through 4th-level illusions'],
+        [23, '12 bonus languages; spells up to 9th level; 99% chance to learn; all spells; immune through 5th-level illusions'],
+        [24, '15 bonus languages; spells up to 9th level; 100% chance to learn; all spells; immune through 6th-level illusions'],
+        [25, '20 bonus languages; spells up to 9th level; 100% chance to learn; all spells; immune through 7th-level illusions']
     ],
     wis: [
         [1, 'Magical defense -6; spell failure 100%'], [2, 'Magical defense -4; spell failure 60%'], [3, 'Magical defense -3; spell failure 50%'],
@@ -2304,7 +2332,41 @@ function updateNwpTargets() {
     });
 }
 function languagesMarkup() {
-    return `<section class="card wide languages-section"><h2>Languages</h2><div class="language-summary">Languages Known: <strong>${data.languages.length}</strong><span>Bonus Languages From Intelligence: 0 <small>(intelligence language data not supplied)</small></span></div><div class="tableWrap"><table class="languages-table"><thead><tr><th>Language</th><th>Source</th><th>Counts Against Language Limit</th><th></th></tr></thead><tbody>${data.languages.map((language, index) => `<tr><td><input data-array="languages" data-index="${index}" data-key="name" value="${esc(language.name)}"></td><td><input data-array="languages" data-index="${index}" data-key="source" value="${esc(language.source)}"></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="countsAgainstLanguageLimit" ${language.countsAgainstLanguageLimit ? 'checked' : ''}></td><td><button class="remove" data-remove="languages" data-index="${index}" aria-label="Remove language">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="languages">Add language</button></section>`;
+    const intelligence = Number.parseInt(data.abilities.int, 10);
+    const available = Number.isInteger(intelligence) && intelligence >= 1 ? intelligenceBonusLanguages[intelligence - 1] || 0 : 0;
+    const used = data.languages.filter(language => language.sourceType === 'bonus' || language.source === 'bonus').length;
+    const remaining = available - used;
+    return `<section class="card wide languages-section"><h2>Languages</h2><div class="language-summary"><strong>Known Languages: ${data.languages.length}</strong><span>Available Bonus Languages: ${available}</span><span>Used Bonus Languages: ${used}</span><strong>Remaining Bonus Languages: ${remaining}</strong></div><div class="language-picker"><label for="language-search">Search language catalogue</label><input id="language-search" type="search" placeholder="Search language name"><div id="language-results" class="language-results"></div></div><div class="tableWrap"><table class="languages-table"><thead><tr><th>Language</th><th>Category</th><th>Source</th><th>Speaks</th><th>Reads</th><th>Writes</th><th>Uses Language Slot</th><th>Notes</th><th></th></tr></thead><tbody>${data.languages.map((language, index) => `<tr><td><input data-array="languages" data-index="${index}" data-key="name" value="${esc(language.name)}"></td><td><input data-array="languages" data-index="${index}" data-key="category" value="${esc(language.category || '')}"></td><td><select data-array="languages" data-index="${index}" data-key="sourceType">${languageSourceTypes.map(source => `<option value="${source}"${language.sourceType === source ? ' selected' : ''}>${source}</option>`).join('')}</select></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="speaks" ${language.speaks ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="reads" ${language.reads ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="writes" ${language.writes ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="usesLanguageSlot" ${language.usesLanguageSlot ? 'checked' : ''}></td><td><input data-array="languages" data-index="${index}" data-key="notes" value="${esc(language.notes)}"></td><td><button class="remove" data-remove="languages" data-index="${index}" aria-label="Remove language">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="languages">Add custom language</button></section>`;
+}
+
+function updateLanguageSummary() {
+    const summary = document.querySelector('.language-summary');
+    if (!summary) return;
+    const intelligence = Number.parseInt(data.abilities.int, 10);
+    const available = Number.isInteger(intelligence) && intelligence >= 1 ? intelligenceBonusLanguages[intelligence - 1] || 0 : 0;
+    const used = data.languages.filter(language => language.sourceType === 'bonus' || language.source === 'bonus').length;
+    summary.children[0].textContent = `Known Languages: ${data.languages.length}`;
+    summary.children[1].textContent = `Available Bonus Languages: ${available}`;
+    summary.children[2].textContent = `Used Bonus Languages: ${used}`;
+    summary.children[3].textContent = `Remaining Bonus Languages: ${available - used}`;
+}
+
+function syncAutomaticLanguages(race) {
+    const raceKey = { Humans: 'human', Dwarf: 'dwarf', Elves: 'elf', Gnome: 'gnome', Goblins: 'goblin', 'Half-Elf': 'half-elf', Halfling: 'halfling' }[race];
+    const automaticIds = languageRaceRules[raceKey]?.automatic || [];
+    data.languages = data.languages.filter(language => !language.isAutomatic);
+    automaticIds.forEach(id => {
+        const catalog = languageCatalog.find(language => language.id === id);
+        if (!catalog) return;
+        const existing = data.languages.find(language => language.id === id || language.name.toLowerCase() === catalog.name.toLowerCase());
+        const language = existing || { id: catalog.id, name: catalog.name, category: catalog.category || null, sourceType: 'racial', speaks: catalog.speaks !== false, reads: catalog.reads === true, writes: catalog.writes === true, usesLanguageSlot: false, notes: '' };
+        language.id = catalog.id;
+        language.name = catalog.name;
+        language.isAutomatic = true;
+        language.usesLanguageSlot = false;
+        language.sourceType = 'racial';
+        if (!existing) data.languages.push(language);
+    });
 }
 
 function setupWeaponProficiencySection() {
@@ -2315,13 +2377,14 @@ function setupWeaponProficiencySection() {
     section.className = 'card wide weapon-proficiencies-section';
     const available = data.weaponProficiencySettings.autoCalculate ? (() => { const entry = data.identity.classEntries?.[0] || {}; const key = String(entry.className || '').toLowerCase().split(/\s|\//)[0]; const group = proficiencyRules.classMappings?.[key]; const rules = proficiencyRules.groups?.[group]?.weaponProficiencies; const level = Number.parseInt(entry.level || data.identity.level, 10); return rules && Number.isInteger(level) && level >= 1 ? rules.initialSlots + Math.floor((level - 1) / rules.additionalSlotEveryLevels) : 0; })() : Number(data.weaponProficiencySettings.availableSlots) || 0;
     const used = data.weaponProficiencies.filter(item => item.proficient).length;
-    section.innerHTML = `<h2>Weapon Proficiencies</h2><div class="weapon-proficiency-summary"><strong>Available Slots: ${available}</strong><strong>Used Slots: ${used}</strong><strong>Remaining Slots: ${available - used}</strong><label><input id="weapon-auto-calculate" type="checkbox" ${data.weaponProficiencySettings.autoCalculate ? 'checked' : ''}> Automatically Calculate Weapon Proficiency Slots</label>${data.weaponProficiencySettings.autoCalculate ? '' : '<label>Available Slots <input id="weapon-available-slots" type="number" min="0" step="1" value="' + esc(data.weaponProficiencySettings.availableSlots || 0) + '"></label>'}</div><div class="weapon-proficiency-picker"><label for="weapon-proficiency-search">Search weapon proficiencies</label><input id="weapon-proficiency-search" type="search" placeholder="Search by weapon name"><div id="weapon-proficiency-results" class="weapon-proficiency-results"></div></div><div class="tableWrap"><table class="weapon-proficiencies-table"><thead><tr><th>Weapon</th><th>Catalog data</th><th>Proficient</th><th>Specialization</th><th></th></tr></thead><tbody>${data.weaponProficiencies.map((state, index) => { const entry = weaponProficiencyCatalog.find(item => (state.proficiencyId && item.proficiencyId === state.proficiencyId) || (state.weaponId && item.weaponId === state.weaponId) || (state.name && item.name?.toLowerCase() === state.name?.toLowerCase())); const record = equipmentCatalogue.find(item => (state.weaponId && item.id === state.weaponId) || (state.name && item.name?.toLowerCase() === state.name?.toLowerCase())); return `<tr><th scope="row">${esc(entry?.name || record?.name || state.name || state.weaponId || 'Custom weapon')}</th><td>${esc(record ? [record.category, record.size, record.damage?.smallMedium, record.damage?.large].filter(Boolean).join(' / ') : '-')}</td><td><input type="checkbox" data-weapon-proficiency-index="${index}" data-weapon-proficiency-key="proficient" ${state.proficient ? 'checked' : ''} aria-label="${esc(entry?.name || state.name || 'Weapon')} proficient"></td><td><select data-weapon-proficiency-index="${index}" data-weapon-proficiency-key="specialization"><option value="none"${state.specialization === 'none' ? ' selected' : ''}>None</option><option value="specialized"${state.specialization === 'specialized' ? ' selected' : ''}>Specialized</option></select></td><td><button type="button" class="remove" data-weapon-proficiency-remove="${index}" aria-label="Remove weapon proficiency">×</button></td></tr>`; }).join('')}</tbody></table></div><small>Weapon proficiency state is stored separately from weapons. Statistics are read from the equipment catalogue.</small>`;
+    section.innerHTML = `<h2>Weapon Proficiencies</h2><div class="weapon-proficiency-summary"><strong>Available Slots: ${available}</strong><strong>Used Slots: ${used}</strong><strong>Remaining Slots: ${available - used}</strong><label><input id="weapon-auto-calculate" type="checkbox" ${data.weaponProficiencySettings.autoCalculate ? 'checked' : ''}> Automatically Calculate Weapon Proficiency Slots</label>${data.weaponProficiencySettings.autoCalculate ? '' : '<label>Available Slots <input id="weapon-available-slots" type="number" min="0" step="1" value="' + esc(data.weaponProficiencySettings.availableSlots || 0) + '"></label>'}</div><div class="weapon-proficiency-picker"><label for="weapon-proficiency-search">Search weapon proficiencies</label><input id="weapon-proficiency-search" type="search" placeholder="Search by weapon name"><div id="weapon-proficiency-results" class="weapon-proficiency-results"></div></div><div class="tableWrap"><table class="weapon-proficiencies-table"><thead><tr><th>Weapon</th><th>Catalog data</th><th>Proficient</th><th>Specialization</th><th></th></tr></thead><tbody>${data.weaponProficiencies.map((state, index) => { const entry = weaponProficiencyCatalog.find(item => (state.proficiencyId && item.proficiencyId === state.proficiencyId) || (state.weaponId && item.weaponId === state.weaponId) || (state.name && item.name?.toLowerCase() === state.name?.toLowerCase())); const record = equipmentCatalogue.find(item => (state.weaponId && item.id === state.weaponId) || (state.name && item.name?.toLowerCase() === state.name?.toLowerCase())); return `<tr><td><input data-weapon-proficiency-index="${index}" data-weapon-proficiency-key="name" value="${esc(entry?.name || record?.name || state.name || state.weaponId || '')}" placeholder="Custom proficiency"></td><td>${esc(record ? [record.category, record.size, record.damage?.smallMedium, record.damage?.large].filter(Boolean).join(' / ') : 'Manual')}</td><td><input type="checkbox" data-weapon-proficiency-index="${index}" data-weapon-proficiency-key="proficient" ${state.proficient ? 'checked' : ''} aria-label="${esc(entry?.name || state.name || 'Weapon')} proficient"></td><td><select data-weapon-proficiency-index="${index}" data-weapon-proficiency-key="specialization"><option value="none"${state.specialization === 'none' ? ' selected' : ''}>None</option><option value="specialized"${state.specialization === 'specialized' ? ' selected' : ''}>Specialized</option></select></td><td><button type="button" class="remove" data-weapon-proficiency-remove="${index}" aria-label="Remove weapon proficiency">×</button></td></tr>`; }).join('')}</tbody></table></div><button type="button" class="add" data-weapon-proficiency-custom>Add custom proficiency</button><small>Weapon proficiency state is stored separately from weapons. Statistics are read from the equipment catalogue.</small>`;
     nwpCard.after(section);
     const picker = section.querySelector('#weapon-proficiency-search');
     const results = section.querySelector('#weapon-proficiency-results');
     const renderPicker = () => { const query = picker.value.trim().toLowerCase(); const matches = weaponProficiencyCatalog.filter(item => !query || item.name.toLowerCase().includes(query)); results.innerHTML = matches.map(item => `<button type="button" data-weapon-proficiency-add="${esc(item.proficiencyId || item.weaponId)}">${esc(item.name)}</button>`).join(''); results.querySelectorAll('[data-weapon-proficiency-add]').forEach(button => button.onclick = () => { const entry = weaponProficiencyCatalog.find(item => (item.proficiencyId || item.weaponId) === button.dataset.weaponProficiencyAdd); if (!entry) return; data.weaponProficiencies.push({ proficiencyId: entry.proficiencyId || null, weaponId: entry.weaponId || null, proficient: false, specialization: 'none' }); changed(); render(); }); };
     picker.oninput = renderPicker;
     renderPicker();
+    section.querySelector('[data-weapon-proficiency-custom]').onclick = () => { data.weaponProficiencies.push({ proficiencyId: null, weaponId: null, name: '', proficient: false, specialization: 'none' }); changed(); render(); };
     section.querySelectorAll('[data-weapon-proficiency-index]').forEach(input => input.onchange = () => {
         const state = data.weaponProficiencies[+input.dataset.weaponProficiencyIndex];
         state[input.dataset.weaponProficiencyKey] = input.type === 'checkbox' ? input.checked : input.value;
@@ -2433,11 +2496,22 @@ function setupProficiencyAndInventorySections() {
         const availableSlots = proficiencyCard.querySelector('#nwp-available-slots');
         if (availableSlots) availableSlots.oninput = () => { data.nwpSettings.availableSlots = availableSlots.value; const summary = proficiencyCard.querySelector('#nwp-summary'); summary.innerHTML = nwpSummaryMarkup(); changed(); };
         updateNwpTargets();
-        const languageSection = document.querySelector('.languages-section');
-        if (languageSection) languageSection.remove();
+        const existingLanguageSection = document.querySelector('.languages-section');
+        if (existingLanguageSection) existingLanguageSection.remove();
         const languageWrapper = document.createElement('div');
         languageWrapper.innerHTML = languagesMarkup();
-        proficiencyCard.after(languageWrapper.firstElementChild);
+        const languageSection = languageWrapper.firstElementChild;
+        proficiencyCard.after(languageSection);
+        const languageSearch = languageSection.querySelector('#language-search');
+        const languageResults = languageSection.querySelector('#language-results');
+        const renderLanguageResults = () => {
+            const query = languageSearch.value.trim().toLowerCase();
+            const matches = languageCatalog.filter(item => !query || item.name.toLowerCase().includes(query)).slice(0, 30);
+            languageResults.innerHTML = matches.map(item => `<button type="button" data-language-add="${esc(item.id)}">${esc(item.name)} <small>${esc(item.category || '')}</small></button>`).join('');
+            languageResults.querySelectorAll('[data-language-add]').forEach(button => button.onclick = () => { const item = languageCatalog.find(record => record.id === button.dataset.languageAdd); if (!item) return; data.languages.push({ id: item.id, name: item.name, category: item.category || null, sourceType: item.sourceType || 'native', speaks: item.speaks !== false, reads: item.reads === true, writes: item.writes === true, usesLanguageSlot: item.usesLanguageSlot === true, notes: Array.isArray(item.notes) ? item.notes.join('; ') : item.notes || '' }); changed(); render(); });
+        };
+        languageSearch.oninput = renderLanguageResults;
+        renderLanguageResults();
     }
     const inventoryCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Inventory'));
     const currencyCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Currency'));
@@ -2569,6 +2643,7 @@ function bind() {
             if (e.dataset.key === 'str') updateWeaponThac0();
             updateClassRequirementNotice();
             if (e.dataset.key === 'str') updateEncumbranceSummary();
+            if (e.dataset.key === 'int') updateLanguageSummary();
             updateNwpTargets();
         }
         if (e.dataset.section === 'combat' && e.dataset.key === 'ac') {
@@ -2607,6 +2682,7 @@ function bind() {
             document.querySelector('#nwp-summary').innerHTML = nwpSummaryMarkup();
             updateNwpTargets();
         }
+        if (e.dataset.array === 'languages') updateLanguageSummary();
         if (e.dataset.array === 'inventory') {
             if (e.dataset.key === 'item') {
                 const match = equipmentCatalogue.find(record => record.name.toLowerCase() === e.value.trim().toLowerCase());
@@ -2663,7 +2739,13 @@ function bind() {
             },
             languages: {
                 name: '',
-                source: 'custom',
+                sourceType: 'native',
+                category: '',
+                id: '',
+                speaks: true,
+                reads: false,
+                writes: false,
+                usesLanguageSlot: false,
                 countsAgainstLanguageLimit: false
             },
             inventory: {
@@ -2742,4 +2824,4 @@ try {
     data = normalize(JSON.parse(localStorage.getItem('adnd2e-sheet-v1') || '{}'))
 } catch {}
 render();
-Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules()]).then(() => render());
+Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadLanguageCatalog()]).then(() => render());
