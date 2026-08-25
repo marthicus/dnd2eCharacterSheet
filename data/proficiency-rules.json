@@ -1,13 +1,132 @@
 {
   "schemaVersion": 1,
-  "source": {"book": "AD&D 2E Player's Handbook", "table": 34, "title": "Proficiency Slots"},
-  "groups": {
-    "warrior": {"weaponProficiencies": {"initialSlots": 4, "additionalSlotEveryLevels": 3, "nonproficiencyPenalty": -2}, "nonweaponProficiencies": {"initialSlots": 3, "additionalSlotEveryLevels": 3}},
-    "wizard": {"weaponProficiencies": {"initialSlots": 1, "additionalSlotEveryLevels": 6, "nonproficiencyPenalty": -5}, "nonweaponProficiencies": {"initialSlots": 4, "additionalSlotEveryLevels": 3}},
-    "priest": {"weaponProficiencies": {"initialSlots": 2, "additionalSlotEveryLevels": 4, "nonproficiencyPenalty": -3}, "nonweaponProficiencies": {"initialSlots": 4, "additionalSlotEveryLevels": 3}},
-    "rogue": {"weaponProficiencies": {"initialSlots": 2, "additionalSlotEveryLevels": 4, "nonproficiencyPenalty": -3}, "nonweaponProficiencies": {"initialSlots": 3, "additionalSlotEveryLevels": 4}}
+  "source": {
+    "book": "AD&D 2E Player's Handbook",
+    "table": 34,
+    "title": "Proficiency Slots"
   },
-  "classMappings": {"fighter":"warrior","paladin":"warrior","ranger":"warrior","mage":"wizard","illusionist":"wizard","specialist-wizard":"wizard","cleric":"priest","druid":"priest","specialty-priest":"priest","priest-of-specific-mythos":"priest","thief":"rogue","bard":"rogue"},
-  "calculationRules": {"firstAdditionalSlotLevel":"1 + additionalSlotEveryLevels","additionalSlotsFormula":"floor((level - 1) / additionalSlotEveryLevels)","totalWeaponSlotsFormula":"initialSlots + floor((level - 1) / additionalSlotEveryLevels)","minimumLevel":1},
-  "optionalRules": {"includeIntelligenceBonusNwpSlots":true,"excludeGrantedProficienciesFromLimits":true,"grantedSourcesExcludedFromLimits":["class","kit","race","language","campaign"]}
+  "groups": {
+    "warrior": {
+      "weaponProficiencies": {
+        "initialSlots": 4,
+        "additionalSlotEveryLevels": 3,
+        "nonproficiencyPenalty": -2
+      },
+      "nonweaponProficiencies": {
+        "initialSlots": 3,
+        "additionalSlotEveryLevels": 3
+      }
+    },
+    "wizard": {
+      "weaponProficiencies": {
+        "initialSlots": 1,
+        "additionalSlotEveryLevels": 6,
+        "nonproficiencyPenalty": -5
+      },
+      "nonweaponProficiencies": {
+        "initialSlots": 4,
+        "additionalSlotEveryLevels": 3
+      }
+    },
+    "priest": {
+      "weaponProficiencies": {
+        "initialSlots": 2,
+        "additionalSlotEveryLevels": 4,
+        "nonproficiencyPenalty": -3
+      },
+      "nonweaponProficiencies": {
+        "initialSlots": 4,
+        "additionalSlotEveryLevels": 3
+      }
+    },
+    "rogue": {
+      "weaponProficiencies": {
+        "initialSlots": 2,
+        "additionalSlotEveryLevels": 4,
+        "nonproficiencyPenalty": -3
+      },
+      "nonweaponProficiencies": {
+        "initialSlots": 3,
+        "additionalSlotEveryLevels": 4
+      }
+    }
+  },
+  "classMappings": {
+    "fighter": "warrior",
+    "paladin": "warrior",
+    "ranger": "warrior",
+    "mage": "wizard",
+    "illusionist": "wizard",
+    "specialist-wizard": "wizard",
+    "cleric": "priest",
+    "druid": "priest",
+    "specialty-priest": "priest",
+    "priest-of-specific-mythos": "priest",
+    "thief": "rogue",
+    "bard": "rogue"
+  },
+  "calculationRules": {
+    "firstAdditionalSlotLevel": "1 + additionalSlotEveryLevels",
+    "additionalSlotsFormula": "floor((level - 1) / additionalSlotEveryLevels)",
+    "totalWeaponSlotsFormula": "initialSlots + floor((level - 1) / additionalSlotEveryLevels)",
+    "minimumLevel": 1,
+    "nonweaponCheckMethod": "Roll 1d20; result succeeds when less than or equal to relevant ability plus modifiers.",
+    "natural20AlwaysFails": true,
+    "outsideAllowedGroupAdditionalSlots": 1,
+    "additionalSlotCheckBonus": 1
+  },
+  "optionalRules": {
+    "includeIntelligenceBonusNwpSlots": true,
+    "excludeGrantedProficienciesFromLimits": true,
+    "grantedSourcesExcludedFromLimits": [
+      "class",
+      "kit",
+      "race",
+      "language",
+      "campaign"
+    ]
+  },
+  "classGroupCrossovers": {
+    "fighter": [
+      "warrior",
+      "general"
+    ],
+    "paladin": [
+      "warrior",
+      "priest",
+      "general"
+    ],
+    "ranger": [
+      "warrior",
+      "wizard",
+      "general"
+    ],
+    "cleric": [
+      "priest",
+      "general"
+    ],
+    "druid": [
+      "priest",
+      "warrior",
+      "general"
+    ],
+    "mage": [
+      "wizard",
+      "general"
+    ],
+    "illusionist": [
+      "wizard",
+      "general"
+    ],
+    "thief": [
+      "rogue",
+      "general"
+    ],
+    "bard": [
+      "rogue",
+      "warrior",
+      "wizard",
+      "general"
+    ]
+  }
 }

@@ -4,12 +4,40 @@
     "thiefSkills": {
       "heading": "Thief skills",
       "valueLabel": "Percent",
-      "entries": ["Pick Pockets", "Open Locks", "Find/Remove Traps", "Move Silently", "Hide in Shadows", "Detect Noise", "Climb Walls", "Read Languages", "Backstab"]
+      "entries": [
+        "Pick Pockets",
+        "Open Locks",
+        "Find/Remove Traps",
+        "Move Silently",
+        "Hide in Shadows",
+        "Detect Noise",
+        "Climb Walls",
+        "Read Languages",
+        "Backstab"
+      ]
     },
     "undeadTurning": {
       "heading": "Undead turning",
       "valueLabel": "Result",
-      "entries": ["Skeleton or 1 HD", "Zombie", "Ghoul or 2 HD", "Shadow or 3-4 HD", "Wight or 5 HD", "Ghast", "Wraith or 6 HD", "Mummy or 7 HD", "Spectre or 8 HD", "Vampire or 9 HD", "Ghost or 10 HD", "Lich or 11+ HD", "Special"]
+      "entries": [
+        "Skeleton or 1 HD",
+        "Zombie",
+        "Ghoul or 2 HD",
+        "Shadow or 3-4 HD",
+        "Wight or 5 HD",
+        "Ghast",
+        "Wraith or 6 HD",
+        "Mummy or 7 HD",
+        "Spectre or 8 HD",
+        "Vampire or 9 HD",
+        "Ghost or 10 HD",
+        "Lich or 11+ HD",
+        "Special"
+      ]
     }
-  }
+  },
+  "normalizationNotes": [
+    "Existing content is an application entry template rather than source-backed class-ability records.",
+    "Preserved without assigning classes, kits, descriptions, or source references that are not present in this file."
+  ]
 }

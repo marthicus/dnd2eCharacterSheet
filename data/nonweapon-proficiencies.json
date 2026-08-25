@@ -79,11 +79,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "ancient-history",
@@ -93,11 +94,12 @@
         "rogue",
         "wizard"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "animal-handling",
@@ -105,11 +107,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "wisdom",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "animal-lore",
@@ -117,11 +120,12 @@
       "groups": [
         "warrior"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "animal-training",
@@ -129,11 +133,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "wisdom",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "appraising",
@@ -141,11 +146,12 @@
       "groups": [
         "rogue"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "armorer",
@@ -153,11 +159,12 @@
       "groups": [
         "warrior"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "intelligence",
       "checkModifier": -2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "artistic-ability",
@@ -165,11 +172,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "wisdom",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "astrology",
@@ -178,11 +186,12 @@
         "priest",
         "wizard"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "intelligence",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "blacksmithing",
@@ -190,11 +199,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "strength",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "blind-fighting",
@@ -203,11 +213,12 @@
         "rogue",
         "warrior"
       ],
-      "slotsRequired": 2,
       "relevantAbility": null,
       "checkModifier": null,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "bowyer-fletcher",
@@ -215,11 +226,12 @@
       "groups": [
         "warrior"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "brewing",
@@ -227,11 +239,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "carpentry",
@@ -239,11 +252,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "strength",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "charioteering",
@@ -251,11 +265,12 @@
       "groups": [
         "warrior"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": 2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "cobbling",
@@ -263,11 +278,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "cooking",
@@ -275,11 +291,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "dancing",
@@ -287,11 +304,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "direction-sense",
@@ -299,11 +317,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "wisdom",
       "checkModifier": 1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "disguise",
@@ -311,11 +330,12 @@
       "groups": [
         "rogue"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "charisma",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "endurance",
@@ -323,11 +343,12 @@
       "groups": [
         "warrior"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "constitution",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "engineering",
@@ -336,11 +357,12 @@
         "priest",
         "wizard"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "intelligence",
       "checkModifier": -3,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "etiquette",
@@ -348,11 +370,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "charisma",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "fire-building",
@@ -360,11 +383,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "wisdom",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "fishing",
@@ -372,11 +396,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "wisdom",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "forgery",
@@ -384,11 +409,12 @@
       "groups": [
         "rogue"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "gaming",
@@ -397,11 +423,12 @@
         "rogue",
         "warrior"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "charisma",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "gem-cutting",
@@ -410,11 +437,12 @@
         "rogue",
         "wizard"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "dexterity",
       "checkModifier": -2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "healing",
@@ -422,11 +450,12 @@
       "groups": [
         "priest"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "wisdom",
       "checkModifier": -2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "heraldry",
@@ -434,11 +463,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "herbalism",
@@ -447,11 +477,12 @@
         "priest",
         "wizard"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "intelligence",
       "checkModifier": -2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "hunting",
@@ -459,11 +490,12 @@
       "groups": [
         "warrior"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "wisdom",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "juggling",
@@ -471,11 +503,12 @@
       "groups": [
         "rogue"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "jumping",
@@ -483,11 +516,12 @@
       "groups": [
         "rogue"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "strength",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "languages-ancient",
@@ -496,11 +530,12 @@
         "priest",
         "wizard"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "languages-modern",
@@ -508,11 +543,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "leatherworking",
@@ -520,11 +556,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "local-history",
@@ -533,11 +570,12 @@
         "priest",
         "rogue"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "charisma",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "mining",
@@ -545,11 +583,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "wisdom",
       "checkModifier": -3,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "mountaineering",
@@ -557,11 +596,12 @@
       "groups": [
         "warrior"
       ],
-      "slotsRequired": 1,
       "relevantAbility": null,
       "checkModifier": null,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "musical-instrument",
@@ -570,11 +610,12 @@
         "priest",
         "rogue"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "navigation",
@@ -584,11 +625,12 @@
         "warrior",
         "wizard"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": -2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "pottery",
@@ -596,11 +638,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": -2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "reading-lips",
@@ -608,11 +651,12 @@
       "groups": [
         "rogue"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "intelligence",
       "checkModifier": -2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "reading-writing",
@@ -621,11 +665,12 @@
         "priest",
         "wizard"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": 1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "religion",
@@ -634,11 +679,12 @@
         "priest",
         "wizard"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "wisdom",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "riding-airborne",
@@ -646,11 +692,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "wisdom",
       "checkModifier": -2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "riding-land-based",
@@ -658,11 +705,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "wisdom",
       "checkModifier": 3,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "rope-use",
@@ -670,11 +718,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "running",
@@ -682,11 +731,12 @@
       "groups": [
         "warrior"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "constitution",
       "checkModifier": -6,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "seamanship",
@@ -694,11 +744,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": 1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "seamstress-tailor",
@@ -706,11 +757,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "set-snares",
@@ -719,11 +771,12 @@
         "rogue",
         "warrior"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "singing",
@@ -731,11 +784,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "charisma",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "spellcraft",
@@ -744,11 +798,12 @@
         "priest",
         "wizard"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": -2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "stonemasonry",
@@ -756,11 +811,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "strength",
       "checkModifier": -2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "survival",
@@ -768,11 +824,12 @@
       "groups": [
         "warrior"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "intelligence",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "swimming",
@@ -780,11 +837,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "strength",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "tightrope-walking",
@@ -792,11 +850,12 @@
       "groups": [
         "rogue"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "tracking",
@@ -804,11 +863,12 @@
       "groups": [
         "warrior"
       ],
-      "slotsRequired": 2,
       "relevantAbility": "wisdom",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
     },
     {
       "id": "tumbling",
@@ -816,11 +876,12 @@
       "groups": [
         "rogue"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "dexterity",
       "checkModifier": 0,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "ventriloquism",
@@ -828,11 +889,12 @@
       "groups": [
         "rogue"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": -2,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "weaponsmithing",
@@ -840,11 +902,12 @@
       "groups": [
         "warrior"
       ],
-      "slotsRequired": 3,
       "relevantAbility": "intelligence",
       "checkModifier": -3,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 3,
+      "notes": []
     },
     {
       "id": "weather-sense",
@@ -852,11 +915,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "wisdom",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     },
     {
       "id": "weaving",
@@ -864,11 +928,12 @@
       "groups": [
         "general"
       ],
-      "slotsRequired": 1,
       "relevantAbility": "intelligence",
       "checkModifier": -1,
       "source": "AD&D 2E PHB",
-      "sourceTable": 37
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
     }
   ]
 }

@@ -1,17 +1,382 @@
 [
   {
-    "id": "chain-mail",
-    "name": "Chain mail",
+    "id": "banded-mail",
+    "name": "Banded Mail",
     "category": "armor",
-    "subcategory": null,
-    "cost": { "amount": 75, "currency": "gp" },
-    "weightLb": 40,
-    "quantity": 1,
+    "subcategory": "armor",
+    "cost": {
+      "amount": 200,
+      "currency": "gp"
+    },
+    "weightLb": 35,
     "stackable": false,
     "consumable": false,
     "trackQuantity": true,
-    "source": "Equipment Lists",
-    "notes": [],
-    "armorClass": 5
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "brigandine",
+    "name": "Brigandine",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 120,
+      "currency": "gp"
+    },
+    "weightLb": 35,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "bronze-plate-mail",
+    "name": "Bronze Plate Mail",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 400,
+      "currency": "gp"
+    },
+    "weightLb": 45,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "chain-mail",
+    "name": "Chain Mail",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 75,
+      "currency": "gp"
+    },
+    "weightLb": 40,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "field-plate",
+    "name": "Field Plate",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 2000,
+      "currency": "gp"
+    },
+    "weightLb": 60,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "full-plate",
+    "name": "Full Plate",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 5000,
+      "currency": "gp"
+    },
+    "weightLb": 70,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "great-helm",
+    "name": "Great Helm",
+    "category": "armor",
+    "subcategory": "helmet",
+    "cost": {
+      "amount": 30,
+      "currency": "gp"
+    },
+    "weightLb": 10,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "basinet",
+    "name": "Basinet",
+    "category": "armor",
+    "subcategory": "helmet",
+    "cost": {
+      "amount": 8,
+      "currency": "gp"
+    },
+    "weightLb": 5,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "hide",
+    "name": "Hide",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 15,
+      "currency": "gp"
+    },
+    "weightLb": 30,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "leather",
+    "name": "Leather",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 5,
+      "currency": "gp"
+    },
+    "weightLb": 15,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "padded",
+    "name": "Padded",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 4,
+      "currency": "gp"
+    },
+    "weightLb": 10,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "plate-mail",
+    "name": "Plate Mail",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 600,
+      "currency": "gp"
+    },
+    "weightLb": 50,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "ring-mail",
+    "name": "Ring Mail",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 100,
+      "currency": "gp"
+    },
+    "weightLb": 30,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "scale-mail",
+    "name": "Scale Mail",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 120,
+      "currency": "gp"
+    },
+    "weightLb": 40,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "shield-body",
+    "name": "Shield, Body",
+    "category": "armor",
+    "subcategory": "shield",
+    "cost": {
+      "amount": 10,
+      "currency": "gp"
+    },
+    "weightLb": 15,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "shield-buckler",
+    "name": "Shield, Buckler",
+    "category": "armor",
+    "subcategory": "shield",
+    "cost": {
+      "amount": 1,
+      "currency": "gp"
+    },
+    "weightLb": 3,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "shield-medium",
+    "name": "Shield, Medium",
+    "category": "armor",
+    "subcategory": "shield",
+    "cost": {
+      "amount": 7,
+      "currency": "gp"
+    },
+    "weightLb": 10,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "shield-small",
+    "name": "Shield, Small",
+    "category": "armor",
+    "subcategory": "shield",
+    "cost": {
+      "amount": 3,
+      "currency": "gp"
+    },
+    "weightLb": 5,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "splint-mail",
+    "name": "Splint Mail",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 80,
+      "currency": "gp"
+    },
+    "weightLb": 40,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
+  },
+  {
+    "id": "studded-leather",
+    "name": "Studded Leather",
+    "category": "armor",
+    "subcategory": "armor",
+    "cost": {
+      "amount": 20,
+      "currency": "gp"
+    },
+    "weightLb": 25,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [
+      "Armor Class ratings are referenced elsewhere in the PHB and are not listed in this price/weight table."
+    ],
+    "armorClass": null
   }
 ]

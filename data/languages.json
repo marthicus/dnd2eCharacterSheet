@@ -1,15 +1,164 @@
 {
   "schemaVersion": 1,
-  "categories": ["human", "demihuman", "humanoid", "monster", "secret", "planar"],
-  "sourceTypes": ["native", "racial", "bonus", "class", "kit", "campaign", "magic"],
-  "raceRules": {"human":{"automatic":["common"]},"dwarf":{"automatic":["common","dwarven"]},"elf":{"automatic":["common","elven"]},"gnome":{"automatic":["common","gnomish"]},"half-elf":{"automatic":["common","elven"]},"halfling":{"automatic":["common","halfling"]},"goblin":{"automatic":["common","goblin"]}},
-  "intelligenceBonusLanguages": [0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 20, 20],
+  "categories": [
+    "human",
+    "demihuman",
+    "humanoid",
+    "monster",
+    "secret",
+    "planar"
+  ],
+  "sourceTypes": [
+    "native",
+    "racial",
+    "bonus",
+    "class",
+    "kit",
+    "campaign",
+    "magic"
+  ],
+  "raceRules": {
+    "human": {
+      "automatic": [
+        "common"
+      ]
+    },
+    "dwarf": {
+      "automatic": [
+        "common",
+        "dwarven"
+      ]
+    },
+    "elf": {
+      "automatic": [
+        "common",
+        "elven"
+      ]
+    },
+    "gnome": {
+      "automatic": [
+        "common",
+        "gnomish"
+      ]
+    },
+    "half-elf": {
+      "automatic": [
+        "common",
+        "elven"
+      ]
+    },
+    "halfling": {
+      "automatic": [
+        "common",
+        "halfling"
+      ]
+    },
+    "goblin": {
+      "automatic": [
+        "common",
+        "goblin"
+      ]
+    }
+  },
+  "intelligenceBonusLanguages": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    15,
+    20,
+    20,
+    20
+  ],
   "languages": [
-    {"id":"common","name":"Common","category":"human","isAutomatic":true,"sourceType":"racial","speaks":true,"reads":false,"writes":false,"usesLanguageSlot":false,"notes":[]},
-    {"id":"dwarven","name":"Dwarven","category":"demihuman","isAutomatic":true,"sourceType":"racial","speaks":true,"reads":false,"writes":false,"usesLanguageSlot":false,"notes":[]},
-    {"id":"elven","name":"Elven","category":"demihuman","isAutomatic":true,"sourceType":"racial","speaks":true,"reads":false,"writes":false,"usesLanguageSlot":false,"notes":[]},
-    {"id":"gnomish","name":"Gnomish","category":"demihuman","isAutomatic":true,"sourceType":"racial","speaks":true,"reads":false,"writes":false,"usesLanguageSlot":false,"notes":[]},
-    {"id":"halfling","name":"Halfling","category":"demihuman","isAutomatic":true,"sourceType":"racial","speaks":true,"reads":false,"writes":false,"usesLanguageSlot":false,"notes":[]},
-    {"id":"goblin","name":"Goblin","category":"humanoid","isAutomatic":true,"sourceType":"racial","speaks":true,"reads":false,"writes":false,"usesLanguageSlot":false,"notes":[]}
+    {
+      "id": "common",
+      "name": "Common",
+      "category": "human",
+      "isAutomatic": true,
+      "sourceType": "racial",
+      "speaks": true,
+      "reads": false,
+      "writes": false,
+      "usesLanguageSlot": false,
+      "notes": []
+    },
+    {
+      "id": "dwarven",
+      "name": "Dwarven",
+      "category": "demihuman",
+      "isAutomatic": true,
+      "sourceType": "racial",
+      "speaks": true,
+      "reads": false,
+      "writes": false,
+      "usesLanguageSlot": false,
+      "notes": []
+    },
+    {
+      "id": "elven",
+      "name": "Elven",
+      "category": "demihuman",
+      "isAutomatic": true,
+      "sourceType": "racial",
+      "speaks": true,
+      "reads": false,
+      "writes": false,
+      "usesLanguageSlot": false,
+      "notes": []
+    },
+    {
+      "id": "gnomish",
+      "name": "Gnomish",
+      "category": "demihuman",
+      "isAutomatic": true,
+      "sourceType": "racial",
+      "speaks": true,
+      "reads": false,
+      "writes": false,
+      "usesLanguageSlot": false,
+      "notes": []
+    },
+    {
+      "id": "halfling",
+      "name": "Halfling",
+      "category": "demihuman",
+      "isAutomatic": true,
+      "sourceType": "racial",
+      "speaks": true,
+      "reads": false,
+      "writes": false,
+      "usesLanguageSlot": false,
+      "notes": []
+    },
+    {
+      "id": "goblin",
+      "name": "Goblin",
+      "category": "humanoid",
+      "isAutomatic": true,
+      "sourceType": "racial",
+      "speaks": true,
+      "reads": false,
+      "writes": false,
+      "usesLanguageSlot": false,
+      "notes": []
+    }
   ]
 }

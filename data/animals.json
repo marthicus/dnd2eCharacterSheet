@@ -1,1 +1,562 @@
-[]
+[
+  {
+    "id": "boar",
+    "name": "Boar",
+    "category": "animals",
+    "subcategory": "boar",
+    "cost": {
+      "amount": 10,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "bull",
+    "name": "Bull",
+    "category": "animals",
+    "subcategory": "bull",
+    "cost": {
+      "amount": 20,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "calf",
+    "name": "Calf",
+    "category": "animals",
+    "subcategory": "calf",
+    "cost": {
+      "amount": 5,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "camel",
+    "name": "Camel",
+    "category": "animals",
+    "subcategory": "camel",
+    "cost": {
+      "amount": 50,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "capon",
+    "name": "Capon",
+    "category": "animals",
+    "subcategory": "capon",
+    "cost": {
+      "amount": 3,
+      "currency": "cp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "cat",
+    "name": "Cat",
+    "category": "animals",
+    "subcategory": "cat",
+    "cost": {
+      "amount": 1,
+      "currency": "sp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "chicken",
+    "name": "Chicken",
+    "category": "animals",
+    "subcategory": "chicken",
+    "cost": {
+      "amount": 2,
+      "currency": "cp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "cow",
+    "name": "Cow",
+    "category": "animals",
+    "subcategory": "cow",
+    "cost": {
+      "amount": 10,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "dog-guard",
+    "name": "Dog, Guard",
+    "category": "animals",
+    "subcategory": "dog",
+    "cost": {
+      "amount": 25,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "dog-hunting",
+    "name": "Dog, Hunting",
+    "category": "animals",
+    "subcategory": "dog",
+    "cost": {
+      "amount": 17,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "dog-war",
+    "name": "Dog, War",
+    "category": "animals",
+    "subcategory": "dog",
+    "cost": {
+      "amount": 20,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "donkey-mule-or-ass",
+    "name": "Donkey, Mule, or Ass",
+    "category": "animals",
+    "subcategory": "donkey",
+    "cost": {
+      "amount": 8,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "elephant-labor",
+    "name": "Elephant, Labor",
+    "category": "animals",
+    "subcategory": "elephant",
+    "cost": {
+      "amount": 200,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "elephant-war",
+    "name": "Elephant, War",
+    "category": "animals",
+    "subcategory": "elephant",
+    "cost": {
+      "amount": 500,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "falcon-trained",
+    "name": "Falcon, Trained",
+    "category": "animals",
+    "subcategory": "falcon",
+    "cost": {
+      "amount": 1000,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "goat",
+    "name": "Goat",
+    "category": "animals",
+    "subcategory": "goat",
+    "cost": {
+      "amount": 1,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "goose",
+    "name": "Goose",
+    "category": "animals",
+    "subcategory": "goose",
+    "cost": {
+      "amount": 5,
+      "currency": "cp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "guinea-hen",
+    "name": "Guinea Hen",
+    "category": "animals",
+    "subcategory": "guinea-hen",
+    "cost": {
+      "amount": 2,
+      "currency": "cp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "horse-draft",
+    "name": "Horse, Draft",
+    "category": "animals",
+    "subcategory": "horse",
+    "cost": {
+      "amount": 200,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "horse-heavy-war",
+    "name": "Horse, Heavy War",
+    "category": "animals",
+    "subcategory": "horse",
+    "cost": {
+      "amount": 400,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "horse-light-war",
+    "name": "Horse, Light War",
+    "category": "animals",
+    "subcategory": "horse",
+    "cost": {
+      "amount": 150,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "horse-medium-war",
+    "name": "Horse, Medium War",
+    "category": "animals",
+    "subcategory": "horse",
+    "cost": {
+      "amount": 225,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "horse-riding",
+    "name": "Horse, Riding",
+    "category": "animals",
+    "subcategory": "horse",
+    "cost": {
+      "amount": 75,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "hunting-cat-jaguar-etc",
+    "name": "Hunting Cat (Jaguar, etc.)",
+    "category": "animals",
+    "subcategory": "hunting-cat",
+    "cost": {
+      "amount": 5000,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "ox",
+    "name": "Ox",
+    "category": "animals",
+    "subcategory": "ox",
+    "cost": {
+      "amount": 15,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "partridge",
+    "name": "Partridge",
+    "category": "animals",
+    "subcategory": "partridge",
+    "cost": {
+      "amount": 5,
+      "currency": "cp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "peacock",
+    "name": "Peacock",
+    "category": "animals",
+    "subcategory": "peacock",
+    "cost": {
+      "amount": 5,
+      "currency": "sp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "pig",
+    "name": "Pig",
+    "category": "animals",
+    "subcategory": "pig",
+    "cost": {
+      "amount": 3,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "pigeon",
+    "name": "Pigeon",
+    "category": "animals",
+    "subcategory": "pigeon",
+    "cost": {
+      "amount": 1,
+      "currency": "cp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "pigeon-homing",
+    "name": "Pigeon, Homing",
+    "category": "animals",
+    "subcategory": "pigeon",
+    "cost": {
+      "amount": 100,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "pony",
+    "name": "Pony",
+    "category": "animals",
+    "subcategory": "pony",
+    "cost": {
+      "amount": 30,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "ram",
+    "name": "Ram",
+    "category": "animals",
+    "subcategory": "ram",
+    "cost": {
+      "amount": 4,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "sheep",
+    "name": "Sheep",
+    "category": "animals",
+    "subcategory": "sheep",
+    "cost": {
+      "amount": 2,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "songbird",
+    "name": "Songbird",
+    "category": "animals",
+    "subcategory": "songbird",
+    "cost": {
+      "amount": 10,
+      "currency": "sp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "swan",
+    "name": "Swan",
+    "category": "animals",
+    "subcategory": "swan",
+    "cost": {
+      "amount": 5,
+      "currency": "sp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  }
+]

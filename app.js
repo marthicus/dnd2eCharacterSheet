@@ -136,13 +136,18 @@ const clone = o => JSON.parse(JSON.stringify(o));
 let data = clone(FIXED);
 let equipmentCatalogue = [];
 let catalogueValidation = [];
+let missileRangeProfiles = [];
 let nonweaponCatalog = [];
 let nonweaponRules = {};
 let nonweaponClassCrossovers = {};
 let classAbilitiesCatalog = {};
+let classAbilityRecords = [];
+let classAbilityValidation = [];
 let weaponProficiencyCatalog = [];
 let proficiencyRules = {};
 let languageCatalog = [];
+let languageRecords = [];
+let languageValidation = [];
 let languageCategories = [];
 let languageSourceTypes = [];
 let intelligenceBonusLanguages = [];
@@ -210,7 +215,9 @@ function normalize(x = {}) {
     d.globalModifiers = Array.isArray(x.globalModifiers) ? x.globalModifiers.map(item => ({ category: typeof item.category === 'string' ? item.category : 'Other', value: item.value ?? '', appliesTo: item.appliesTo ?? '', source: item.source ?? '', active: item.active !== false, condition: item.condition ?? '', notes: item.notes ?? '' })) : [];
     d.xpHistory = Array.isArray(x.xpHistory) ? x.xpHistory : [];
     d.inventory = d.inventory.map(item => ({
-        itemId: typeof item.itemId === 'string' ? item.itemId : '',
+        catalogType: typeof item.catalogType === 'string' ? item.catalogType : 'equipment',
+        catalogItemId: ({ needle: 'blowgun-needle', 'flight-arrow-12': 'flight-arrow', 'sheaf-arrow-6': 'sheaf-arrow' }[item.catalogItemId || item.itemId] || item.catalogItemId || item.itemId || ''),
+        itemId: ({ needle: 'blowgun-needle', 'flight-arrow-12': 'flight-arrow', 'sheaf-arrow-6': 'sheaf-arrow' }[item.itemId] || item.itemId || ''),
         item: typeof item.item === 'string' ? item.item : typeof item.name === 'string' ? item.name : '',
         location: item.location === 'stored' ? 'stored' : 'carried',
         equipped: item.equipped !== false,
@@ -298,7 +305,7 @@ function formatExperience(value) {
 
 function catalogueItem(item) {
     const legacyIds = { longsword: 'long-sword' };
-    return equipmentCatalogue.find(record => record.id === (legacyIds[item.itemId] || item.itemId)) || null;
+    return equipmentCatalogue.find(record => record.id === (legacyIds[item.catalogItemId || item.itemId] || item.catalogItemId || item.itemId)) || null;
 }
 
 function itemName(item) {
@@ -308,6 +315,10 @@ function itemName(item) {
 function itemWeight(item) {
     const override = Number.parseFloat(item.weightOverride);
     return Number.isFinite(override) ? override : Number.parseFloat(catalogueItem(item)?.weightLb) || 0;
+}
+
+function weaponRangeProfile(record) {
+    return record?.rangeProfileId ? missileRangeProfiles.find(profile => profile.id === record.rangeProfileId) || null : null;
 }
 
 function formatCost(cost) {
@@ -359,11 +370,22 @@ function validateCatalogue(records) {
 
 async function loadEquipmentCatalogue() {
     try {
-        const response = await fetch('data/equipment-catalog.json');
-        if (!response.ok) throw new Error('Catalogue file unavailable');
-        const catalog = await response.json();
-        const records = Array.isArray(catalog) ? catalog : catalog.items;
-        if (!Array.isArray(records)) throw new Error('Catalogue items are missing');
+        const sources = [
+            ['equipment-catalog', 'equipment'],
+            ['weapons', 'weapon'],
+            ['armor', 'armor'],
+            ['animals', 'animal'],
+            ['services', 'service']
+        ];
+        const responses = await Promise.all(sources.map(([file]) => fetch(`data/${file}.json`)));
+        if (responses.some(response => !response.ok)) throw new Error('Catalogue file unavailable');
+        const catalogs = await Promise.all(responses.map(response => response.json()));
+        const records = catalogs.flatMap((catalog, index) => {
+            const items = Array.isArray(catalog) ? catalog : catalog.items;
+            return (Array.isArray(items) ? items : []).map(item => ({ ...item, catalogType: sources[index][1] }));
+        });
+        const rangeResponse = await fetch('data/missile-ranges.json');
+        missileRangeProfiles = rangeResponse.ok ? await rangeResponse.json() : [];
         equipmentCatalogue = records.filter(item => item && typeof item === 'object').map(item => ({
             ...item,
             id: typeof item.id === 'string' ? item.id : '',
@@ -398,26 +420,246 @@ async function loadNonweaponCatalog() {
     }
 }
 
+function normalizeSpellLevel(value) {
+    if (Number.isInteger(value)) return value;
+    if (typeof value === 'string') {
+        const match = value.match(/(\d+)/);
+        return match ? Number.parseInt(match[1], 10) : 0;
+    }
+    return 0;
+}
+
+function normalizeLegacySpellSource(value) {
+    const text = String(value || '').trim();
+    if (!text) return 'Unknown';
+    return text.includes('wizard') ? 'Wizard' : text.includes('priest') ? 'Priest' : text;
+}
+
+function normalizeSpellRecord(record = {}, index = 0) {
+    const source = record.source || record.school || record.spellGroup || 'Unknown';
+    const legacySource = normalizeLegacySpellSource(record.spellGroup || record.school || source);
+    const components = record.components && typeof record.components === 'object' ? record.components : { verbal: null, somatic: null, material: null };
+    const classLists = Array.isArray(record.classLists) ? record.classLists : Array.isArray(record.classes) ? record.classes : [];
+    return {
+        id: typeof record.id === 'string' ? record.id : `spell-${index + 1}`,
+        sourceRecordId: typeof record.sourceRecordId === 'string' ? record.sourceRecordId : null,
+        name: typeof record.name === 'string' ? record.name : '',
+        level: record.level == null ? null : normalizeSpellLevel(record.level),
+        type: typeof record.type === 'string' ? record.type : 'Spell',
+        school: typeof record.school === 'string' ? record.school : null,
+        classLists,
+        spellGroup: typeof record.spellGroup === 'string' ? record.spellGroup : typeof record.school === 'string' ? record.school.toLowerCase() : '',
+        components: {
+            verbal: components.verbal ?? null,
+            somatic: components.somatic ?? null,
+            material: components.material ?? null
+        },
+        materialComponents: record.materialComponents ?? null,
+        source: typeof record.source === 'string' ? record.source : source,
+        sourceLabel: legacySource,
+        notes: Array.isArray(record.notes) ? record.notes : [],
+        ...(Array.isArray(record.descriptorSchools) ? { descriptorSchools: record.descriptorSchools } : {}),
+        ...(Array.isArray(record.settingOrElementDescriptors) ? { settingOrElementDescriptors: record.settingOrElementDescriptors } : {}),
+        ...(typeof record.reversibleSpell === 'boolean' ? { reversibleSpell: record.reversibleSpell } : {}),
+        ...(Object.prototype.hasOwnProperty.call(record, 'reverseSpellId') ? { reverseSpellId: record.reverseSpellId } : {}),
+        ...(Object.prototype.hasOwnProperty.call(record, 'sourceNotes') ? { sourceNotes: record.sourceNotes } : {}),
+        ...(record.sourceLocation && typeof record.sourceLocation === 'object' ? { sourceLocation: record.sourceLocation } : {}),
+        ...(Array.isArray(record.sphere) ? { sphere: record.sphere } : {}),
+        ...(Array.isArray(record.schools) ? { schools: record.schools } : {}),
+        ...(['verbal', 'somatic', 'material'].reduce((fields, field) => {
+            if (Object.prototype.hasOwnProperty.call(record, field)) fields[field] = record[field];
+            return fields;
+        }, {})),
+        ...(record.unmapped && typeof record.unmapped === 'object' ? { unmapped: record.unmapped } : {}),
+        ...(['range', 'duration', 'castingTime', 'areaOfEffect', 'savingThrow'].reduce((fields, field) => {
+            if (Object.prototype.hasOwnProperty.call(record, field)) fields[field] = record[field];
+            return fields;
+        }, {}))
+    };
+}
+
+function validateSpellCatalog(records) {
+    const ids = new Set();
+    const errors = [];
+    records.forEach((record, index) => {
+        const label = record.id || `Record ${index + 1}`;
+        if (!record.id || ids.has(record.id)) errors.push(`${label}: duplicate or missing ID.`);
+        ids.add(record.id);
+        if (!record.name) errors.push(`${label}: missing name.`);
+        if (record.level != null && (!Number.isInteger(record.level) || record.level < 0)) errors.push(`${label}: invalid level.`);
+        if (!Array.isArray(record.classLists) || record.classLists.length === 0) errors.push(`${label}: classLists is required.`);
+        if (!record.spellGroup && !record.school && !Array.isArray(record.sphere)) errors.push(`${label}: spellGroup, school, or sphere is required.`);
+        if (!record.source) errors.push(`${label}: source is required.`);
+        if (!record.components || typeof record.components !== 'object') errors.push(`${label}: invalid components object.`);
+    });
+    return errors;
+}
+
+function spellCatalogLookupById(id, records = spellCatalogRecords) {
+    return records.find(record => record.id === id) || null;
+}
+
+function spellCatalogLookupAllById(id, records = spellCatalogSourceRecords) {
+    return records.filter(record => record.id === id);
+}
+
+function spellCatalogLookupByName(name, records = spellCatalogRecords) {
+    const normalizedName = String(name || '').trim().toLowerCase();
+    return records.find(record => record.name && record.name.toLowerCase() === normalizedName) || null;
+}
+
+function filterSpellCatalog(records = spellCatalogRecords, filters = {}) {
+    return records.filter(record => {
+        const matchesLevel = filters.level == null || Number(record.level) === Number(filters.level);
+        const matchesClass = !filters.classList || (Array.isArray(record.classLists) && record.classLists.includes(filters.classList));
+        const matchesGroup = !filters.spellGroup || record.spellGroup === filters.spellGroup;
+        const matchesSource = !filters.source || record.source === filters.source;
+        return matchesLevel && matchesClass && matchesGroup && matchesSource;
+    });
+}
+
+function mergeSpellCatalogRecords(existingRecords, incomingRecords) {
+    const merged = [...existingRecords.map(record => ({ ...record, sourceRefs: Array.isArray(record.sourceRefs) ? [...new Set(record.sourceRefs.filter(Boolean))] : record.source ? [record.source] : [] }))];
+    const conflicts = [];
+    incomingRecords.forEach(incoming => {
+        const normalizedIncoming = {
+            ...incoming,
+            sourceRefs: Array.isArray(incoming.sourceRefs) ? [...new Set(incoming.sourceRefs.filter(Boolean))] : incoming.source ? [incoming.source] : [],
+            schools: Array.isArray(incoming.schools) ? incoming.schools : incoming.school ? [incoming.school] : [],
+            notes: Array.isArray(incoming.notes) ? incoming.notes : [],
+            materialComponents: incoming.materialComponents ?? null
+        };
+        const existingIndex = merged.findIndex(record => record.id === normalizedIncoming.id);
+        if (existingIndex === -1) {
+            merged.push(normalizedIncoming);
+            return;
+        }
+        const existing = merged[existingIndex];
+        const comparedKeys = [...new Set([...Object.keys(existing), ...Object.keys(normalizedIncoming)])].filter(key => !['source', 'sourceRefs', 'notes', 'sourceLabel', 'components', 'materialComponents', 'spellGroup'].includes(key));
+        const conflictingFields = comparedKeys.filter(key => !((existing[key] === normalizedIncoming[key]) || (JSON.stringify(existing[key]) === JSON.stringify(normalizedIncoming[key]))));
+        if (conflictingFields.length) {
+            conflicts.push({
+                spellId: normalizedIncoming.id,
+                existingSource: existing.source || existing.sourceRefs?.[0] || 'Unknown',
+                incomingSource: normalizedIncoming.source || normalizedIncoming.sourceRefs?.[0] || 'Unknown',
+                conflictingFields
+            });
+            return;
+        }
+        existing.sourceRefs = [...new Set([...(existing.sourceRefs || []), ...(normalizedIncoming.sourceRefs || [])].filter(Boolean))];
+        existing.notes = [...new Set([...(Array.isArray(existing.notes) ? existing.notes : []), ...(Array.isArray(normalizedIncoming.notes) ? normalizedIncoming.notes : [])].filter(Boolean))];
+        if (!existing.schools && normalizedIncoming.schools?.length) existing.schools = normalizedIncoming.schools;
+        if (!existing.school && normalizedIncoming.school) existing.school = normalizedIncoming.school;
+    });
+    return { merged, conflicts };
+}
+
 async function loadSpellCatalog() {
     try {
-        const response = await fetch('data/spells.json');
-        if (!response.ok) throw new Error('Spell catalogue unavailable');
-        const records = await response.json();
-        spellCatalog = (Array.isArray(records) ? records : Array.isArray(records.spells) ? records.spells : []).map(item => ({ ...item, source: item.school || item.source || '' }));
+        const [legacyResponse, catalogResponse, tomeResponse, tomePriestResponse, compendiumResponse, compendiumV2Response, compendiumV3Response, wizardCompendiumResponse, wizardCompendiumV2Response, wizardCompendiumV3Response, wizardCompendiumV4Response, playersOptionResponse, magicEncyclopediaResponse, completeWizardsHandbookResponse] = await Promise.all([fetch('data/spells.json'), fetch('data/spell-catalog.json'), fetch('data/tome-of-magic-spells.json').catch(() => null), fetch('data/tome-of-magic-priest-spells.json').catch(() => null), fetch('data/priest-spell-compendium-v1-extract.json').catch(() => null), fetch('data/priest-spell-compendium-v2-extract.json').catch(() => null), fetch('data/priest-spell-compendium-v3-extract.json').catch(() => null), fetch('data/wizard-spell-compendium-v1-extract.json').catch(() => null), fetch('data/wizard-spell-compendium-v2-extract.json').catch(() => null), fetch('data/wizard-spell-compendium-v3-extract.json').catch(() => null), fetch('data/wizard-spell-compendium-v4-extract.json').catch(() => null), fetch('data/players-option-spells-and-magic-extract.json').catch(() => null), fetch('data/magic-encyclopedia-v1-spell-extract.json').catch(() => null), fetch('data/complete-wizards-handbook-spell-extract.json').catch(() => null)]);
+        if (!legacyResponse.ok || !catalogResponse.ok) throw new Error('Spell catalogue unavailable');
+        const legacyRecords = await legacyResponse.json();
+        const catalog = await catalogResponse.json();
+        const normalizedLegacy = (Array.isArray(legacyRecords) ? legacyRecords : Array.isArray(legacyRecords.spells) ? legacyRecords.spells : []).map((item, index) => normalizeSpellRecord(item, index));
+        const normalizedCatalog = (Array.isArray(catalog.spells) ? catalog.spells : []).map((item, index) => normalizeSpellRecord(item, index));
+        let mergedRecords = normalizedCatalog.length ? normalizedCatalog : normalizedLegacy;
+        const sourceBatches = [];
+        if (tomeResponse && tomeResponse.ok) sourceBatches.push(await tomeResponse.json());
+        if (tomePriestResponse && tomePriestResponse.ok) sourceBatches.push(await tomePriestResponse.json());
+        if (compendiumResponse && compendiumResponse.ok) sourceBatches.push(await compendiumResponse.json());
+        if (compendiumV2Response && compendiumV2Response.ok) sourceBatches.push(await compendiumV2Response.json());
+        if (compendiumV3Response && compendiumV3Response.ok) sourceBatches.push(await compendiumV3Response.json());
+        if (wizardCompendiumResponse && wizardCompendiumResponse.ok) sourceBatches.push(await wizardCompendiumResponse.json());
+        if (wizardCompendiumV2Response && wizardCompendiumV2Response.ok) sourceBatches.push(await wizardCompendiumV2Response.json());
+        if (wizardCompendiumV3Response && wizardCompendiumV3Response.ok) sourceBatches.push(await wizardCompendiumV3Response.json());
+        if (wizardCompendiumV4Response && wizardCompendiumV4Response.ok) sourceBatches.push(await wizardCompendiumV4Response.json());
+        if (playersOptionResponse && playersOptionResponse.ok) sourceBatches.push(await playersOptionResponse.json());
+        if (magicEncyclopediaResponse && magicEncyclopediaResponse.ok) sourceBatches.push(await magicEncyclopediaResponse.json());
+        if (completeWizardsHandbookResponse && completeWizardsHandbookResponse.ok) sourceBatches.push(await completeWizardsHandbookResponse.json());
+        spellCatalogSourceRecords = sourceBatches.flatMap(batch => (Array.isArray(batch) ? batch : []).map((item, index) => {
+                const normalized = normalizeSpellRecord(item, index);
+                normalized.source = typeof item.source === 'string' ? item.source : 'Tome of Magic';
+                normalized.sourceRefs = [normalized.source];
+                normalized.notes = Array.isArray(item.notes) ? item.notes : [];
+                return normalized;
+            }));
+        if (spellCatalogSourceRecords.length) {
+            const duplicateIds = new Set();
+            spellCatalogSourceRecords.forEach((record, index) => {
+                if (spellCatalogSourceRecords.slice(0, index).some(previous => previous.id === record.id)) duplicateIds.add(record.id);
+            });
+            spellCatalogConflicts = [...duplicateIds].map(spellId => {
+                const duplicateRecord = spellCatalogSourceRecords.find(record => record.id === spellId);
+                return { spellId, type: 'duplicate-source-id', source: duplicateRecord?.source || 'Unknown', conflictingFields: [] };
+            });
+            const firstById = spellCatalogSourceRecords.filter((record, index, records) => records.findIndex(candidate => candidate.id === record.id) === index);
+            const mergeResult = mergeSpellCatalogRecords(mergedRecords, firstById);
+            mergedRecords = mergeResult.merged;
+            spellCatalogConflicts.push(...mergeResult.conflicts);
+        } else {
+            spellCatalogConflicts = [];
+        }
+        spellCatalogRecords = mergedRecords;
+        spellCatalogValidation = validateSpellCatalog(spellCatalogRecords);
+        spellCatalog = spellCatalogRecords.map(item => ({
+            ...item,
+            source: item.source || item.sourceRefs?.[0] || (item.spellGroup ? normalizeLegacySpellSource(item.spellGroup) : 'Unknown'),
+            school: item.school || item.source || item.spellGroup || (Array.isArray(item.schools) ? item.schools[0] : Array.isArray(item.sphere) ? item.sphere[0] : 'Unknown'),
+            level: String(item.level),
+            type: 'Spell',
+            notes: Array.isArray(item.notes) ? item.notes : []
+        }));
     } catch {
+        spellCatalogRecords = [];
+        spellCatalogValidation = [];
         spellCatalog = [];
+        spellCatalogConflicts = [];
+        spellCatalogSourceRecords = [];
     }
 }
 
 async function loadClassAbilitiesCatalog() {
     try {
-        const response = await fetch('data/class-abilities.json');
-        if (!response.ok) throw new Error('Class abilities catalogue unavailable');
-        const catalog = await response.json();
-        classAbilitiesCatalog = catalog.abilities || {};
+        const [templateResponse, catalogResponse] = await Promise.all([fetch('data/class-abilities.json'), fetch('data/class-abilities-catalog.json')]);
+        if (!templateResponse.ok || !catalogResponse.ok) throw new Error('Class abilities data unavailable');
+        const template = await templateResponse.json();
+        const catalog = await catalogResponse.json();
+        classAbilitiesCatalog = template.abilities || {};
+        classAbilityRecords = Array.isArray(catalog.abilities) ? catalog.abilities : [];
+        classAbilityValidation = validateClassAbilityCatalog(classAbilityRecords);
     } catch {
         classAbilitiesCatalog = {};
+        classAbilityRecords = [];
+        classAbilityValidation = [];
     }
+}
+
+function validateClassAbilityCatalog(records) {
+    const validTypes = ['class-feature', 'spellcasting', 'kit-feature', 'power', 'custom'];
+    const validClasses = ['fighter', 'paladin', 'ranger', 'cleric', 'druid', 'mage', 'wizard', 'illusionist', 'thief', 'bard', 'barbarian', 'ninja', 'psionicist'];
+    const ids = new Set();
+    const errors = [];
+    records.forEach((record, index) => {
+        if (!record.id || ids.has(record.id)) errors.push(`Record ${index + 1}: duplicate or missing ID.`);
+        ids.add(record.id);
+        if (!record.name) errors.push(`Record ${index + 1}: missing name.`);
+        if (!validTypes.includes(record.abilityType)) errors.push(`${record.id || 'Unnamed record'}: invalid ability type.`);
+        if (!Array.isArray(record.classes) || record.classes.some(className => !validClasses.includes(className))) errors.push(`${record.id || 'Unnamed record'}: invalid class reference.`);
+    });
+    return errors;
+}
+
+function classAbilityLookup({ className = '', abilityType = '', source = '' } = {}) {
+    const normalizedClass = String(className).toLowerCase().replace(/\s+/g, '-');
+    return classAbilityRecords.filter(record => (!normalizedClass || record.classes.includes(normalizedClass)) && (!abilityType || record.abilityType === abilityType) && (!source || record.source === source));
+}
+
+function classAbilityCatalogMarkup() {
+    const classes = [...new Set(classAbilityRecords.flatMap(record => record.classes))].sort();
+    const types = [...new Set(classAbilityRecords.map(record => record.abilityType))].sort();
+    const sources = [...new Set(classAbilityRecords.map(record => record.source).filter(Boolean))].sort();
+    const errors = classAbilityValidation.length ? `<div class="catalogue-validation">${classAbilityValidation.map(error => `<div>${esc(error)}</div>`).join('')}</div>` : '';
+    return `<div class="class-ability-catalog"><h3>Class ability catalogue</h3>${errors}<div class="class-ability-filters"><label>Class<select id="class-ability-class"><option value="">All classes</option>${classes.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label><label>Type<select id="class-ability-type"><option value="">All types</option>${types.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label><label>Source<select id="class-ability-source"><option value="">All sources</option>${sources.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label></div><div id="class-ability-catalog-results" class="class-ability-catalog-results"></div></div>`;
 }
 
 async function loadWeaponProficiencyCatalog() {
@@ -425,7 +667,7 @@ async function loadWeaponProficiencyCatalog() {
         const response = await fetch('data/weapon-proficiencies.json');
         if (!response.ok) throw new Error('Weapon proficiency catalogue unavailable');
         const records = await response.json();
-        weaponProficiencyCatalog = Array.isArray(records) ? records : [];
+        weaponProficiencyCatalog = Array.isArray(records) ? records.filter(item => typeof item.proficiencyId === 'string' && item.proficiencyId) : [];
     } catch {
         weaponProficiencyCatalog = [];
     }
@@ -441,18 +683,43 @@ async function loadProficiencyRules() {
     }
 }
 
+function validateLanguageCatalog(records) {
+    const validCategories = ['common', 'racial', 'humanoid', 'secret-tongue'];
+    const ids = new Set();
+    const errors = [];
+    records.forEach((record, index) => {
+        const label = record.id || `Record ${index + 1}`;
+        if (!record.id || ids.has(record.id)) errors.push(`${label}: duplicate or missing ID.`);
+        ids.add(record.id);
+        if (!record.name) errors.push(`${label}: missing name.`);
+        if (!validCategories.includes(record.category)) errors.push(`${label}: invalid category.`);
+        if (!record.source) errors.push(`${label}: source is required.`);
+        if (typeof record.literacySupported !== 'boolean') errors.push(`${label}: literacySupported must be boolean.`);
+    });
+    return errors;
+}
+
+function languageLookup(id) {
+    return languageRecords.find(record => record.id === id) || null;
+}
+
 async function loadLanguageCatalog() {
     try {
-        const response = await fetch('data/languages.json');
-        if (!response.ok) throw new Error('Language catalogue unavailable');
-        const catalog = await response.json();
-        languageCatalog = Array.isArray(catalog) ? catalog : catalog.languages || [];
-        languageCategories = catalog.categories || [];
-        languageSourceTypes = catalog.sourceTypes || [];
-        intelligenceBonusLanguages = catalog.intelligenceBonusLanguages || [];
-        languageRaceRules = catalog.raceRules || {};
+        const [rulesResponse, catalogResponse] = await Promise.all([fetch('data/languages.json'), fetch('data/language-catalog.json')]);
+        if (!rulesResponse.ok || !catalogResponse.ok) throw new Error('Language data unavailable');
+        const rules = await rulesResponse.json();
+        const catalog = await catalogResponse.json();
+        languageCatalog = Array.isArray(rules) ? rules : rules.languages || [];
+        languageRecords = Array.isArray(catalog.languages) ? catalog.languages : [];
+        languageValidation = validateLanguageCatalog(languageRecords);
+        languageCategories = rules.categories || [];
+        languageSourceTypes = rules.sourceTypes || [];
+        intelligenceBonusLanguages = rules.intelligenceBonusLanguages || [];
+        languageRaceRules = rules.raceRules || {};
     } catch {
         languageCatalog = [];
+        languageRecords = [];
+        languageValidation = [];
         languageCategories = [];
         languageSourceTypes = [];
         intelligenceBonusLanguages = [];
@@ -1872,6 +2139,18 @@ function setupClassAbilitiesSection() {
         } else {
             spellsCard.append(section);
         }
+        section.querySelector('.class-abilities-content').insertAdjacentHTML('beforeend', classAbilityCatalogMarkup());
+    }
+    const catalogPanel = section.querySelector('.class-ability-catalog');
+    if (catalogPanel) {
+        const classFilter = catalogPanel.querySelector('#class-ability-class');
+        const typeFilter = catalogPanel.querySelector('#class-ability-type');
+        const sourceFilter = catalogPanel.querySelector('#class-ability-source');
+        const renderCatalog = () => { const matches = classAbilityLookup({ className: classFilter.value, abilityType: typeFilter.value, source: sourceFilter.value }); catalogPanel.querySelector('#class-ability-catalog-results').innerHTML = matches.map(record => `<article><strong>${esc(record.name)}</strong><small>${esc(record.abilityType)} · ${esc(record.source)}</small></article>`).join('') || '<small>No matching class abilities.</small>'; };
+        classFilter.onchange = renderCatalog;
+        typeFilter.onchange = renderCatalog;
+        sourceFilter.onchange = renderCatalog;
+        renderCatalog();
     }
     const toggle = section.querySelector('.class-abilities-toggle');
     const collapsed = data.sectionStates['class-abilities'] === true;
@@ -2064,6 +2343,58 @@ function setupBladesingerReferenceSection() {
     document.querySelector('.grid').append(section);
 }
 
+function setupReferenceLibrary() {
+    const grid = document.querySelector('.grid');
+    if (!grid) return;
+    let section = document.querySelector('.reference-library-section');
+    if (!section) {
+        section = document.createElement('section');
+        section.className = 'card wide reference-library-section';
+        grid.append(section);
+    }
+    const modes = {
+        spells: { label: 'Spells', records: spellCatalogRecords },
+        abilities: { label: 'Abilities', records: classAbilityRecords },
+        proficiencies: { label: 'Proficiencies', records: nonweaponCatalog },
+        languages: { label: 'Languages', records: languageRecords }
+    };
+    const mode = section.dataset.mode || 'spells';
+    const active = modes[mode] || modes.spells;
+    const records = active.records || [];
+    const sources = [...new Set(records.map(record => record.source).filter(Boolean))].sort();
+    const classes = [...new Set(records.flatMap(record => record.classLists || record.classes || []).filter(Boolean))].sort();
+    const groups = [...new Set(records.map(record => record.category || record.group || record.abilityType).filter(Boolean))].sort();
+    section.innerHTML = `<h2>Reference library</h2><div class="reference-library-tabs" role="tablist">${Object.entries(modes).map(([key, value]) => `<button type="button" class="reference-library-tab${key === mode ? ' active' : ''}" data-reference-mode="${key}" role="tab" aria-selected="${key === mode}">${value.label}</button>`).join('')}</div><div class="reference-library-filters"><label>Search<input type="search" data-reference-search placeholder="Name or source"></label>${classes.length ? `<label>Class<select data-reference-class><option value="">All classes</option>${classes.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label>` : ''}${groups.length ? `<label>Category<select data-reference-group><option value="">All categories</option>${groups.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label>` : ''}${sources.length ? `<label>Source<select data-reference-source><option value="">All sources</option>${sources.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label>` : ''}</div><div class="reference-library-results" data-reference-results></div><div class="reference-library-detail" data-reference-detail aria-live="polite"><small>Select a result to inspect its available metadata.</small></div>`;
+    const search = section.querySelector('[data-reference-search]');
+    const classFilter = section.querySelector('[data-reference-class]');
+    const groupFilter = section.querySelector('[data-reference-group]');
+    const sourceFilter = section.querySelector('[data-reference-source]');
+    const results = section.querySelector('[data-reference-results]');
+    const detail = section.querySelector('[data-reference-detail]');
+    const getName = record => record.name || record.spellName || record.proficiencyName || record.languageName || 'Unnamed record';
+    const renderDetail = record => {
+        const fields = mode === 'spells'
+            ? [['Level', record.level], ['Class', (record.classLists || []).join(', ')], ['School / sphere', record.school || record.spellGroup || (record.sphere || []).join(', ')], ['Components', [record.verbal ? 'V' : '', record.somatic ? 'S' : '', record.material ? 'M' : ''].filter(Boolean).join(', ')], ['Material', record.materialComponents], ['Range', record.range], ['Casting time', record.castingTime], ['Duration', record.duration], ['Area', record.areaOfEffect], ['Saving throw', record.savingThrow], ['Source', record.source], ['Occurrence', record.sourceRecordId]]
+            : Object.entries(record).filter(([key]) => !['id', 'name', 'spellName'].includes(key)).slice(0, 8).map(([key, value]) => [key, Array.isArray(value) ? value.join(', ') : typeof value === 'object' && value !== null ? JSON.stringify(value) : value]);
+        detail.innerHTML = `<strong>${esc(getName(record))}</strong><dl>${fields.filter(([, value]) => value !== undefined && value !== null && value !== '').map(([label, value]) => `<dt>${esc(label)}</dt><dd>${esc(value)}</dd>`).join('')}</dl>`;
+    };
+    const renderResults = () => {
+        const needle = String(search?.value || '').trim().toLowerCase();
+        const matches = records.filter(record => {
+            const name = getName(record).toLowerCase();
+            const source = String(record.source || '').toLowerCase();
+            const recordClasses = record.classLists || record.classes || [];
+            const group = record.category || record.group || record.abilityType || '';
+            return (!needle || name.includes(needle) || source.includes(needle)) && (!classFilter || !classFilter.value || recordClasses.includes(classFilter.value)) && (!groupFilter || !groupFilter.value || group === groupFilter.value) && (!sourceFilter || !sourceFilter.value || record.source === sourceFilter.value);
+        }).slice(0, 40);
+        results.innerHTML = matches.map((record, index) => `<button type="button" class="reference-library-result" data-reference-result="${index}"><strong>${esc(getName(record))}</strong><small>${esc(record.source || record.abilityType || record.category || '')}</small></button>`).join('') || '<small>No matching reference records.</small>';
+        results.querySelectorAll('[data-reference-result]').forEach(button => button.onclick = () => renderDetail(matches[+button.dataset.referenceResult]));
+    };
+    section.querySelectorAll('[data-reference-mode]').forEach(button => button.onclick = () => { section.dataset.mode = button.dataset.referenceMode; setupReferenceLibrary(); });
+    [search, classFilter, groupFilter, sourceFilter].filter(Boolean).forEach(control => control.oninput = renderResults);
+    renderResults();
+}
+
 function setupSpellSectionPosition() {
     const combat = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Combat'));
     const spells = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Spells'));
@@ -2071,11 +2402,81 @@ function setupSpellSectionPosition() {
 }
 
 let spellCatalog = [];
-/*
-    ...['Affect Normal Fires', 'Alarm', 'Armor', 'Audible Glamer', 'Burning Hands', 'Cantrip', 'Change Self', 'Charm Person', 'Chill Touch', 'Color Spray', 'Comprehend Languages', 'Dancing Lights', 'Detect Magic', 'Detect Undead', 'Enlarge', 'Erase', 'Feather Fall', 'Find Familiar', 'Friends', 'Gaze Reflection', 'Grease', 'Hold Portal', 'Hypnotism', 'Identify', 'Jump', 'Light', 'Magic Missile', 'Mending', 'Message', 'Mount', "Nystul's Magical Aura", 'Phantasmal Force', 'Protection from Evil', 'Read Magic', 'Shield', 'Shocking Grasp', 'Sleep', 'Spider Climb', 'Spook', 'Taunt', "Tenser's Floating Disc", 'Unseen Servant', 'Ventriloquism', 'Wall of Fog', 'Wizard Mark'].map(name => ({ name, level: '1st', source: 'Wizard' })),
-    ...['Animal Friendship', 'Bless', 'Combine', 'Command', 'Create Water', 'Cure Light Wounds', 'Detect Evil', 'Detect Magic', 'Detect Poison', 'Detect Snares and Pits', 'Endure Cold/Endure Heat', 'Entangle', 'Faerie Fire', 'Invisibility to Animals', 'Invisibility to Undead', 'Light', 'Locate Animals or Plants', 'Magical Stone', 'Pass Without Trace', 'Protection from Evil', 'Purify Food and Drink', 'Remove Fear', 'Sanctuary', 'Shillelagh'].map(name => ({ name, level: '1st', source: 'Priest' }))
-];
-*/
+let spellCatalogRecords = [];
+let spellCatalogValidation = [];
+let spellCatalogConflicts = [];
+let spellCatalogSourceRecords = [];
+let spellReconciliationArtifacts = null;
+let spellMaterialEnrichmentRecords = [];
+let spellMaterialEnrichmentConflicts = [];
+let spellPscManualReviewCandidates = 0;
+
+function normalizePscMaterialEnrichments(batch, volume) {
+    return Object.values(batch || {}).map(record => ({
+        ...record,
+        source: `Priest Spell Compendium Volume ${volume}`,
+        sourceCategory: 'Priest',
+        sourceBook: 'Priest Spell Compendium',
+        sourceVolume: volume,
+        sourceAuthority: 'PSC'
+    }));
+}
+
+function applySpellMaterialEnrichments(records, enrichments) {
+    const conflicts = [];
+    const enrichedRecords = records.map(record => ({ ...record }));
+    enrichments.forEach(enrichment => {
+        const match = enrichedRecords.find(record => record.sourceRecordId === enrichment.sourceRecordId);
+        if (!match) {
+            conflicts.push({ sourceRecordId: enrichment.sourceRecordId, type: 'missing-source-occurrence', conflictingFields: ['sourceRecordId'] });
+            return;
+        }
+        const consistencyFields = ['id', 'source'];
+        const inconsistentFields = consistencyFields.filter(field => enrichment[field] !== match[field]);
+        if (inconsistentFields.length) {
+            conflicts.push({ sourceRecordId: enrichment.sourceRecordId, type: 'source-consistency-conflict', conflictingFields: inconsistentFields });
+            return;
+        }
+        if (match.materialComponents == null) {
+            match.materialComponents = enrichment.materialComponents;
+        } else if (match.materialComponents !== enrichment.materialComponents) {
+            conflicts.push({ sourceRecordId: enrichment.sourceRecordId, type: 'material-components-conflict', conflictingFields: ['materialComponents'], existingValue: match.materialComponents, incomingValue: enrichment.materialComponents });
+        }
+    });
+    return { records: enrichedRecords, conflicts };
+}
+
+async function loadSpellMaterialEnrichments() {
+    try {
+        const [batchOneResponse, batchTwoResponse, batchThreeResponse, batchFourResponse, batchFiveResponse, batchSixResponse, pscFinalResponse] = await Promise.all([
+            fetch('data/spell-material-components-wsc-batch-1.json'),
+            fetch('data/spell-material-components-batch-2.json'),
+            fetch('data/spell-material-components-wsc-v1-batch-3.json'),
+            fetch('data/spell-material-components-wsc-v2-batch-4.json'),
+            fetch('data/spell-material-components-wsc-v3-batch-5.json'),
+            fetch('data/spell-material-components-wsc-v4-batch-6.json'),
+            fetch('data/PSC-MC-1.0.json')
+        ]);
+        if (![batchOneResponse, batchTwoResponse, batchThreeResponse, batchFourResponse, batchFiveResponse, batchSixResponse, pscFinalResponse].every(response => response.ok)) throw new Error('Spell material enrichment unavailable');
+        const [batchOne, batchTwo, batchThree, batchFour, batchFive, batchSix, pscFinal] = await Promise.all([
+            batchOneResponse.json(), batchTwoResponse.json(), batchThreeResponse.json(), batchFourResponse.json(), batchFiveResponse.json(), batchSixResponse.json(), pscFinalResponse.json()
+        ]);
+        spellPscManualReviewCandidates = 0;
+        spellMaterialEnrichmentRecords = [...batchOne, ...batchTwo, ...batchThree, ...batchFour, ...batchFive, ...batchSix, ...pscFinal.records.map(record => ({ ...record, source: `${record.sourceBook} Volume ${record.sourceVolume}`, sourceCategory: 'Priest', sourceAuthority: record.sourceAuthority }))];
+    } catch {
+        spellMaterialEnrichmentRecords = [];
+    }
+}
+
+function validatePartialSpellReconciliation(index, conflicts, report) {
+    const errors = [];
+    if (!Array.isArray(index)) errors.push('Canonical index must be an array.');
+    if (!Array.isArray(conflicts)) errors.push('Conflict report must be an array.');
+    if (!report || typeof report !== 'object') errors.push('Reconciliation report must be an object.');
+    if (report && !String(report.scopeLimitation || '').toLowerCase().includes('not included')) errors.push('Reconciliation report must document its partial scope.');
+    if (report && report.duplicateSourceRecordIds?.length) errors.push('Reconciliation report contains duplicate sourceRecordIds.');
+    return errors;
+}
 
 function setupSpellTracking() {
     const section = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Spells'));
@@ -2336,7 +2737,7 @@ function languagesMarkup() {
     const available = Number.isInteger(intelligence) && intelligence >= 1 ? intelligenceBonusLanguages[intelligence - 1] || 0 : 0;
     const used = data.languages.filter(language => language.sourceType === 'bonus' || language.source === 'bonus').length;
     const remaining = available - used;
-    return `<section class="card wide languages-section"><h2>Languages</h2><div class="language-summary"><strong>Known Languages: ${data.languages.length}</strong><span>Available Bonus Languages: ${available}</span><span>Used Bonus Languages: ${used}</span><strong>Remaining Bonus Languages: ${remaining}</strong></div><div class="language-picker"><label for="language-search">Search language catalogue</label><input id="language-search" type="search" placeholder="Search language name"><div id="language-results" class="language-results"></div></div><div class="tableWrap"><table class="languages-table"><thead><tr><th>Language</th><th>Category</th><th>Source</th><th>Speaks</th><th>Reads</th><th>Writes</th><th>Uses Language Slot</th><th>Notes</th><th></th></tr></thead><tbody>${data.languages.map((language, index) => `<tr><td><input data-array="languages" data-index="${index}" data-key="name" value="${esc(language.name)}"></td><td><input data-array="languages" data-index="${index}" data-key="category" value="${esc(language.category || '')}"></td><td><select data-array="languages" data-index="${index}" data-key="sourceType">${languageSourceTypes.map(source => `<option value="${source}"${language.sourceType === source ? ' selected' : ''}>${source}</option>`).join('')}</select></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="speaks" ${language.speaks ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="reads" ${language.reads ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="writes" ${language.writes ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="usesLanguageSlot" ${language.usesLanguageSlot ? 'checked' : ''}></td><td><input data-array="languages" data-index="${index}" data-key="notes" value="${esc(language.notes)}"></td><td><button class="remove" data-remove="languages" data-index="${index}" aria-label="Remove language">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="languages">Add custom language</button></section>`;
+    return `<section class="card wide languages-section"><h2>Languages</h2><div class="language-summary"><strong>Known Languages: ${data.languages.length}</strong><span>Available Bonus Languages: ${available}</span><span>Used Bonus Languages: ${used}</span><strong>Remaining Bonus Languages: ${remaining}</strong></div><div class="language-picker"><label for="language-search">Search language catalogue</label><input id="language-search" type="search" placeholder="Search language name"><div class="language-filters"><label>Category<select id="language-category-filter"><option value="">All categories</option>${[...new Set(languageRecords.map(item => item.category))].sort().map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label><label>Source<select id="language-source-filter"><option value="">All sources</option>${[...new Set(languageRecords.map(item => item.source).filter(Boolean))].sort().map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label><label>Literacy<select id="language-literacy-filter"><option value="">Any literacy</option><option value="true">Supported</option><option value="false">Not supported</option></select></label></div><div id="language-results" class="language-results"></div></div><div class="tableWrap"><table class="languages-table"><thead><tr><th>Language</th><th>Category</th><th>Source</th><th>Speaks</th><th>Reads</th><th>Writes</th><th>Uses Language Slot</th><th>Notes</th><th></th></tr></thead><tbody>${data.languages.map((language, index) => `<tr><td><input data-array="languages" data-index="${index}" data-key="name" value="${esc(language.name)}"></td><td><input data-array="languages" data-index="${index}" data-key="category" value="${esc(language.category || '')}"></td><td><select data-array="languages" data-index="${index}" data-key="sourceType">${languageSourceTypes.map(source => `<option value="${source}"${language.sourceType === source ? ' selected' : ''}>${source}</option>`).join('')}</select></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="speaks" ${language.speaks ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="reads" ${language.reads ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="writes" ${language.writes ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="usesLanguageSlot" ${language.usesLanguageSlot ? 'checked' : ''}></td><td><input data-array="languages" data-index="${index}" data-key="notes" value="${esc(language.notes)}"></td><td><button class="remove" data-remove="languages" data-index="${index}" aria-label="Remove language">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="languages">Add custom language</button></section>`;
 }
 
 function updateLanguageSummary() {
@@ -2356,7 +2757,7 @@ function syncAutomaticLanguages(race) {
     const automaticIds = languageRaceRules[raceKey]?.automatic || [];
     data.languages = data.languages.filter(language => !language.isAutomatic);
     automaticIds.forEach(id => {
-        const catalog = languageCatalog.find(language => language.id === id);
+        const catalog = languageLookup(id);
         if (!catalog) return;
         const existing = data.languages.find(language => language.id === id || language.name.toLowerCase() === catalog.name.toLowerCase());
         const language = existing || { id: catalog.id, name: catalog.name, category: catalog.category || null, sourceType: 'racial', speaks: catalog.speaks !== false, reads: catalog.reads === true, writes: catalog.writes === true, usesLanguageSlot: false, notes: '' };
@@ -2460,7 +2861,7 @@ function setupProficiencyAndInventorySections() {
             results.querySelectorAll('[data-proficiency-id]').forEach(button => button.onclick = () => {
                 const item = nonweaponCatalog.find(record => record.id === button.dataset.proficiencyId);
                 if (!item) return;
-                data.proficiencies.push({ id: item.id, name: item.name, slotCost: item.slotsRequired, acquisition: 'purchased', usesNwpSlot: true, exemptFromNwpLimits: false, ability: abilityAbbreviation(item.relevantAbility), checkModifier: item.checkModifier, notes: '' });
+                data.proficiencies.push({ id: item.id, name: item.name, slotCost: item.slotCost ?? item.slotsRequired ?? 1, acquisition: 'purchased', usesNwpSlot: true, exemptFromNwpLimits: false, ability: abilityAbbreviation(item.relevantAbility), checkModifier: item.checkModifier, notes: Array.isArray(item.notes) ? item.notes.join('; ') : item.notes || '' });
                 changed();
                 render();
             });
@@ -2478,7 +2879,7 @@ function setupProficiencyAndInventorySections() {
                 if (!preset) return;
                 const row = data.proficiencies[+input.dataset.index];
                 row.name = preset.name;
-                row.slotCost = preset.slotsRequired;
+                row.slotCost = preset.slotCost ?? preset.slotsRequired ?? 1;
                 row.ability = abilityAbbreviation(preset.relevantAbility);
                 row.acquisition = 'purchased';
                 row.usesNwpSlot = true;
@@ -2503,14 +2904,21 @@ function setupProficiencyAndInventorySections() {
         const languageSection = languageWrapper.firstElementChild;
         proficiencyCard.after(languageSection);
         const languageSearch = languageSection.querySelector('#language-search');
+        const languageCategory = languageSection.querySelector('#language-category-filter');
+        const languageSource = languageSection.querySelector('#language-source-filter');
+        const languageLiteracy = languageSection.querySelector('#language-literacy-filter');
         const languageResults = languageSection.querySelector('#language-results');
         const renderLanguageResults = () => {
             const query = languageSearch.value.trim().toLowerCase();
-            const matches = languageCatalog.filter(item => !query || item.name.toLowerCase().includes(query)).slice(0, 30);
-            languageResults.innerHTML = matches.map(item => `<button type="button" data-language-add="${esc(item.id)}">${esc(item.name)} <small>${esc(item.category || '')}</small></button>`).join('');
-            languageResults.querySelectorAll('[data-language-add]').forEach(button => button.onclick = () => { const item = languageCatalog.find(record => record.id === button.dataset.languageAdd); if (!item) return; data.languages.push({ id: item.id, name: item.name, category: item.category || null, sourceType: item.sourceType || 'native', speaks: item.speaks !== false, reads: item.reads === true, writes: item.writes === true, usesLanguageSlot: item.usesLanguageSlot === true, notes: Array.isArray(item.notes) ? item.notes.join('; ') : item.notes || '' }); changed(); render(); });
+            const literacy = languageLiteracy.value;
+            const matches = languageRecords.filter(item => (!query || item.name.toLowerCase().includes(query)) && (!languageCategory.value || item.category === languageCategory.value) && (!languageSource.value || item.source === languageSource.value) && (!literacy || String(item.literacySupported) === literacy)).slice(0, 30);
+            languageResults.innerHTML = matches.map(item => `<button type="button" data-language-add="${esc(item.id)}">${esc(item.name)} <small>${esc(item.category || '')} / ${esc(item.source || '')} / ${item.literacySupported ? 'literacy supported' : 'no literacy'}</small></button>`).join('') || '<small>No matching languages.</small>';
+            languageResults.querySelectorAll('[data-language-add]').forEach(button => button.onclick = () => { const item = languageLookup(button.dataset.languageAdd); if (!item) return; data.languages.push({ id: item.id, name: item.name, category: item.category || null, sourceType: 'native', speaks: true, reads: item.literacySupported === true, writes: item.literacySupported === true, usesLanguageSlot: false, notes: Array.isArray(item.notes) ? item.notes.join('; ') : item.notes || '' }); changed(); render(); });
         };
         languageSearch.oninput = renderLanguageResults;
+        languageCategory.onchange = renderLanguageResults;
+        languageSource.onchange = renderLanguageResults;
+        languageLiteracy.onchange = renderLanguageResults;
         renderLanguageResults();
     }
     const inventoryCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Inventory'));
@@ -2536,7 +2944,7 @@ function setupProficiencyAndInventorySections() {
             inventoryCard.querySelectorAll('[data-catalogue-id]').forEach(button => button.onclick = () => {
                 const item = equipmentCatalogue.find(record => record.id === button.dataset.catalogueId);
                 if (!item) return;
-                data.inventory.push({ itemId: item.id, item: '', location: 'carried', equipped: true, customName: null, weightOverride: null, quantity: item.quantity || 1, notes: '' });
+                data.inventory.push({ catalogType: item.catalogType || 'equipment', catalogItemId: item.id, itemId: item.id, item: '', location: 'carried', equipped: true, customName: null, weightOverride: null, quantity: item.quantity || 1, notes: '' });
                 changed();
                 render();
             });
@@ -2592,6 +3000,7 @@ function render() {
     setupWeaponProficiencySection();
     setupSurpriseReferenceSection();
     setupBladesingerReferenceSection();
+    setupReferenceLibrary();
     setupAbilityTooltips();
     setupCharacterHeader();
     setupSurpriseSection();
@@ -2687,6 +3096,8 @@ function bind() {
             if (e.dataset.key === 'item') {
                 const match = equipmentCatalogue.find(record => record.name.toLowerCase() === e.value.trim().toLowerCase());
                 item.itemId = match?.id || '';
+                item.catalogItemId = item.itemId;
+                item.catalogType = match?.catalogType || item.catalogType || 'equipment';
                 item.item = match ? '' : e.value;
                 e.closest('td').querySelector('[data-key="itemId"]').value = item.itemId;
                 e.closest('tr').children[4].textContent = formatCost(match?.cost);
@@ -2824,4 +3235,21 @@ try {
     data = normalize(JSON.parse(localStorage.getItem('adnd2e-sheet-v1') || '{}'))
 } catch {}
 render();
-Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadLanguageCatalog()]).then(() => render());
+Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadLanguageCatalog()]).then(() => {
+    const enrichmentResult = applySpellMaterialEnrichments(spellCatalogSourceRecords, spellMaterialEnrichmentRecords);
+    spellCatalogSourceRecords = enrichmentResult.records;
+    spellMaterialEnrichmentConflicts = enrichmentResult.conflicts;
+    spellCatalogRecords = spellCatalogRecords.map(record => {
+        const sourceRecord = spellCatalogSourceRecords.find(candidate => candidate.sourceRecordId === record.sourceRecordId);
+        return sourceRecord ? { ...record, materialComponents: sourceRecord.materialComponents } : record;
+    });
+    spellCatalog = spellCatalogRecords.map(item => ({
+        ...item,
+        source: item.source || item.sourceRefs?.[0] || (item.spellGroup ? normalizeLegacySpellSource(item.spellGroup) : 'Unknown'),
+        school: item.school || item.source || item.spellGroup || (Array.isArray(item.schools) ? item.schools[0] : Array.isArray(item.sphere) ? item.sphere[0] : 'Unknown'),
+        level: String(item.level),
+        type: 'Spell',
+        notes: Array.isArray(item.notes) ? item.notes : []
+    }));
+    render();
+});

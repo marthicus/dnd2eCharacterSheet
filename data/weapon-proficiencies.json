@@ -1,28 +1,173 @@
 [
-  {"weaponId":"battle-axe","name":"Battle Axe"},
-  {"weaponId":"long-bow","name":"Bow, Long"},
-  {"weaponId":"short-bow","name":"Bow, Short"},
-  {"weaponId":"club","name":"Club"},
-  {"proficiencyId":"crossbow","weaponId":null,"compatibleWeaponIds":["hand-crossbow","heavy-crossbow","light-crossbow"],"name":"Crossbow"},
-  {"weaponId":"dagger-or-dirk","name":"Dagger"},
-  {"weaponId":"dart","name":"Dart"},
-  {"weaponId":"footman-s-flail","name":"Flail"},
-  {"weaponId":"hand-or-throwing-axe","name":"Hand Axe"},
-  {"weaponId":"javelin","name":"Javelin"},
-  {"weaponId":"knife","name":"Knife"},
-  {"weaponId":"jousting-lance","name":"Lance"},
-  {"weaponId":"horseman-s-mace","name":"Mace"},
-  {"weaponId":"footman-s-pick","name":"Pick"},
-  {"proficiencyId":"polearm","weaponId":null,"compatibleWeaponIds":["awl-pike","bardiche","halberd","partisan","ranseur","spetum","voulge"],"name":"Polearm"},
-  {"weaponId":"sling","name":"Sling"},
-  {"weaponId":"spear","name":"Spear"},
-  {"weaponId":"quarterstaff","name":"Staff"},
-  {"weaponId":"bastard-sword-one-handed","name":"Sword, Bastard"},
-  {"weaponId":"long-sword","name":"Sword, Long"},
-  {"weaponId":"scimitar","name":"Sword, Scimitar"},
-  {"weaponId":"short-sword","name":"Sword, Short"},
-  {"weaponId":"two-handed-sword","name":"Sword, Two-Handed"},
-  {"weaponId":"warhammer","name":"Warhammer"},
-  {"weaponId":"whip","name":"Whip"},
-  {"proficiencyId":"two-weapon-fighting","weaponId":null,"name":"Two Weapon Fighting"}
+  {
+    "weaponId": "battle-axe",
+    "name": "Battle Axe",
+    "proficiencyId": "battle-axe",
+    "notes": []
+  },
+  {
+    "weaponId": "long-bow",
+    "name": "Bow, Long",
+    "proficiencyId": "long-bow",
+    "notes": []
+  },
+  {
+    "weaponId": "short-bow",
+    "name": "Bow, Short",
+    "proficiencyId": "short-bow",
+    "notes": []
+  },
+  {
+    "weaponId": "club",
+    "name": "Club",
+    "proficiencyId": "club",
+    "notes": []
+  },
+  {
+    "proficiencyId": "crossbow",
+    "weaponId": null,
+    "compatibleWeaponIds": [
+      "hand-crossbow",
+      "heavy-crossbow",
+      "light-crossbow"
+    ],
+    "name": "Crossbow",
+    "notes": []
+  },
+  {
+    "weaponId": "dagger-or-dirk",
+    "name": "Dagger",
+    "proficiencyId": "dagger-or-dirk",
+    "notes": []
+  },
+  {
+    "weaponId": "dart",
+    "name": "Dart",
+    "proficiencyId": "dart",
+    "notes": []
+  },
+  {
+    "weaponId": "footman-s-flail",
+    "name": "Flail",
+    "proficiencyId": "footman-s-flail",
+    "notes": []
+  },
+  {
+    "weaponId": "hand-or-throwing-axe",
+    "name": "Hand Axe",
+    "proficiencyId": "hand-or-throwing-axe",
+    "notes": []
+  },
+  {
+    "weaponId": "javelin",
+    "name": "Javelin",
+    "proficiencyId": "javelin",
+    "notes": []
+  },
+  {
+    "weaponId": "knife",
+    "name": "Knife",
+    "proficiencyId": "knife",
+    "notes": []
+  },
+  {
+    "weaponId": "jousting-lance",
+    "name": "Lance",
+    "proficiencyId": "jousting-lance",
+    "notes": []
+  },
+  {
+    "weaponId": "horseman-s-mace",
+    "name": "Mace",
+    "proficiencyId": "horseman-s-mace",
+    "notes": []
+  },
+  {
+    "weaponId": "footman-s-pick",
+    "name": "Pick",
+    "proficiencyId": "footman-s-pick",
+    "notes": []
+  },
+  {
+    "proficiencyId": "polearm",
+    "weaponId": null,
+    "compatibleWeaponIds": [
+      "awl-pike",
+      "bardiche",
+      "halberd",
+      "partisan",
+      "ranseur",
+      "spetum",
+      "voulge"
+    ],
+    "name": "Polearm",
+    "notes": []
+  },
+  {
+    "weaponId": "sling",
+    "name": "Sling",
+    "proficiencyId": "sling",
+    "notes": []
+  },
+  {
+    "weaponId": "spear",
+    "name": "Spear",
+    "proficiencyId": "spear",
+    "notes": []
+  },
+  {
+    "weaponId": "quarterstaff",
+    "name": "Staff",
+    "proficiencyId": "quarterstaff",
+    "notes": []
+  },
+  {
+    "weaponId": "bastard-sword-one-handed",
+    "name": "Sword, Bastard",
+    "proficiencyId": "bastard-sword-one-handed",
+    "notes": []
+  },
+  {
+    "weaponId": "long-sword",
+    "name": "Sword, Long",
+    "proficiencyId": "long-sword",
+    "notes": []
+  },
+  {
+    "weaponId": "scimitar",
+    "name": "Sword, Scimitar",
+    "proficiencyId": "scimitar",
+    "notes": []
+  },
+  {
+    "weaponId": "short-sword",
+    "name": "Sword, Short",
+    "proficiencyId": "short-sword",
+    "notes": []
+  },
+  {
+    "weaponId": "two-handed-sword",
+    "name": "Sword, Two-Handed",
+    "proficiencyId": "two-handed-sword",
+    "notes": []
+  },
+  {
+    "weaponId": "warhammer",
+    "name": "Warhammer",
+    "proficiencyId": "warhammer",
+    "notes": []
+  },
+  {
+    "weaponId": "whip",
+    "name": "Whip",
+    "proficiencyId": "whip",
+    "notes": []
+  },
+  {
+    "proficiencyId": "two-weapon-fighting",
+    "weaponId": null,
+    "name": "Two Weapon Fighting",
+    "compatibleWeaponIds": [],
+    "notes": []
+  }
 ]

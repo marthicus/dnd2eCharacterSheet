@@ -1,1 +1,196 @@
-[]
+[
+  {
+    "id": "banquet",
+    "name": "Banquet",
+    "category": "service",
+    "subcategory": "meal",
+    "cost": {
+      "amount": 10,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": true,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [],
+    "pricingUnit": "person"
+  },
+  {
+    "id": "city-room-common",
+    "name": "City Room, Common",
+    "category": "service",
+    "subcategory": "lodging",
+    "cost": {
+      "amount": 20,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [],
+    "pricingUnit": "month"
+  },
+  {
+    "id": "city-room-poor",
+    "name": "City Room, Poor",
+    "category": "service",
+    "subcategory": "lodging",
+    "cost": {
+      "amount": 6,
+      "currency": "sp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [],
+    "pricingUnit": "month"
+  },
+  {
+    "id": "grain-and-stabling-for-horse",
+    "name": "Grain and Stabling for Horse",
+    "category": "service",
+    "subcategory": "animal-care",
+    "cost": {
+      "amount": 5,
+      "currency": "sp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [],
+    "pricingUnit": "day"
+  },
+  {
+    "id": "meals-good",
+    "name": "Meals, Good",
+    "category": "service",
+    "subcategory": "meal",
+    "cost": {
+      "amount": 5,
+      "currency": "sp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": true,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [],
+    "pricingUnit": "day"
+  },
+  {
+    "id": "meals-common",
+    "name": "Meals, Common",
+    "category": "service",
+    "subcategory": "meal",
+    "cost": {
+      "amount": 3,
+      "currency": "sp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": true,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [],
+    "pricingUnit": "day"
+  },
+  {
+    "id": "meals-poor",
+    "name": "Meals, Poor",
+    "category": "service",
+    "subcategory": "meal",
+    "cost": {
+      "amount": 1,
+      "currency": "sp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": true,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [],
+    "pricingUnit": "day"
+  },
+  {
+    "id": "separate-latrine-for-rooms",
+    "name": "Separate Latrine for Rooms",
+    "category": "service",
+    "subcategory": "lodging",
+    "cost": {
+      "amount": 2,
+      "currency": "gp"
+    },
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [],
+    "pricingUnit": "month"
+  },
+  {
+    "id": "inn-lodging-common",
+    "name": "Inn Lodging, Common",
+    "category": "service",
+    "subcategory": "lodging",
+    "cost": null,
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [],
+    "pricing": [
+      {
+        "period": "day",
+        "cost": {
+          "amount": 5,
+          "currency": "sp"
+        }
+      },
+      {
+        "period": "week",
+        "cost": {
+          "amount": 3,
+          "currency": "gp"
+        }
+      }
+    ]
+  },
+  {
+    "id": "inn-lodging-poor",
+    "name": "Inn Lodging, Poor",
+    "category": "service",
+    "subcategory": "lodging",
+    "cost": null,
+    "weightLb": null,
+    "stackable": false,
+    "consumable": false,
+    "trackQuantity": true,
+    "source": "AD&D 2E PHB",
+    "notes": [],
+    "pricing": [
+      {
+        "period": "day",
+        "cost": {
+          "amount": 5,
+          "currency": "cp"
+        }
+      },
+      {
+        "period": "week",
+        "cost": {
+          "amount": 2,
+          "currency": "sp"
+        }
+      }
+    ]
+  }
+]

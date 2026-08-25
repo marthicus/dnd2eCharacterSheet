@@ -1,1 +1,212 @@
-[]
+[
+  {
+    "id": "arquebus-range",
+    "weaponId": "arquebus",
+    "unit": "tens-of-yards",
+    "short": 5,
+    "medium": 15,
+    "long": 21,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "blowgun-range",
+    "weaponId": "blowgun",
+    "unit": "tens-of-yards",
+    "short": 1,
+    "medium": 2,
+    "long": 3,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "composite-long-bow-range",
+    "weaponId": "composite-long-bow",
+    "unit": "tens-of-yards",
+    "short": 6,
+    "medium": 12,
+    "long": 21,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "composite-short-bow-range",
+    "weaponId": "composite-short-bow",
+    "unit": "tens-of-yards",
+    "short": 5,
+    "medium": 10,
+    "long": 18,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "long-bow-range",
+    "weaponId": "long-bow",
+    "unit": "tens-of-yards",
+    "short": 7,
+    "medium": 14,
+    "long": 21,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "short-bow-range",
+    "weaponId": "short-bow",
+    "unit": "tens-of-yards",
+    "short": 5,
+    "medium": 10,
+    "long": 15,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "club-range",
+    "weaponId": "club",
+    "unit": "tens-of-yards",
+    "short": 1,
+    "medium": 2,
+    "long": 3,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "hand-crossbow-range",
+    "weaponId": "hand-crossbow",
+    "unit": "tens-of-yards",
+    "short": 2,
+    "medium": 4,
+    "long": 6,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "heavy-crossbow-range",
+    "weaponId": "heavy-crossbow",
+    "unit": "tens-of-yards",
+    "short": 8,
+    "medium": 16,
+    "long": 24,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "light-crossbow-range",
+    "weaponId": "light-crossbow",
+    "unit": "tens-of-yards",
+    "short": 6,
+    "medium": 12,
+    "long": 18,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "dagger-or-dirk-range",
+    "weaponId": "dagger-or-dirk",
+    "unit": "tens-of-yards",
+    "short": 1,
+    "medium": 2,
+    "long": 3,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "dart-range",
+    "weaponId": "dart",
+    "unit": "tens-of-yards",
+    "short": 1,
+    "medium": 2,
+    "long": 4,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "hand-or-throwing-axe-range",
+    "weaponId": "hand-or-throwing-axe",
+    "unit": "tens-of-yards",
+    "short": 1,
+    "medium": 2,
+    "long": 3,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "harpoon-range",
+    "weaponId": "harpoon",
+    "unit": "tens-of-yards",
+    "short": 1,
+    "medium": 2,
+    "long": 3,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "javelin-range",
+    "weaponId": "javelin",
+    "unit": "tens-of-yards",
+    "short": 2,
+    "medium": 4,
+    "long": 6,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "knife-range",
+    "weaponId": "knife",
+    "unit": "tens-of-yards",
+    "short": 1,
+    "medium": 2,
+    "long": 3,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "sling-bullet-range",
+    "weaponId": "sling-bullet",
+    "unit": "tens-of-yards",
+    "short": 5,
+    "medium": 10,
+    "long": 20,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "sling-stone-range",
+    "weaponId": "sling-stone",
+    "unit": "tens-of-yards",
+    "short": 4,
+    "medium": 8,
+    "long": 16,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "spear-range",
+    "weaponId": "spear",
+    "unit": "tens-of-yards",
+    "short": 1,
+    "medium": 2,
+    "long": 3,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "staff-sling-range",
+    "weaponId": "staff-sling",
+    "unit": "tens-of-yards",
+    "short": null,
+    "medium": "3-6",
+    "long": 9,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  },
+  {
+    "id": "warhammer-range",
+    "weaponId": "warhammer",
+    "unit": "tens-of-yards",
+    "short": 1,
+    "medium": 2,
+    "long": 3,
+    "source": "AD&D 2E PHB",
+    "notes": []
+  }
+]
