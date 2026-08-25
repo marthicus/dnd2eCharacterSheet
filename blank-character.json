@@ -58,7 +58,7 @@
   "weaponProficiencies": [],
   "weaponProficiencySettings": { "autoCalculate": true, "availableSlots": 0 },
   "languages": [],
-  "nwpSettings": { "autoCalculate": false, "exemptBonusProficiencies": true, "availableSlots": 0 },
+  "nwpSettings": { "autoCalculate": true, "exemptBonusProficiencies": true, "availableSlots": 0 },
   "inventory": [],
   "spells": [],
   "resistances": [],

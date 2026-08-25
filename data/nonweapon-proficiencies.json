@@ -3,7 +3,8 @@
   "dataNotes": [
     "Transcribed from the user-provided reference image.",
     "Null relevantAbility and checkModifier represent entries shown as NA.",
-    "Proficiencies repeated across groups are merged into one record."
+    "Proficiencies repeated across groups are merged into one record.",
+    "PHBR11 Table 55 ranger proficiencies added; crossover-group audit remains explicit in record notes."
   ],
   "slotProgression": {
     "warrior": {
@@ -934,6 +935,21 @@
       "sourceTable": 37,
       "slotCost": 1,
       "notes": []
-    }
+    },
+    { "id": "alertness", "name": "Alertness", "groups": ["ranger"], "relevantAbility": "wisdom", "checkModifier": 1, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "boating", "name": "Boating", "groups": ["ranger"], "relevantAbility": "wisdom", "checkModifier": 1, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "camouflage", "name": "Camouflage", "groups": ["ranger"], "relevantAbility": "wisdom", "checkModifier": 0, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "cartography", "name": "Cartography", "groups": ["ranger"], "relevantAbility": "intelligence", "checkModifier": -2, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "distance-sense", "name": "Distance Sense", "groups": ["ranger"], "relevantAbility": "wisdom", "checkModifier": 0, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "falconry", "name": "Falconry", "groups": ["ranger"], "relevantAbility": "wisdom", "checkModifier": -1, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "foraging", "name": "Foraging", "groups": ["ranger"], "relevantAbility": "intelligence", "checkModifier": -2, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "persuasion", "name": "Persuasion", "groups": ["ranger"], "relevantAbility": "charisma", "checkModifier": 0, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "riding-sea-based", "name": "Riding, Sea-based", "groups": ["ranger"], "relevantAbility": "dexterity", "checkModifier": -2, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 2, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "signaling", "name": "Signaling", "groups": ["ranger"], "relevantAbility": "intelligence", "checkModifier": -2, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "spelunking", "name": "Spelunking", "groups": ["ranger"], "relevantAbility": "intelligence", "checkModifier": -2, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "trail-marking", "name": "Trail Marking", "groups": ["ranger"], "relevantAbility": "wisdom", "checkModifier": 0, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "trail-signs", "name": "Trail Signs", "groups": ["ranger"], "relevantAbility": "intelligence", "checkModifier": -1, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "veterinary-healing", "name": "Veterinary Healing", "groups": ["ranger"], "relevantAbility": "wisdom", "checkModifier": -3, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] },
+    { "id": "weaponsmithing-crude", "name": "Weaponsmithing, Crude", "groups": ["ranger"], "relevantAbility": "wisdom", "checkModifier": -3, "source": "PHBR11 - The Complete Ranger's Handbook", "sourceTable": 55, "slotCost": 1, "notes": ["Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."] }
   ]
 }

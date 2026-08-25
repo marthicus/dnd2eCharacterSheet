@@ -110,7 +110,7 @@ const FIXED = {
     weaponProficiencySettings: { autoCalculate: true, availableSlots: 0 },
     languages: [],
     languageTracking: { availableBonusLanguages: null },
-    nwpSettings: { autoCalculate: false, exemptBonusProficiencies: true, availableSlots: 0 },
+    nwpSettings: { autoCalculate: true, exemptBonusProficiencies: true, availableSlots: 0 },
     inventory: [],
     spells: [],
     resistances: [],
@@ -431,9 +431,43 @@ function normalizeSpellLevel(value) {
 }
 
 function normalizeLegacySpellSource(value) {
-    const text = String(value || '').trim();
+    const text = Array.isArray(value) ? value.join(', ') : String(value || '').trim();
     if (!text) return 'Unknown';
     return text.includes('wizard') ? 'Wizard' : text.includes('priest') ? 'Priest' : text;
+}
+
+function spellSources(record) {
+    return [...new Set([...(Array.isArray(record.source) ? record.source : [record.source]), ...(record.sourceRefs || [])].filter(Boolean))];
+}
+
+function sourceQualifiedValue(record, value) {
+    const source = spellSources(record).join(', ') || 'Unknown';
+    return `${source}: ${value}`;
+}
+
+function sourceQualifiedValueFromSources(sources, value) {
+    return `${sources.join(', ') || 'Unknown'}: ${value}`;
+}
+
+function mergeSpellField(existing, incoming, field) {
+    const existingValue = existing[field];
+    const incomingValue = incoming[field];
+    if (Array.isArray(existingValue) && Array.isArray(incomingValue)) {
+        existing[field] = [...new Set([...existingValue, ...incomingValue])];
+        return;
+    }
+    const existingMissing = existingValue == null || existingValue === '' || (Array.isArray(existingValue) && !existingValue.length);
+    const incomingMissing = incomingValue == null || incomingValue === '' || (Array.isArray(incomingValue) && !incomingValue.length);
+    if (existingMissing && !incomingMissing) {
+        existing[field] = incomingValue;
+        return;
+    }
+    if (existingMissing || incomingMissing || JSON.stringify(existingValue) === JSON.stringify(incomingValue)) return;
+    const existingSources = existing.fieldSources?.[field] || spellSources(existing);
+    const values = Array.isArray(existingValue) && existingValue.every(value => typeof value === 'string') && !existing.fieldSources?.[field] ? existingValue : [sourceQualifiedValueFromSources(existingSources, existingValue)];
+    const incomingValues = Array.isArray(incomingValue) && incomingValue.every(value => typeof value === 'string') ? incomingValue.map(value => sourceQualifiedValue(incoming, value)) : [sourceQualifiedValue(incoming, incomingValue)];
+    existing[field] = [...new Set([...values, ...incomingValues])].join('; ');
+    existing.fieldSources = { ...(existing.fieldSources || {}), [field]: [...new Set([...existingSources, ...spellSources(incoming)])] };
 }
 
 function normalizeSpellRecord(record = {}, index = 0) {
@@ -514,18 +548,18 @@ function filterSpellCatalog(records = spellCatalogRecords, filters = {}) {
         const matchesLevel = filters.level == null || Number(record.level) === Number(filters.level);
         const matchesClass = !filters.classList || (Array.isArray(record.classLists) && record.classLists.includes(filters.classList));
         const matchesGroup = !filters.spellGroup || record.spellGroup === filters.spellGroup;
-        const matchesSource = !filters.source || record.source === filters.source;
+        const matchesSource = !filters.source || spellSources(record).includes(filters.source);
         return matchesLevel && matchesClass && matchesGroup && matchesSource;
     });
 }
 
 function mergeSpellCatalogRecords(existingRecords, incomingRecords) {
-    const merged = [...existingRecords.map(record => ({ ...record, sourceRefs: Array.isArray(record.sourceRefs) ? [...new Set(record.sourceRefs.filter(Boolean))] : record.source ? [record.source] : [] }))];
+    const merged = [...existingRecords.map(record => ({ ...record, sourceRefs: spellSources(record), source: Array.isArray(record.source) ? [...record.source] : record.source ? [record.source] : [], fieldSources: { ...(record.fieldSources || {}) } }))];
     const conflicts = [];
     incomingRecords.forEach(incoming => {
         const normalizedIncoming = {
             ...incoming,
-            sourceRefs: Array.isArray(incoming.sourceRefs) ? [...new Set(incoming.sourceRefs.filter(Boolean))] : incoming.source ? [incoming.source] : [],
+            sourceRefs: spellSources(incoming),
             schools: Array.isArray(incoming.schools) ? incoming.schools : incoming.school ? [incoming.school] : [],
             notes: Array.isArray(incoming.notes) ? incoming.notes : [],
             materialComponents: incoming.materialComponents ?? null
@@ -536,21 +570,19 @@ function mergeSpellCatalogRecords(existingRecords, incomingRecords) {
             return;
         }
         const existing = merged[existingIndex];
-        const comparedKeys = [...new Set([...Object.keys(existing), ...Object.keys(normalizedIncoming)])].filter(key => !['source', 'sourceRefs', 'notes', 'sourceLabel', 'components', 'materialComponents', 'spellGroup'].includes(key));
-        const conflictingFields = comparedKeys.filter(key => !((existing[key] === normalizedIncoming[key]) || (JSON.stringify(existing[key]) === JSON.stringify(normalizedIncoming[key]))));
-        if (conflictingFields.length) {
-            conflicts.push({
-                spellId: normalizedIncoming.id,
-                existingSource: existing.source || existing.sourceRefs?.[0] || 'Unknown',
-                incomingSource: normalizedIncoming.source || normalizedIncoming.sourceRefs?.[0] || 'Unknown',
-                conflictingFields
-            });
-            return;
-        }
+        const comparedKeys = [...new Set([...Object.keys(existing), ...Object.keys(normalizedIncoming)])].filter(key => !['id', 'source', 'sourceRefs', 'sourceLabel', 'notes', 'components', 'spellGroup', 'sourceRecordId'].includes(key));
+        const conflictingFields = comparedKeys.filter(key => {
+            const before = existing[key];
+            mergeSpellField(existing, normalizedIncoming, key);
+            return before != null && normalizedIncoming[key] != null && before !== existing[key];
+        });
         existing.sourceRefs = [...new Set([...(existing.sourceRefs || []), ...(normalizedIncoming.sourceRefs || [])].filter(Boolean))];
+        existing.source = existing.sourceRefs;
+        existing.sourceRecordIds = [...new Set([...(existing.sourceRecordIds || []), existing.sourceRecordId, normalizedIncoming.sourceRecordId].filter(Boolean))];
         existing.notes = [...new Set([...(Array.isArray(existing.notes) ? existing.notes : []), ...(Array.isArray(normalizedIncoming.notes) ? normalizedIncoming.notes : [])].filter(Boolean))];
         if (!existing.schools && normalizedIncoming.schools?.length) existing.schools = normalizedIncoming.schools;
         if (!existing.school && normalizedIncoming.school) existing.school = normalizedIncoming.school;
+        if (conflictingFields.length) conflicts.push({ spellId: normalizedIncoming.id, conflictingFields, sources: existing.sourceRefs });
     });
     return { merged, conflicts };
 }
@@ -593,8 +625,7 @@ async function loadSpellCatalog() {
                 const duplicateRecord = spellCatalogSourceRecords.find(record => record.id === spellId);
                 return { spellId, type: 'duplicate-source-id', source: duplicateRecord?.source || 'Unknown', conflictingFields: [] };
             });
-            const firstById = spellCatalogSourceRecords.filter((record, index, records) => records.findIndex(candidate => candidate.id === record.id) === index);
-            const mergeResult = mergeSpellCatalogRecords(mergedRecords, firstById);
+            const mergeResult = mergeSpellCatalogRecords(mergedRecords, spellCatalogSourceRecords);
             mergedRecords = mergeResult.merged;
             spellCatalogConflicts.push(...mergeResult.conflicts);
         } else {
@@ -650,17 +681,25 @@ function validateClassAbilityCatalog(records) {
     return errors;
 }
 
-function classAbilityLookup({ className = '', abilityType = '', source = '' } = {}) {
+function spellsAndAbilitiesCatalogueRecords() {
+    return [
+        ...classAbilityRecords.map(record => ({ ...record, catalogueType: 'ability' })),
+        ...spellCatalogRecords.map(record => ({ ...record, classes: Array.isArray(record.classLists) ? record.classLists : [], abilityType: 'spell', catalogueType: 'spell' }))
+    ];
+}
+
+function classAbilityLookup({ className = '', abilityType = '', source = '', catalogueType = '' } = {}, records = classAbilityRecords) {
     const normalizedClass = String(className).toLowerCase().replace(/\s+/g, '-');
-    return classAbilityRecords.filter(record => (!normalizedClass || record.classes.includes(normalizedClass)) && (!abilityType || record.abilityType === abilityType) && (!source || record.source === source));
+    return records.filter(record => (!normalizedClass || (record.classes || []).includes(normalizedClass)) && (!abilityType || record.abilityType === abilityType) && (!source || record.source === source) && (!catalogueType || record.catalogueType === catalogueType));
 }
 
 function classAbilityCatalogMarkup() {
-    const classes = [...new Set(classAbilityRecords.flatMap(record => record.classes))].sort();
+    const records = spellsAndAbilitiesCatalogueRecords();
+    const classes = [...new Set(records.flatMap(record => record.classes || []))].sort();
     const types = [...new Set(classAbilityRecords.map(record => record.abilityType))].sort();
-    const sources = [...new Set(classAbilityRecords.map(record => record.source).filter(Boolean))].sort();
+    const sources = [...new Set(records.flatMap(record => Array.isArray(record.source) ? record.source : [record.source]).filter(Boolean))].sort();
     const errors = classAbilityValidation.length ? `<div class="catalogue-validation">${classAbilityValidation.map(error => `<div>${esc(error)}</div>`).join('')}</div>` : '';
-    return `<div class="class-ability-catalog"><h3>Class ability catalogue</h3>${errors}<div class="class-ability-filters"><label>Class<select id="class-ability-class"><option value="">All classes</option>${classes.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label><label>Type<select id="class-ability-type"><option value="">All types</option>${types.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label><label>Source<select id="class-ability-source"><option value="">All sources</option>${sources.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label></div><div id="class-ability-catalog-results" class="class-ability-catalog-results"></div></div>`;
+    return `<div class="class-ability-catalog"><h3>Spells and abilities catalogue</h3>${errors}<label class="class-ability-search">Search catalogue<input id="class-ability-search" type="search" placeholder="Search name or source"></label><div class="class-ability-filters"><label>Class<select id="class-ability-class"><option value="">All classes</option>${classes.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label><label>Type<select id="class-ability-catalogue-type"><option value="">All</option><option value="spell">Spells</option><option value="ability">Abilities</option></select></label><label>Ability type<select id="class-ability-type"><option value="">All types</option>${types.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label><label>Source<select id="class-ability-source"><option value="">All sources</option>${sources.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label></div><div id="class-ability-catalog-results" class="class-ability-catalog-results"></div></div>`;
 }
 
 async function loadWeaponProficiencyCatalog() {
@@ -2153,10 +2192,40 @@ function setupClassAbilitiesSection() {
     const catalogPanel = section.querySelector('.class-ability-catalog');
     if (catalogPanel) {
         const classFilter = catalogPanel.querySelector('#class-ability-class');
+        const search = catalogPanel.querySelector('#class-ability-search');
+        const catalogueTypeFilter = catalogPanel.querySelector('#class-ability-catalogue-type');
         const typeFilter = catalogPanel.querySelector('#class-ability-type');
         const sourceFilter = catalogPanel.querySelector('#class-ability-source');
-        const renderCatalog = () => { const matches = classAbilityLookup({ className: classFilter.value, abilityType: typeFilter.value, source: sourceFilter.value }); catalogPanel.querySelector('#class-ability-catalog-results').innerHTML = matches.map(record => `<article><strong>${esc(record.name)}</strong><small>${esc(record.abilityType)} · ${esc(record.source)}</small></article>`).join('') || '<small>No matching class abilities.</small>'; };
+        const abilityTypeOption = catalogPanel.querySelector('#class-ability-catalogue-type option[value="ability"]');
+        if (abilityTypeOption) abilityTypeOption.textContent = 'Abil.';
+        const renderCatalog = () => {
+            const records = spellsAndAbilitiesCatalogueRecords();
+            const query = search.value.trim().toLowerCase();
+            const matches = classAbilityLookup({ className: classFilter.value, abilityType: typeFilter.value, source: sourceFilter.value, catalogueType: catalogueTypeFilter.value }, records).filter(record => !query || [record.name, record.source, ...(record.classes || [])].join(' ').toLowerCase().includes(query));
+            const visibleMatches = matches.slice(0, 40);
+            const results = catalogPanel.querySelector('#class-ability-catalog-results');
+            results.innerHTML = visibleMatches.map(record => {
+                const trackedKey = record.catalogueType === 'spell' ? 'spellCatalogId' : 'classAbilityId';
+                const tracked = data.spells.some(item => item[trackedKey] === record.id);
+                const classNames = (record.classes || []).join(', ');
+                const metadata = record.catalogueType === 'spell' ? [`Spell${record.level != null ? ` · L${record.level}` : ''}`, classNames, record.source] : ['Ability', record.abilityType, classNames, record.source];
+                return `<button type="button" class="class-ability-result" data-class-ability-add="${esc(record.id)}" data-class-ability-type="${record.catalogueType}"${tracked ? ' disabled' : ''}><strong>${esc(record.name)}</strong><small>${esc(metadata.filter(Boolean).join(' · '))}${tracked ? ' · Tracked' : ''}</small></button>`;
+            }).join('') || '<small>No matching class abilities.</small>';
+            results.querySelectorAll('[data-class-ability-add]').forEach(button => button.onclick = () => {
+                const record = spellsAndAbilitiesCatalogueRecords().find(item => item.id === button.dataset.classAbilityAdd && item.catalogueType === button.dataset.classAbilityType);
+                if (!record) return;
+                const trackedKey = record.catalogueType === 'spell' ? 'spellCatalogId' : 'classAbilityId';
+                if (data.spells.some(item => item[trackedKey] === record.id)) return;
+                data.spells.push(record.catalogueType === 'spell'
+                    ? { spellCatalogId: record.id, name: record.name, level: record.level ?? '', type: 'Spell', school: record.school || record.spellGroup || '', known: '', memorized: false, memorizedQty: '', castQty: '', verbal: record.components?.verbal === true, somatic: record.components?.somatic === true, material: record.components?.material === true, materialComponents: record.materialComponents || '', notes: Array.isArray(record.notes) ? record.notes.join('; ') : record.notes || '', source: record.source || '' }
+                    : { classAbilityId: record.id, name: record.name, level: record.levelRequired ?? '', type: 'Class ability', school: record.abilityType || '', known: '', memorized: false, memorizedQty: '', castQty: '', verbal: false, somatic: false, material: false, materialComponents: '', notes: Array.isArray(record.notes) ? record.notes.join('; ') : record.notes || '', source: record.source || '' });
+                changed();
+                render();
+            });
+        };
+        search.oninput = renderCatalog;
         classFilter.onchange = renderCatalog;
+        catalogueTypeFilter.onchange = renderCatalog;
         typeFilter.onchange = renderCatalog;
         sourceFilter.onchange = renderCatalog;
         renderCatalog();
@@ -2370,7 +2439,7 @@ function setupReferenceLibrary() {
     const mode = section.dataset.mode || 'spells';
     const active = modes[mode] || modes.spells;
     const records = active.records || [];
-    const sources = [...new Set(records.map(record => record.source).filter(Boolean))].sort();
+    const sources = [...new Set(records.flatMap(record => Array.isArray(record.source) ? record.source : [record.source]).filter(Boolean))].sort();
     const classes = [...new Set(records.flatMap(record => record.classLists || record.classes || []).filter(Boolean))].sort();
     const groups = [...new Set(records.map(record => record.category || record.group || record.abilityType).filter(Boolean))].sort();
     section.innerHTML = `<h2>Reference library</h2><div class="reference-library-tabs" role="tablist">${Object.entries(modes).map(([key, value]) => `<button type="button" class="reference-library-tab${key === mode ? ' active' : ''}" data-reference-mode="${key}" role="tab" aria-selected="${key === mode}">${value.label}</button>`).join('')}</div><div class="reference-library-filters"><label>Search<input type="search" data-reference-search placeholder="Name or source"></label>${classes.length ? `<label>Class<select data-reference-class><option value="">All classes</option>${classes.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label>` : ''}${groups.length ? `<label>Category<select data-reference-group><option value="">All categories</option>${groups.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label>` : ''}${sources.length ? `<label>Source<select data-reference-source><option value="">All sources</option>${sources.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label>` : ''}</div><div class="reference-library-results" data-reference-results></div><div class="reference-library-detail" data-reference-detail aria-live="polite"><small>Select a result to inspect its available metadata.</small></div>`;
@@ -2383,8 +2452,8 @@ function setupReferenceLibrary() {
     const getName = record => record.name || record.spellName || record.proficiencyName || record.languageName || 'Unnamed record';
     const renderDetail = record => {
         const fields = mode === 'spells'
-            ? [['Level', record.level], ['Class', (record.classLists || []).join(', ')], ['School / sphere', record.school || record.spellGroup || (record.sphere || []).join(', ')], ['Components', [record.verbal ? 'V' : '', record.somatic ? 'S' : '', record.material ? 'M' : ''].filter(Boolean).join(', ')], ['Material', record.materialComponents], ['Range', record.range], ['Casting time', record.castingTime], ['Duration', record.duration], ['Area', record.areaOfEffect], ['Saving throw', record.savingThrow], ['Source', record.source], ['Occurrence', record.sourceRecordId]]
-            : Object.entries(record).filter(([key]) => !['id', 'name', 'spellName'].includes(key)).slice(0, 8).map(([key, value]) => [key, Array.isArray(value) ? value.join(', ') : typeof value === 'object' && value !== null ? JSON.stringify(value) : value]);
+            ? [['Level', record.level], ['Class', (record.classLists || []).join(', ')], ['School / sphere', record.school || record.spellGroup || (record.sphere || []).join(', ')], ['Components', [record.verbal ? 'V' : '', record.somatic ? 'S' : '', record.material ? 'M' : ''].filter(Boolean).join(', ')], ['Material', record.materialComponents], ['Range', record.range], ['Casting time', record.castingTime], ['Duration', record.duration], ['Area', record.areaOfEffect], ['Saving throw', record.savingThrow], ['Description', record.description || record.effect], ['Notes', Array.isArray(record.notes) ? record.notes.join('; ') : record.notes], ['Source', record.source], ['Occurrence', record.sourceRecordId]]
+            : [['Description', record.description || record.effect], ['Notes', Array.isArray(record.notes) ? record.notes.join('; ') : record.notes], ...Object.entries(record).filter(([key]) => !['id', 'name', 'spellName', 'description', 'effect', 'notes'].includes(key)).slice(0, 6).map(([key, value]) => [key, Array.isArray(value) ? value.join(', ') : typeof value === 'object' && value !== null ? JSON.stringify(value) : value])];
         detail.innerHTML = `<strong>${esc(getName(record))}</strong><dl>${fields.filter(([, value]) => value !== undefined && value !== null && value !== '').map(([label, value]) => `<dt>${esc(label)}</dt><dd>${esc(value)}</dd>`).join('')}</dl>`;
     };
     const renderResults = () => {
@@ -2394,7 +2463,7 @@ function setupReferenceLibrary() {
             const source = String(record.source || '').toLowerCase();
             const recordClasses = record.classLists || record.classes || [];
             const group = record.category || record.group || record.abilityType || '';
-            return (!needle || name.includes(needle) || source.includes(needle)) && (!classFilter || !classFilter.value || recordClasses.includes(classFilter.value)) && (!groupFilter || !groupFilter.value || group === groupFilter.value) && (!sourceFilter || !sourceFilter.value || record.source === sourceFilter.value);
+            return (!needle || name.includes(needle) || source.includes(needle)) && (!classFilter || !classFilter.value || recordClasses.includes(classFilter.value)) && (!groupFilter || !groupFilter.value || group === groupFilter.value) && (!sourceFilter || !sourceFilter.value || spellSources(record).includes(sourceFilter.value));
         }).slice(0, 40);
         results.innerHTML = matches.map((record, index) => `<button type="button" class="reference-library-result" data-reference-result="${index}"><strong>${esc(getName(record))}</strong><small>${esc(record.source || record.abilityType || record.category || '')}</small></button>`).join('') || '<small>No matching reference records.</small>';
         results.querySelectorAll('[data-reference-result]').forEach(button => button.onclick = () => renderDetail(matches[+button.dataset.referenceResult]));
@@ -2491,6 +2560,10 @@ function setupSpellTracking() {
     const section = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Spells'));
     if (!section) return;
     section.innerHTML = `<h2>Spells and abilities</h2><div class="spell-slots"><h3>Spell slots</h3><table class="spell-slots-table"><thead><tr><th>Level</th><th>Available</th><th>Used</th><th>Remaining</th></tr></thead><tbody>${data.spellSlots.map((slot, index) => `<tr><th>${esc(slot.level)}</th><td><input type="number" min="0" step="1" data-spell-slot="${index}" data-spell-slot-key="available" value="${esc(slot.available)}"></td><td><input type="number" min="0" step="1" data-spell-slot="${index}" data-spell-slot-key="used" value="${esc(slot.used)}"></td><td><output data-spell-remaining="${index}">-</output></td></tr>`).join('')}</tbody></table><small>Enter the slots available for this character. Used slots are tracked separately and never exceed the available count.</small></div><div class="manual-spells"><h3>Manual spells and abilities</h3><div class="tableWrap"><table class="spells-table"><thead><tr><th>Name</th><th>Level</th><th>Type</th><th>School / sphere</th><th>Known</th><th>Memorized</th><th>Cast / used</th><th>Notes</th><th></th></tr></thead><tbody>${data.spells.map((spell, index) => { const preset = spellCatalog.some(item => item.name === spell.name); return `<tr><td><select data-spell-preset="${index}"><option value="Other" ${preset ? '' : 'selected'}>Other</option><optgroup label="Wizard 1st level">${spellCatalog.filter(item => item.source === 'Wizard').map(item => `<option value="${esc(item.name)}" ${spell.name === item.name ? 'selected' : ''}>${esc(item.name)}</option>`).join('')}</optgroup><optgroup label="Priest 1st level">${spellCatalog.filter(item => item.source === 'Priest').map(item => `<option value="${esc(item.name)}" ${spell.name === item.name ? 'selected' : ''}>${esc(item.name)}</option>`).join('')}</optgroup></select><input data-spell-item="${index}" data-spell-key="name" value="${esc(spell.name)}" placeholder="Spell or ability" ${preset ? 'hidden' : ''}></td><td><input data-spell-item="${index}" data-spell-key="level" value="${esc(spell.level)}" placeholder="1st"></td><td><select data-spell-item="${index}" data-spell-key="type"><option ${spell.type === 'Spell' ? 'selected' : ''}>Spell</option><option ${spell.type === 'Racial ability' ? 'selected' : ''}>Racial ability</option><option ${spell.type === 'Class ability' ? 'selected' : ''}>Class ability</option><option ${spell.type === 'Other' ? 'selected' : ''}>Other</option></select></td><td><input data-spell-item="${index}" data-spell-key="school" value="${esc(spell.school)}" placeholder="School / sphere"></td><td><input data-spell-item="${index}" data-spell-key="known" value="${esc(spell.known)}"></td><td><input data-spell-item="${index}" data-spell-key="memorizedQty" value="${esc(spell.memorizedQty)}" type="number" min="0" step="1"></td><td><input data-spell-item="${index}" data-spell-key="castQty" value="${esc(spell.castQty)}" type="number" min="0" step="1"></td><td><input data-spell-item="${index}" data-spell-key="notes" value="${esc(spell.notes)}"></td><td><button type="button" class="remove" data-spell-remove="${index}" aria-label="Remove spell or ability">×</button></td></tr>`; }).join('')}</tbody></table></div><button type="button" class="add" data-spell-add>Add spell or ability</button></div>`;
+    const trackedTableHeading = section.querySelector('.manual-spells > h3');
+    if (trackedTableHeading) trackedTableHeading.textContent = 'Spells and abilities';
+    section.querySelectorAll('[data-spell-preset]').forEach(select => select.remove());
+    section.querySelectorAll('[data-spell-key="name"]').forEach(input => input.hidden = false);
     const spellHeader = section.querySelector('.spells-table thead tr');
     const castHeader = [...spellHeader.children].find(cell => cell.textContent.trim() === 'Cast / used');
     if (castHeader) {
@@ -2510,7 +2583,7 @@ function setupSpellTracking() {
         section.querySelectorAll('.spells-table tbody tr').forEach(row => row.children[knownColumnIndex]?.remove());
     }
     const memorizedHeader = [...spellHeader.children].find(cell => cell.textContent.trim() === 'Memorized');
-    if (memorizedHeader) memorizedHeader.textContent = 'Memorized / prepared';
+    if (memorizedHeader) memorizedHeader.textContent = 'Prep.';
     section.querySelectorAll('[data-spell-key="memorizedQty"]').forEach(input => {
         const spell = data.spells[+input.dataset.spellItem];
         input.dataset.spellKey = 'memorized';
@@ -2542,20 +2615,6 @@ function setupSpellTracking() {
     });
     section.querySelectorAll('[data-spell-key="notes"]').forEach(input => input.title = input.value || 'No notes');
     section.querySelectorAll('[data-spell-key="materialComponents"]').forEach(input => input.title = input.value || 'No material requirements recorded');
-    section.querySelectorAll('[data-spell-preset]').forEach(select => select.onchange = () => {
-        const preset = spellCatalog.find(item => item.name === select.value);
-        const index = +select.dataset.spellPreset;
-        if (!preset) {
-            data.spells[index].name = '';
-        } else {
-            data.spells[index].name = preset.name;
-            data.spells[index].level = preset.level;
-            data.spells[index].type = 'Spell';
-            data.spells[index].school = preset.source;
-        }
-        changed();
-        render();
-    });
     section.querySelector('[data-spell-add]').onclick = () => {
         data.spells.push({ name: '', level: '', type: 'Spell', school: '', known: '', memorizedQty: '', castQty: '', verbal: false, somatic: false, material: false, materialComponents: '', notes: '' });
         changed();
@@ -3257,9 +3316,10 @@ Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(
         const sourceRecord = spellCatalogSourceRecords.find(candidate => candidate.sourceRecordId === record.sourceRecordId);
         return sourceRecord ? { ...record, materialComponents: sourceRecord.materialComponents } : record;
     });
+    spellCatalogRecords = mergeSpellCatalogRecords(spellCatalogRecords, spellCatalogSourceRecords).merged;
     spellCatalog = spellCatalogRecords.map(item => ({
         ...item,
-        source: item.source || item.sourceRefs?.[0] || (item.spellGroup ? normalizeLegacySpellSource(item.spellGroup) : 'Unknown'),
+        source: spellSources(item).length ? spellSources(item) : [item.spellGroup ? normalizeLegacySpellSource(item.spellGroup) : 'Unknown'],
         school: item.school || item.source || item.spellGroup || (Array.isArray(item.schools) ? item.schools[0] : Array.isArray(item.sphere) ? item.sphere[0] : 'Unknown'),
         level: String(item.level),
         type: 'Spell',
