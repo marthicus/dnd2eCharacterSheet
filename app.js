@@ -1447,7 +1447,13 @@ function setupSectionOrdering() {
     const cards = [...document.querySelectorAll('.grid > .card')];
     const defaultOrder = cards.map(card => card.dataset.sectionKey);
     const savedOrder = data.sectionOrder.filter(key => defaultOrder.includes(key));
-    const order = [...savedOrder, ...defaultOrder.filter(key => !savedOrder.includes(key))];
+    const order = [...savedOrder];
+    defaultOrder.filter(key => !savedOrder.includes(key)).forEach(key => {
+        const keyPosition = defaultOrder.indexOf(key);
+        const nextSavedKey = order.find(savedKey => defaultOrder.indexOf(savedKey) > keyPosition);
+        if (nextSavedKey) order.splice(order.indexOf(nextSavedKey), 0, key);
+        else order.push(key);
+    });
     order.forEach(key => {
         const card = cards.find(item => item.dataset.sectionKey === key);
         if (card) document.querySelector('.grid').append(card);
