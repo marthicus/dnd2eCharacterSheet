@@ -162,12 +162,5 @@
     "name": "Whip",
     "proficiencyId": "whip",
     "notes": []
-  },
-  {
-    "proficiencyId": "two-weapon-fighting",
-    "weaponId": null,
-    "name": "Two Weapon Fighting",
-    "compatibleWeaponIds": [],
-    "notes": []
   }
 ]

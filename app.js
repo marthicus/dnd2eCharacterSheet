@@ -152,6 +152,7 @@ let languageCategories = [];
 let languageSourceTypes = [];
 let intelligenceBonusLanguages = [];
 let languageRaceRules = {};
+let languageCatalogStatus = 'loading';
 const gameRules = {
     currencyConversion: { cp: 1, sp: 10, ep: 50, gp: 100, pp: 500 },
     wealthCalculations: { baseCurrency: 'cp', displayCurrency: 'gp', allowCurrencyBreakdown: true, autoCalculateInventoryValue: true }
@@ -716,6 +717,7 @@ async function loadLanguageCatalog() {
         languageSourceTypes = rules.sourceTypes || [];
         intelligenceBonusLanguages = rules.intelligenceBonusLanguages || [];
         languageRaceRules = rules.raceRules || {};
+        languageCatalogStatus = 'ready';
     } catch {
         languageCatalog = [];
         languageRecords = [];
@@ -724,6 +726,7 @@ async function loadLanguageCatalog() {
         languageSourceTypes = [];
         intelligenceBonusLanguages = [];
         languageRaceRules = {};
+        languageCatalogStatus = 'error';
     }
 }
 
@@ -2921,11 +2924,16 @@ function setupProficiencyAndInventorySections() {
             languageResults.innerHTML = matches.map(item => `<button type="button" data-language-add="${esc(item.id)}">${esc(item.name)} <small>${esc(item.category || '')} / ${esc(item.source || '')} / ${item.literacySupported ? 'literacy supported' : 'no literacy'}</small></button>`).join('') || '<small>No matching languages.</small>';
             languageResults.querySelectorAll('[data-language-add]').forEach(button => button.onclick = () => { const item = languageLookup(button.dataset.languageAdd); if (!item) return; data.languages.push({ id: item.id, name: item.name, category: item.category || null, sourceType: 'native', speaks: true, reads: item.literacySupported === true, writes: item.literacySupported === true, usesLanguageSlot: false, notes: Array.isArray(item.notes) ? item.notes.join('; ') : item.notes || '' }); changed(); render(); });
         };
-        languageSearch.oninput = renderLanguageResults;
-        languageCategory.onchange = renderLanguageResults;
-        languageSource.onchange = renderLanguageResults;
-        languageLiteracy.onchange = renderLanguageResults;
-        renderLanguageResults();
+        const renderLanguageResultsWithStatus = () => {
+            renderLanguageResults();
+            if (languageCatalogStatus === 'loading') languageResults.innerHTML = '<small>Loading language catalogue...</small>';
+            if (languageCatalogStatus === 'error') languageResults.innerHTML = '<small>Language catalogue unavailable.</small>';
+        };
+        languageSearch.oninput = renderLanguageResultsWithStatus;
+        languageCategory.onchange = renderLanguageResultsWithStatus;
+        languageSource.onchange = renderLanguageResultsWithStatus;
+        languageLiteracy.onchange = renderLanguageResultsWithStatus;
+        renderLanguageResultsWithStatus();
     }
     const inventoryCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Inventory'));
     const currencyCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Currency'));

@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "status": "starter-catalog",
+  "extractionState": "manual-seed-before-full-phbr-extraction",
+  "abilities": [
+    {
+      "id": "turn-undead",
+      "name": "Turn Undead",
+      "classes": [
+        "cleric",
+        "paladin"
+      ],
+      "abilityType": "class-feature",
+      "source": "PHB",
+      "notes": []
+    },
+    {
+      "id": "thief-skills",
+      "name": "Thief Skills",
+      "classes": [
+        "thief",
+        "bard"
+      ],
+      "abilityType": "class-feature",
+      "source": "PHB",
+      "notes": []
+    },
+    {
+      "id": "arcane-spellcasting",
+      "name": "Arcane Spellcasting",
+      "classes": [
+        "wizard",
+        "bard"
+      ],
+      "abilityType": "spellcasting",
+      "source": "PHB",
+      "notes": []
+    },
+    {
+      "id": "divine-spellcasting",
+      "name": "Divine Spellcasting",
+      "classes": [
+        "cleric",
+        "druid",
+        "paladin",
+        "ranger"
+      ],
+      "abilityType": "spellcasting",
+      "source": "PHB",
+      "notes": []
+    },
+    {
+      "id": "tracking",
+      "name": "Tracking",
+      "classes": [
+        "ranger"
+      ],
+      "abilityType": "class-feature",
+      "source": "PHBR11",
+      "notes": []
+    },
+    {
+      "id": "detect-evil",
+      "name": "Detect Evil",
+      "classes": [
+        "paladin"
+      ],
+      "abilityType": "class-feature",
+      "source": "PHBR12",
+      "notes": []
+    },
+    {
+      "id": "lay-on-hands",
+      "name": "Lay On Hands",
+      "classes": [
+        "paladin"
+      ],
+      "abilityType": "class-feature",
+      "source": "PHBR12",
+      "notes": []
+    },
+    {
+      "id": "shapechange",
+      "name": "Wild Shape",
+      "classes": [
+        "druid"
+      ],
+      "abilityType": "class-feature",
+      "source": "PHBR13",
+      "notes": []
+    },
+    {
+      "id": "rage-like-ferocity",
+      "name": "Barbarian Battle Ferocity",
+      "classes": [
+        "barbarian"
+      ],
+      "abilityType": "class-feature",
+      "source": "PHBR14",
+      "notes": [
+        "Verify exact terminology against source text during detailed extraction pass."
+      ]
+    },
+    {
+      "id": "ninja-stealth",
+      "name": "Ninja Stealth",
+      "classes": [
+        "ninja"
+      ],
+      "abilityType": "class-feature",
+      "source": "PHBR15",
+      "notes": []
+    },
+    {
+      "id": "weapon-specialization",
+      "name": "Weapon Specialization",
+      "classes": [
+        "fighter"
+      ],
+      "abilityType": "class-feature",
+      "source": "PHBR01",
+      "notes": []
+    },
+    {
+      "id": "two-weapon-fighting",
+      "name": "Two Weapon Fighting",
+      "classes": [],
+      "abilityType": "class-feature",
+      "source": "PHB",
+      "notes": [
+        "Class assignment requires source-specific confirmation."
+      ]
+    }
+  ]
+}
