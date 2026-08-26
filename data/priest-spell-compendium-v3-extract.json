@@ -1,0 +1,8326 @@
+[
+  {
+    "id": "spike-growth",
+    "sourceRecordId": "spike-growth",
+    "name": "Spike Growth",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Enchantment"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "6",
+    "duration": "3d4 turns + | turn/level",
+    "areaOfEffect": "10-ft. square/level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "spike-stones",
+    "sourceRecordId": "spike-stones",
+    "name": "Spike Stones",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Enchantment"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "6",
+    "duration": "3d4 turns + 1 turn/level",
+    "areaOfEffect": "10-ft. square/level, 1 spike/sq. ft.",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "spirit-animal-form",
+    "sourceRecordId": "spirit-animal-form",
+    "name": "Spirit Animal Form",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Animal"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 hr.",
+    "duration": "1d10 days",
+    "areaOfEffect": "Person touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "spirit-mask",
+    "sourceRecordId": "spirit-mask",
+    "name": "Spirit Mask",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "4",
+    "duration": "1 rd./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "spirit-of-flame",
+    "sourceRecordId": "spirit-of-flame",
+    "name": "Spirit of Flame",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Elemental Fire"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "2 mi./level",
+    "castingTime": "6 rds.",
+    "duration": "Special",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "spirit-of-power",
+    "sourceRecordId": "spirit-of-power",
+    "name": "Spirit of Power*",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation",
+      "Summoning"
+    ],
+    "sphere": [
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "3 turns",
+    "duration": "1 hr.",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "spirit-quest",
+    "sourceRecordId": "spirit-quest",
+    "name": "Spirit Quest",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "24 hrs.",
+    "duration": "Special",
+    "areaOfEffect": "1 being",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "spirit-trap-of-the-darkbringer",
+    "sourceRecordId": "spirit-trap-of-the-darkbringer",
+    "name": "Spirit Trap (of the Darkbringer)",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "sphere": [
+      "Plant",
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "| hr.",
+    "duration": "Special",
+    "areaOfEffect": "1 living creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "spiritual-corruption",
+    "sourceRecordId": "spiritual-corruption",
+    "name": "Spiritual Corruption",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Charm"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "8",
+    "duration": "Special",
+    "areaOfEffect": "Living creature touched",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "spiritual-hammer",
+    "sourceRecordId": "spiritual-hammer",
+    "name": "Spiritual Hammer",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "5",
+    "duration": "3 rds. + 1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "spiritual-wrath",
+    "sourceRecordId": "spiritual-wrath",
+    "name": "Spiritual Wrath*",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "300 yds.",
+    "castingTime": "1 turn",
+    "duration": "Instantaneous",
+    "areaOfEffect": "60 ft. to 120 ft. radius",
+    "savingThrow": "/",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "spittle",
+    "sourceRecordId": "spittle",
+    "name": "Spittle",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": false,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "1",
+    "duration": "1 attack",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "S",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "spliffs-wonder-bubbles",
+    "sourceRecordId": "spliffs-wonder-bubbles",
+    "name": "Spliff’s Wonder Bubbles",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "5",
+    "duration": "144 rds. + 1 rd./level",
+    "areaOfEffect": "10-ft. stream, 3 ft./level long",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "splinter-wood",
+    "sourceRecordId": "splinter-wood",
+    "name": "Splinter Wood",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "6",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 wooden item",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "spring",
+    "sourceRecordId": "spring",
+    "name": "Spring",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "3 yds./level",
+    "castingTime": "1 rd.",
+    "duration": "24 hrs. maximum",
+    "areaOfEffect": "Creates 1 spring",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, М",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "spring-mastery",
+    "sourceRecordId": "spring-mastery",
+    "name": "Spring Mastery",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Evocation"
+    ],
+    "sphere": [
+      "Creation",
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "sprite-venom-elf",
+    "sourceRecordId": "sprite-venom-elf",
+    "name": "Sprite Venom — Elf",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "| rd./level",
+    "areaOfEffect": "1 arrow/level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "squeaking-floor",
+    "sourceRecordId": "squeaking-floor",
+    "name": "Squeaking Floor",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "6",
+    "duration": "1 hr./level",
+    "areaOfEffect": "10-ft./level square",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, М",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "stalk",
+    "sourceRecordId": "stalk",
+    "name": "Stalk",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Animal",
+      "Traveler"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "1 turn/level",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "starflight",
+    "sourceRecordId": "starflight",
+    "name": "Starflight*",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Air",
+      "Travelers"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "2 turns",
+    "duration": "Special",
+    "areaOfEffect": "1 to 3 worshipers of Mystra",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "starharp",
+    "sourceRecordId": "starharp",
+    "name": "Starharp",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Healing",
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "9",
+    "duration": "1 rd./level",
+    "areaOfEffect": "2-ft./level diameter sphere",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "starshine",
+    "sourceRecordId": "starshine",
+    "name": "Starshine",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation",
+      "Illusion/Phantasm"
+    ],
+    "sphere": [
+      "Sun"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yd/level",
+    "castingTime": "6",
+    "duration": "1 turn/level",
+    "areaOfEffect": "10-ft square/level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "steal-breath",
+    "sourceRecordId": "steal-breath",
+    "name": "Steal Breath",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Elemental Air"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "120 yds.",
+    "castingTime": "1",
+    "duration": "3 rds.",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "steal-psionic-strength-duergar",
+    "sourceRecordId": "steal-psionic-strength-duergar",
+    "name": "Steal Psionic Strength — Duergar",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "4",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "stealth-of-brandobaris-halfling",
+    "sourceRecordId": "stealth-of-brandobaris-halfling",
+    "name": "Stealth of Brandobaris — Halfling",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Guardian"
+    ],
+    "verbal": false,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "1 turn + 1 rd./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "steelskin-gnome",
+    "sourceRecordId": "steelskin-gnome",
+    "name": "Steelskin — Gnome",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4",
+    "duration": "3 rds. + 1 rd./level",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "steep-soma-juice-vedic",
+    "sourceRecordId": "steep-soma-juice-vedic",
+    "name": "Steep Soma-Juice — Vedic",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "8 hrs.",
+    "duration": "1 wk.",
+    "areaOfEffect": "2 ounces/level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "still-waves",
+    "sourceRecordId": "still-waves",
+    "name": "Still Waves",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "20 yds.",
+    "castingTime": "7",
+    "duration": "1 turn+3 rds./level",
+    "areaOfEffect": "20-ft. х 20-ft. area",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "stone-curse",
+    "sourceRecordId": "stone-curse",
+    "name": "Stone Curse",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "Permanent",
+    "areaOfEffect": "1 cu. yd./level",
+    "savingThrow": "'/ or None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "stone-form-gnome",
+    "sourceRecordId": "stone-form-gnome",
+    "name": "Stone Form — Gnome",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "7",
+    "duration": "3 rds. + 1 rd./level",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "stone-of-sharpening",
+    "sourceRecordId": "stone-of-sharpening",
+    "name": "Stone of Sharpening",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth RU UA"
+    ],
+    "verbal": false,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "5 rds.",
+    "duration": "Special",
+    "areaOfEffect": "1 weapon (per level)",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "stone-seeing-dwarf",
+    "sourceRecordId": "stone-seeing-dwarf",
+    "name": "Stone Seeing — Dwarf",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination",
+      "Elemental Earth"
+    ],
+    "sphere": [
+      "Divination",
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Unlimited",
+    "castingTime": "8",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "stone-shape",
+    "sourceRecordId": "stone-shape",
+    "name": "Stone Shape",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "Instantaneous",
+    "areaOfEffect": "3-ft. cube plus 1 cu. ft./level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "stone-tell",
+    "sourceRecordId": "stone-tell",
+    "name": "Stone Tell",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination",
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 turn",
+    "duration": "1 turn",
+    "areaOfEffect": "1 cu. yd.",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, $, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "stone-trap-dwarf",
+    "sourceRecordId": "stone-trap-dwarf",
+    "name": "Stone Trap — Dwarf",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Guardían"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "1 turn",
+    "duration": "Permanent until discharged",
+    "areaOfEffect": "1 cu. ft./level",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "stone-walk",
+    "sourceRecordId": "stone-walk",
+    "name": "Stone Walk",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "stone-walk-drow",
+    "sourceRecordId": "stone-walk-drow",
+    "name": "Stone Walk — Drow",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": false,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "1 rd. + 1 rd./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "S,",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "stonebirds",
+    "sourceRecordId": "stonebirds",
+    "name": "Stonebirds",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Animal",
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "4",
+    "duration": "Special",
+    "areaOfEffect": "2d10 birds",
+    "savingThrow": "none",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "stoneblend-dwarf",
+    "sourceRecordId": "stoneblend-dwarf",
+    "name": "Stoneblend — Dwarf",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Illusion/Phantasm"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4",
+    "duration": "Special",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "stonefall-dwarf",
+    "sourceRecordId": "stonefall-dwarf",
+    "name": "Stonefall — Dwarf",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "120 yds.",
+    "castingTime": "7",
+    "duration": "1 rd.",
+    "areaOfEffect": "3 cu. ft./level",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "stoneiron",
+    "sourceRecordId": "stoneiron",
+    "name": "Stoneiron",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "6",
+    "duration": "5 rds./level",
+    "areaOfEffect": "Weapon(s) touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, М",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "stoneskin-dwarf",
+    "sourceRecordId": "stoneskin-dwarf",
+    "name": "Stoneskin — Dwarf",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1",
+    "duration": "Special (24 hrs. maximum)",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "stonewood",
+    "sourceRecordId": "stonewood",
+    "name": "Stonewood",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "8",
+    "duration": "Permanent",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "storm-cone",
+    "sourceRecordId": "storm-cone",
+    "name": "Storm Cone",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Evocation"
+    ],
+    "sphere": [
+      "Elemental Air",
+      "Weather"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "5 yds./level",
+    "castingTime": "8",
+    "duration": "4 rds. + 1 rd./3 levels above 9th",
+    "areaOfEffect": "Cone, 20-ft.-wide x 60 ft. long",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "storm-shield",
+    "sourceRecordId": "storm-shield",
+    "name": "Storm Shield",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "sphere": [
+      "Protection",
+      "Weather"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "6",
+    "duration": "6 rds.+1d4 rds.",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "stormcloak",
+    "sourceRecordId": "stormcloak",
+    "name": "Stormcloak",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration",
+      "Evocation"
+    ],
+    "sphere": [
+      "Protection",
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "7",
+    "duration": "1 year",
+    "areaOfEffect": "1 living being",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "stormrage",
+    "sourceRecordId": "stormrage",
+    "name": "Stormrage",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "9",
+    "duration": "1 rd./4 levels (round down)",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "stormyoice-old-empire",
+    "sourceRecordId": "stormyoice-old-empire",
+    "name": "Stormyoice —Old Empire",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Weather"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "5",
+    "duration": "1 rd.",
+    "areaOfEffect": "Special",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "strength-shukenja",
+    "sourceRecordId": "strength-shukenja",
+    "name": "Strength — Shukenja",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "| turn",
+    "duration": "1 hr./level",
+    "areaOfEffect": "Person touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "strength-dwarf",
+    "sourceRecordId": "strength-dwarf",
+    "name": "Strength — Dwarf",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 turn",
+    "duration": "1 hr./level",
+    "areaOfEffect": "Person touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "strength-of-one",
+    "sourceRecordId": "strength-of-one",
+    "name": "Strength of One",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Law"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "6",
+    "duration": "2d6 rds.",
+    "areaOfEffect": "1 creature + 1 creature/2 levels",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "strength-of-stone",
+    "sourceRecordId": "strength-of-stone",
+    "name": "Strength of Stone",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4",
+    "duration": "3 rds. + 1 rd./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "strengthen-stone",
+    "sourceRecordId": "strengthen-stone",
+    "name": "Strengthen Stone",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "| hr.",
+    "duration": "Permanent",
+    "areaOfEffect": "1 building or wall",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "striking-shadows",
+    "sourceRecordId": "striking-shadows",
+    "name": "Striking Shadows",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Guardian"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "9",
+    "duration": "1 rd./level",
+    "areaOfEffect": "A 20-sq.-ft./level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "striking-wave",
+    "sourceRecordId": "striking-wave",
+    "name": "Striking Wave",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Evocation"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "5 yds./level",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "stumble-old-empire",
+    "sourceRecordId": "stumble-old-empire",
+    "name": "Stumble — Old Empire",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "20 yds.",
+    "castingTime": "4",
+    "duration": "1 rd./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, М",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "substitution",
+    "sourceRecordId": "substitution",
+    "name": "Substitution",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Creation"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "3 turns",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "succor-of-berronar-dwarf",
+    "sourceRecordId": "succor-of-berronar-dwarf",
+    "name": "Succor of Berronar — Dwarf",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Healing"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "summon-ancestor",
+    "sourceRecordId": "summon-ancestor",
+    "name": "Summon Ancestor",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 ft./level",
+    "castingTime": "4 rds.",
+    "duration": "2 rds./level",
+    "areaOfEffect": "1 spirit",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "summon-animal-spirit",
+    "sourceRecordId": "summon-animal-spirit",
+    "name": "Summon Animal Spirit",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "6",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "summon-cetacean-sea-elf",
+    "sourceRecordId": "summon-cetacean-sea-elf",
+    "name": "Summon Cetacean — Sea Elf",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Summoning",
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "1-mi. radius",
+    "castingTime": "6",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "old-empire",
+    "sourceRecordId": "old-empire",
+    "name": "Old Empire",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "All"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "1 rd.",
+    "duration": "1 turn/level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "summon-earth-grue-gnome",
+    "sourceRecordId": "summon-earth-grue-gnome",
+    "name": "Summon Earth Grue — Gnome",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Elemental Earth",
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "1 rd.",
+    "duration": "3 rds./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "summon-insects",
+    "sourceRecordId": "summon-insects",
+    "name": "Summon Insects",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Animal"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "1 rd.",
+    "duration": "| rd./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "summon-lock-lurker",
+    "sourceRecordId": "summon-lock-lurker",
+    "name": "Summon Lock Lurker",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "6",
+    "duration": "8 hrs.",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "summon-spectator",
+    "sourceRecordId": "summon-spectator",
+    "name": "Summon Spectator",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Summoning",
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "70 yds.",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "summon-spectral-death",
+    "sourceRecordId": "summon-spectral-death",
+    "name": "Summon Spectral Death",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "9",
+    "duration": "1 day/level maximum",
+    "areaOfEffect": "Tracks 1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "summon-undead",
+    "sourceRecordId": "summon-undead",
+    "name": "Summon Undead",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy",
+      "Summoning"
+    ],
+    "sphere": [
+      "Necromantic",
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "9",
+    "duration": "1 turn/level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "summon-varrangoin",
+    "sourceRecordId": "summon-varrangoin",
+    "name": "Summon Varrangoin",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "Special",
+    "duration": "Special",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "sunblade",
+    "sourceRecordId": "sunblade",
+    "name": "Sunblade",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration"
+    ],
+    "sphere": [
+      "Elemental Sun whe"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "4 rds.",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "sunburst",
+    "sourceRecordId": "sunburst",
+    "name": "Sunburst",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Sun"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "7",
+    "duration": "Instantaneous",
+    "areaOfEffect": "40-ft. radius globe",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "sunray",
+    "sourceRecordId": "sunray",
+    "name": "Sunray",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Evocation"
+    ],
+    "sphere": [
+      "Sun"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "4",
+    "duration": "1 rd. + 144 rds.",
+    "areaOfEffect": "5-ft.-radius (special)",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "sunrise",
+    "sourceRecordId": "sunrise",
+    "name": "Sunrise",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation",
+      "Alteration"
+    ],
+    "sphere": [
+      "Sun"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "6",
+    "duration": "1+1d4 rds. or special",
+    "areaOfEffect": "5-ft.-sphere around creature touched",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "sunscorch",
+    "sourceRecordId": "sunscorch",
+    "name": "Sunscorch",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Sun"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "40 yds.",
+    "castingTime": "4",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "sunstroke-old-empire",
+    "sourceRecordId": "sunstroke-old-empire",
+    "name": "Sunstroke —Old Empire",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Fire",
+      "Sun"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "6",
+    "duration": "1 rd./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "superheroism",
+    "sourceRecordId": "superheroism",
+    "name": "Superheroism",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "9",
+    "duration": "3 rds./level",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "surelock",
+    "sourceRecordId": "surelock",
+    "name": "Surelock",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 hr.",
+    "duration": "1 day/level",
+    "areaOfEffect": "60-ft. radius",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "surf-surface-sojourn-sea-elf",
+    "sourceRecordId": "surf-surface-sojourn-sea-elf",
+    "name": "Surf Surface Sojourn — Sea Elf",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration) (Alteration"
+    ],
+    "sphere": [
+      "Elemental Water Sphere: Animal",
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds. Range: Touch",
+    "castingTime": "6 Casting Time: 1 rd.",
+    "duration": "1 turn + 1 turn/level Duration: 3 hrs./level",
+    "areaOfEffect": "10 yds. beachfront/level Area of Effect: 1 creature",
+    "savingThrow": "None Saving Throw: None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S Components: V, S, M",
+      "printedLevel": "3 Level: 1"
+    },
+    "notes": []
+  },
+  {
+    "id": "suspended-animation",
+    "sourceRecordId": "suspended-animation",
+    "name": "Suspended Animation",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "7",
+    "duration": "Special",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, $, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "sustain",
+    "sourceRecordId": "sustain",
+    "name": "Sustain",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Healing"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "6 hrs./level",
+    "areaOfEffect": "1 creature/2 levels",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "sustarres-transformation",
+    "sourceRecordId": "sustarres-transformation",
+    "name": "Sustarre’s Transformation",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "5 yds./level",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "1d4 creatures in a 60-ft. cube",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "swim",
+    "sourceRecordId": "swim",
+    "name": "Swim",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Charm"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "1 hr. + 1 turn/level",
+    "areaOfEffect": "1 creature/2 levels",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "swirling-scythes-old-empire",
+    "sourceRecordId": "swirling-scythes-old-empire",
+    "name": "Swirling Scythes — Old Empire",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation"
+    ],
+    "sphere": [
+      "Plant",
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "1 rd./level",
+    "areaOfEffect": "3-ft. radius/level",
+    "savingThrow": "'⁄2",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "sword-and-hammer",
+    "sourceRecordId": "sword-and-hammer",
+    "name": "Sword and Hammer",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "9",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, $",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "swordward",
+    "sourceRecordId": "swordward",
+    "name": "Swordward",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Evocation",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Protection",
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "5 yds./level",
+    "castingTime": "1 rd.",
+    "duration": "1 rd. + 1 rd./level",
+    "areaOfEffect": "5 to 60 sq. ft.",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "sylvan-form-elf",
+    "sourceRecordId": "sylvan-form-elf",
+    "name": "Sylvan Form — Elf",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Animal"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "2 turns/level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "sympathetic-magic-i",
+    "sourceRecordId": "sympathetic-magic-i",
+    "name": "Sympathetic Magic I",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "1 rd./level",
+    "areaOfEffect": "1 creature or object",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "sympathetic-magic-ii",
+    "sourceRecordId": "sympathetic-magic-ii",
+    "name": "Sympathetic Magic II",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "3 rds./level",
+    "areaOfEffect": "1 creature or object",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "talonas-blessing",
+    "sourceRecordId": "talonas-blessing",
+    "name": "Talona’s Blessing",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Protection",
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "8",
+    "duration": "1 turn/level",
+    "areaOfEffect": "1 being",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "tame-animal-shaman",
+    "sourceRecordId": "tame-animal-shaman",
+    "name": "Tame Animal — Shaman",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Animal \""
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "9",
+    "duration": "Permanent",
+    "areaOfEffect": "1 animal",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "telepathic-broadcast",
+    "sourceRecordId": "telepathic-broadcast",
+    "name": "Telepathic Broadcast",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat",
+      "Thought"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "8",
+    "duration": "1 rd./level",
+    "areaOfEffect": "The caster's allies",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "telepathy",
+    "sourceRecordId": "telepathy",
+    "name": "Telepathy",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination",
+      "Alteration"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "5",
+    "duration": "1 turn + 2 rds./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "telethaumaturgy",
+    "sourceRecordId": "telethaumaturgy",
+    "name": "Telethaumaturgy",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "2 rds.",
+    "duration": "Special",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "temporal-anomaly-elf",
+    "sourceRecordId": "temporal-anomaly-elf",
+    "name": "Temporal Anomaly — Elf",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "І rd.",
+    "duration": "2d4 rds.",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "tenfold-ironguard",
+    "sourceRecordId": "tenfold-ironguard",
+    "name": "Tenfold Ironguard",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration",
+      "Alteration"
+    ],
+    "sphere": [
+      "All"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "1 rd./level",
+    "areaOfEffect": "1 to 10 creatures",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "tentacle-of-withering",
+    "sourceRecordId": "tentacle-of-withering",
+    "name": "Tentacle of Withering",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Combat",
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "6 rds.",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "tentacle-walls",
+    "sourceRecordId": "tentacle-walls",
+    "name": "Tentacle Walls",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "50-ft. cube",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, 5, М",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "test-of-maat-old-empire",
+    "sourceRecordId": "test-of-maat-old-empire",
+    "name": "Test of Maat — Old Empire",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination",
+      "Law"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "that-art-thou-vedic",
+    "sourceRecordId": "that-art-thou-vedic",
+    "name": "That Art Thou — Vedic",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "1 rd./level",
+    "areaOfEffect": "30-ft. radius sphere",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "the-doom-of-bane",
+    "sourceRecordId": "the-doom-of-bane",
+    "name": "The Doom of Bane",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 round",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 suit of armor and 1 corpse",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, 8, М",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "thiefs-lament",
+    "sourceRecordId": "thiefs-lament",
+    "name": "Thief’s Lament",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "6",
+    "duration": "1 hr./level",
+    "areaOfEffect": "5-ft. cube/level",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "thorn-spray",
+    "sourceRecordId": "thorn-spray",
+    "name": "Thorn Spray",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "3",
+    "duration": "1 rd.",
+    "areaOfEffect": "4 thornlike objects/level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "thorns-of-binding",
+    "sourceRecordId": "thorns-of-binding",
+    "name": "Thorns of Binding",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth",
+      "Elemental Water"
+    ],
+    "verbal": false,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "1 rd.",
+    "duration": "1 turn + 1 turn/level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "S",
+      "printedLevel": "4 RU UA"
+    },
+    "notes": []
+  },
+  {
+    "id": "thornwrack",
+    "sourceRecordId": "thornwrack",
+    "name": "Thornwrack",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "8",
+    "duration": "1 thorn/level",
+    "areaOfEffect": "1 person",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "thought-broadcast",
+    "sourceRecordId": "thought-broadcast",
+    "name": "Thought Broadcast",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "7",
+    "duration": "| turn + 3 rds./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "thoughtwave",
+    "sourceRecordId": "thoughtwave",
+    "name": "Thoughtwave*",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "threefold-boon",
+    "sourceRecordId": "threefold-boon",
+    "name": "Threefold Boon",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat",
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "8",
+    "duration": "3 rds.",
+    "areaOfEffect": "1 being",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "threnody-drow",
+    "sourceRecordId": "threnody-drow",
+    "name": "Threnody — Drow",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy",
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Necromantic",
+      "Charm"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "30-ft. radius",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "thunderclap",
+    "sourceRecordId": "thunderclap",
+    "name": "Thunderclap",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Elemental Air"
+    ],
+    "verbal": false,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "Special",
+    "areaOfEffect": "30-ft. radius",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "thundercone",
+    "sourceRecordId": "thundercone",
+    "name": "Thundercone",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Weather"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Cone 40 ft. long X 20 ft. wide",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "thunderstroke-old-empire",
+    "sourceRecordId": "thunderstroke-old-empire",
+    "name": "Thunderstroke — Old Empire",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Combat",
+      "Weather"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "40 yds. + 10 yds./level",
+    "castingTime": "7",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "2",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "time-pool",
+    "sourceRecordId": "time-pool",
+    "name": "Time Pool",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "timelessness",
+    "sourceRecordId": "timelessness",
+    "name": "Timelessness",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "7",
+    "duration": "1 day/level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "timewarp-old-empire",
+    "sourceRecordId": "timewarp-old-empire",
+    "name": "Timewarp — Old Empire",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "8",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, $",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "totem-beast",
+    "sourceRecordId": "totem-beast",
+    "name": "Totem Beast",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Animal"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "| mi.",
+    "castingTime": "| turn",
+    "duration": "1 day/level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "touch-of-the-styx",
+    "sourceRecordId": "touch-of-the-styx",
+    "name": "Touch of the Styx",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm",
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "7",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "touch-of-the-talontar",
+    "sourceRecordId": "touch-of-the-talontar",
+    "name": "Touch of the Talontar",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Combat",
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "] turn",
+    "areaOfEffect": "Touched beings",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "touchsickle",
+    "sourceRecordId": "touchsickle",
+    "name": "Touchsickle",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat",
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "5",
+    "duration": "2 rds./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "tracking",
+    "sourceRecordId": "tracking",
+    "name": "Tracking",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "1 turn + 1 turn/level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "trance",
+    "sourceRecordId": "trance",
+    "name": "Trance",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "1 rd./level",
+    "areaOfEffect": "120-ft. radius",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "translate",
+    "sourceRecordId": "translate",
+    "name": "Translate",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "3 turns/level",
+    "areaOfEffect": "1 text or scroll",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "transmute-metal-to-wood",
+    "sourceRecordId": "transmute-metal-to-wood",
+    "name": "Transmute Metal to Wood",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "80 yds.",
+    "castingTime": "| rd.",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 metal object",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "transport-via-plants",
+    "sourceRecordId": "transport-via-plants",
+    "name": "Transport Via Plants",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "treasure-scent",
+    "sourceRecordId": "treasure-scent",
+    "name": "Treasure Scent",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "4",
+    "duration": "1 rd./level",
+    "areaOfEffect": "20-ft. radius",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "tree",
+    "sourceRecordId": "tree",
+    "name": "Tree",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "1 hr. + 1 turn/level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "tree-growth",
+    "sourceRecordId": "tree-growth",
+    "name": "Tree Growth",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment"
+    ],
+    "sphere": [
+      "Elemental Air",
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "8",
+    "duration": "1 rd.",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6 RV"
+    },
+    "notes": []
+  },
+  {
+    "id": "tree-healing",
+    "sourceRecordId": "tree-healing",
+    "name": "Tree Healing",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Healing",
+      "Necromantic",
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "8",
+    "duration": "Special",
+    "areaOfEffect": "The caster and one tree",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "tree-nap-gnome",
+    "sourceRecordId": "tree-nap-gnome",
+    "name": "Tree Nap — Gnome",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Illusion/Phantasm",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "tree-spirit",
+    "sourceRecordId": "tree-spirit",
+    "name": "Tree Spirit",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "| turn",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 tree",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "tree-steed",
+    "sourceRecordId": "tree-steed",
+    "name": "Tree Steed",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "7",
+    "duration": "1 hr./level",
+    "areaOfEffect": "1 log or plank",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "triple-mask",
+    "sourceRecordId": "triple-mask",
+    "name": "Triple Mask",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Illusion/Phantasm",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic",
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "8",
+    "duration": "1 rd./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "true-name-savant",
+    "sourceRecordId": "true-name-savant",
+    "name": "True Name — Savant",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "1 rd.",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 creature or object",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "tsunami-shukenja",
+    "sourceRecordId": "tsunami-shukenja",
+    "name": "Tsunami — Shukenja",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "240 yds.",
+    "castingTime": "1 turn",
+    "duration": "1d4 rds.",
+    "areaOfEffect": "Variable",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "tumblethorns",
+    "sourceRecordId": "tumblethorns",
+    "name": "Tumblethorns",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "5",
+    "duration": "1 rd.",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "/",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "turn-wood",
+    "sourceRecordId": "turn-wood",
+    "name": "Turn Wood",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "9",
+    "duration": "1 rd./level",
+    "areaOfEffect": "120-ft.-wide path, 20 ft. long/level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "turnbane",
+    "sourceRecordId": "turnbane",
+    "name": "Turnbane",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "sphere": [
+      "Protection",
+      "Necromancy"
+    ],
+    "verbal": false,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "Special",
+    "areaOfEffect": "30-ft. radius",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "tyranny",
+    "sourceRecordId": "tyranny",
+    "name": "Tyranny",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Charm"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "1 rd./level",
+    "areaOfEffect": "120-ft. radius",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "of-the-holy-sentinel",
+    "sourceRecordId": "of-the-holy-sentinel",
+    "name": "of the Holy Sentinel",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Guardian"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 turn",
+    "duration": "1 hr./level",
+    "areaOfEffect": "5-ft.-radius sphere",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "uncontrolled-weather",
+    "sourceRecordId": "uncontrolled-weather",
+    "name": "Uncontrolled Weather",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 turn",
+    "duration": "1 turn/level",
+    "areaOfEffect": "4d4 sq. mi.",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "undead-battlemight-drow",
+    "sourceRecordId": "undead-battlemight-drow",
+    "name": "Undead Battlemight — Drow",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4",
+    "duration": "1 rd. + 1 rd./level",
+    "areaOfEffect": "1 undead/level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "undead-focus-drow",
+    "sourceRecordId": "undead-focus-drow",
+    "name": "Undead Focus — Drow",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "8",
+    "duration": "Special",
+    "areaOfEffect": "1 undead creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "undead-form",
+    "sourceRecordId": "undead-form",
+    "name": "Undead Form",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "| rd./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "undead-ward",
+    "sourceRecordId": "undead-ward",
+    "name": "Undead Ward",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "2 turns",
+    "duration": "| turn/level",
+    "areaOfEffect": "5-ft. cube/level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, М",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "undeath-after-death",
+    "sourceRecordId": "undeath-after-death",
+    "name": "Undeath After Death",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 turn",
+    "duration": "Special",
+    "areaOfEffect": "| Banite",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, М",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "undeath-to-death",
+    "sourceRecordId": "undeath-to-death",
+    "name": "Undeath to Death",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "A 40-ft. diameter sphere",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "understand-curse-shaman",
+    "sourceRecordId": "understand-curse-shaman",
+    "name": "Understand Curse —Shaman",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination p"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 ft.",
+    "castingTime": "| turn",
+    "duration": "3 month",
+    "areaOfEffect": "1 creature or object",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "2 \"T"
+    },
+    "notes": []
+  },
+  {
+    "id": "understand-device",
+    "sourceRecordId": "understand-device",
+    "name": "Understand Device",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "2 turns",
+    "duration": "Instantaneous",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "unearthly-choir",
+    "sourceRecordId": "unearthly-choir",
+    "name": "Unearthly Choir*",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "unfailing-endurance",
+    "sourceRecordId": "unfailing-endurance",
+    "name": "Unfailing Endurance",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "1 day/level",
+    "areaOfEffect": "1 creature/level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "unfailing-premonition",
+    "sourceRecordId": "unfailing-premonition",
+    "name": "Unfailing Premonition",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "1 turn + 2 rds./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "unquestioning-obedience",
+    "sourceRecordId": "unquestioning-obedience",
+    "name": "Unquestioning Obedience",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Charm",
+      "Law"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "2",
+    "duration": "1 rd./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "unwilling-wood",
+    "sourceRecordId": "unwilling-wood",
+    "name": "Unwilling Wood",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "5 yds./level",
+    "castingTime": "| rd.",
+    "duration": "Special",
+    "areaOfEffect": "30-ft. radius",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "uplift",
+    "sourceRecordId": "uplift",
+    "name": "Uplift*",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "All"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "12 hrs.",
+    "duration": "] turn",
+    "areaOfEffect": "1 priest",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "veil-of-djalice",
+    "sourceRecordId": "veil-of-djalice",
+    "name": "Veil of Djalice",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Illusion/Phantasm"
+    ],
+    "sphere": [
+      "Charm"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "6 rds.",
+    "areaOfEffect": "1 being",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "velsharoon-s-death-pact",
+    "sourceRecordId": "velsharoon-s-death-pact",
+    "name": "Velsharoon's Death Pact",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy",
+      "Alteration"
+    ],
+    "sphere": [
+      "Necromantic",
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 turn",
+    "duration": "Special",
+    "areaOfEffect": "1 individual (usually the caster)",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, $, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "venom-immunity-drow",
+    "sourceRecordId": "venom-immunity-drow",
+    "name": "Venom Immunity — Drow",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "6",
+    "duration": "| rds. + 1 rd./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "venom-of-varae",
+    "sourceRecordId": "venom-of-varae",
+    "name": "Venom of Varae",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "Special",
+    "areaOfEffect": "30 ft.",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "venomed-claws",
+    "sourceRecordId": "venomed-claws",
+    "name": "Venomed Claws",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "8",
+    "duration": "1 rd./level",
+    "areaOfEffect": "1 creature per 3 levels",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "venomous-blade-drow",
+    "sourceRecordId": "venomous-blade-drow",
+    "name": "Venomous Blade — Drow",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "1 bladed weapon",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, $, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "vicissitude",
+    "sourceRecordId": "vicissitude",
+    "name": "Vicissitude",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "verbal": false,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "1",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "S, М",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "vipers-bite",
+    "sourceRecordId": "vipers-bite",
+    "name": "Viper’s Bite",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Animal"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "| rd./3 levels",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "wailing-whips",
+    "sourceRecordId": "wailing-whips",
+    "name": "Wailing Whips",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Guardian"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "8",
+    "duration": "4 rds.",
+    "areaOfEffect": "30-ft.-diameter sphere",
+    "savingThrow": "'2",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "wailing-wind",
+    "sourceRecordId": "wailing-wind",
+    "name": "Wailing Wind",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Air",
+      "Weather"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "5 yds./level",
+    "castingTime": "1 rd.",
+    "duration": "| turn/level",
+    "areaOfEffect": "Cube, 10 ft./level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "wall-of-fire",
+    "sourceRecordId": "wall-of-fire",
+    "name": "Wall of Fire",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Elemental Fire"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "80 yds.",
+    "castingTime": "8",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "wall-of-shadow",
+    "sourceRecordId": "wall-of-shadow",
+    "name": "Wall of Shadow",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Sun"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "80 yds.",
+    "castingTime": "8",
+    "duration": "Permanent",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "wandering-glyphs",
+    "sourceRecordId": "wandering-glyphs",
+    "name": "Wandering Glyphs",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration",
+      "Evocation"
+    ],
+    "sphere": [
+      "Ward"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "8 hrs. maximum",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "ward-of-light",
+    "sourceRecordId": "ward-of-light",
+    "name": "Ward of Light",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration",
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Guardian"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "6 rds.",
+    "areaOfEffect": "Sphere 10 to 90 ft. in diameter",
+    "savingThrow": "Из",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "warmth",
+    "sourceRecordId": "warmth",
+    "name": "Warmth",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Sun"
+    ],
+    "verbal": false,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "6",
+    "duration": "4 hrs. + 1 hr/level",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V. M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "warning-shout-halfling",
+    "sourceRecordId": "warning-shout-halfling",
+    "name": "Warning Shout — Halfling",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1/2[FRA]-mi. radius",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "warp-and-weave",
+    "sourceRecordId": "warp-and-weave",
+    "name": "Warp and Weave",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "1 rd.",
+    "duration": "1 rd.",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "warp-sense",
+    "sourceRecordId": "warp-sense",
+    "name": "Warp Sense",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "1 rd./level",
+    "areaOfEffect": "60 ft. path",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "warp-stone-or-metal",
+    "sourceRecordId": "warp-stone-or-metal",
+    "name": "Warp Stone or Metal",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "1 level",
+    "castingTime": "7",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "watching-shadow",
+    "sourceRecordId": "watching-shadow",
+    "name": "Watching Shadow",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "7",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "water-form",
+    "sourceRecordId": "water-form",
+    "name": "Water Form",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "1 turn + 1 rd./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "water-of-eldath",
+    "sourceRecordId": "water-of-eldath",
+    "name": "Water of Eldath",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Water",
+      "Healing"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "8",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Three potion flasks",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "water-sprint-old-empire",
+    "sourceRecordId": "water-sprint-old-empire",
+    "name": "Water Sprint — Old Empire",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "4",
+    "duration": "Special",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, $",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "water-trap",
+    "sourceRecordId": "water-trap",
+    "name": "Water Trap",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Water wie"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "5 rds.",
+    "duration": "| hr./level",
+    "areaOfEffect": "20-ft diameter",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "water-walk",
+    "sourceRecordId": "water-walk",
+    "name": "Water Walk",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "6",
+    "duration": "1 turn + 1 turn/level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "water-window",
+    "sourceRecordId": "water-window",
+    "name": "Water Window",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Divination",
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 ft.",
+    "castingTime": "| rd.",
+    "duration": "| hr.",
+    "areaOfEffect": "5 X 5 ft. sq.",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "water-witch",
+    "sourceRecordId": "water-witch",
+    "name": "Water Witch",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Elemental Water wie"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "3 turns",
+    "duration": "Until water is found",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "waterfloat",
+    "sourceRecordId": "waterfloat",
+    "name": "Waterfloat",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds/level",
+    "castingTime": "1",
+    "duration": "3 rds. + 1 rd./level",
+    "areaOfEffect": "10-ft. cube",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "waters-of-life",
+    "sourceRecordId": "waters-of-life",
+    "name": "Waters of Life",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Water Кед"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "9 rds.",
+    "duration": "Special",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, М",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "waterspout",
+    "sourceRecordId": "waterspout",
+    "name": "Waterspout",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Evocation"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "1 rd.",
+    "duration": "| turn",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "waterwall",
+    "sourceRecordId": "waterwall",
+    "name": "Waterwall",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "7",
+    "duration": "1 rd./level",
+    "areaOfEffect": "10 sq. ft./level",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "watery-fist",
+    "sourceRecordId": "watery-fist",
+    "name": "Watery Fist",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "5",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "watery-travel",
+    "sourceRecordId": "watery-travel",
+    "name": "Watery Travel",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "| turn +1 rd./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "wave",
+    "sourceRecordId": "wave",
+    "name": "Wave",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "| turn",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "wave-of-telekinesis-gnome",
+    "sourceRecordId": "wave-of-telekinesis-gnome",
+    "name": "Wave of Telekinesis — Gnome",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "Instantaneous",
+    "areaOfEffect": "10-ft. wide path, 10 ft./level long",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "wealthtwist",
+    "sourceRecordId": "wealthtwist",
+    "name": "Wealthtwist",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Healing",
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "2 rds.",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "wealthword",
+    "sourceRecordId": "wealthword",
+    "name": "Wealthword",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Healing",
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "2 rds.",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "weapon-bless",
+    "sourceRecordId": "weapon-bless",
+    "name": "Weapon Bless",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "| turn",
+    "duration": "Special",
+    "areaOfEffect": "1 weapon",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "weapon-immunity-old-empire",
+    "sourceRecordId": "weapon-immunity-old-empire",
+    "name": "Weapon Immunity — Old Empire",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "sphere": [
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "2 rds./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "weapon-of-the-earth-dwarf",
+    "sourceRecordId": "weapon-of-the-earth-dwarf",
+    "name": "Weapon of the Earth — Dwarf",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Earth"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "weapon-shift-halfling",
+    "sourceRecordId": "weapon-shift-halfling",
+    "name": "Weapon Shift — Halfling",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "2 rds. + 1 rd./level",
+    "areaOfEffect": "1 weapon",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "weather-dome",
+    "sourceRecordId": "weather-dome",
+    "name": "Weather Dome",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "sphere": [
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "7",
+    "castingTime": "| rd.",
+    "duration": "1 turn/level.",
+    "areaOfEffect": "30-ft.-radius dome",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "weather-prediction",
+    "sourceRecordId": "weather-prediction",
+    "name": "Weather Prediction",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Weather"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "Instantaneous",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "weather-stasis",
+    "sourceRecordId": "weather-stasis",
+    "name": "Weather Stasis",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "sphere": [
+      "Wards",
+      "Weather"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "| turn",
+    "duration": "1 hr./level",
+    "areaOfEffect": "Cube, 10-ft./level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "weather-summoning",
+    "sourceRecordId": "weather-summoning",
+    "name": "Weather Summoning",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Weather"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 turn",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "weathertell",
+    "sourceRecordId": "weathertell",
+    "name": "Weathertell",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "Weather",
+      "Divination"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "3 rds.",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "weavesong",
+    "sourceRecordId": "weavesong",
+    "name": "Weavesong*",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Creation"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "Special",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "weighty-chest",
+    "sourceRecordId": "weighty-chest",
+    "name": "Weighty Chest",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4",
+    "duration": "| day/level",
+    "areaOfEffect": "5-ft. cube",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "wheat-into-blade",
+    "sourceRecordId": "wheat-into-blade",
+    "name": "Wheat into Blade",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat",
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "6",
+    "duration": "4 rds.",
+    "areaOfEffect": "1 plant",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "wheel-of-bones",
+    "sourceRecordId": "wheel-of-bones",
+    "name": "Wheel of Bones",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "whip-of-flame",
+    "sourceRecordId": "whip-of-flame",
+    "name": "Whip of Flame",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "5",
+    "duration": "7 rds.",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "whip-of-pain",
+    "sourceRecordId": "whip-of-pain",
+    "name": "Whip of Pain",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Combat",
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "whip-of-shar",
+    "sourceRecordId": "whip-of-shar",
+    "name": "Whip of Shar",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "1 rd./level",
+    "areaOfEffect": "5-ft.-long, flexible beam of force",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "whip-of-woe",
+    "sourceRecordId": "whip-of-woe",
+    "name": "Whip of Woe",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation/E vocation"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "8",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "whirlchain",
+    "sourceRecordId": "whirlchain",
+    "name": "Whirlchain",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": false,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "90 yds.",
+    "castingTime": "7",
+    "duration": "1 rd.",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "2",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "whirlpool",
+    "sourceRecordId": "whirlpool",
+    "name": "Whirlpool",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Water"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 turn",
+    "duration": "1 turn/level.",
+    "areaOfEffect": "Special",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "whirlpool-of-doom",
+    "sourceRecordId": "whirlpool-of-doom",
+    "name": "Whirlpool of Doom",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Elemental Earth or Silt"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "5 rds.",
+    "duration": "| rd./level",
+    "areaOfEffect": "5 ft./level radius",
+    "savingThrow": "Vs. spell",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "whirlwind-of-steel",
+    "sourceRecordId": "whirlwind-of-steel",
+    "name": "Whirlwind of Steel",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning",
+      "Evocation"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "5 yds./level",
+    "castingTime": "8",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "Уз",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "whisperleaf-gnome",
+    "sourceRecordId": "whisperleaf-gnome",
+    "name": "Whisperleaf — Gnome",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "4 rds. + 2 rds./level",
+    "areaOfEffect": "1 oak branch",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "whisperward",
+    "sourceRecordId": "whisperward",
+    "name": "Whisperward",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Guardian",
+      "Weather"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "| turn",
+    "duration": "Until triggered",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "wieldskill",
+    "sourceRecordId": "wieldskill",
+    "name": "Wieldskill",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Charm",
+      "Thought"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "1 rd./level",
+    "areaOfEffect": "1 being",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "wild-deer-speed",
+    "sourceRecordId": "wild-deer-speed",
+    "name": "Wild Deer Speed",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Animal"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "5",
+    "duration": "1 turn + 1 rd./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "wild-lands",
+    "sourceRecordId": "wild-lands",
+    "name": "Wild Lands",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Cosmos"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "4 hrs.",
+    "duration": "Special",
+    "areaOfEffect": "/; mi./level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "wind-and-rain-protection",
+    "sourceRecordId": "wind-and-rain-protection",
+    "name": "Wind and Rain Protection",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "6",
+    "duration": "1 rd./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "wind-blast-elf",
+    "sourceRecordId": "wind-blast-elf",
+    "name": "Wind Blast — Elf",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Air"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "wind-column",
+    "sourceRecordId": "wind-column",
+    "name": "Wind Column",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Elemental Air"
+    ],
+    "verbal": false,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "2 rds./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "S",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "wind-lash",
+    "sourceRecordId": "wind-lash",
+    "name": "Wind Lash",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Evocation"
+    ],
+    "sphere": [
+      "Weather"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "5 yds./level",
+    "castingTime": "5",
+    "duration": "1 rd./level",
+    "areaOfEffect": "1 being",
+    "savingThrow": "1⁄2",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "wind-walk",
+    "sourceRecordId": "wind-walk",
+    "name": "Wind Walk",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Air"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "1 hr./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "wind-walk-shukenja",
+    "sourceRecordId": "wind-walk-shukenja",
+    "name": "Wind Walk — Shukenja",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Air"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "1 hr./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "windbearer",
+    "sourceRecordId": "windbearer",
+    "name": "Windbearer",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Elemental Air"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "6",
+    "duration": "1 turn*1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "windborne",
+    "sourceRecordId": "windborne",
+    "name": "Windborne",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Elemental Air"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "Special",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "windlance",
+    "sourceRecordId": "windlance",
+    "name": "Windlance",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Elemental Air"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "1 rd.",
+    "areaOfEffect": "10-ft. cube",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "winds-of-akadi",
+    "sourceRecordId": "winds-of-akadi",
+    "name": "Winds of Akadi",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "Elemental Air"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "100 yds.",
+    "castingTime": "7",
+    "duration": "1 turn",
+    "areaOfEffect": "Special",
+    "savingThrow": "И;",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "winds-of-change",
+    "sourceRecordId": "winds-of-change",
+    "name": "Winds of Change",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Elemental Air Ке"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "5",
+    "duration": "30 yds.",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "withdraw",
+    "sourceRecordId": "withdraw",
+    "name": "Withdraw",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Protection"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "5",
+    "duration": "Special",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "wither",
+    "sourceRecordId": "wither",
+    "name": "Wither",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "8",
+    "duration": "6 rds.",
+    "areaOfEffect": "1 creature touched",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "wolfjaws",
+    "sourceRecordId": "wolfjaws",
+    "name": "Wolfjaws",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Necromancy"
+    ],
+    "sphere": [
+      "Combat",
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "5",
+    "duration": "| rd./level",
+    "areaOfEffect": "The caster's right hand",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "wondrous-recall",
+    "sourceRecordId": "wondrous-recall",
+    "name": "Wondrous Recall",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Charm",
+      "Creation"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "9",
+    "duration": "Instantaneous",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "wood-sword",
+    "sourceRecordId": "wood-sword",
+    "name": "Wood Sword",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Evocation"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "5 yds./level",
+    "castingTime": "5",
+    "duration": "rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "woodiron",
+    "sourceRecordId": "woodiron",
+    "name": "Woodiron",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment"
+    ],
+    "sphere": [
+      "Plant",
+      "Combat RA"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch pP",
+    "castingTime": "7 it '",
+    "duration": "5 rds./level",
+    "areaOfEffect": "Weapon(s) touched",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4 \""
+    },
+    "notes": []
+  },
+  {
+    "id": "word-of-binding",
+    "sourceRecordId": "word-of-binding",
+    "name": "Word of Binding",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Guardian"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 rd.",
+    "duration": "Special",
+    "areaOfEffect": "Up to 30 sq. ft./level",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "word-of-recall",
+    "sourceRecordId": "word-of-recall",
+    "name": "Word of Recall",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat",
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "word-of-vengeance",
+    "sourceRecordId": "word-of-vengeance",
+    "name": "Word of Vengeance",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "|",
+    "duration": "Special",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "wound",
+    "sourceRecordId": "wound",
+    "name": "Wound",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromantic"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "120 yds.",
+    "castingTime": "5",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "wrath-of-torm",
+    "sourceRecordId": "wrath-of-torm",
+    "name": "Wrath of Torm",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration",
+      "Alteration"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "9",
+    "duration": "4 rds.",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "wyvern-watch",
+    "sourceRecordId": "wyvern-watch",
+    "name": "Wyvern Watch",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "Guardian"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "5",
+    "duration": "8 hrs. or until strike",
+    "areaOfEffect": "5-ft.-radius sphere",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "zin-carla",
+    "sourceRecordId": "zin-carla",
+    "name": "Zin-Carla",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4 rds.",
+    "duration": "Special",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Special",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "zone-of-sweet-air",
+    "sourceRecordId": "zone-of-sweet-air",
+    "name": "Zone of Sweet Air",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "sphere": [
+      "Elemental Air",
+      "Wards"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "6",
+    "duration": "| turn/level",
+    "areaOfEffect": "10-ft./level cube",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "zone-of-truth",
+    "sourceRecordId": "zone-of-truth",
+    "name": "Zone of Truth",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "5",
+    "duration": "1 rd./level",
+    "areaOfEffect": "5-ft./level cube",
+    "savingThrow": "Neg.",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "air-of-permanence",
+    "sourceRecordId": "air-of-permanence",
+    "name": "Air of Permanence",
+    "level": 9,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "Air"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 turn",
+    "duration": "Permanent",
+    "areaOfEffect": "30 cu. ft. of air",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "9"
+    },
+    "notes": []
+  },
+  {
+    "id": "adaptation",
+    "sourceRecordId": "adaptation",
+    "name": "Adaptation",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "Special",
+    "duration": "Special",
+    "areaOfEffect": "One unit of up to 200 individuals",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "caltrops",
+    "sourceRecordId": "caltrops",
+    "name": "Caltrops",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "20 yds./level",
+    "castingTime": "| turn",
+    "duration": "1 turn/level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "courage",
+    "sourceRecordId": "courage",
+    "name": "Courage",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "240 yds.",
+    "castingTime": "1 turn",
+    "duration": "Special",
+    "areaOfEffect": "1 unit up to 200 individuals",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "disguise",
+    "sourceRecordId": "disguise",
+    "name": "Disguise",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Шиѕіоп/ Phantasm"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "200 yds.",
+    "castingTime": "2 turns",
+    "duration": "1 turn/3 levels",
+    "areaOfEffect": "1 unit up to 300 individuals",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "emotion-perception",
+    "sourceRecordId": "emotion-perception",
+    "name": "Emotion Perception",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "300 yds.",
+    "castingTime": "| turn",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 unit/S levels",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "entrench",
+    "sourceRecordId": "entrench",
+    "name": "Entrench",
+    "level": 4,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Invocation/Evocation"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "1 rd.",
+    "duration": "Instantaneous",
+    "areaOfEffect": "10-ft. cube/2 levels",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "4"
+    },
+    "notes": []
+  },
+  {
+    "id": "fortify",
+    "sourceRecordId": "fortify",
+    "name": "Fortify",
+    "level": 3,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "1 rd.",
+    "duration": "Instantaneous",
+    "areaOfEffect": "10-ft. cube/2 levels",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "3"
+    },
+    "notes": []
+  },
+  {
+    "id": "gravity-variation",
+    "sourceRecordId": "gravity-variation",
+    "name": "Gravity Variation",
+    "level": 6,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "2 turns",
+    "duration": "| turn/3 levels",
+    "areaOfEffect": "120-yd. X 120-yd. square",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "6"
+    },
+    "notes": []
+  },
+  {
+    "id": "illusory-artillery",
+    "sourceRecordId": "illusory-artillery",
+    "name": "Illusory Artillery",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "300 yds.",
+    "castingTime": "1 turn",
+    "duration": "Instantaneous",
+    "areaOfEffect": "30 yd. x 30 yd. square",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "illusory-fortification",
+    "sourceRecordId": "illusory-fortification",
+    "name": "Illusory Fortification",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Illusion/Phantasm"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "240 yds.",
+    "castingTime": "10 turns",
+    "duration": "Special",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  },
+  {
+    "id": "morale",
+    "sourceRecordId": "morale",
+    "name": "Morale",
+    "level": 1,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "Special",
+    "duration": "Special",
+    "areaOfEffect": "1 unit up to 200 individuals",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, М",
+      "printedLevel": "1"
+    },
+    "notes": []
+  },
+  {
+    "id": "rally",
+    "sourceRecordId": "rally",
+    "name": "Rally",
+    "level": 2,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "240 yds.",
+    "castingTime": "1 turn",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 unit of up to 300 individuals",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "2"
+    },
+    "notes": []
+  },
+  {
+    "id": "righteous-wrath-of-the-faithful",
+    "sourceRecordId": "righteous-wrath-of-the-faithful",
+    "name": "Righteous Wrath of the Faithful",
+    "level": 5,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "8",
+    "duration": "1 rd./level",
+    "areaOfEffect": "30-ft. radius",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "5"
+    },
+    "notes": []
+  },
+  {
+    "id": "shadow-engines",
+    "sourceRecordId": "shadow-engines",
+    "name": "Shadow Engines",
+    "level": 7,
+    "type": "Spell",
+    "school": "Priest",
+    "classLists": [
+      "priest"
+    ],
+    "descriptorSchools": [
+      "Illusion/Phantasm"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "240 yards",
+    "castingTime": "3 turns",
+    "duration": "8 turns",
+    "areaOfEffect": "180-yard X 180-yard square",
+    "savingThrow": "None",
+    "source": "Priest Spell Compendium Volume 3",
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "printedLevel": "7"
+    },
+    "notes": []
+  }
+]

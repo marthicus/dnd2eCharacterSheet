@@ -1,0 +1,16 @@
+# External source-data repository; keep it out of this repository if copied here.
+advanced-dungeons-dragons-2nd-edition/
+
+# Source reports, analyses, reconciliation artifacts, and publication sidecars.
+data/*-report.json
+data/*-layout-analysis*.json
+data/*-reconciliation-report*.json
+data/*-preflight-report*.json
+data/psc-import-audit-report.json
+data/PSC-MC-1.0.sha256
+data/PSC-MC-1.0.md
+
+# Superseded raw PSC material batches; PSC-MC-1.0 is the runtime source.
+data/spell-material-components-psc-v1-batch-7.json
+data/spell-material-components-psc-v2-batch-8.json
+data/spell-material-components-psc-v3-batch-9.json

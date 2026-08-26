@@ -1,0 +1,142 @@
+[
+  {
+    "id": "protection-from-lightning",
+    "sourceRecordId": "wsc-v3-protection-from-lightning",
+    "materialComponents": "The material component is a thread of copper for each protected creature.",
+    "source": "Wizard Spell Compendium Volume 3",
+    "sourceLocation": {
+      "ocrLine": null,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": [
+      "Batch 2"
+    ]
+  },
+  {
+    "id": "remove-curse-variant",
+    "sourceRecordId": "wsc-v3-remove-curse-variant",
+    "materialComponents": "The material component is a coin taken in payment for a betrayal.",
+    "source": "Wizard Spell Compendium Volume 3",
+    "sourceLocation": {
+      "ocrLine": null,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": [
+      "Batch 2"
+    ]
+  },
+  {
+    "id": "electrical-protection-variant",
+    "sourceRecordId": "wsc-v3-electrical-protection-variant",
+    "materialComponents": "The material component is an extract from a whole volt, shocker, or electric eel.",
+    "source": "Wizard Spell Compendium Volume 3",
+    "sourceLocation": {
+      "ocrLine": null,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": [
+      "Batch 2"
+    ]
+  },
+  {
+    "id": "superior-heroism",
+    "sourceRecordId": "wsc-v4-superior-heroism",
+    "materialComponents": "The material component is a leaf from a treant.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": null,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": [
+      "Batch 2"
+    ]
+  },
+  {
+    "id": "tortoise-shell-ward",
+    "sourceRecordId": "wsc-v4-tortoise-shell-ward",
+    "materialComponents": "The material component is a piece of tortoise shell.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": null,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": [
+      "Batch 2"
+    ]
+  },
+  {
+    "id": "thornbush-arrows",
+    "sourceRecordId": "wsc-v4-thornbush-arrows-variant",
+    "materialComponents": "The material components are whole thorns, sliced from a rose bush and kept with petals from the same plant’s blossoms, and a feather from a phoenix.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": null,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": [
+      "Batch 2"
+    ]
+  },
+  {
+    "id": "thiondars-permanent-anti-magic-field",
+    "sourceRecordId": "wsc-v4-thiondars-permanent-anti-magic-field",
+    "materialComponents": "The material component is a small piece of cat fur sealed inside a small box.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": null,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": [
+      "Batch 2"
+    ]
+  },
+  {
+    "id": "warp-wood",
+    "sourceRecordId": "wsc-v4-warp-wood",
+    "materialComponents": "The material component for this spell is a piece of clay, twisted in the caster’s hands.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": null,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": [
+      "Batch 2"
+    ]
+  },
+  {
+    "id": "warmth-pluma",
+    "sourceRecordId": "wsc-v4-warmth-pluma-variant",
+    "materialComponents": "The material component for the spell is a tiny fragment of goose down.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": null,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": [
+      "Batch 2"
+    ]
+  },
+  {
+    "id": "weapon-proficiency",
+    "sourceRecordId": "wsc-v4-weapon-proficiency-variant",
+    "materialComponents": "The material components for the proficiency spell are a bit of fleece and a miniature bronze weapon or weapons of the type that the spell’s recipient will gain proficiency in.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": null,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": [
+      "Batch 2"
+    ]
+  }
+]

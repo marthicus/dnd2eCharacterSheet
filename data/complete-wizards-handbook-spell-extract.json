@@ -1,0 +1,1237 @@
+[
+  {
+    "id": "copy",
+    "sourceRecordId": "phbr04-copy",
+    "name": "Copy",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "1 round",
+    "duration": "Instantaneous",
+    "areaOfEffect": "One object",
+    "savingThrow": "Special",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 14811,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 1
+    },
+    "notes": []
+  },
+  {
+    "id": "chromatic-orb",
+    "sourceRecordId": "phbr04-chromatic-orb",
+    "name": "Chromatic Orb",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Evocation"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "Special",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 14847,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 1
+    },
+    "notes": []
+  },
+  {
+    "id": "detect-disease",
+    "sourceRecordId": "phbr04-detect-disease",
+    "name": "Detect Disease",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yards",
+    "castingTime": "1",
+    "duration": "1 round/level",
+    "areaOfEffect": "1 creature or object",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15021,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 1
+    },
+    "notes": []
+  },
+  {
+    "id": "divining-rod",
+    "sourceRecordId": "phbr04-divining-rod",
+    "name": "Divining Rod",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination",
+      "Enchantment"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yards",
+    "castingTime": "1 round",
+    "duration": "1 round/level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15048,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 1
+    },
+    "notes": []
+  },
+  {
+    "id": "thirst",
+    "sourceRecordId": "phbr04-thirst",
+    "name": "Thirst",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": false,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1",
+    "duration": "1 day/level",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15104,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "S, M",
+      "levelSection": 1
+    },
+    "notes": []
+  },
+  {
+    "id": "choke",
+    "sourceRecordId": "phbr04-choke",
+    "name": "Choke",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy",
+      "Conjuration/Summoning"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yards",
+    "castingTime": "2",
+    "duration": "1 round/level",
+    "areaOfEffect": "One creature",
+    "savingThrow": "1/2",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15140,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 2
+    },
+    "notes": []
+  },
+  {
+    "id": "death-recall",
+    "sourceRecordId": "phbr04-death-recall",
+    "name": "Death Recall",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy",
+      "Divination"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 round",
+    "duration": "Special",
+    "areaOfEffect": "One corpse",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15180,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 2
+    },
+    "notes": []
+  },
+  {
+    "id": "detect-life",
+    "sourceRecordId": "phbr04-detect-life",
+    "name": "Detect Life",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 feet/level",
+    "castingTime": "2",
+    "duration": "5 rounds",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15212,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 2
+    },
+    "notes": []
+  },
+  {
+    "id": "ice-knife",
+    "sourceRecordId": "phbr04-ice-knife",
+    "name": "Ice Knife",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Evocation"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "1 round",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Special",
+    "savingThrow": "Neg.",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15316,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 2
+    },
+    "notes": []
+  },
+  {
+    "id": "bone-club",
+    "sourceRecordId": "phbr04-bone-club",
+    "name": "Bone Club",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Enchantment",
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 round",
+    "duration": "1 round/level",
+    "areaOfEffect": "One bone",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15414,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, M",
+      "levelSection": 3
+    },
+    "notes": []
+  },
+  {
+    "id": "delay-death",
+    "sourceRecordId": "phbr04-delay-death",
+    "name": "Delay Death",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Enchantment",
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yards",
+    "castingTime": "1 round",
+    "duration": "1 turn/level",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15457,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 3
+    },
+    "notes": []
+  },
+  {
+    "id": "hovering-skull",
+    "sourceRecordId": "phbr04-hovering-skull",
+    "name": "Hovering Skull",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "4",
+    "duration": "2 rounds/level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15505,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "levelSection": 3
+    },
+    "notes": []
+  },
+  {
+    "id": "invisible-mail",
+    "sourceRecordId": "phbr04-invisible-mail",
+    "name": "Invisible Mail",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Evocation",
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "2",
+    "duration": "Special",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15553,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 3
+    },
+    "notes": []
+  },
+  {
+    "id": "iron-mind",
+    "sourceRecordId": "phbr04-iron-mind",
+    "name": "Iron Mind",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": false,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "3",
+    "duration": "1 hour",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15608,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "S, M",
+      "levelSection": 3
+    },
+    "notes": []
+  },
+  {
+    "id": "pain-touch",
+    "sourceRecordId": "phbr04-pain-touch",
+    "name": "Pain Touch",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "3",
+    "duration": "1 round/level",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15634,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, M",
+      "levelSection": 3
+    },
+    "notes": []
+  },
+  {
+    "id": "snapping-teeth",
+    "sourceRecordId": "phbr04-snapping-teeth",
+    "name": "Snapping Teeth",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Conjuration",
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "3",
+    "duration": "1 turn/level",
+    "areaOfEffect": "1 creature or object",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15673,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 3
+    },
+    "notes": []
+  },
+  {
+    "id": "duplicate",
+    "sourceRecordId": "phbr04-duplicate",
+    "name": "Duplicate",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Conjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": false,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 round",
+    "duration": "1 hour/level",
+    "areaOfEffect": "One object",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15732,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "S, M",
+      "levelSection": 4
+    },
+    "notes": []
+  },
+  {
+    "id": "fire-aura",
+    "sourceRecordId": "phbr04-fire-aura",
+    "name": "Fire Aura",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "4",
+    "duration": "2 rounds/level",
+    "areaOfEffect": "Caster",
+    "savingThrow": "Special",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15762,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 4
+    },
+    "notes": []
+  },
+  {
+    "id": "halo-of-eyes",
+    "sourceRecordId": "phbr04-halo-of-eyes",
+    "name": "Halo of Eyes",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration",
+      "Conjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "4",
+    "duration": "1 turn/level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15806,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, M",
+      "levelSection": 4
+    },
+    "notes": []
+  },
+  {
+    "id": "otilukes-dispelling-screen",
+    "sourceRecordId": "phbr04-otilukes-dispelling-screen",
+    "name": "Otiluke’s Dispelling Screen",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Evocation",
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "5 yards/level",
+    "castingTime": "5",
+    "duration": "1 round/level",
+    "areaOfEffect": "20-foot square",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15846,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 4
+    },
+    "notes": []
+  },
+  {
+    "id": "force-shapechange",
+    "sourceRecordId": "phbr04-force-shapechange",
+    "name": "Force Shapechange",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yards/level",
+    "castingTime": "1",
+    "duration": "Instantaneous",
+    "areaOfEffect": "One creature/level",
+    "savingThrow": "!/2",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 15968,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 5
+    },
+    "notes": []
+  },
+  {
+    "id": "know-value",
+    "sourceRecordId": "phbr04-know-value",
+    "name": "Know Value",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yards",
+    "castingTime": "3",
+    "duration": "Instantaneous",
+    "areaOfEffect": "10-foot cube",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16041,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, M",
+      "levelSection": 5
+    },
+    "notes": []
+  },
+  {
+    "id": "sanctum",
+    "sourceRecordId": "phbr04-sanctum",
+    "name": "Sanctum",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "2 turns",
+    "duration": "1 hour/level",
+    "areaOfEffect": "One room",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16089,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 5
+    },
+    "notes": []
+  },
+  {
+    "id": "mummy-rot",
+    "sourceRecordId": "phbr04-mummy-rot",
+    "name": "Mummy Rot",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "1 round/level",
+    "areaOfEffect": "One victim",
+    "savingThrow": "Special",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16126,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 5
+    },
+    "notes": []
+  },
+  {
+    "id": "rarys-telepathic-bond",
+    "sourceRecordId": "phbr04-rarys-telepathic-bond",
+    "name": "Rary’s Telepathic Bond",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination",
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "20 yards",
+    "castingTime": "1 round",
+    "duration": "2 turns per level",
+    "areaOfEffect": "Two or more creatures",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16166,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 5
+    },
+    "notes": []
+  },
+  {
+    "id": "throbbing-bones",
+    "sourceRecordId": "phbr04-throbbing-bones",
+    "name": "Throbbing Bones",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yards",
+    "castingTime": "3",
+    "duration": "1 round/level",
+    "areaOfEffect": "One creature",
+    "savingThrow": "1/2",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16217,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, M",
+      "levelSection": 5
+    },
+    "notes": []
+  },
+  {
+    "id": "blackmantle",
+    "sourceRecordId": "phbr04-blackmantle",
+    "name": "Blackmantle",
+    "level": 6,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy",
+      "Enchantment"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yards",
+    "castingTime": "1 round",
+    "duration": "1 turn/level",
+    "areaOfEffect": "15-foot radius",
+    "savingThrow": "Neg.",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16319,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 6
+    },
+    "notes": []
+  },
+  {
+    "id": "dead-mans-eyes",
+    "sourceRecordId": "phbr04-dead-mans-eyes",
+    "name": "Dead Man’s Eyes",
+    "level": 6,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": false,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Special",
+    "castingTime": "1 round",
+    "duration": "1 round/level",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16371,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "S, M",
+      "levelSection": 6
+    },
+    "notes": []
+  },
+  {
+    "id": "dragon-scales",
+    "sourceRecordId": "phbr04-dragon-scales",
+    "name": "Dragon Scales",
+    "level": 6,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 round",
+    "duration": "1 turn/level",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16423,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 6
+    },
+    "notes": []
+  },
+  {
+    "id": "tentacles",
+    "sourceRecordId": "phbr04-tentacles",
+    "name": "Tentacles",
+    "level": 6,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Conjuration",
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 round",
+    "duration": "1 turn/level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16502,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, M",
+      "levelSection": 6
+    },
+    "notes": []
+  },
+  {
+    "id": "defoliate",
+    "sourceRecordId": "phbr04-defoliate",
+    "name": "Defoliate",
+    "level": 8,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": false,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yards",
+    "castingTime": "1 round",
+    "duration": "Special",
+    "areaOfEffect": "50-foot square/level",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16613,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "S, M",
+      "levelSection": 8
+    },
+    "notes": []
+  },
+  {
+    "id": "fear-ward",
+    "sourceRecordId": "phbr04-fear-ward",
+    "name": "Fear Ward",
+    "level": 8,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 round",
+    "duration": "1 turn/level",
+    "areaOfEffect": "5 foot radius",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16654,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 8
+    },
+    "notes": []
+  },
+  {
+    "id": "shadow-form",
+    "sourceRecordId": "phbr04-shadow-form",
+    "name": "Shadow Form",
+    "level": 8,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 round",
+    "duration": "1 round/level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "The Complete Wizard's Handbook",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 16681,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "levelSection": 8
+    },
+    "notes": []
+  }
+]

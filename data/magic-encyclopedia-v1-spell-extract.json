@@ -1,0 +1,40 @@
+[
+  {
+    "id": "prismals-reversal",
+    "sourceRecordId": "magic-encyclopedia-v1-prismals-reversal",
+    "name": "Prismal's Reversal",
+    "level": 7,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5 Rounds",
+    "duration": "Permanent",
+    "areaOfEffect": "One portal",
+    "savingThrow": "None",
+    "source": "The Magic Encyclopedia Volume 1",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 2206,
+      "page": null
+    },
+    "unmapped": {
+      "printedHeading": "New Magic",
+      "printedComponents": "V, S",
+      "printedLevel": "7"
+    },
+    "notes": []
+  }
+]

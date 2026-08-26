@@ -1,0 +1,1371 @@
+[
+  {
+    "id": "anal",
+    "occurrenceCount": 2,
+    "sources": [
+      "Wizard Spell Compendium Volume 2",
+      "Wizard Spell Compendium Volume 3"
+    ],
+    "fieldConflicts": {
+      "level": [
+        {
+          "value": 5,
+          "sourceRecordIds": [
+            "wsc-v2-anal"
+          ]
+        },
+        {
+          "value": 2,
+          "sourceRecordIds": [
+            "wsc-v3-anal"
+          ]
+        }
+      ],
+      "descriptorSchools": [
+        {
+          "value": [
+            "Necromancy"
+          ],
+          "sourceRecordIds": [
+            "wsc-v2-anal"
+          ]
+        },
+        {
+          "value": [
+            "All"
+          ],
+          "sourceRecordIds": [
+            "wsc-v3-anal"
+          ]
+        }
+      ],
+      "material": [
+        {
+          "value": true,
+          "sourceRecordIds": [
+            "wsc-v2-anal"
+          ]
+        },
+        {
+          "value": false,
+          "sourceRecordIds": [
+            "wsc-v3-anal"
+          ]
+        }
+      ],
+      "range": [
+        {
+          "value": "Touch",
+          "sourceRecordIds": [
+            "wsc-v2-anal"
+          ]
+        },
+        {
+          "value": "10 yds./level",
+          "sourceRecordIds": [
+            "wsc-v3-anal"
+          ]
+        }
+      ],
+      "castingTime": [
+        {
+          "value": "5",
+          "sourceRecordIds": [
+            "wsc-v2-anal"
+          ]
+        },
+        {
+          "value": "2",
+          "sourceRecordIds": [
+            "wsc-v3-anal"
+          ]
+        }
+      ],
+      "duration": [
+        {
+          "value": "| turn + 1 rd./level",
+          "sourceRecordIds": [
+            "wsc-v2-anal"
+          ]
+        },
+        {
+          "value": "1 hr./level",
+          "sourceRecordIds": [
+            "wsc-v3-anal"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "Person touched",
+          "sourceRecordIds": [
+            "wsc-v2-anal"
+          ]
+        },
+        {
+          "value": "Special",
+          "sourceRecordIds": [
+            "wsc-v3-anal"
+          ]
+        }
+      ],
+      "savingThrow": [
+        {
+          "value": "None",
+          "sourceRecordIds": [
+            "wsc-v2-anal"
+          ]
+        },
+        {
+          "value": "Special",
+          "sourceRecordIds": [
+            "wsc-v3-anal"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "blunt-weapons",
+    "occurrenceCount": 2,
+    "sources": [
+      "Wizard Spell Compendium Volume 3"
+    ],
+    "fieldConflicts": {
+      "duration": [
+        {
+          "value": "4 rds. + 1d4 rds.",
+          "sourceRecordIds": [
+            "wsc-v3-blunt-weapons"
+          ]
+        },
+        {
+          "value": "| turn/level",
+          "sourceRecordIds": [
+            "wsc-v3-blunt-weapons-variant-2"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "1 creature",
+          "sourceRecordIds": [
+            "wsc-v3-blunt-weapons"
+          ]
+        },
+        {
+          "value": "Creature touched",
+          "sourceRecordIds": [
+            "wsc-v3-blunt-weapons-variant-2"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "edged-weapons",
+    "occurrenceCount": 2,
+    "sources": [
+      "Wizard Spell Compendium Volume 3"
+    ],
+    "fieldConflicts": {
+      "duration": [
+        {
+          "value": "4 rds. + 1d4 rds.",
+          "sourceRecordIds": [
+            "wsc-v3-edged-weapons"
+          ]
+        },
+        {
+          "value": "| turn/level",
+          "sourceRecordIds": [
+            "wsc-v3-edged-weapons-variant-2"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "etherealness",
+    "occurrenceCount": 2,
+    "sources": [
+      "Player's Option: Spells & Magic",
+      "Wizard Spell Compendium Volume 2"
+    ],
+    "fieldConflicts": {
+      "level": [
+        {
+          "value": 3,
+          "sourceRecordIds": [
+            "po-sm-etherealness"
+          ]
+        },
+        {
+          "value": 6,
+          "sourceRecordIds": [
+            "wsc-v2-etherealness"
+          ]
+        }
+      ],
+      "settingOrElementDescriptors": [
+        {
+          "value": [],
+          "sourceRecordIds": [
+            "po-sm-etherealness"
+          ]
+        },
+        {
+          "value": [
+            "Dimension"
+          ],
+          "sourceRecordIds": [
+            "wsc-v2-etherealness"
+          ]
+        }
+      ],
+      "range": [
+        {
+          "value": "0",
+          "sourceRecordIds": [
+            "po-sm-etherealness"
+          ]
+        },
+        {
+          "value": "Touch",
+          "sourceRecordIds": [
+            "wsc-v2-etherealness"
+          ]
+        }
+      ],
+      "castingTime": [
+        {
+          "value": "1",
+          "sourceRecordIds": [
+            "po-sm-etherealness"
+          ]
+        },
+        {
+          "value": "|",
+          "sourceRecordIds": [
+            "wsc-v2-etherealness"
+          ]
+        }
+      ],
+      "duration": [
+        {
+          "value": "1 turn + 1 rd./level",
+          "sourceRecordIds": [
+            "po-sm-etherealness"
+          ]
+        },
+        {
+          "value": "1 hr./level",
+          "sourceRecordIds": [
+            "wsc-v2-etherealness"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "The caster",
+          "sourceRecordIds": [
+            "po-sm-etherealness"
+          ]
+        },
+        {
+          "value": "Creature(s) touched",
+          "sourceRecordIds": [
+            "wsc-v2-etherealness"
+          ]
+        }
+      ],
+      "savingThrow": [
+        {
+          "value": "None",
+          "sourceRecordIds": [
+            "po-sm-etherealness"
+          ]
+        },
+        {
+          "value": "Neg.",
+          "sourceRecordIds": [
+            "wsc-v2-etherealness"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "fire-aura",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 2"
+    ],
+    "fieldConflicts": {
+      "settingOrElementDescriptors": [
+        {
+          "value": [],
+          "sourceRecordIds": [
+            "phbr04-fire-aura"
+          ]
+        },
+        {
+          "value": [
+            "Fire"
+          ],
+          "sourceRecordIds": [
+            "wsc-v2-fire-aura"
+          ]
+        }
+      ],
+      "duration": [
+        {
+          "value": "2 rounds/level",
+          "sourceRecordIds": [
+            "phbr04-fire-aura"
+          ]
+        },
+        {
+          "value": "2 rds./level",
+          "sourceRecordIds": [
+            "wsc-v2-fire-aura"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "Caster",
+          "sourceRecordIds": [
+            "phbr04-fire-aura"
+          ]
+        },
+        {
+          "value": "The caster",
+          "sourceRecordIds": [
+            "wsc-v2-fire-aura"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "force-shapechange",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 2"
+    ],
+    "fieldConflicts": {
+      "range": [
+        {
+          "value": "10 yards/level",
+          "sourceRecordIds": [
+            "phbr04-force-shapechange"
+          ]
+        },
+        {
+          "value": "10 yds./level",
+          "sourceRecordIds": [
+            "wsc-v2-force-shapechange"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "One creature/level",
+          "sourceRecordIds": [
+            "phbr04-force-shapechange"
+          ]
+        },
+        {
+          "value": "30-ft. radius",
+          "sourceRecordIds": [
+            "wsc-v2-force-shapechange"
+          ]
+        }
+      ],
+      "savingThrow": [
+        {
+          "value": "!/2",
+          "sourceRecordIds": [
+            "phbr04-force-shapechange"
+          ]
+        },
+        {
+          "value": "Special",
+          "sourceRecordIds": [
+            "wsc-v2-force-shapechange"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "hovering-skull",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 2"
+    ],
+    "fieldConflicts": {
+      "duration": [
+        {
+          "value": "2 rounds/level",
+          "sourceRecordIds": [
+            "phbr04-hovering-skull"
+          ]
+        },
+        {
+          "value": "2 rds./level",
+          "sourceRecordIds": [
+            "wsc-v2-hovering-skull"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ice-knife",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 2"
+    ],
+    "fieldConflicts": {
+      "settingOrElementDescriptors": [
+        {
+          "value": [],
+          "sourceRecordIds": [
+            "phbr04-ice-knife"
+          ]
+        },
+        {
+          "value": [
+            "Artifice, Water"
+          ],
+          "sourceRecordIds": [
+            "wsc-v2-ice-knife"
+          ]
+        }
+      ],
+      "castingTime": [
+        {
+          "value": "1 round",
+          "sourceRecordIds": [
+            "phbr04-ice-knife"
+          ]
+        },
+        {
+          "value": "| rd.",
+          "sourceRecordIds": [
+            "wsc-v2-ice-knife"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "invisible-mail",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 2"
+    ],
+    "fieldConflicts": {
+      "descriptorSchools": [
+        {
+          "value": [
+            "Evocation",
+            "Abjuration"
+          ],
+          "sourceRecordIds": [
+            "phbr04-invisible-mail"
+          ]
+        },
+        {
+          "value": [
+            "Abjuration",
+            "Evocation"
+          ],
+          "sourceRecordIds": [
+            "wsc-v2-invisible-mail"
+          ]
+        }
+      ],
+      "settingOrElementDescriptors": [
+        {
+          "value": [],
+          "sourceRecordIds": [
+            "phbr04-invisible-mail"
+          ]
+        },
+        {
+          "value": [
+            "Force"
+          ],
+          "sourceRecordIds": [
+            "wsc-v2-invisible-mail"
+          ]
+        }
+      ],
+      "castingTime": [
+        {
+          "value": "2",
+          "sourceRecordIds": [
+            "phbr04-invisible-mail"
+          ]
+        },
+        {
+          "value": "3",
+          "sourceRecordIds": [
+            "wsc-v2-invisible-mail"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "iron-mind",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 2"
+    ],
+    "fieldConflicts": {
+      "settingOrElementDescriptors": [
+        {
+          "value": [],
+          "sourceRecordIds": [
+            "phbr04-iron-mind"
+          ]
+        },
+        {
+          "value": [
+            "Mentalism"
+          ],
+          "sourceRecordIds": [
+            "wsc-v2-iron-mind"
+          ]
+        }
+      ],
+      "duration": [
+        {
+          "value": "1 hour",
+          "sourceRecordIds": [
+            "phbr04-iron-mind"
+          ]
+        },
+        {
+          "value": "| hr.",
+          "sourceRecordIds": [
+            "wsc-v2-iron-mind"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "One creature",
+          "sourceRecordIds": [
+            "phbr04-iron-mind"
+          ]
+        },
+        {
+          "value": "1 creature",
+          "sourceRecordIds": [
+            "wsc-v2-iron-mind"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "know-value",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 2"
+    ],
+    "fieldConflicts": {
+      "somatic": [
+        {
+          "value": false,
+          "sourceRecordIds": [
+            "phbr04-know-value"
+          ]
+        },
+        {
+          "value": true,
+          "sourceRecordIds": [
+            "wsc-v2-know-value"
+          ]
+        }
+      ],
+      "range": [
+        {
+          "value": "10 yards",
+          "sourceRecordIds": [
+            "phbr04-know-value"
+          ]
+        },
+        {
+          "value": "10 yds.",
+          "sourceRecordIds": [
+            "wsc-v2-know-value"
+          ]
+        }
+      ],
+      "castingTime": [
+        {
+          "value": "3",
+          "sourceRecordIds": [
+            "phbr04-know-value"
+          ]
+        },
+        {
+          "value": "1 rd.",
+          "sourceRecordIds": [
+            "wsc-v2-know-value"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "10-foot cube",
+          "sourceRecordIds": [
+            "phbr04-know-value"
+          ]
+        },
+        {
+          "value": "10-ft. cube",
+          "sourceRecordIds": [
+            "wsc-v2-know-value"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "lightning-rod",
+    "occurrenceCount": 2,
+    "sources": [
+      "Wizard Spell Compendium Volume 2"
+    ],
+    "fieldConflicts": {
+      "level": [
+        {
+          "value": 3,
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod"
+          ]
+        },
+        {
+          "value": 6,
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod-variant-2"
+          ]
+        }
+      ],
+      "descriptorSchools": [
+        {
+          "value": [
+            "Alteration"
+          ],
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod"
+          ]
+        },
+        {
+          "value": [
+            "Abjuration"
+          ],
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod-variant-2"
+          ]
+        }
+      ],
+      "range": [
+        {
+          "value": "Touch",
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod"
+          ]
+        },
+        {
+          "value": "Special",
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod-variant-2"
+          ]
+        }
+      ],
+      "castingTime": [
+        {
+          "value": "7",
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod"
+          ]
+        },
+        {
+          "value": "6",
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod-variant-2"
+          ]
+        }
+      ],
+      "duration": [
+        {
+          "value": "Special",
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod"
+          ]
+        },
+        {
+          "value": "1 turn/level",
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod-variant-2"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "1 metal object",
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod"
+          ]
+        },
+        {
+          "value": "30-ft. radius",
+          "sourceRecordIds": [
+            "wsc-v2-lightning-rod-variant-2"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "otilukes-dispelling-screen",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 3"
+    ],
+    "fieldConflicts": {
+      "descriptorSchools": [
+        {
+          "value": [
+            "Evocation",
+            "Abjuration"
+          ],
+          "sourceRecordIds": [
+            "phbr04-otilukes-dispelling-screen"
+          ]
+        },
+        {
+          "value": [
+            "Abjuration",
+            "Evocation"
+          ],
+          "sourceRecordIds": [
+            "wsc-v3-otilukes-dispelling-screen"
+          ]
+        }
+      ],
+      "range": [
+        {
+          "value": "5 yards/level",
+          "sourceRecordIds": [
+            "phbr04-otilukes-dispelling-screen"
+          ]
+        },
+        {
+          "value": "5 yds./level",
+          "sourceRecordIds": [
+            "wsc-v3-otilukes-dispelling-screen"
+          ]
+        }
+      ],
+      "castingTime": [
+        {
+          "value": "5",
+          "sourceRecordIds": [
+            "phbr04-otilukes-dispelling-screen"
+          ]
+        },
+        {
+          "value": "4",
+          "sourceRecordIds": [
+            "wsc-v3-otilukes-dispelling-screen"
+          ]
+        }
+      ],
+      "duration": [
+        {
+          "value": "1 round/level",
+          "sourceRecordIds": [
+            "phbr04-otilukes-dispelling-screen"
+          ]
+        },
+        {
+          "value": "1 rd./level",
+          "sourceRecordIds": [
+            "wsc-v3-otilukes-dispelling-screen"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "20-foot square",
+          "sourceRecordIds": [
+            "phbr04-otilukes-dispelling-screen"
+          ]
+        },
+        {
+          "value": "20-ft. square",
+          "sourceRecordIds": [
+            "wsc-v3-otilukes-dispelling-screen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "pain-touch",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 3"
+    ],
+    "fieldConflicts": {
+      "descriptorSchools": [
+        {
+          "value": [
+            "Divination"
+          ],
+          "sourceRecordIds": [
+            "phbr04-pain-touch"
+          ]
+        },
+        {
+          "value": [
+            "Necromancy"
+          ],
+          "sourceRecordIds": [
+            "wsc-v3-pain-touch"
+          ]
+        }
+      ],
+      "duration": [
+        {
+          "value": "1 round/level",
+          "sourceRecordIds": [
+            "phbr04-pain-touch"
+          ]
+        },
+        {
+          "value": "1 rd./level",
+          "sourceRecordIds": [
+            "wsc-v3-pain-touch"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "One creature",
+          "sourceRecordIds": [
+            "phbr04-pain-touch"
+          ]
+        },
+        {
+          "value": "1 creature",
+          "sourceRecordIds": [
+            "wsc-v3-pain-touch"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "prismals-reversal",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Magic Encyclopedia Volume 1",
+      "Wizard Spell Compendium Volume 3"
+    ],
+    "fieldConflicts": {
+      "name": [
+        {
+          "value": "Prismal's Reversal",
+          "sourceRecordIds": [
+            "magic-encyclopedia-v1-prismals-reversal"
+          ]
+        },
+        {
+          "value": "Prismal’s Reversal",
+          "sourceRecordIds": [
+            "wsc-v3-prismals-reversal"
+          ]
+        }
+      ],
+      "settingOrElementDescriptors": [
+        {
+          "value": [],
+          "sourceRecordIds": [
+            "magic-encyclopedia-v1-prismals-reversal"
+          ]
+        },
+        {
+          "value": [
+            "Chronomancy"
+          ],
+          "sourceRecordIds": [
+            "wsc-v3-prismals-reversal"
+          ]
+        }
+      ],
+      "castingTime": [
+        {
+          "value": "5 Rounds",
+          "sourceRecordIds": [
+            "magic-encyclopedia-v1-prismals-reversal"
+          ]
+        },
+        {
+          "value": "7",
+          "sourceRecordIds": [
+            "wsc-v3-prismals-reversal"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "One portal",
+          "sourceRecordIds": [
+            "magic-encyclopedia-v1-prismals-reversal"
+          ]
+        },
+        {
+          "value": "1 portal",
+          "sourceRecordIds": [
+            "wsc-v3-prismals-reversal"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "red-wizard",
+    "occurrenceCount": 4,
+    "sources": [
+      "Wizard Spell Compendium Volume 3"
+    ],
+    "fieldConflicts": {
+      "level": [
+        {
+          "value": 1,
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard"
+          ]
+        },
+        {
+          "value": 3,
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-2"
+          ]
+        },
+        {
+          "value": 8,
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-3"
+          ]
+        },
+        {
+          "value": 2,
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-4"
+          ]
+        }
+      ],
+      "descriptorSchools": [
+        {
+          "value": [
+            "Enchantment/Charm"
+          ],
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard",
+            "wsc-v3-red-wizard-variant-2",
+            "wsc-v3-red-wizard-variant-3"
+          ]
+        },
+        {
+          "value": [
+            "Abjuration"
+          ],
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-4"
+          ]
+        }
+      ],
+      "somatic": [
+        {
+          "value": false,
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard"
+          ]
+        },
+        {
+          "value": true,
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-2",
+            "wsc-v3-red-wizard-variant-3",
+            "wsc-v3-red-wizard-variant-4"
+          ]
+        }
+      ],
+      "material": [
+        {
+          "value": false,
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard",
+            "wsc-v3-red-wizard-variant-2",
+            "wsc-v3-red-wizard-variant-3"
+          ]
+        },
+        {
+          "value": true,
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-4"
+          ]
+        }
+      ],
+      "range": [
+        {
+          "value": "10 yds.",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard"
+          ]
+        },
+        {
+          "value": "10 yds. + 1 yd./level",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-2",
+            "wsc-v3-red-wizard-variant-3"
+          ]
+        },
+        {
+          "value": "Touch",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-4"
+          ]
+        }
+      ],
+      "castingTime": [
+        {
+          "value": "1",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard"
+          ]
+        },
+        {
+          "value": "3",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-2"
+          ]
+        },
+        {
+          "value": "8",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-3"
+          ]
+        },
+        {
+          "value": "2",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-4"
+          ]
+        }
+      ],
+      "duration": [
+        {
+          "value": "1 rd.",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard"
+          ]
+        },
+        {
+          "value": "2d4 rds.",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-2"
+          ]
+        },
+        {
+          "value": "3d6 rds. + 1 rd./level",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-3"
+          ]
+        },
+        {
+          "value": "2 rds. + 1d10 rds.",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-4"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "1 creature",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard",
+            "wsc-v3-red-wizard-variant-2",
+            "wsc-v3-red-wizard-variant-3"
+          ]
+        },
+        {
+          "value": "Creature touched",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-4"
+          ]
+        }
+      ],
+      "savingThrow": [
+        {
+          "value": "Neg.",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard",
+            "wsc-v3-red-wizard-variant-2",
+            "wsc-v3-red-wizard-variant-3"
+          ]
+        },
+        {
+          "value": "None",
+          "sourceRecordIds": [
+            "wsc-v3-red-wizard-variant-4"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shadow-form",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 3"
+    ],
+    "fieldConflicts": {
+      "settingOrElementDescriptors": [
+        {
+          "value": [],
+          "sourceRecordIds": [
+            "phbr04-shadow-form"
+          ]
+        },
+        {
+          "value": [
+            "Shadow"
+          ],
+          "sourceRecordIds": [
+            "wsc-v3-shadow-form"
+          ]
+        }
+      ],
+      "castingTime": [
+        {
+          "value": "1 round",
+          "sourceRecordIds": [
+            "phbr04-shadow-form"
+          ]
+        },
+        {
+          "value": "1 rd.",
+          "sourceRecordIds": [
+            "wsc-v3-shadow-form"
+          ]
+        }
+      ],
+      "duration": [
+        {
+          "value": "1 round/level",
+          "sourceRecordIds": [
+            "phbr04-shadow-form"
+          ]
+        },
+        {
+          "value": "1 rd./level",
+          "sourceRecordIds": [
+            "wsc-v3-shadow-form"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "snapping-teeth",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 3"
+    ],
+    "fieldConflicts": {
+      "descriptorSchools": [
+        {
+          "value": [
+            "Conjuration",
+            "Alteration"
+          ],
+          "sourceRecordIds": [
+            "phbr04-snapping-teeth"
+          ]
+        },
+        {
+          "value": [
+            "Alteration",
+            "Conjuration"
+          ],
+          "sourceRecordIds": [
+            "wsc-v3-snapping-teeth"
+          ]
+        }
+      ],
+      "settingOrElementDescriptors": [
+        {
+          "value": [],
+          "sourceRecordIds": [
+            "phbr04-snapping-teeth"
+          ]
+        },
+        {
+          "value": [
+            "Artifice"
+          ],
+          "sourceRecordIds": [
+            "wsc-v3-snapping-teeth"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tentacles",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 4"
+    ],
+    "fieldConflicts": {
+      "descriptorSchools": [
+        {
+          "value": [
+            "Conjuration",
+            "Alteration"
+          ],
+          "sourceRecordIds": [
+            "phbr04-tentacles"
+          ]
+        },
+        {
+          "value": [
+            "Alteration",
+            "Conjuration"
+          ],
+          "sourceRecordIds": [
+            "wsc-v4-tentacles"
+          ]
+        }
+      ],
+      "castingTime": [
+        {
+          "value": "1 round",
+          "sourceRecordIds": [
+            "phbr04-tentacles"
+          ]
+        },
+        {
+          "value": "| rd.",
+          "sourceRecordIds": [
+            "wsc-v4-tentacles"
+          ]
+        }
+      ],
+      "duration": [
+        {
+          "value": "1 turn/level",
+          "sourceRecordIds": [
+            "phbr04-tentacles"
+          ]
+        },
+        {
+          "value": "| turn/level",
+          "sourceRecordIds": [
+            "wsc-v4-tentacles"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "throbbing-bones",
+    "occurrenceCount": 2,
+    "sources": [
+      "The Complete Wizard's Handbook",
+      "Wizard Spell Compendium Volume 4"
+    ],
+    "fieldConflicts": {
+      "range": [
+        {
+          "value": "10 yards",
+          "sourceRecordIds": [
+            "phbr04-throbbing-bones"
+          ]
+        },
+        {
+          "value": "10 yds.",
+          "sourceRecordIds": [
+            "wsc-v4-throbbing-bones"
+          ]
+        }
+      ],
+      "duration": [
+        {
+          "value": "1 round/level",
+          "sourceRecordIds": [
+            "phbr04-throbbing-bones"
+          ]
+        },
+        {
+          "value": "| rd./level",
+          "sourceRecordIds": [
+            "wsc-v4-throbbing-bones"
+          ]
+        }
+      ],
+      "areaOfEffect": [
+        {
+          "value": "One creature",
+          "sourceRecordIds": [
+            "phbr04-throbbing-bones"
+          ]
+        },
+        {
+          "value": "| creature",
+          "sourceRecordIds": [
+            "wsc-v4-throbbing-bones"
+          ]
+        }
+      ],
+      "savingThrow": [
+        {
+          "value": "1/2",
+          "sourceRecordIds": [
+            "phbr04-throbbing-bones"
+          ]
+        },
+        {
+          "value": "4",
+          "sourceRecordIds": [
+            "wsc-v4-throbbing-bones"
+          ]
+        }
+      ]
+    }
+  }
+]

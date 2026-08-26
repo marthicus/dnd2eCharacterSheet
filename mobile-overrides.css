@@ -1,0 +1,512 @@
+/* Late overrides for mobile toolbar placement and table overflow handling. */
+
+.tableWrap {
+    width: calc(100% + 20px);
+    max-width: none;
+    margin-left: -10px;
+    margin-right: -10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-gutter: auto;
+}
+
+.dragon-shadow-flight {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.dragon-shadow-flight::before {
+    content: "";
+    position: absolute;
+    top: 16vh;
+    left: -28vw;
+    width: clamp(180px, 26vw, 380px);
+    aspect-ratio: 2 / 1;
+    background: url("dragon-shadow.svg") center/contain no-repeat;
+    opacity: 0.16;
+    filter: blur(1.3px) brightness(0.45) saturate(0);
+    mix-blend-mode: multiply;
+    transform-origin: center;
+    animation: dragonShadowDrift 56s linear infinite;
+}
+
+@keyframes dragonShadowDrift {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.72) rotate(-10deg);
+    }
+    22% {
+        transform: translate3d(40vw, -7vh, 0) scale(0.62) rotate(-4deg);
+    }
+    47% {
+        transform: translate3d(74vw, 3vh, 0) scale(0.78) rotate(5deg);
+    }
+    71% {
+        transform: translate3d(28vw, 12vh, 0) scale(0.68) rotate(11deg);
+    }
+    100% {
+        transform: translate3d(-12vw, 4vh, 0) scale(0.72) rotate(-10deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dragon-shadow-flight::before {
+        animation: none;
+        opacity: 0.12;
+    }
+}
+
+.tableWrap > table {
+    width: 100%;
+    min-width: 100%;
+}
+
+.tableWrap th,
+.tableWrap td {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.tableWrap td > input,
+.tableWrap td > select,
+.tableWrap td > textarea,
+.tableWrap td > output,
+.tableWrap td > button {
+    max-width: 100%;
+}
+
+.tableWrap button.remove,
+.tableWrap button[data-remove],
+.tableWrap button[data-ac-remove],
+.tableWrap button[data-weapon-remove],
+.tableWrap button[data-spell-remove],
+.tableWrap button[data-resistance-remove],
+.tableWrap button[data-global-remove],
+.tableWrap button[data-weapon-proficiency-remove] {
+    width: 1.25rem !important;
+    min-width: 1.25rem !important;
+    max-width: 1.25rem !important;
+    height: 1.25rem !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.weapon-proficiencies-table th:nth-child(1) { width: 24%; }
+.weapon-proficiencies-table th:nth-child(2) { width: 26%; }
+.weapon-proficiencies-table th:nth-child(3) { width: 10%; }
+.weapon-proficiencies-table th:nth-child(4) { width: 14%; }
+.weapon-proficiencies-table th:nth-child(5) { width: 24%; }
+.weapon-proficiencies-table th:nth-child(6) { width: 2%; }
+
+/* Keep the ambush bush panel vertically aligned with the surprise fields. */
+.surprise-layout {
+    align-items: center;
+}
+
+.surprise-summary {
+    align-self: center;
+}
+
+/* Prevent hidden tooltip sizing from widening cards at medium widths. */
+.stat-tooltip {
+    min-width: min(225%, 560px);
+    max-width: min(560px, calc(100vw - 32px));
+}
+
+/* Keep horizontal overflow inside table wrappers, not at page level. */
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+@media (max-width: 700px) {
+    .stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .stats > .stat > input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .character-tracker-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .movement-base-field {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .movement-base-field input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .class-entries-field table {
+        width: 100%;
+        min-width: 100%;
+        table-layout: fixed;
+    }
+
+    .class-entries-field thead,
+    .class-entries-field tbody,
+    .class-entries-field tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .class-entries-field th,
+    .class-entries-field td {
+        min-width: 96px;
+        overflow-wrap: anywhere;
+    }
+
+    .class-entries-field th:first-child,
+    .class-entries-field td:first-child {
+        min-width: 132px;
+    }
+
+    .xp-award-controls {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: stretch;
+        gap: 6px;
+    }
+
+    .xp-award-controls label,
+    .xp-award-controls select,
+    .xp-award-controls input,
+    .xp-award-controls button {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+    }
+
+    .tableWrap {
+        overflow-x: auto;
+        overflow-y: hidden;
+        max-width: 100%;
+    }
+
+    .tableWrap > table {
+        width: 100%;
+        min-width: 100%;
+        table-layout: fixed;
+    }
+
+    .tableWrap th,
+    .tableWrap td {
+        min-width: 92px;
+        white-space: normal;
+        vertical-align: top;
+    }
+
+    .tableWrap th:last-child,
+    .tableWrap td:last-child {
+        min-width: 40px;
+    }
+
+    .tableWrap td > input,
+    .tableWrap td > select,
+    .tableWrap td > textarea {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .spells-table th:nth-child(1),
+    .spells-table td:nth-child(1) { min-width: 180px; }
+    .spells-table th:nth-child(2),
+    .spells-table td:nth-child(2) { min-width: 64px; }
+    .spells-table th:nth-child(3),
+    .spells-table td:nth-child(3) { min-width: 100px; }
+    .spells-table th:nth-child(4),
+    .spells-table td:nth-child(4) { min-width: 150px; }
+    .spells-table th:nth-child(5),
+    .spells-table td:nth-child(5),
+    .spells-table th:nth-child(6),
+    .spells-table td:nth-child(6),
+    .spells-table th:nth-child(7),
+    .spells-table td:nth-child(7),
+    .spells-table th:nth-child(8),
+    .spells-table td:nth-child(8),
+    .spells-table th:nth-child(9),
+    .spells-table td:nth-child(9) { min-width: 76px; }
+    .spells-table th:nth-child(10),
+    .spells-table td:nth-child(10),
+    .spells-table th:nth-child(11),
+    .spells-table td:nth-child(11) { min-width: 180px; }
+    .spells-table th:nth-child(12),
+    .spells-table td:nth-child(12) { min-width: 40px; }
+
+    .languages-table th:nth-child(1),
+    .languages-table td:nth-child(1) { min-width: 150px; }
+    .languages-table th:nth-child(2),
+    .languages-table td:nth-child(2) { min-width: 120px; }
+    .languages-table th:nth-child(3),
+    .languages-table td:nth-child(3) { min-width: 120px; }
+    .languages-table th:nth-child(4),
+    .languages-table td:nth-child(4),
+    .languages-table th:nth-child(5),
+    .languages-table td:nth-child(5),
+    .languages-table th:nth-child(6),
+    .languages-table td:nth-child(6),
+    .languages-table th:nth-child(7),
+    .languages-table td:nth-child(7) { min-width: 76px; }
+    .languages-table th:nth-child(8),
+    .languages-table td:nth-child(8) { min-width: 190px; }
+    .languages-table th:nth-child(9),
+    .languages-table td:nth-child(9) { min-width: 40px; }
+
+    .proficiencies-table th:nth-child(1),
+    .proficiencies-table td:nth-child(1) { min-width: 170px; }
+    .proficiencies-table th:nth-child(2),
+    .proficiencies-table td:nth-child(2),
+    .proficiencies-table th:nth-child(3),
+    .proficiencies-table td:nth-child(3),
+    .proficiencies-table th:nth-child(4),
+    .proficiencies-table td:nth-child(4),
+    .proficiencies-table th:nth-child(5),
+    .proficiencies-table td:nth-child(5),
+    .proficiencies-table th:nth-child(7),
+    .proficiencies-table td:nth-child(7),
+    .proficiencies-table th:nth-child(8),
+    .proficiencies-table td:nth-child(8) { min-width: 90px; }
+    .proficiencies-table th:nth-child(6),
+    .proficiencies-table td:nth-child(6),
+    .proficiencies-table th:nth-child(9),
+    .proficiencies-table td:nth-child(9) { min-width: 180px; }
+    .proficiencies-table th:nth-child(10),
+    .proficiencies-table td:nth-child(10) { min-width: 40px; }
+
+    .weapon-proficiencies-table th:nth-child(1),
+    .weapon-proficiencies-table td:nth-child(1) { min-width: 150px; }
+    .weapon-proficiencies-table th:nth-child(2),
+    .weapon-proficiencies-table td:nth-child(2) { min-width: 160px; }
+    .weapon-proficiencies-table th:nth-child(3),
+    .weapon-proficiencies-table td:nth-child(3) { min-width: 82px; }
+    .weapon-proficiencies-table th:nth-child(4),
+    .weapon-proficiencies-table td:nth-child(4) { min-width: 110px; }
+    .weapon-proficiencies-table th:nth-child(5),
+    .weapon-proficiencies-table td:nth-child(5) { min-width: 160px; }
+    .weapon-proficiencies-table th:nth-child(6),
+    .weapon-proficiencies-table td:nth-child(6) { min-width: 32px; }
+
+    .inventory-table th:nth-child(1),
+    .inventory-table td:nth-child(1) { min-width: 190px; }
+    .inventory-table th:nth-child(2),
+    .inventory-table td:nth-child(2),
+    .inventory-table th:nth-child(3),
+    .inventory-table td:nth-child(3) { min-width: 120px; }
+    .inventory-table th:nth-child(4),
+    .inventory-table td:nth-child(4),
+    .inventory-table th:nth-child(5),
+    .inventory-table td:nth-child(5),
+    .inventory-table th:nth-child(6),
+    .inventory-table td:nth-child(6),
+    .inventory-table th:nth-child(7),
+    .inventory-table td:nth-child(7) { min-width: 90px; }
+    .inventory-table th:nth-child(8),
+    .inventory-table td:nth-child(8) { min-width: 180px; }
+    .inventory-table th:nth-child(9),
+    .inventory-table td:nth-child(9) { min-width: 40px; }
+
+    .weapons-table th:nth-child(1),
+    .weapons-table td:nth-child(1),
+    .weapons-table th:nth-child(3),
+    .weapons-table td:nth-child(3),
+    .weapons-table th:nth-child(4),
+    .weapons-table td:nth-child(4),
+    .weapons-table th:nth-child(5),
+    .weapons-table td:nth-child(5),
+    .weapons-table th:nth-child(6),
+    .weapons-table td:nth-child(6),
+    .weapons-table th:nth-child(10),
+    .weapons-table td:nth-child(10),
+    .weapons-table th:nth-child(11),
+    .weapons-table td:nth-child(11),
+    .weapons-table th:nth-child(12),
+    .weapons-table td:nth-child(12) { min-width: 80px; }
+    .weapons-table th:nth-child(2),
+    .weapons-table td:nth-child(2) { min-width: 180px; }
+    .weapons-table th:nth-child(7),
+    .weapons-table td:nth-child(7),
+    .weapons-table th:nth-child(8),
+    .weapons-table td:nth-child(8),
+    .weapons-table th:nth-child(9),
+    .weapons-table td:nth-child(9) { min-width: 120px; }
+    .weapons-table th:nth-child(13),
+    .weapons-table td:nth-child(13) { min-width: 40px; }
+
+    .resistance-table th:nth-child(1),
+    .resistance-table td:nth-child(1),
+    .resistance-table th:nth-child(4),
+    .resistance-table td:nth-child(4),
+    .resistance-table th:nth-child(5),
+    .resistance-table td:nth-child(5) { min-width: 90px; }
+    .resistance-table th:nth-child(2),
+    .resistance-table td:nth-child(2),
+    .resistance-table th:nth-child(3),
+    .resistance-table td:nth-child(3),
+    .resistance-table th:nth-child(6),
+    .resistance-table td:nth-child(6) { min-width: 170px; }
+    .resistance-table th:nth-child(7),
+    .resistance-table td:nth-child(7) { min-width: 40px; }
+
+    .global-modifiers-table th:nth-child(1),
+    .global-modifiers-table td:nth-child(1),
+    .global-modifiers-table th:nth-child(3),
+    .global-modifiers-table td:nth-child(3) { min-width: 90px; }
+    .global-modifiers-table th:nth-child(2),
+    .global-modifiers-table td:nth-child(2),
+    .global-modifiers-table th:nth-child(4),
+    .global-modifiers-table td:nth-child(4),
+    .global-modifiers-table th:nth-child(5),
+    .global-modifiers-table td:nth-child(5),
+    .global-modifiers-table th:nth-child(6),
+    .global-modifiers-table td:nth-child(6),
+    .global-modifiers-table th:nth-child(7),
+    .global-modifiers-table td:nth-child(7) { min-width: 165px; }
+    .global-modifiers-table th:nth-child(8),
+    .global-modifiers-table td:nth-child(8) { min-width: 40px; }
+
+    .ac-items-table th:nth-child(1),
+    .ac-items-table td:nth-child(1),
+    .ac-items-table th:nth-child(6),
+    .ac-items-table td:nth-child(6) { min-width: 44px; }
+    .ac-items-table th:nth-child(2),
+    .ac-items-table td:nth-child(2) { min-width: 150px; }
+    .ac-items-table th:nth-child(3),
+    .ac-items-table td:nth-child(3),
+    .ac-items-table th:nth-child(4),
+    .ac-items-table td:nth-child(4),
+    .ac-items-table th:nth-child(5),
+    .ac-items-table td:nth-child(5) { min-width: 110px; }
+
+    .spell-slots-table th,
+    .spell-slots-table td,
+    .reference-table th,
+    .reference-table td {
+        min-width: 96px;
+    }
+
+    .toolbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: block;
+        min-height: 52px;
+        padding: 10px 12px;
+    }
+
+    .toolbar > div:first-child {
+        display: block;
+        padding-right: 104px;
+    }
+
+    #mobileMenuBtn,
+    .toolbar .toolbar-pin {
+        position: absolute;
+        top: 10px;
+        z-index: 102;
+        margin: 0;
+    }
+
+    #mobileMenuBtn {
+        right: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    .toolbar .toolbar-pin {
+        right: 8px;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .toolbar .actions {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 10px 12px;
+        background: #29231d;
+        border-top: 1px solid #6e6256;
+        box-shadow: 0 8px 18px #0006;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+    }
+
+    .toolbar.mobile-menu-open .actions {
+        display: flex;
+    }
+
+    .toolbar .actions button,
+    .toolbar .actions .button {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+@media (max-width: 520px) {
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 950px) {
+    .character-tracker-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .movement-base-field {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .movement-base-field input {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .movement-base-field .movement-tooltip {
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .movement-base-field .movement-tooltip .tooltip-table {
+        table-layout: fixed;
+        width: 100%;
+    }
+}

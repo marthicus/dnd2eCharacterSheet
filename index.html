@@ -4,11 +4,14 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Local AD&D 2e Character Sheet</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="mobile-overrides.css?v=dragon-shadow-1">
   <style>.toolbar{position:fixed;top:0;left:0;right:0;z-index:100}.toolbar.toolbar-nav-collapsed{left:auto;right:0;width:52px;padding:12px;background:transparent;box-shadow:none}</style>
 </head>
 <body>
+<div class="dragon-shadow-flight" aria-hidden="true"></div>
 <header class="toolbar">
   <div><strong>Local AD&D 2e Sheet</strong><span class="badge">offline</span></div>
+  <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">&#9776;</button>
   <div class="actions">
     <button id="expandAllBtn">Expand all</button><button id="collapseAllBtn">Minimize all</button><button id="topBtn">Go to top</button><button id="newBtn">New</button><button id="saveBtn" class="primary">Save JSON</button>
     <label class="button">Load JSON<input id="loadInput" type="file" accept="application/json,.json" hidden></label>

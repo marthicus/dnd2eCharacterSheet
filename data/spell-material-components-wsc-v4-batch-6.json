@@ -1,0 +1,2138 @@
+[
+  {
+    "id": "squaring-the-circle",
+    "sourceRecordId": "wsc-v4-squaring-the-circle",
+    "materialComponents": "The material component is a small pendant of any precious metal with a circle fashioned inside a square.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 858,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "staffspell",
+    "sourceRecordId": "wsc-v4-staffspell",
+    "materialComponents": "The material component is a small wooden rod 18 inches long, cut by the caster from a stout oak, and is consumed by the spell.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 943,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "stairway",
+    "sourceRecordId": "wsc-v4-stairway",
+    "materialComponents": "The material components are a quartz crystal, powdered silver, and powdered talc.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 1003,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "starharp",
+    "sourceRecordId": "wsc-v4-starharp",
+    "materialComponents": "The material components are a tear from the caster and a tiny carved harp of wood, bone, or ivory.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 1038,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "static-field",
+    "sourceRecordId": "wsc-v4-static-field",
+    "materialComponents": "The material component is a perfectly formed glass globe, 2 to 3 inches in diameter, containing a chip from the tooth of a blue dragon.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 1213,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "statue",
+    "sourceRecordId": "wsc-v4-statue",
+    "materialComponents": "The material components of this spell are lime, sand, and a drop of water stirred by an iron bar, such as a nail or spike.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 1292,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "statue-wu-jen",
+    "sourceRecordId": "wsc-v4-statue-wu-jen",
+    "materialComponents": "The material components are mortar, sand, and lime, mixed with water and stirred with a bar of iron.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 1353,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "stealth",
+    "sourceRecordId": "wsc-v4-stealth",
+    "materialComponents": "The material component is a small piece of soft leather.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 1589,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "steam-blast",
+    "sourceRecordId": "wsc-v4-steam-blast",
+    "materialComponents": "The material components of this spell are two tea leaves and a pinch of wet, powdered sulphur or a drop of mist dragon spittle.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 1702,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "steam-breath",
+    "sourceRecordId": "wsc-v4-steam-breath",
+    "materialComponents": "The material component for this spell is a glowing piece of charcoal doused with water.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 1763,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "stench-of-death",
+    "sourceRecordId": "wsc-v4-stench-of-death",
+    "materialComponents": "The material component of this spell is a rotted body organ.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 1875,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "still-water",
+    "sourceRecordId": "wsc-v4-still-water",
+    "materialComponents": "The material component for this spell is a tiny flask of whale oil.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 1916,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "stinking-cloud",
+    "sourceRecordId": "wsc-v4-stinking-cloud",
+    "materialComponents": "The material component of the spell is a rotten egg or several skunk cabbage leaves.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 1989,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "stone-drill",
+    "sourceRecordId": "wsc-v4-stone-drill",
+    "materialComponents": "The material components are a twisted bar of iron or steel and 500 gp worth of diamond chips.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 2063,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "stone-hull",
+    "sourceRecordId": "wsc-v4-stone-hull",
+    "materialComponents": "The material component of this spell is a bit of pumice (a volcanic rock light enough to float on water).",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 2140,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "stone-shape",
+    "sourceRecordId": "wsc-v4-stone-shape",
+    "materialComponents": "The material component of this spell is soft clay that must be worked into roughly the desired shape of the stone object and then touched to the stone when the spell is uttered.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 2189,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "stone-to-flesh",
+    "sourceRecordId": "wsc-v4-stone-to-flesh",
+    "materialComponents": "The material components are a pinch of earth and a drop of blood.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 2286,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "stoneiron",
+    "sourceRecordId": "wsc-v4-stoneiron",
+    "materialComponents": "The material component is a small chunk of stone, of the same type as the weapon to be enchanted.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 2394,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "stoneskin",
+    "sourceRecordId": "wsc-v4-stoneskin",
+    "materialComponents": "The material components of the spell are granite and diamond dust sprinkled on the recipient's skin.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 2437,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "storm",
+    "sourceRecordId": "wsc-v4-storm",
+    "materialComponents": "The material component of this spell is a used (previously stricken) lightning rod, which the caster hurls at the sky to cause the clouds to gather.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 2500,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "storms-spell-thrust",
+    "sourceRecordId": "wsc-v4-storms-spell-thrust",
+    "materialComponents": "The material component is a small, curved piece of polished metal or glass.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 2633,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "storms-swordfire",
+    "sourceRecordId": "wsc-v4-storms-swordfire",
+    "materialComponents": "The material components are a lodestone or magnetized piece of metal and a lump of saltpeter as large as the caster's mouth.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 2688,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "strahds-malefic-meld",
+    "sourceRecordId": "wsc-v4-strahds-malefic-meld",
+    "materialComponents": "The material component for this spell is a pinch powdered doppleganger bone.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 2876,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "strength",
+    "sourceRecordId": "wsc-v4-strength",
+    "materialComponents": "The material component of this spell is a few hairs, or a pinch of dung, from a particularly strong animal\u2014ape, bear, ox, etc.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 3010,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "suggestion",
+    "sourceRecordId": "wsc-v4-suggestion",
+    "materialComponents": "The material components of this spell are a snake's tongue and either a bit of honeycomb or a drop of sweet oil.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 3263,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-cats",
+    "sourceRecordId": "wsc-v4-summon-cats",
+    "materialComponents": "The material component is a cat\u2019s whisker, freely given.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 3320,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-cosmic-storm",
+    "sourceRecordId": "wsc-v4-summon-cosmic-storm",
+    "materialComponents": "The material components for the spell are a piece of lodestone and a piece of mithral, both of which are consumed in the casting.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 3371,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-equine-beings",
+    "sourceRecordId": "wsc-v4-summon-equine-beings",
+    "materialComponents": "The material component is a small cube of sugar.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 3586,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-fiend",
+    "sourceRecordId": "wsc-v4-summon-fiend",
+    "materialComponents": "The material component for this spell is a chip of stone or pinch of earth from the home plane of the creature to be called.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 3757,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-fire-dragons",
+    "sourceRecordId": "wsc-v4-summon-fire-dragons",
+    "materialComponents": "The material component is a strip of paper soaked with saltpeter, coal oil, and sulphur that catches fire as the spell is cast.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 3858,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-least-yugoloth",
+    "sourceRecordId": "wsc-v4-summon-least-yugoloth",
+    "materialComponents": "The material component is a ruby worth at least 500 gp, which is destroyed in the casting.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 3907,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-lycanthrope",
+    "sourceRecordId": "wsc-v4-summon-lycanthrope",
+    "materialComponents": "The material components are a drop of blood from any animal, a human hair, and a moonstone worth at least 150 gp.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 3960,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-shadow",
+    "sourceRecordId": "wsc-v4-summon-shadow",
+    "materialComponents": "The material component for this spell is a bit of smoky quartz.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 4155,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-spider-drow",
+    "sourceRecordId": "wsc-v4-summon-spider-drow",
+    "materialComponents": "The material components of this spell are a bag (of any size), a small candle, taper, or lamp (not necessarily lit), and a spider leg or entire spider corpse.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 4197,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-swarm",
+    "sourceRecordId": "wsc-v4-summon-swarm",
+    "materialComponents": "The material component is a square of red cloth.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 4380,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-undead-red-wizard",
+    "sourceRecordId": "wsc-v4-summon-undead-red-wizard",
+    "materialComponents": "The material component is bone dust, which is scattered to the wind during the casting.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 4446,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-wind",
+    "sourceRecordId": "wsc-v4-summon-wind",
+    "materialComponents": "The material component is a flask of air captured and sealed in a bottle on the Elemental Plane of Air.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 4489,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "summon-wind-dragons",
+    "sourceRecordId": "wsc-v4-summon-wind-dragons",
+    "materialComponents": "The material component of this spell is a cup of any sort.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 4542,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "sunbolt-elf",
+    "sourceRecordId": "wsc-v4-sunbolt-elf",
+    "materialComponents": "The material component is a small sunstone, worth at least 25 gp.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 4718,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "sunburst",
+    "sourceRecordId": "wsc-v4-sunburst",
+    "materialComponents": "The material component is a sunflower seed.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 4755,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "sundazzle",
+    "sourceRecordId": "wsc-v4-sundazzle",
+    "materialComponents": "The material component of this spell is a small glob of sweet gum, which is destroyed in the process of casting.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 4846,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "superheroism-elf",
+    "sourceRecordId": "wsc-v4-superheroism-elf",
+    "materialComponents": "The material component is a leaf from a treant.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 5346,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "superior-magnetism",
+    "sourceRecordId": "wsc-v4-superior-magnetism",
+    "materialComponents": "The material component for this spell is a small bar magnet, bent into a U-shape.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 5405,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "suppress-lycanthropy",
+    "sourceRecordId": "wsc-v4-suppress-lycanthropy",
+    "materialComponents": "The material component of this spell is a sprig of wolfsbane.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 5627,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "suspension",
+    "sourceRecordId": "wsc-v4-suspension",
+    "materialComponents": "The material component is a small leather loop suspended from a bent golden wire.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 5770,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "sword-of-darkness",
+    "sourceRecordId": "wsc-v4-sword-of-darkness",
+    "materialComponents": "The material component for this spell is a katana or long sword worth at least 20 gp, which is shattered against a stone.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 5933,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "sword-of-deception",
+    "sourceRecordId": "wsc-v4-sword-of-deception",
+    "materialComponents": "The material components for this spell are a miniature replica of a sword and a set of loaded dice.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 5978,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "swordshun",
+    "sourceRecordId": "wsc-v4-swordshun",
+    "materialComponents": "The material component of this spell is the weapon, which dissipates in smoke when the spell is done.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 6039,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "sylunes-streaking-meteor",
+    "sourceRecordId": "wsc-v4-sylunes-streaking-meteor",
+    "materialComponents": "The material components of this spell are an insect wing or bird feather, a pinch of ash from any fire, and a pinch of sulphur or saltpeter.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 6226,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "sylunes-viper",
+    "sourceRecordId": "wsc-v4-sylunes-viper",
+    "materialComponents": "The material components of this spell are a scale and a tooth from any snake (not necessarily a fang).",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 6302,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "laughter",
+    "sourceRecordId": "wsc-v4-laughter",
+    "materialComponents": "The material components are a small feather and minute tarts.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 6775,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "taunt",
+    "sourceRecordId": "wsc-v4-taunt",
+    "materialComponents": "The material component is a slug, which is hurled at the creatures to be taunted.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 7035,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "temporal-freedom",
+    "sourceRecordId": "wsc-v4-temporal-freedom",
+    "materialComponents": "The material component is a pinch of bone dust.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 7680,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "temporal-wall",
+    "sourceRecordId": "wsc-v4-temporal-wall",
+    "materialComponents": "The material component is a strand of webbing from a vortex spider\u2019s web.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 7873,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-brawl",
+    "sourceRecordId": "wsc-v4-tensers-brawl",
+    "materialComponents": "The material component for the spell is a bit of chest fur from a bear or gorilla.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8059,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-deadly-strike",
+    "sourceRecordId": "wsc-v4-tensers-deadly-strike",
+    "materialComponents": "The material component is a full set of tiger claws.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8094,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-destructive-resonance",
+    "sourceRecordId": "wsc-v4-tensers-destructive-resonance",
+    "materialComponents": "The material component for this spell is a tiny orb of finely crafted gold with a small removable ring surrounding it that must be taken off as the spell is cast.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8126,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-eye-of-the-eagle",
+    "sourceRecordId": "wsc-v4-tensers-eye-of-the-eagle",
+    "materialComponents": "The material components are a few feathers from the head of an eagle and ground carrot.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8217,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-eye-of-the-tiger",
+    "sourceRecordId": "wsc-v4-tensers-eye-of-the-tiger",
+    "materialComponents": "The material components are \u00e0 tiger's whisker and ground carrot.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8241,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-floating-disc",
+    "sourceRecordId": "wsc-v4-tensers-floating-disc",
+    "materialComponents": "The material component of the spell is a drop of mercury.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8340,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-fortunes-of-war",
+    "sourceRecordId": "wsc-v4-tensers-fortunes-of-war",
+    "materialComponents": "The material component is a valuable sacrifice made to the fighter's patron deity, worth at least 5,000 gp in goods desirable to the deity.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8386,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-giant-strength",
+    "sourceRecordId": "wsc-v4-tensers-giant-strength",
+    "materialComponents": "The material component is a bit of hair from a giant or a titan.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8439,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-hunting-hawk",
+    "sourceRecordId": "wsc-v4-tensers-hunting-hawk",
+    "materialComponents": "The material component is a wing feather from a hawk.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8498,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-primal-fury",
+    "sourceRecordId": "wsc-v4-tensers-primal-fury",
+    "materialComponents": "The material component is a bit of fur from a wolverine or a grizzly bear.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8580,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-running-warrior",
+    "sourceRecordId": "wsc-v4-tensers-running-warrior",
+    "materialComponents": "The material component is a bit of fur from a live wolf.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8625,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-staff-of-smiting",
+    "sourceRecordId": "wsc-v4-tensers-staff-of-smiting",
+    "materialComponents": "The material component is a small iron bar.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8655,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tensers-steady-aim",
+    "sourceRecordId": "wsc-v4-tensers-steady-aim",
+    "materialComponents": "The material component is a small coiled spring.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8686,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tentacles",
+    "sourceRecordId": "wsc-v4-tentacles",
+    "materialComponents": "The material component for this spell is a dried tentacle from a small octopus.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8781,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "there-not-there",
+    "sourceRecordId": "wsc-v4-there-not-there",
+    "materialComponents": "The material component is a small piece of cat fur sealed inside a small box.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8838,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "thornbush-arrows",
+    "sourceRecordId": "wsc-v4-thornbush-arrows",
+    "materialComponents": "The material components are whole thorns, sliced from a rose bush and kept with petals from the same plant's blossoms, and a feather from a phoenix.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 8974,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "throbbing-bones",
+    "sourceRecordId": "wsc-v4-throbbing-bones",
+    "materialComponents": "The material components for this spell are both pieces of a small bone that has been snapped in half.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9064,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "thultauns-thrust",
+    "sourceRecordId": "wsc-v4-thultauns-thrust",
+    "materialComponents": "The material component of this spell is a small carved fist or hand, which must be made from an organic substance such as bone, ivory, or wood.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9101,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "thundaerls-universal-taster",
+    "sourceRecordId": "wsc-v4-thundaerls-universal-taster",
+    "materialComponents": "The material components of this spell are a berry from any poisonous plant (for example, deadly nightshade) and a piece of snakeskin.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9199,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "thunder-staff",
+    "sourceRecordId": "wsc-v4-thunder-staff",
+    "materialComponents": "The material component is a vial of rain gathered during a thunderstorm, focused by the wizard's staff, which must be made of oak.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9236,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "thunderball-old-empire",
+    "sourceRecordId": "wsc-v4-thunderball-old-empire",
+    "materialComponents": "The material component for this spell is an amber rod.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9307,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "thunderlance",
+    "sourceRecordId": "wsc-v4-thunderlance",
+    "materialComponents": "The material component of this spell is a small, silver spear.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9343,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "thunguuls-preservation",
+    "sourceRecordId": "wsc-v4-thunguuls-preservation",
+    "materialComponents": "The material component is a special candle that costs 1,000 gp to prepare.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9433,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tidal-wave",
+    "sourceRecordId": "wsc-v4-tidal-wave",
+    "materialComponents": "The material component of this spell is a wooden plank, struck forcibly across the surface of the water in the direction the tidal wave is to form.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9504,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "time-loop-old-empire",
+    "sourceRecordId": "wsc-v4-time-loop-old-empire",
+    "materialComponents": "The material component for this spell is a powder of crushed diamond, ruby, emerald, and sapphire dust, with each crushed stone being of at least 100 gp value.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9581,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "timed-stasis",
+    "sourceRecordId": "wsc-v4-timed-stasis",
+    "materialComponents": "The material component is a small platinum spring worth at least 500 gp.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9716,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "timereaver",
+    "sourceRecordId": "wsc-v4-timereaver",
+    "materialComponents": "The material component is a ruby worth 10,000 gp or more, which must be crushed into dust.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9866,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "timeslip",
+    "sourceRecordId": "wsc-v4-timeslip",
+    "materialComponents": "The material components for this spell are a diaphanous square of fine silk and a small piece of basalt.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9916,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tipple",
+    "sourceRecordId": "wsc-v4-tipple",
+    "materialComponents": "The material component is a hollow reed, which is destroyed in the casting.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 9981,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tobians-ultimate-circle",
+    "sourceRecordId": "wsc-v4-tobians-ultimate-circle",
+    "materialComponents": "The material component is the 10,000 gp of gold dust used to form the initial circle.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 10022,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "toothed-tentacle-phaerimm",
+    "sourceRecordId": "wsc-v4-toothed-tentacle-phaerimm",
+    "materialComponents": "The material components are a hair and three teeth (they need not all be from the same corpse or species).",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 10173,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "torment",
+    "sourceRecordId": "wsc-v4-torment",
+    "materialComponents": "The material component of the spell is the aforementioned \"specially prepared writing\" (in the form of a scroll).",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 10242,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "traceless-travel",
+    "sourceRecordId": "wsc-v4-traceless-travel",
+    "materialComponents": "The material components of this spell are a handful of sand and the caster's teardrop.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 10388,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "transmute-rock-to-mud",
+    "sourceRecordId": "wsc-v4-transmute-rock-to-mud",
+    "materialComponents": "The material components for the spell are clay and water (or sand, lime, and water for the reverse).",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 10717,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "transmute-water-to-dust",
+    "sourceRecordId": "wsc-v4-transmute-water-to-dust",
+    "materialComponents": "The material components of the spell are diamond dust (at least 500 gp value) and a bit of seashell.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 10899,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "triad-gem",
+    "sourceRecordId": "wsc-v4-triad-gem",
+    "materialComponents": "The material component is a ruby of any size worth at least 500 gp, upon which the caster has cast either an enchant an item or an eternal flame spell.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 11223,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "trick-old-empire",
+    "sourceRecordId": "wsc-v4-trick-old-empire",
+    "materialComponents": "The material component for this spell is a ball of wax.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 11298,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "troll-repellent",
+    "sourceRecordId": "wsc-v4-troll-repellent",
+    "materialComponents": "The material components are a bit of ragweed, some troll dung, and an open flame.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 11353,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "trollish-fortitude",
+    "sourceRecordId": "wsc-v4-trollish-fortitude",
+    "materialComponents": "The material component for this spell is a shred of dried flesh from a troll\u2019s heart, pulverized into dust, which is then sprinkled on the caster.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 11389,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "true-bearing",
+    "sourceRecordId": "wsc-v4-true-bearing",
+    "materialComponents": "The material component of this spell is a pinch of iron filings, swallowed by the caster.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 11459,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "true-dream",
+    "sourceRecordId": "wsc-v4-true-dream",
+    "materialComponents": "The material components are a pinch of ground dreamwillow bark and a small amount of silver filings (1 gp value).",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 11513,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "true-nightmare",
+    "sourceRecordId": "wsc-v4-true-nightmare",
+    "materialComponents": "The material components of this spell are a pinch of ground dreamwillow bark and a small \"a i 956 Tsunami amount of iron filings (1 gp value).",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 11732,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tsunami",
+    "sourceRecordId": "wsc-v4-tsunami",
+    "materialComponents": "The material component for this spell is the scale of a dragon turtle or tun mi lung and water taken from a water elemental.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 11839,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tulruns-tracer",
+    "sourceRecordId": "wsc-v4-tulruns-tracer",
+    "materialComponents": "The material component is a pinch of phosphorus or a glowing life form such as a fungus or glowworms over which the caster verbally describes the creature to be traced.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 11891,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tumble-old-empire",
+    "sourceRecordId": "wsc-v4-tumble-old-empire",
+    "materialComponents": "The material component for this spell is a pinch of grease, which is consumed in the casting.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 11959,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "turn-undead-savant",
+    "sourceRecordId": "wsc-v4-turn-undead-savant",
+    "materialComponents": "The material component is a cleric's holy symbol.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 12122,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "turtle-soup",
+    "sourceRecordId": "wsc-v4-turtle-soup",
+    "materialComponents": "The material components are three drops of water and a piece of turtle shell or skin of any size.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 12203,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tymessulls-cerulean-traverse",
+    "sourceRecordId": "wsc-v4-tymessulls-cerulean-traverse",
+    "materialComponents": "The material component is at least 1,000 gp of powdered emerald for each subject, to be sprinkled in a circle enclosing the subjects.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 12267,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tymessulls-planar-pacifier",
+    "sourceRecordId": "wsc-v4-tymessulls-planar-pacifier",
+    "materialComponents": "The material components of this spell are a drop of the caster's blood and 500 gp of powdered diamond for each plus of the items to be protected.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 12344,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "tyranteyes",
+    "sourceRecordId": "wsc-v4-tyranteyes",
+    "materialComponents": "The material component of this spell is part of a Notes: Very rare spell from the FORGOTTEN REALMS setting; virtually unknown elsewhere.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 12478,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "ultravision",
+    "sourceRecordId": "wsc-v4-ultravision",
+    "materialComponents": "The material component for this spell is a black agate worth at least 50 gold pieces.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 12540,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "unbinding",
+    "sourceRecordId": "wsc-v4-unbinding",
+    "materialComponents": "The material components are a lodestone and a pinch of saltpeter.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 12583,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "unburn",
+    "sourceRecordId": "wsc-v4-unburn",
+    "materialComponents": "The material component for this spell is a smal!",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 12662,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "undead-aides",
+    "sourceRecordId": "wsc-v4-undead-aides",
+    "materialComponents": "The material components are human bone fragments and a dragon's brain.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 12749,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "undead-control",
+    "sourceRecordId": "wsc-v4-undead-control",
+    "materialComponents": "The material component is an evil priest\u2019s unholy symbol or some other properly cursed talisman forcefully presented to the affected monsters.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 12800,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "undead-mount",
+    "sourceRecordId": "wsc-v4-undead-mount",
+    "materialComponents": "The material components of this spell are a drop of water, a human hair, and a pinch of powdered hoof.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13054,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "undead-summoning-i",
+    "sourceRecordId": "wsc-v4-undead-summoning-i",
+    "materialComponents": "The material component is a bit of bone taken from a ghoul, wight, or ghast.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13190,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "undead-summoning-ii",
+    "sourceRecordId": "wsc-v4-undead-summoning-ii",
+    "materialComponents": "The material component is a bit of bone taken from a wight, ghast, or mummy.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13224,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "undead-summoning-iii",
+    "sourceRecordId": "wsc-v4-undead-summoning-iii",
+    "materialComponents": "The material component is a bit of bone taken from a wight, ghast, or mummy.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13262,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "undead-summoning-iv",
+    "sourceRecordId": "wsc-v4-undead-summoning-iv",
+    "materialComponents": "The material component is a bit of bone taken from a mummy, vampire, or lich.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13295,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "undead-summoning-v",
+    "sourceRecordId": "wsc-v4-undead-summoning-v",
+    "materialComponents": "The material component is a bit of bone taken from a mummy, vampire, or lich.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13340,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "undead-summoning-vi",
+    "sourceRecordId": "wsc-v4-undead-summoning-vi",
+    "materialComponents": "The material component is a bit of bone taken from a vampire or lich.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13374,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "undead-summoning-vii",
+    "sourceRecordId": "wsc-v4-undead-summoning-vii",
+    "materialComponents": "The material component is a bit of bone taken from a lich.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13410,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "unlife-red-wizard",
+    "sourceRecordId": "wsc-v4-unlife-red-wizard",
+    "materialComponents": "The material component of this spell is dirt from a freshly dug grave.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13584,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "unluck",
+    "sourceRecordId": "wsc-v4-unluck",
+    "materialComponents": "The material component is a piece of a broken mirror Notes: Restricted to wild mages, common.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13637,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "unmask",
+    "sourceRecordId": "wsc-v4-unmask",
+    "materialComponents": "The material component of the spell is a black piece of cloth with two eyeholes cut in it.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13677,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "unpickable-lock",
+    "sourceRecordId": "wsc-v4-unpickable-lock",
+    "materialComponents": "The material component of this spell is a sliver of bone.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13717,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "unseen-servant",
+    "sourceRecordId": "wsc-v4-unseen-servant",
+    "materialComponents": "The material components of the spell are a piece of string and a bit of wood.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 13767,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "vaporize-witch",
+    "sourceRecordId": "wsc-v4-vaporize-witch",
+    "materialComponents": "The material components for this spell are a bit of ash and spittle.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 14220,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "venom-bolt-drow",
+    "sourceRecordId": "wsc-v4-venom-bolt-drow",
+    "materialComponents": "The material components of this spell are at least six drops of any type of poison, and any source of spark or flame (extinguished in the spellcasting).",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 14410,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "ventriloquism",
+    "sourceRecordId": "wsc-v4-ventriloquism",
+    "materialComponents": "The material component of this spell is a parchment rolled up into a small cone.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 14488,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "vile-venom",
+    "sourceRecordId": "wsc-v4-vile-venom",
+    "materialComponents": "The material component is a small vial of serpent venom.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 14573,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "virus-charm",
+    "sourceRecordId": "wsc-v4-virus-charm",
+    "materialComponents": "The material component is a thin web of finely spun copper wire, worth about 100 gp.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 14744,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "vision",
+    "sourceRecordId": "wsc-v4-vision",
+    "materialComponents": "The material component of the spell is the sacrifice of something valued by the spellcaster or by the power supplicated.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 14819,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "vision-stone",
+    "sourceRecordId": "wsc-v4-vision-stone",
+    "materialComponents": "The material components are the item to be enchanted, and an eyelash and a tooth from any creature.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 14895,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "vitriolic-sphere",
+    "sourceRecordId": "wsc-v4-vitriolic-sphere",
+    "materialComponents": "The material component for this spell is a drop of giant slug bile.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 14973,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "vocalize",
+    "sourceRecordId": "wsc-v4-vocalize",
+    "materialComponents": "The material component of this spell is a bell with no clapper.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15030,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "volcanic-circle-witch",
+    "sourceRecordId": "wsc-v4-volcanic-circle-witch",
+    "materialComponents": "The material component is a shard of obsidian.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15072,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "von-gasiks-refusal",
+    "sourceRecordId": "wsc-v4-von-gasiks-refusal",
+    "materialComponents": "The material component is a pinch of dust from any wizard's tomb.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15139,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "vortex",
+    "sourceRecordId": "wsc-v4-vortex",
+    "materialComponents": "The material components are a silk streamer and a handful of straw.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15199,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wail-of-the-banshee",
+    "sourceRecordId": "wsc-v4-wail-of-the-banshee",
+    "materialComponents": "The material component is a lock of hair from an evil female elf.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15271,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wakefulness",
+    "sourceRecordId": "wsc-v4-wakefulness",
+    "materialComponents": "The material component for this spell is a tiny glass bell.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15308,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wall-against-noise",
+    "sourceRecordId": "wsc-v4-wall-against-noise",
+    "materialComponents": "The material component of this spell is a white feather, blown into the air.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15370,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wall-of-fog",
+    "sourceRecordId": "wsc-v4-wall-of-fog",
+    "materialComponents": "The material component is a pinch of split dried peas.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15599,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wall-of-force",
+    "sourceRecordId": "wsc-v4-wall-of-force",
+    "materialComponents": "The material component for this spell is a pinch of powdered diamond worth 5,000 gp.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15647,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wall-of-ice",
+    "sourceRecordId": "wsc-v4-wall-of-ice",
+    "materialComponents": "The material component of this spell is a small piece of quartz or similar rock crystal.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15749,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wall-of-iron",
+    "sourceRecordId": "wsc-v4-wall-of-iron",
+    "materialComponents": "The material component of this spell is a small piece of sheet iron.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15832,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wall-of-paper",
+    "sourceRecordId": "wsc-v4-wall-of-paper",
+    "materialComponents": "The material component is a small square of origami paper, folded to create a sliding joint.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15885,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wall-of-sound-bard",
+    "sourceRecordId": "wsc-v4-wall-of-sound-bard",
+    "materialComponents": "The material component is a piece of slate and a finger nail clipping.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 15992,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wall-of-stone",
+    "sourceRecordId": "wsc-v4-wall-of-stone",
+    "materialComponents": "The material component is a small block of granite.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 16050,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wall-of-water",
+    "sourceRecordId": "wsc-v4-wall-of-water",
+    "materialComponents": "The material component is a vial full of blessed spring water.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 16104,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wandweird",
+    "sourceRecordId": "wsc-v4-wandweird",
+    "materialComponents": "The material component of this spell is a piece of wood, roughly the size and shape of a wand, upon which any spell has been cast within a day of the casting of the wandweird.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 16280,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "ward-old-empire",
+    "sourceRecordId": "wsc-v4-ward-old-empire",
+    "materialComponents": "The material components are the feathers of a vulture.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 16354,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wardaway",
+    "sourceRecordId": "wsc-v4-wardaway",
+    "materialComponents": "The material component of this spell is a small human hand sculpted of clear rock crystal or moonstone.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 16495,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wardmist",
+    "sourceRecordId": "wsc-v4-wardmist",
+    "materialComponents": "The material components are an amount of silver larger in total volume than the caster's fist, phase spider silk, and three powdered pieces of amber of no less than 500 gp value each.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 16553,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wards-of-defense-witch",
+    "sourceRecordId": "wsc-v4-wards-of-defense-witch",
+    "materialComponents": "The material component is a piece of tortoise shell.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 16777,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "warmth-pluma",
+    "sourceRecordId": "wsc-v4-warmth-pluma",
+    "materialComponents": "The material component for the spell is a tiny fragment of goose down.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 16817,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "warp-stone",
+    "sourceRecordId": "wsc-v4-warp-stone",
+    "materialComponents": "The material component for this spell is a piece of clay, twisted in the caster's hands.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 16892,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "warp-wood",
+    "sourceRecordId": "wsc-v4-warp-wood",
+    "materialComponents": "The material component of this spell is a green twig, which is bent as the spell is cast.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 16935,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wasting",
+    "sourceRecordId": "wsc-v4-wasting",
+    "materialComponents": "The material component is earth from the grave of a ghost.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 16967,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "watchware",
+    "sourceRecordId": "wsc-v4-watchware",
+    "materialComponents": "The material components of this spell are a spider web, a small brass or silver bell, and a shard of glass.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 17079,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "watchware-30-radius",
+    "sourceRecordId": "wsc-v4-watchware-30-radius",
+    "materialComponents": "The material components of this spell are a spider web, a small brass or silver bell, and powdered glass, which is sprinkled in a circle about the caster.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 17132,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "water-bomb",
+    "sourceRecordId": "wsc-v4-water-bomb",
+    "materialComponents": "The material component is a small, glass bead.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 17237,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "water-breathing",
+    "sourceRecordId": "wsc-v4-water-breathing",
+    "materialComponents": "The material component of the spell is a short reed or piece of straw.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 17279,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "water-form",
+    "sourceRecordId": "wsc-v4-water-form",
+    "materialComponents": "The material component of this spell is an eyedropper, which is broken during the spellcasting.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 17317,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "water-move-pluma",
+    "sourceRecordId": "wsc-v4-water-move-pluma",
+    "materialComponents": "The material component is the foot of a duck or goose.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 17394,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "waterbane",
+    "sourceRecordId": "wsc-v4-waterbane",
+    "materialComponents": "The material components of this spell are a bit of wax and some paper.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 17561,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wave-of-death",
+    "sourceRecordId": "wsc-v4-wave-of-death",
+    "materialComponents": "The material components for this spell are a flower and a drop of poison.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 17794,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "waveform",
+    "sourceRecordId": "wsc-v4-waveform",
+    "materialComponents": "The material component is a small, carved oar decorated with aquamarines worth at least 500 gp.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 17826,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "waves-of-weariness",
+    "sourceRecordId": "wsc-v4-waves-of-weariness",
+    "materialComponents": "The material component is a small book of poetry, which is read aloud (a personal favorite is Translations from Kara-Tur Haiku by Lhaeo of Shadowdale).",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 17964,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "weakness-witch",
+    "sourceRecordId": "wsc-v4-weakness-witch",
+    "materialComponents": "The material component is a drop of lotus extract.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 18016,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "web",
+    "sourceRecordId": "wsc-v4-web",
+    "materialComponents": "The material component of this spell is a bit of spider web.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 18233,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "web-of-lightning",
+    "sourceRecordId": "wsc-v4-web-of-lightning",
+    "materialComponents": "The material components of this spell are four lodestones or a bit of fur, and a small, smooth rod of amber, crystal, or glass.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 18307,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "web-of-shadows-drow",
+    "sourceRecordId": "wsc-v4-web-of-shadows-drow",
+    "materialComponents": "material component is a piece of spider web, collected in shadow or darkness.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 18362,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "weight-concentration-witch",
+    "sourceRecordId": "wsc-v4-weight-concentration-witch",
+    "materialComponents": "The material component is a miniature set of scales.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 18439,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "weirdshield-phaerimm",
+    "sourceRecordId": "wsc-v4-weirdshield-phaerimm",
+    "materialComponents": "The material components of this spell are a drop of the caster's saliva or spittle, a miniature shield or scrap of armor plate, and an arm (either whittled of wood or formed of clay, or the actual arm of any creature, from mouse to man-size).",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 18551,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "witchs-glamor-witch",
+    "sourceRecordId": "wsc-v4-witchs-glamor-witch",
+    "materialComponents": "The material component for this spell is burning tobacco (or some other noxious, fume-producing plant).",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 20883,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "wizards-oracle",
+    "sourceRecordId": "wsc-v4-wizards-oracle",
+    "materialComponents": "The material component is a small fire sprinkled with exotic, aromatic oils worth no less than 100 gp per question to be asked.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 21288,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "year-stealing",
+    "sourceRecordId": "wsc-v4-year-stealing",
+    "materialComponents": "The material component is a pound of bone marrow from a newborn dragon.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 22335,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "youth-witch",
+    "sourceRecordId": "wsc-v4-youth-witch",
+    "materialComponents": "The material component is a green shoot of any kind.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 22460,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "zalas-amberhelm",
+    "sourceRecordId": "wsc-v4-zalas-amberhelm",
+    "materialComponents": "The material component is an amber bead worth at least 200 gp, a silver piece, and a parrot feather.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 22517,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "zalas-disruption",
+    "sourceRecordId": "wsc-v4-zalas-disruption",
+    "materialComponents": "The material component is a diamond worth no less than 5,000 gp, which is shattered in the casting of the spell.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 22664,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "zephyr",
+    "sourceRecordId": "wsc-v4-zephyr",
+    "materialComponents": "The material component for this spell is a piece of fine parchment, accordion-folded and tacked near the bottom with a pin of ivory or silver.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 22966,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  },
+  {
+    "id": "zombie-double",
+    "sourceRecordId": "wsc-v4-zombie-double",
+    "materialComponents": "The material components for this spell are a bit of wax from a black candle and a lock of hair from the caster.",
+    "source": "Wizard Spell Compendium Volume 4",
+    "sourceLocation": {
+      "ocrLine": 23076,
+      "page": null
+    },
+    "extractionMethod": "explicit-material-component-sentence",
+    "notes": []
+  }
+]

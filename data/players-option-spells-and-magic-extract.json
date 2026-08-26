@@ -1,0 +1,1964 @@
+[
+  {
+    "id": "astral-celerity",
+    "sourceRecordId": "po-sm-astral-celerity",
+    "name": "Astral Celerity",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "4",
+    "duration": "1 hr./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 21387,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "battlefate",
+    "sourceRecordId": "po-sm-battlefate",
+    "name": "Battlefate",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "20 yds.",
+    "castingTime": "4",
+    "duration": "2 rds./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 21429,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+4",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "blessed-walchfulness",
+    "sourceRecordId": "po-sm-blessed-walchfulness",
+    "name": "Blessed Walchfulness",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4",
+    "duration": "4 hrs. + 1 hr./level",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 21496,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "calculate",
+    "sourceRecordId": "po-sm-calculate",
+    "name": "Calculate",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": false,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "4",
+    "duration": "Instantaneous",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 21533,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "calm-animals",
+    "sourceRecordId": "po-sm-calm-animals",
+    "name": "Calm Animals",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "4",
+    "duration": "1 turn 1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 21594,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "Moderate audio"
+    },
+    "notes": []
+  },
+  {
+    "id": "dispel-fatigue",
+    "sourceRecordId": "po-sm-dispel-fatigue",
+    "name": "Dispel Fatigue",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "4",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 21643,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+4",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "firelight",
+    "sourceRecordId": "po-sm-firelight",
+    "name": "Firelight",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4",
+    "duration": "4 hrs. + 1 hr./2 levels",
+    "areaOfEffect": "1 object",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 21683,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+4",
+      "sensory": "Large visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "orison",
+    "sourceRecordId": "po-sm-orison",
+    "name": "Orison",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Various schools"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds.",
+    "castingTime": "4",
+    "duration": "Special",
+    "areaOfEffect": "Varies",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 21732,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "Small visual/audio"
+    },
+    "notes": []
+  },
+  {
+    "id": "protection-rom-chaos",
+    "sourceRecordId": "po-sm-protection-rom-chaos",
+    "name": "Protection [rom Chaos",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4",
+    "duration": "3 rds./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 21834,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+4",
+      "sensory": "Small visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "from-a-giant",
+    "sourceRecordId": "po-sm-from-a-giant",
+    "name": "from a giant.",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "40 yds.",
+    "castingTime": "4",
+    "duration": "Instantaneous",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Neg.",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 21928,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "d6",
+      "critical": "Medium (1",
+      "subtlety": "+3",
+      "sensory": "Moderate visual,"
+    },
+    "notes": []
+  },
+  {
+    "id": "ici-noou-mh",
+    "sourceRecordId": "po-sm-ici-noou-mh",
+    "name": "/ ICI NOOU MH",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": false,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "2 rds./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 21978,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+1",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "astral-awareness",
+    "sourceRecordId": "po-sm-astral-awareness",
+    "name": "Astral Awareness",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "5",
+    "duration": "1 hr./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22044,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "chaos-ward",
+    "sourceRecordId": "po-sm-chaos-ward",
+    "name": "Chaos Ward",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "2 rds. /level",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22085,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+4",
+      "sensory": "Small visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "cure-moderate-wounds",
+    "sourceRecordId": "po-sm-cure-moderate-wounds",
+    "name": "Cure Moderate Wounds",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22155,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "d8",
+      "critical": "Medium (1 hit)",
+      "subtlety": "+3",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "ethereal-barrier",
+    "sourceRecordId": "po-sm-ethereal-barrier",
+    "name": "Ethereal Barrier",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "120 yds.",
+    "castingTime": "1 turn",
+    "duration": "1 turn/level",
+    "areaOfEffect": "Two 10-ft.",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22197,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+6",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "iron-vigil",
+    "sourceRecordId": "po-sm-iron-vigil",
+    "name": "Iron Vigil",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 turn",
+    "duration": "1 week + 1 day/level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22259,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "45",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "resist-acid-and-corrosion",
+    "sourceRecordId": "po-sm-resist-acid-and-corrosion",
+    "name": "Resist Acid and Corrosion",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22309,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "restore-strength",
+    "sourceRecordId": "po-sm-restore-strength",
+    "name": "Restore Strength",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "5",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22344,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "soften-earth-and-stone",
+    "sourceRecordId": "po-sm-soften-earth-and-stone",
+    "name": "Soften Earth and Stone",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "5",
+    "duration": "Permanent",
+    "areaOfEffect": "10-ft. square/level",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22384,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+4",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "watery-fist",
+    "sourceRecordId": "po-sm-watery-fist",
+    "name": "Watery Fist",
+    "level": 2,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "5",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22452,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "d10",
+      "critical": "Medium (1 hit) crushing",
+      "subtlety": "+4",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "control-animal",
+    "sourceRecordId": "po-sm-control-animal",
+    "name": "Control Animal",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "60 yds. + 10 yds./level",
+    "castingTime": "6",
+    "duration": "1 round/level",
+    "areaOfEffect": "1 animal",
+    "savingThrow": "Neg.",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22540,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "Small audio/ tactile"
+    },
+    "notes": []
+  },
+  {
+    "id": "detect-spirits",
+    "sourceRecordId": "po-sm-detect-spirits",
+    "name": "Detect Spirits",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "1 turn + 1 turn/level",
+    "areaOfEffect": "10 x 60 ft. path",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22600,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+4",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "dictate",
+    "sourceRecordId": "po-sm-dictate",
+    "name": "Dictate",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "30 yds.",
+    "castingTime": "6",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Up to 6 creatures",
+    "savingThrow": "Neg.",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22641,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+2",
+      "sensory": "Small audio"
+    },
+    "notes": []
+  },
+  {
+    "id": "etherealness",
+    "sourceRecordId": "po-sm-etherealness",
+    "name": "Etherealness",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1",
+    "duration": "1 turn + 1 rd./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22706,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+2",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "fortify",
+    "sourceRecordId": "po-sm-fortify",
+    "name": "Fortify",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "1 round",
+    "duration": "Permanent",
+    "areaOfEffect": "10 ft. cube/2 levels",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22755,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, 5, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+6",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "summon-animal-spiril",
+    "sourceRecordId": "po-sm-summon-animal-spiril",
+    "name": "Summon Animal Spiril",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "6",
+    "duration": "1 round/level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22836,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "d8",
+      "critical": "Medium (1 hit)",
+      "subtlety": "+4",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "hold-poison",
+    "sourceRecordId": "po-sm-hold-poison",
+    "name": "Hold Poison",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1",
+    "duration": "1 day/level",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22915,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "repair-injury",
+    "sourceRecordId": "po-sm-repair-injury",
+    "name": "Repair Injury",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1 turn",
+    "duration": "Instantaneous",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 22970,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+5",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "unfailing-premonition",
+    "sourceRecordId": "po-sm-unfailing-premonition",
+    "name": "Unfailing Premonition",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "6",
+    "duration": "1 turn + 2 rds./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23044,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "weather-prediction",
+    "sourceRecordId": "po-sm-weather-prediction",
+    "name": "Weather Prediction",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 rd.",
+    "duration": "Instantaneous",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23097,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+5",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "wind-servant",
+    "sourceRecordId": "po-sm-wind-servant",
+    "name": "Wind Servant",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "20 yds./level",
+    "castingTime": "6",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23142,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "Moderate audio/ tactile"
+    },
+    "notes": []
+  },
+  {
+    "id": "adamantite-mace",
+    "sourceRecordId": "po-sm-adamantite-mace",
+    "name": "Adamantite Mace",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "7",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Caster’s weapon",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23205,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "d12",
+      "critical": "Medium (1 hit)",
+      "subtlety": "+5",
+      "sensory": "Small visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "dimensional-anchor",
+    "sourceRecordId": "po-sm-dimensional-anchor",
+    "name": "Dimensional Anchor",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "10 yds./level",
+    "castingTime": "1",
+    "duration": "1 turn + 1 rd./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23249,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+2",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "entrench",
+    "sourceRecordId": "po-sm-entrench",
+    "name": "Entrench",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration",
+      "Invocation/Evocation"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "3 rds.",
+    "duration": "Permanent",
+    "areaOfEffect": "10-ft. cube/2 levels",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23286,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, $5, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+3",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "omniscient-eye",
+    "sourceRecordId": "po-sm-omniscient-eye",
+    "name": "Omniscient Eye",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Divination"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "1 turn + 1 rd./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23369,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+5",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "decilalion",
+    "sourceRecordId": "po-sm-decilalion",
+    "name": "Decilalion",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration",
+      "Invocation/Evocation"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "1 rd./level",
+    "areaOfEffect": "60-ft. radius",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23420,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+5",
+      "sensory": "Moderate audio"
+    },
+    "notes": []
+  },
+  {
+    "id": "suspended-animation",
+    "sourceRecordId": "po-sm-suspended-animation",
+    "name": "Suspended Animation",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Necromancy"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "4",
+    "duration": "Special",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23466,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, 5, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+8",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "windborne",
+    "sourceRecordId": "po-sm-windborne",
+    "name": "Windborne",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "Special",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23611,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+5",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "dimensional-translocation",
+    "sourceRecordId": "po-sm-dimensional-translocation",
+    "name": "Dimensional Translocation",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": false,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "3",
+    "duration": "1 rd./level",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Special",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23767,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+1",
+      "sensory": "Small visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "impregnable-mind",
+    "sourceRecordId": "po-sm-impregnable-mind",
+    "name": "Impregnable Mind",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "castingTime": "1",
+    "duration": "1 turn + 1 rd./level",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23840,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+2",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "othertime",
+    "sourceRecordId": "po-sm-othertime",
+    "name": "Othertime",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Alteration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "7",
+    "duration": "Special",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23880,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+5",
+      "sensory": "Small visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "produce-ice",
+    "sourceRecordId": "po-sm-produce-ice",
+    "name": "Produce Ice",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds.",
+    "castingTime": "8",
+    "duration": "2 rds./level",
+    "areaOfEffect": "Cube 1 ft./level",
+    "savingThrow": "Special",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 23973,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+5",
+      "sensory": "Moderate visual,"
+    },
+    "notes": []
+  },
+  {
+    "id": "righteous-wrath-of-the-faithful",
+    "sourceRecordId": "po-sm-righteous-wrath-of-the-faithful",
+    "name": "Righteous Wrath of the Faithful",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "8",
+    "duration": "1 rd./level",
+    "areaOfEffect": "30-ft. radius",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 24034,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+5",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "command-monster",
+    "sourceRecordId": "po-sm-command-monster",
+    "name": "Command Monster",
+    "level": 6,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Enchantment/Charm"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "materialComponents": null,
+    "range": "60 yds,",
+    "castingTime": "1",
+    "duration": "1 rd./2 levels",
+    "areaOfEffect": "1 creature",
+    "savingThrow": "Special",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 24094,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+1",
+      "sensory": "Small audio"
+    },
+    "notes": []
+  },
+  {
+    "id": "entropy-shield",
+    "sourceRecordId": "po-sm-entropy-shield",
+    "name": "Entropy Shield",
+    "level": 6,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "9",
+    "duration": "1 rd./level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 24148,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, 5, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+5",
+      "sensory": "Moderate visual /tactile"
+    },
+    "notes": []
+  },
+  {
+    "id": "whirlwind",
+    "sourceRecordId": "po-sm-whirlwind",
+    "name": "Whirlwind",
+    "level": 6,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Invocation/Evocation"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "60 yds. + 10 yds./level",
+    "castingTime": "9",
+    "duration": "1 rd./level",
+    "areaOfEffect": "Cone 10 ft.",
+    "savingThrow": "Special",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 24217,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "d20",
+      "critical": "Large (1d3",
+      "subtlety": "+6",
+      "sensory": "Huge visual/audio,"
+    },
+    "notes": []
+  },
+  {
+    "id": "conjure-air-or-water-elemental",
+    "sourceRecordId": "po-sm-conjure-air-or-water-elemental",
+    "name": "Conjure Air or Water Elemental",
+    "level": 7,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "80 yds.",
+    "castingTime": "6 rds.",
+    "duration": "1 turn/level",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 24320,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+5",
+      "sensory": "Moderate visual"
+    },
+    "notes": []
+  },
+  {
+    "id": "impervious-sanctity-of-mind",
+    "sourceRecordId": "po-sm-impervious-sanctity-of-mind",
+    "name": "Impervious Sanctity of Mind",
+    "level": 7,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Abjuration"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "castingTime": "1 round",
+    "duration": "1 turn/level",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 24355,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "None",
+      "critical": "None",
+      "subtlety": "+6",
+      "sensory": "None"
+    },
+    "notes": []
+  },
+  {
+    "id": "ring-of-lead-that-was-once-breathed-upon-by-a-red-dragon",
+    "sourceRecordId": "po-sm-ring-of-lead-that-was-once-breathed-upon-by-a-red-dragon",
+    "name": "ring of lead that was once breathed upon by a red dragon.",
+    "level": 7,
+    "type": "Spell",
+    "school": "Wizard",
+    "classLists": [
+      "wizard"
+    ],
+    "descriptorSchools": [
+      "Conjuration/Summoning"
+    ],
+    "settingOrElementDescriptors": [],
+    "reversibleSpell": false,
+    "reverseSpellId": null,
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "200 yds. + 50 yds. /level",
+    "castingTime": "3 rds.",
+    "duration": "Special",
+    "areaOfEffect": "Wave 2 ft. high",
+    "savingThrow": "None",
+    "source": "Player's Option: Spells & Magic",
+    "sourceNotes": null,
+    "sourceLocation": {
+      "ocrLine": 24397,
+      "page": null
+    },
+    "unmapped": {
+      "printedComponents": "V, S, M",
+      "knockdown": "Special",
+      "critical": "None",
+      "subtlety": "+6",
+      "sensory": "Gargantuan visual,"
+    },
+    "notes": []
+  }
+]

@@ -1,0 +1,2468 @@
+[
+  {
+    "id": "analyze-balance-divination",
+    "name": "Analyze Balance (Divination)",
+    "level": null,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers, Divination"
+    ],
+    "range": "80 yards",
+    "duration": "5 rounds +1 round/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "One creature, object, or 10\u2019 square",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "anti-vermin-barrier-abjuration",
+    "name": "Anti-Vermin Barrier (Abjuration)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "30 yards",
+    "duration": "1 hour/level",
+    "castingTime": "1",
+    "areaOfEffect": "10-foot cube/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "call-upon-faith-invocation",
+    "name": "Call Upon Faith (Invocation)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Summoning"
+    ],
+    "range": "0",
+    "duration": "1 round",
+    "castingTime": "1",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "courage-enchantment-charm",
+    "name": "Courage (Enchantment/Charm)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "240 yards",
+    "duration": "Special",
+    "castingTime": "1 turn",
+    "areaOfEffect": "One unit up to 200 individuals",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "emotion-read-divination",
+    "name": "Emotion Read (Divination)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "5 yards/level",
+    "duration": "Instantaneous",
+    "castingTime": "3",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "know-age-divination",
+    "name": "Know Age (Divination)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "0",
+    "duration": "Instantaneous",
+    "castingTime": "1",
+    "areaOfEffect": "One object or creature",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "know-direction-divination",
+    "name": "Know Direction (Divination)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "0",
+    "duration": "Instantaneous",
+    "castingTime": "1",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "know-time-divination",
+    "name": "Know Time (Divination)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "0",
+    "duration": "Instantaneous",
+    "castingTime": "1",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "log-of-everburning-enchantment",
+    "name": "Log of Everburning (Enchantment)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Elemental Fire, Plant"
+    ],
+    "range": "Touch",
+    "duration": "1 hour/level",
+    "castingTime": "1",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "mistaken-missive-alteration",
+    "name": "Mistaken Missive (Alteration)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "range": "Touch",
+    "duration": "Permanent",
+    "castingTime": "1",
+    "areaOfEffect": "One page/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "morale-enchantment-charm",
+    "name": "Morale (Enchantment/Charm)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "Special",
+    "duration": "Special",
+    "castingTime": "Special",
+    "areaOfEffect": "One unit up to 200 individuals",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "personal-reading-divination",
+    "name": "Personal Reading (Divination)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "range": "0",
+    "duration": "Special",
+    "castingTime": "2 turns",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reversible",
+    "name": "Reversible",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Protection"
+    ],
+    "range": "0",
+    "duration": "2d10 rounds",
+    "castingTime": "5",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "sacred-guardian-enchantment-charm",
+    "name": "Sacred Guardian (Enchantment/Charm)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Guardian"
+    ],
+    "range": "Touch",
+    "duration": "1 day/level",
+    "castingTime": "1",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "speak-with-astral-traveler-alteration",
+    "name": "Speak With Astral Traveler (Alteration)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Astral"
+    ],
+    "range": "Touch",
+    "duration": "1 round/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "thought-capture-divination",
+    "name": "Thought Capture (Divination)",
+    "level": 1,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "0",
+    "duration": "Instantaneous",
+    "castingTime": "3",
+    "areaOfEffect": "10 yards",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "weighty-chest-alteration",
+    "name": "Weighty Chest (Alteration)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "Touch",
+    "duration": "1 day/level",
+    "castingTime": "1",
+    "areaOfEffect": "5-foot cube",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "aura-of-comfort-evocation",
+    "name": "Aura of Comfort (Evocation)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "Touch",
+    "duration": "1 hour/level",
+    "castingTime": "2",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "calm-chaos-enchantment-charm",
+    "name": "Calm Chaos (Enchantment/Charm)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Law"
+    ],
+    "range": "20 yards",
+    "duration": "Special",
+    "castingTime": "1",
+    "areaOfEffect": "1d6 creatures/level",
+    "savingThrow": "Special",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "enchantment-charm-alteration",
+    "name": "(Enchantment/Charm, Alteration)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "range": "Touch",
+    "duration": "5 turns +2 turns/level",
+    "castingTime": "2 turns",
+    "areaOfEffect": "Special",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "draw-upon-holy-might-invocation",
+    "name": "Draw Upon Holy Might (Invocation)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Summoning"
+    ],
+    "range": "0",
+    "duration": "1 round/level",
+    "castingTime": "2",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "emotion-perception-divination",
+    "name": "Emotion Perception (Divination)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "300 yards",
+    "duration": "Instantaneous",
+    "castingTime": "1 turn",
+    "areaOfEffect": "One unit/five levels",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "frisky-chest-enchantment-charm",
+    "name": "Frisky Chest (Enchantment/Charm)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "Touch",
+    "duration": "Permanent",
+    "castingTime": "2",
+    "areaOfEffect": "10-foot cube",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "hesitation-enchantment-charm",
+    "name": "Hesitation (Enchantment/Charm)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "30 yards",
+    "duration": "1 round/level",
+    "castingTime": "2",
+    "areaOfEffect": "20-foot-radius circle",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "idea-divination",
+    "name": "Idea (Divination)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "0",
+    "duration": "Instantaneous",
+    "castingTime": "4",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "lighten-load-alteration",
+    "name": "Lighten Load (Alteration)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "30 yards",
+    "duration": "1 hour/level",
+    "castingTime": "2",
+    "areaOfEffect": "10-foot cube",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "mind-read-divination",
+    "name": "Mind Read (Divination)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "5 yards/level",
+    "duration": "1 round/level",
+    "castingTime": "2",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "moment-divination",
+    "name": "Moment (Divination)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "range": "0",
+    "duration": "1 round/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "50-foot radius",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "music-of-the-spheres-enchantment-charm",
+    "name": "Music of the Spheres (Enchantment/Charm)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers, Charm"
+    ],
+    "range": "50 yards",
+    "duration": "1 turn +1 round/level",
+    "castingTime": "4",
+    "areaOfEffect": "20-foot-diameter circle",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "mystic-transfer-invocation",
+    "name": "Mystic Transfer (Invocation)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Charm"
+    ],
+    "range": "0",
+    "duration": "9 rounds",
+    "castingTime": "1 round",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "nap-alteration",
+    "name": "Nap (Alteration)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "Touch",
+    "duration": "Special",
+    "castingTime": "2",
+    "areaOfEffect": "One creature/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "rally-enchantment-charm",
+    "name": "Rally (Enchantment/Charm)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "240 yards",
+    "duration": "Instantaneous",
+    "castingTime": "1 turn",
+    "areaOfEffect": "One unit of up to 300 individuals",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reversible",
+    "name": "Reversible",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "All"
+    ],
+    "range": "10 yards",
+    "duration": "Special",
+    "castingTime": "1 turn",
+    "areaOfEffect": "10 yard X 10 yard square/priest",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "zone-of-truth-enchantment-charm",
+    "name": "Zone of Truth (Enchantment/Charm)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "30 yards",
+    "duration": "1 round/level",
+    "castingTime": "2",
+    "areaOfEffect": "5-foot square/level",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "accelerate-healing-alteration",
+    "name": "Accelerate Healing (Alteration)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "Touch",
+    "duration": "1-4 days",
+    "castingTime": "1 turn",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "adaptation-enchantment-charm-alteration",
+    "name": "Adaptation (Enchantment/Charm, Alteration)",
+    "level": 2,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "Special",
+    "duration": "Special",
+    "castingTime": "Special",
+    "areaOfEffect": "One unit of up to 200 individuals",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "astral-window-divination",
+    "name": "Astral Window (Divination)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Astral"
+    ],
+    "range": "5 yards",
+    "duration": "2 rounds/level",
+    "castingTime": "3",
+    "areaOfEffect": "10\u2019 X 10\u2019 area",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "caltrops-evocation",
+    "name": "Caltrops (Evocation)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "20 yards/level",
+    "duration": "1 turn/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "choose-future-divination",
+    "name": "Choose Future (Divination)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "Touch",
+    "duration": "1 round",
+    "castingTime": "3",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reversible",
+    "name": "Reversible",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "0",
+    "duration": "Special",
+    "castingTime": "3",
+    "areaOfEffect": "50-foot radius",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "efficacious-monster-ward-abjuration",
+    "name": "Efficacious Monster Ward (Abjuration)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "30 yards",
+    "duration": "1 round/level",
+    "castingTime": "3",
+    "areaOfEffect": "10-foot cube/level",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "extradimensional-detection-divination",
+    "name": "Extradimensional Detection (Divination)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers, Divination"
+    ],
+    "range": "0",
+    "duration": "1 round/level",
+    "castingTime": "3",
+    "areaOfEffect": "One 10'-wide path, 60 feet long",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "helping-hand-evocation",
+    "name": "Helping Hand (Evocation)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "Special",
+    "duration": "1 hour/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "invisibility-purge-abjuration",
+    "name": "Invisibility Purge (Abjuration)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "30 yards",
+    "duration": "1 turn/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "10-foot square/priest",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "know-customs-divination",
+    "name": "Know Customs (Divination)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "Special",
+    "duration": "Special",
+    "castingTime": "3",
+    "areaOfEffect": "The caster",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reversible",
+    "name": "Reversible",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Protection"
+    ],
+    "range": "0",
+    "duration": "1 round/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "30-yard line",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "memory-read-divination",
+    "name": "Memory Read (Divination)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "5 yards",
+    "duration": "1 round/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "miscast-magic-invocation-evocation",
+    "name": "Miscast Magic (Invocation/Evocation)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "range": "40 yards +10 yards/level",
+    "duration": "Special",
+    "castingTime": "2",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "moment-reading-divination",
+    "name": "Moment Reading (Divination)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "range": "0",
+    "duration": "Instantaneous",
+    "castingTime": "1 round",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "random-causality-alteration",
+    "name": "Random Causality (Alteration)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "range": "10 yards",
+    "duration": "Special",
+    "castingTime": "3 rounds +1 round/level",
+    "areaOfEffect": "One weapon",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "rigid-thinking-enchantment-charm",
+    "name": "Rigid Thinking (Enchantment/Charm)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Law"
+    ],
+    "range": "60 yards",
+    "duration": "1 round/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "slow-rot-abjuration",
+    "name": "Slow Rot (Abjuration)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Plant"
+    ],
+    "range": "Touch",
+    "duration": "1 week/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "squeaking-floors-evocation",
+    "name": "Squeaking Floors (Evocation)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "30 yards",
+    "duration": "1 hour/level",
+    "castingTime": "3",
+    "areaOfEffect": "10-foot square/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "strength-of-one-alteration",
+    "name": "Strength of One (Alteration)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Law"
+    ],
+    "range": "10 yards",
+    "duration": "2d6 rounds",
+    "castingTime": "3",
+    "areaOfEffect": "One creature + Icreature/2 levels",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "telepathy-divination-alteration",
+    "name": "Telepathy (Divination, Alteration)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "30 yards",
+    "duration": "1 turn +2 rounds/level",
+    "castingTime": "5",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "telethaumaturgy-enchantment-charm",
+    "name": "Telethaumaturgy (Enchantment/Charm)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "range": "0",
+    "duration": "Special",
+    "castingTime": "2 rounds",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "thiefs-lament-alteration",
+    "name": "Thief\u2019s Lament (Alteration)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "10 yards/level",
+    "duration": "1 hour/level",
+    "castingTime": "3",
+    "areaOfEffect": "5-foot cube/level",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "zone-of-sweet-air-abjuration",
+    "name": "Zone of Sweet Air (Abjuration)",
+    "level": 3,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "10 yards/level",
+    "duration": "1 turn/level",
+    "castingTime": "3",
+    "areaOfEffect": "10-foot cube/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "addition-alteration",
+    "name": "Addition (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers, Creation"
+    ],
+    "range": "30 yards",
+    "duration": "Special",
+    "castingTime": "1 round",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "age-plant-alteration",
+    "name": "Age Plant (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "30 yards",
+    "duration": "Permanent",
+    "castingTime": "1 round",
+    "areaOfEffect": "One plant, seed, or tree/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "blessed-warmth-alteration",
+    "name": "Blessed Warmth (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Sun"
+    ],
+    "range": "Touch",
+    "duration": "1 round/level",
+    "castingTime": "4",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "body-clock-alteration",
+    "name": "Body Clock (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "Touch",
+    "duration": "1 hour/level",
+    "castingTime": "4",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "chaotic-combat-invocation-evocation",
+    "name": "Chaotic Combat (Invocation/Evocation)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "range": "30 yards",
+    "duration": "1 round/level",
+    "castingTime": "3",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "chaotic-sleep-alteration",
+    "name": "Chaotic Sleep (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "range": "Touch",
+    "duration": "Permanent",
+    "castingTime": "1 turn",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "circle-of-privacy-alteration",
+    "name": "Circle of Privacy (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "Special",
+    "duration": "1 hour/level",
+    "castingTime": "4",
+    "areaOfEffect": "50-foot-diameter circle",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "compulsive-order-enchantment-charm",
+    "name": "Compulsive Order (Enchantment/Charm)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Law"
+    ],
+    "range": "10 yards",
+    "duration": "Permanent",
+    "castingTime": "5",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "defensive-harmony-enchantment-charm",
+    "name": "Defensive Harmony (Enchantment/Charm)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Law"
+    ],
+    "range": "5 yards",
+    "duration": "1 round +2d4 rounds",
+    "castingTime": "1",
+    "areaOfEffect": "One creature/two levels",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "dimensional-folding-alteration",
+    "name": "Dimensional Folding (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "range": "5 feet",
+    "duration": "1 round",
+    "castingTime": "1 round",
+    "areaOfEffect": "10-foot circle",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "fire-purge-abjuration",
+    "name": "Fire Purge (Abjuration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "10 yards/level",
+    "duration": "1 turn/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "10-yard square/priest",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "focus-invocation",
+    "name": "Focus (Invocation)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "All"
+    ],
+    "range": "10 feet",
+    "duration": "Special",
+    "castingTime": "1 day",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "fortify-necromancy",
+    "name": "Fortify (Necromancy)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Healing"
+    ],
+    "range": "0",
+    "duration": "Special",
+    "castingTime": "6",
+    "areaOfEffect": "Creature touched",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "genius-divination",
+    "name": "Genius (Divination)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "0",
+    "duration": "Instantaneous",
+    "castingTime": "5",
+    "areaOfEffect": "Caster",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "inverted-ethics-enchantment-charm",
+    "name": "Inverted Ethics (Enchantment/Charm)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "range": "120 yards",
+    "duration": "1 turn",
+    "castingTime": "1",
+    "areaOfEffect": "Special",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "join-with-astral-traveler-alteration",
+    "name": "Join With Astral Traveler (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Astral"
+    ],
+    "range": "0",
+    "duration": "Special",
+    "castingTime": "1 turn",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reversible",
+    "name": "Reversible",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "Special",
+    "duration": "Special",
+    "castingTime": "Special",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "mental-domination-enchantment-charm",
+    "name": "Mental Domination (Enchantment/Charm)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "50 yards",
+    "duration": "3 rounds/level",
+    "castingTime": "4",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "modify-memory-enchantment-charm",
+    "name": "Modify Memory (Enchantment/Charm)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "30 feet",
+    "duration": "Permanent",
+    "castingTime": "Special",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "probability-control-alteration",
+    "name": "Probability Control (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "range": "30 yards",
+    "duration": "Special",
+    "castingTime": "4",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "rapport-divination-alteration",
+    "name": "Rapport (Divination, Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "30 yards",
+    "duration": "1 turn +1 round/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "One creature",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "solipsism-alteration",
+    "name": "Solipsism (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "10 yards/level",
+    "duration": "Special",
+    "castingTime": "1 round",
+    "areaOfEffect": "100 sq. ft. +100 sq. ft./level",
+    "savingThrow": "Special",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reversible",
+    "name": "Reversible",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "240 yards",
+    "duration": "2 turns/level",
+    "castingTime": "2 turns",
+    "areaOfEffect": "100 sq. yards/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "thought-broadcast-alteration",
+    "name": "Thought Broadcast (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "30 yards",
+    "duration": "1 turn +3 rounds/level",
+    "castingTime": "5",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "tree-steed-alteration-enchantment-charm",
+    "name": "Tree Steed (Alteration, Enchantment/Charm)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "10 yards",
+    "duration": "1 hour/level",
+    "castingTime": "4",
+    "areaOfEffect": "One log or plank",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "uplift-alteration",
+    "name": "Uplift (Alteration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "All"
+    ],
+    "range": "0",
+    "duration": "1 turn",
+    "castingTime": "12 hours",
+    "areaOfEffect": "One priest",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "weather-stasis-abjuration",
+    "name": "Weather Stasis (Abjuration)",
+    "level": 4,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "30 yards",
+    "duration": "1 hour/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "10-foot cube/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reversible",
+    "name": "Reversible",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "10 yards",
+    "duration": "Permanent",
+    "castingTime": "1 round",
+    "areaOfEffect": "1 cubic foot/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "barrier-of-retention-abjuration",
+    "name": "Barrier of Retention (Abjuration)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "Special",
+    "duration": "1 turn/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "10\u2019-cube/level",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "blessed-abundance-conjuration",
+    "name": "Blessed Abundance (Conjuration)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Creation"
+    ],
+    "range": "Touch",
+    "duration": "Permanent",
+    "castingTime": "1 round",
+    "areaOfEffect": "1 cubic foot/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "champions-strength-alteration",
+    "name": "Champion\u2019s Strength (Alteration)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Law"
+    ],
+    "range": "0",
+    "duration": "Special",
+    "castingTime": "2",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "chaotic-commands-enchantment-charm",
+    "name": "Chaotic Commands (Enchantment/Charm)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "range": "Touch",
+    "duration": "1 turn/level",
+    "castingTime": "3",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Special",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reversible",
+    "name": "Reversible",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "0",
+    "duration": "1 hour/level",
+    "castingTime": "5",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "cloud-of-purification-evocation",
+    "name": "Cloud of Purification (Evocation)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Elemental Air, Water"
+    ],
+    "range": "30 yards",
+    "duration": "1 round/level",
+    "castingTime": "5",
+    "areaOfEffect": "20-foot cube",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "consequence-divination",
+    "name": "Consequence (Divination)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers, Divination"
+    ],
+    "range": "0",
+    "duration": "Instantaneous",
+    "castingTime": "1 round",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "disguise-illusion-phantasm",
+    "name": "Disguise (Illusion/Phantasm)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "200 yards",
+    "duration": "1 turn/3 levels",
+    "castingTime": "2 turns",
+    "areaOfEffect": "One unit up to 300 individuals",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "easy-march-invocation",
+    "name": "Easy March (Invocation)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "50 feet",
+    "duration": "1 day/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "One creature/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "elemental-forbiddance-abjuration",
+    "name": "Elemental Forbiddance (Abjuration)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "Special",
+    "duration": "1 turn/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "5'-cube/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "extradimensional-pocket-alteration",
+    "name": "Extradimensional Pocket (Alteration)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "range": "Touch",
+    "duration": "1d12 rounds +2 turns/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "grounding-abjuration",
+    "name": "Grounding (Abjuration)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "30 yards",
+    "duration": "1 turn/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "10-yard square/priest",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "illusory-artillery-enchantment-charm",
+    "name": "Illusory Artillery (Enchantment/Charm)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "300 yards",
+    "duration": "Instantaneous",
+    "castingTime": "1 turn",
+    "areaOfEffect": "30 yard X 30 yard square",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "impeding-permission-enchantment-charm",
+    "name": "Impeding Permission (Enchantment/Charm)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Law"
+    ],
+    "range": "150 yards",
+    "duration": "1 turn/level",
+    "castingTime": "3",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "meld-enchantment",
+    "name": "Meld (Enchantment)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Charm"
+    ],
+    "range": "10 yards",
+    "duration": "12 hours",
+    "castingTime": "1 turn",
+    "areaOfEffect": "One priest",
+    "savingThrow": "Special",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "alteration-enchantment-charm",
+    "name": "(Alteration, Enchantment/Charm)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "10 yards",
+    "duration": "2 rounds/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "mindshatter-enchantment-charm",
+    "name": "Mindshatter (Enchantment/Charm)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "3 yards/level",
+    "duration": "Special",
+    "castingTime": "1 round",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "repeat-action-enchantment-charm",
+    "name": "Repeat Action (Enchantment/Charm)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "30 yards",
+    "duration": "Special",
+    "castingTime": "5",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "shrieking-walls-enchantment",
+    "name": "Shrieking Walls (Enchantment)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "Touch",
+    "duration": "1 day/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "20'-cube",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "thoughtwave-divination",
+    "name": "Thoughtwave (Divination)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Divination"
+    ],
+    "range": "0",
+    "duration": "Instantaneous",
+    "castingTime": "1",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "time-pool-divination",
+    "name": "Time Pool (Divination)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "Touch",
+    "duration": "1 round/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "alteration",
+    "name": "(Alteration)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Guardian"
+    ],
+    "range": "0",
+    "duration": "1 hour/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "5-foot-radius sphere",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "undead-ward-abjuration-necromancy",
+    "name": "Undead Ward (Abjuration, Necromancy)",
+    "level": 5,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "Special",
+    "duration": "1 turn/level",
+    "castingTime": "2 turns",
+    "areaOfEffect": "5-foot cube/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reversible",
+    "name": "Reversible",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "Touch",
+    "duration": "Permanent",
+    "castingTime": "1 round",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "crushing-walls-enchantment",
+    "name": "Crushing Walls (Enchantment)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "Touch",
+    "duration": "Permanent until activated",
+    "castingTime": "1 turn",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "disbelief-enchantment-charm",
+    "name": "Disbelief (Enchantment/Charm)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "0",
+    "duration": "1 round/level",
+    "castingTime": "5",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "dragonbane-abjuration",
+    "name": "Dragonbane (Abjuration)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "10 yards/level",
+    "duration": "1d4 rounds +1 round/2 levels",
+    "castingTime": "1 round",
+    "areaOfEffect": "5'-cube/level",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "gravity-variation-alteration",
+    "name": "Gravity Variation (Alteration)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "10 yards/level",
+    "duration": "1 turn/3 levels",
+    "castingTime": "2 turns",
+    "areaOfEffect": "120-yard X 120-yard square",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reversible",
+    "name": "Reversible",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Sun"
+    ],
+    "range": "0",
+    "duration": "1 round",
+    "castingTime": "6 turns",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "group-mind-divination-enchantment-charm",
+    "name": "Group Mind (Divination, Enchantment/Charm)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought"
+    ],
+    "range": "0",
+    "duration": "1 turn +1 round/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "30-yard-diameter circle",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "land-of-stability-abjuration",
+    "name": "Land of Stability (Abjuration)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "10 yards/level",
+    "duration": "1 day/level",
+    "castingTime": "6",
+    "areaOfEffect": "10-foot-cube/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "legal-thoughts-enchantment-charm",
+    "name": "Legal Thoughts (Enchantment/Charm)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Law"
+    ],
+    "range": "10 yards",
+    "duration": "Permanent",
+    "castingTime": "1 turn",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "monster-mount-enchantment-charm",
+    "name": "Monster Mount (Enchantment/Charm)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "30 yards",
+    "duration": "1 hour/level",
+    "castingTime": "6",
+    "areaOfEffect": "20-foot radius circle",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "physical-mirror-alteration",
+    "name": "Physical Mirror (Alteration)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "range": "30 yards",
+    "duration": "1d4 +8 rounds",
+    "castingTime": "6",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reverse-time-alteration",
+    "name": "Reverse Time (Alteration)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "30 yards",
+    "duration": "1-4 rounds",
+    "castingTime": "6",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "seclusion-alteration",
+    "name": "Seclusion (Alteration)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "range": "Touch",
+    "duration": "3d12 rounds +4 rounds/level",
+    "castingTime": "6",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "skip-day-invocation-evocation",
+    "name": "Skip Day (Invocation/Evocation)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "0",
+    "duration": "Instantaneous",
+    "castingTime": "1 round",
+    "areaOfEffect": "10-foot radius",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "sols-searing-orb-invocation",
+    "name": "Sol\u2019s Searing Orb (Invocation)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Sun"
+    ],
+    "range": "30 yards",
+    "duration": "Instantaneous",
+    "castingTime": "6",
+    "areaOfEffect": "One gem",
+    "savingThrow": "Special",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "spiritual-wrath-invocation",
+    "name": "Spiritual Wrath (Invocation)",
+    "level": 6,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Combat"
+    ],
+    "range": "300 yards",
+    "duration": "Instantaneous",
+    "castingTime": "1 turn",
+    "areaOfEffect": "Special",
+    "savingThrow": "1/2",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "age-dragon-alteration",
+    "name": "Age Dragon (Alteration)",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Time"
+    ],
+    "range": "30 yards",
+    "duration": "1 round/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "One dragon",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "reversible",
+    "name": "Reversible",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Necromantic"
+    ],
+    "range": "0",
+    "duration": "1 hour/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "divine-inspiration",
+    "name": "Divine Inspiration",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought, Divination"
+    ],
+    "range": "0",
+    "duration": "Instantaneous",
+    "castingTime": "5",
+    "areaOfEffect": "The caster",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "hovering-road-conjuration-summoning",
+    "name": "Hovering Road (Conjuration/Summoning)",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Travelers"
+    ],
+    "range": "0",
+    "duration": "1 turn/level",
+    "castingTime": "1 round",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "illusory-fortification-illusion-phantasm",
+    "name": "Illusory Fortification (Illusion/Phantasm)",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "240 yards",
+    "duration": "Special",
+    "castingTime": "10 turns",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "mindkiller-enchantment-charm-necromancy",
+    "name": "Mindkiller (Enchantment/Charm, Necromancy)",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Thought, Necromantic"
+    ],
+    "range": "240 yards",
+    "duration": "Special",
+    "castingTime": "1 round",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "shadow-engines-illusion-phantasm",
+    "name": "Shadow Engines (Illusion/Phantasm)",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "War"
+    ],
+    "range": "240 yards",
+    "duration": "8 turns",
+    "castingTime": "3 turns",
+    "areaOfEffect": "180-yard X 180-yard square",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "spacewarp-alteration",
+    "name": "Spacewarp (Alteration)",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "range": "50 yards",
+    "duration": "1 round/level",
+    "castingTime": "7",
+    "areaOfEffect": "50-foot-diameter sphere",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "spirit-of-power-summoning-invocation",
+    "name": "Spirit of Power (Summoning, Invocation)",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Summoning"
+    ],
+    "range": "0",
+    "duration": "1 hour",
+    "castingTime": "3 turns",
+    "areaOfEffect": "The casters",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "tentacle-walls-enchantment",
+    "name": "Tentacle Walls (Enchantment)",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Wards"
+    ],
+    "range": "Touch",
+    "duration": "Special",
+    "castingTime": "1 round",
+    "areaOfEffect": "50-foot cube",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "timelessness-alteration",
+    "name": "Timelessness (Alteration)",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Numbers"
+    ],
+    "range": "Touch",
+    "duration": "1 day/level",
+    "castingTime": "7",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "conjuration-summoning",
+    "name": "(Conjuration/Summoning)",
+    "level": 7,
+    "classLists": [
+      "priest"
+    ],
+    "sphere": [
+      "Chaos"
+    ],
+    "range": "0",
+    "duration": "1 turn/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "4d4 square miles",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  }
+]

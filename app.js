@@ -166,6 +166,8 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
     '"': '&quot;',
     "'": '&#39;'
 } [c]));
+const PORTRAIT_PLACEHOLDER_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" role="img" aria-label="Upload character portrait"><defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5f564d"/><stop offset="100%" stop-color="#2e2924"/></linearGradient><radialGradient id="shade" cx="0.5" cy="0.28" r="0.9"><stop offset="0%" stop-color="#8d8378" stop-opacity="0.35"/><stop offset="70%" stop-color="#1b1714" stop-opacity="0.62"/><stop offset="100%" stop-color="#0f0d0b" stop-opacity="0.78"/></radialGradient><radialGradient id="halo" cx="0.5" cy="0.43" r="0.42"><stop offset="0%" stop-color="#c2c7cc" stop-opacity="0.22"/><stop offset="100%" stop-color="#11100f" stop-opacity="0"/></radialGradient></defs><rect width="240" height="300" fill="url(#bg)"/><rect width="240" height="300" fill="url(#shade)"/><rect width="240" height="300" fill="url(#halo)"/><circle cx="120" cy="102" r="40" fill="#868e96"/><path d="M58 252c0-41 28-74 62-74s62 33 62 74" fill="#7a838c"/><rect x="20" y="20" width="200" height="260" rx="8" ry="8" fill="none" stroke="#a79a8a" stroke-opacity="0.42" stroke-width="2"/><text x="120" y="279" fill="#d9cec0" fill-opacity="0.92" font-family="Georgia, serif" font-size="13" text-anchor="middle" letter-spacing="0.5">Upload character portrait</text></svg>`;
+const PORTRAIT_PLACEHOLDER_DATA_URI = `data:image/svg+xml,${encodeURIComponent(PORTRAIT_PLACEHOLDER_SVG)}`;
 
 function normalize(x = {}) {
     const d = clone(FIXED);
@@ -201,10 +203,10 @@ function normalize(x = {}) {
         source: item.source ?? '',
         notes: item.notes ?? ''
     }));
-    d.weaponProficiencies = Array.isArray(x.weaponProficiencies) ? x.weaponProficiencies.map(item => ({ proficiencyId: typeof item.proficiencyId === 'string' ? item.proficiencyId : null, weaponId: typeof item.weaponId === 'string' ? item.weaponId : null, name: typeof item.name === 'string' ? item.name : '', proficient: item.proficient === true || item.proficient === 'true', specialization: typeof item.specialization === 'string' ? item.specialization : 'none' })) : [];
+    d.weaponProficiencies = Array.isArray(x.weaponProficiencies) ? x.weaponProficiencies.map(item => ({ proficiencyId: typeof item.proficiencyId === 'string' ? item.proficiencyId : null, weaponId: typeof item.weaponId === 'string' ? item.weaponId : null, name: typeof item.name === 'string' ? item.name : '', proficient: item.proficient === true || item.proficient === 'true', specialization: typeof item.specialization === 'string' ? item.specialization : 'none', notes: typeof item.notes === 'string' ? item.notes : '' })) : [];
     const legacyWeaponNames = ['Battle Axe', 'Bow, Long', 'Bow, Short', 'Shortbow', 'Club', 'Crossbow', 'Dagger', 'Dart', 'Flail', 'Hand Axe', 'Javelin', 'Knife', 'Lance', 'Mace', 'Pick', 'Polearm', 'Sling', 'Spear', 'Staff', 'Sword, Bastard', 'Bastard Sword', 'Long Sword', 'Sword, Scimitar', 'Scimitar', 'Short Sword', 'Sword, Short', 'Two-Handed Sword', 'Sword, Two-Handed', 'Warhammer', 'War Hammer', 'Whip'];
     const legacyWeaponRows = d.proficiencies.filter(item => legacyWeaponNames.some(name => name.toLowerCase() === String(item.name || '').trim().toLowerCase()) || String(item.type || '').toLowerCase() === 'weapon');
-    if (!d.weaponProficiencies.length) d.weaponProficiencies = legacyWeaponRows.map(item => ({ proficiencyId: null, weaponId: null, name: item.name, proficient: true, specialization: 'none' }));
+    if (!d.weaponProficiencies.length) d.weaponProficiencies = legacyWeaponRows.map(item => ({ proficiencyId: null, weaponId: null, name: item.name, proficient: true, specialization: 'none', notes: '' }));
     const legacyLanguageRows = d.proficiencies.filter(item => String(item.type || '').toLowerCase() === 'language');
     if ((!Array.isArray(x.languages) || !x.languages.length) && legacyLanguageRows.length) d.languages = legacyLanguageRows.map(item => ({ name: item.name || '', source: item.source || 'legacy', countsAgainstLanguageLimit: false }));
     if (legacyWeaponRows.length || legacyLanguageRows.length) d.proficiencies = d.proficiencies.filter(item => !legacyWeaponRows.includes(item) && !legacyLanguageRows.includes(item));
@@ -1393,10 +1395,20 @@ function setupCharacterHeader() {
         const image = document.createElement('img');
         image.className = 'portrait';
         image.alt = 'Character portrait';
-        image.src = data.portraitUrl || '';
+        image.src = data.portraitUrl || PORTRAIT_PLACEHOLDER_DATA_URI;
         hero.append(image);
         return image;
     })();
+    const applyPortraitSource = source => {
+        const portraitSource = String(source || '').trim();
+        portrait.classList.toggle('portrait-placeholder', !portraitSource);
+        portrait.src = portraitSource || PORTRAIT_PLACEHOLDER_DATA_URI;
+    };
+    portrait.onerror = () => {
+        portrait.classList.add('portrait-placeholder');
+        portrait.src = PORTRAIT_PLACEHOLDER_DATA_URI;
+    };
+    applyPortraitSource(data.portraitUrl);
     const portraitArea = document.createElement('div');
     portraitArea.className = 'portrait-area';
     portrait.replaceWith(portraitArea);
@@ -1417,9 +1429,7 @@ function setupCharacterHeader() {
     refresh.textContent = 'Refresh';
     refresh.title = 'Reload portrait from the last saved URL';
     refresh.onclick = () => {
-        const source = data.portraitUrl || portrait.src;
-        portrait.src = '';
-        portrait.src = source;
+        applyPortraitSource(data.portraitUrl);
     };
     const expand = document.createElement('button');
     expand.type = 'button';
@@ -1431,8 +1441,21 @@ function setupCharacterHeader() {
         lightbox.querySelector('img').src = portrait.currentSrc || portrait.src;
         lightbox.hidden = false;
     };
+    const portraitInput = portraitField.querySelector('[data-root="portraitUrl"]');
+    if (portraitInput) portraitInput.addEventListener('change', () => applyPortraitSource(portraitInput.value));
     controls.append(portraitField, refresh, expand);
     portraitArea.append(portraitFrame, controls);
+
+    const className = data.identity.classEntries?.[0]?.className || data.identity.className || 'Adventurer';
+    const level = data.identity.classEntries?.[0]?.level || data.identity.level || '?';
+    const badgeLabel = data.selectedBackground || 'Campaign badge';
+    const initials = (data.identity.name || className).split(/\s+/).map(part => part[0] || '').join('').slice(0, 2).toUpperCase() || '??';
+    const notesSource = String(data.notes || data.details.background || '').trim();
+    const notesSnippet = notesSource ? `${notesSource.slice(0, 150)}${notesSource.length > 150 ? '...' : ''}` : 'Add notes to display a session snippet here.';
+    const portraitMeta = document.createElement('article');
+    portraitMeta.className = 'portrait-meta';
+    portraitMeta.innerHTML = `<div class="portrait-emblem" aria-label="Campaign emblem"><strong>${esc(initials)}</strong><small>${esc(badgeLabel)}</small></div><div class="portrait-session"><h3>Session notes</h3><p>${esc(notesSnippet)}</p><small>${esc(className)} · Level ${esc(level)}</small></div>`;
+    portraitArea.append(portraitMeta);
 
     const details = document.createElement('section');
     details.className = 'card character-details';
@@ -1450,6 +1473,30 @@ function setupCharacterHeader() {
         if (event.target === lightbox || event.target.classList.contains('lightbox-close')) lightbox.hidden = true;
     };
     document.body.append(lightbox);
+}
+
+function setupQuickFactsFooter() {
+    document.querySelector('.quick-facts-footer')?.remove();
+    const app = document.querySelector('#app');
+    if (!app) return;
+    const primaryClass = data.identity.classEntries?.[0]?.className || data.identity.className || 'Unknown';
+    const primaryLevel = data.identity.classEntries?.[0]?.level || data.identity.level || '-';
+    const entries = [
+        ['Character', data.identity.name || 'Unnamed'],
+        ['Class', `${primaryClass} (L${primaryLevel})`],
+        ['Race', data.raceSelection || data.identity.race || 'Unknown'],
+        ['Alignment', data.identity.alignment || 'Unspecified'],
+        ['HP', `${data.combat.hpCurrent || '-'} / ${data.combat.hpMax || '-'}`],
+        ['AC / THAC0', `${data.combat.ac || '-'} / ${data.combat.thac0 || '-'}`],
+        ['Languages', String(data.languages.length || 0)],
+        ['Proficiencies', String(data.proficiencies.length || 0)],
+        ['Inventory items', String(data.inventory.length || 0)],
+        ['Tracked spells/abilities', String(data.spells.length || 0)]
+    ];
+    const section = document.createElement('section');
+    section.className = 'card wide quick-facts-footer';
+    section.innerHTML = `<h2>Quick facts</h2><div class="quick-facts-grid">${entries.map(([label, value]) => `<article><h3>${esc(label)}</h3><p>${esc(value)}</p></article>`).join('')}</div>`;
+    app.append(section);
 }
 
 function setupSectionToggles() {
@@ -2899,10 +2946,22 @@ function setupWeaponProficiencySection() {
     nwpCard.after(section);
     const picker = section.querySelector('#weapon-proficiency-search');
     const results = section.querySelector('#weapon-proficiency-results');
-    const renderPicker = () => { const query = picker.value.trim().toLowerCase(); const matches = weaponProficiencyCatalog.filter(item => !query || item.name.toLowerCase().includes(query)); results.innerHTML = matches.map(item => `<button type="button" data-weapon-proficiency-add="${esc(item.proficiencyId || item.weaponId)}">${esc(item.name)}</button>`).join(''); results.querySelectorAll('[data-weapon-proficiency-add]').forEach(button => button.onclick = () => { const entry = weaponProficiencyCatalog.find(item => (item.proficiencyId || item.weaponId) === button.dataset.weaponProficiencyAdd); if (!entry) return; data.weaponProficiencies.push({ proficiencyId: entry.proficiencyId || null, weaponId: entry.weaponId || null, proficient: false, specialization: 'none' }); changed(); render(); }); };
+    const renderPicker = () => { const query = picker.value.trim().toLowerCase(); const matches = weaponProficiencyCatalog.filter(item => !query || item.name.toLowerCase().includes(query)); results.innerHTML = matches.map(item => `<button type="button" data-weapon-proficiency-add="${esc(item.proficiencyId || item.weaponId)}">${esc(item.name)}</button>`).join(''); results.querySelectorAll('[data-weapon-proficiency-add]').forEach(button => button.onclick = () => { const entry = weaponProficiencyCatalog.find(item => (item.proficiencyId || item.weaponId) === button.dataset.weaponProficiencyAdd); if (!entry) return; data.weaponProficiencies.push({ proficiencyId: entry.proficiencyId || null, weaponId: entry.weaponId || null, proficient: false, specialization: 'none', notes: '' }); changed(); render(); }); };
     picker.oninput = renderPicker;
     renderPicker();
-    section.querySelector('[data-weapon-proficiency-custom]').onclick = () => { data.weaponProficiencies.push({ proficiencyId: null, weaponId: null, name: '', proficient: false, specialization: 'none' }); changed(); render(); };
+    section.querySelector('[data-weapon-proficiency-custom]').onclick = () => { data.weaponProficiencies.push({ proficiencyId: null, weaponId: null, name: '', proficient: false, specialization: 'none', notes: '' }); changed(); render(); };
+    const proficiencyTable = section.querySelector('.weapon-proficiencies-table');
+    const proficiencyHeader = proficiencyTable?.querySelector('thead tr');
+    if (proficiencyHeader && !proficiencyHeader.textContent.includes('Notes')) {
+        const notesHeader = document.createElement('th');
+        notesHeader.textContent = 'Notes';
+        proficiencyHeader.insertBefore(notesHeader, proficiencyHeader.lastElementChild);
+        proficiencyTable.querySelectorAll('tbody tr').forEach((row, index) => {
+            const notesCell = document.createElement('td');
+            notesCell.innerHTML = `<input data-weapon-proficiency-index="${index}" data-weapon-proficiency-key="notes" value="${esc(data.weaponProficiencies[index]?.notes || '')}">`;
+            row.insertBefore(notesCell, row.lastElementChild);
+        });
+    }
     section.querySelectorAll('[data-weapon-proficiency-index]').forEach(input => input.onchange = () => {
         const state = data.weaponProficiencies[+input.dataset.weaponProficiencyIndex];
         state[input.dataset.weaponProficiencyKey] = input.type === 'checkbox' ? input.checked : input.value;
@@ -3129,6 +3188,7 @@ function render() {
     setupSectionToggles();
     setupSectionOrdering();
     setupTableOfContents();
+    setupQuickFactsFooter();
     bind()
 }
 
@@ -3145,15 +3205,40 @@ function syncToolbarOffset() {
 window.addEventListener('resize', syncToolbarOffset);
 syncToolbarOffset();
 const navPin = document.querySelector('#navPinBtn');
+const mobileMenuButton = document.querySelector('#mobileMenuBtn');
+const toolbar = document.querySelector('.toolbar');
+
+function closeMobileMenu() {
+    if (!toolbar || !mobileMenuButton) return;
+    toolbar.classList.remove('mobile-menu-open');
+    mobileMenuButton.setAttribute('aria-expanded', 'false');
+    mobileMenuButton.setAttribute('aria-label', 'Open menu');
+}
+
 navPin.onclick = () => {
-    const toolbar = document.querySelector('.toolbar');
     const collapsed = toolbar.classList.toggle('toolbar-nav-collapsed');
     navPin.classList.toggle('tooltip-pin-muted', collapsed);
     navPin.setAttribute('aria-pressed', String(collapsed));
     navPin.setAttribute('aria-label', `${collapsed ? 'Show' : 'Hide'} navigation bar`);
     navPin.title = `${collapsed ? 'Show' : 'Hide'} navigation bar`;
+    if (collapsed) closeMobileMenu();
     syncToolbarOffset();
 };
+if (mobileMenuButton) {
+    mobileMenuButton.onclick = () => {
+        const expanded = toolbar.classList.toggle('mobile-menu-open');
+        mobileMenuButton.setAttribute('aria-expanded', String(expanded));
+        mobileMenuButton.setAttribute('aria-label', `${expanded ? 'Close' : 'Open'} menu`);
+    };
+    toolbar.querySelectorAll('.actions button, .actions .button').forEach(control => {
+        control.addEventListener('click', () => {
+            if (window.matchMedia('(max-width: 700px)').matches) closeMobileMenu();
+        });
+    });
+    window.addEventListener('resize', () => {
+        if (!window.matchMedia('(max-width: 700px)').matches) closeMobileMenu();
+    });
+}
 const resetOrderButton = document.querySelector('#resetOrderBtn');
 if (resetOrderButton) resetOrderButton.onclick = () => {
     data.sectionOrder = [];

@@ -1,0 +1,2133 @@
+{
+  "dataset": "PSC-MC-1.0",
+  "status": "FINAL",
+  "recordCount": 236,
+  "records": [
+    {
+      "id": "advanced-sunshine",
+      "sourceRecordId": "psc-v1-advanced-sunshine",
+      "spellName": "Advanced Sunshine",
+      "materialComponents": "Components: V Casting Time: 5 Duration: Instantaneous Area of Effect: 1 creature Saving Throw: Neg. This spell allows the shukenja to give profound and thoughtful advice to any creature of at least low intelligence The two must also share a common lan- guage. When cast, the creature is allowed a sav",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "age-dragon",
+      "sourceRecordId": "psc-v1-age-dragon",
+      "spellName": "Age Dragon",
+      "materialComponents": "The material component is a handful of dirt taken from a dragon's footprint.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "air-lens",
+      "sourceRecordId": "psc-v1-air-lens",
+      "spellName": "Air Lens",
+      "materialComponents": "The material component for this spell is a small, round piece of glass.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "air-walk",
+      "sourceRecordId": "psc-v1-air-walk",
+      "spellName": "Air Walk",
+      "materialComponents": "The material components for the spell are the priest's holy symbol and a bit of thistledown.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "all-seeing-crystal-ball",
+      "sourceRecordId": "psc-v1-all-seeing-crystal-ball",
+      "spellName": "All-Seeing Crystal Ball",
+      "materialComponents": "The material components of this spell are the priest's holy symbol and a ball of snow and ice or a pile of fine sand of the volume of a 6-inch sphere.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "alter-luck",
+      "sourceRecordId": "psc-v1-alter-luck",
+      "spellName": "Alter Luck",
+      "materialComponents": "Components: V, S Casting Time: 5 Duration: Instantaneous Area of Effect: Creature touched Saving Throw: None With this spell, a priest can transfer as many of his hit points as desired to heal a willing, living being of any alignment not directly opposed to his own (good vs. evil or lawful vs. chaot",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "amanuensis",
+      "sourceRecordId": "psc-v1-amanuensis",
+      "spellName": "Amanuensis",
+      "materialComponents": "The material components of this spell are a quill pen and a blank sheet or sheets of parch- ment, some vellum scrip, a chapbook, or another writing surface onto which the writing will be copied.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "amulet",
+      "sourceRecordId": "psc-v1-amulet",
+      "spellName": "Amulet",
+      "materialComponents": "the material components are inordinately valuable or obtained from distant locations (farther than 100 miles), the amulet has doubled effects (+2 to saves and AC).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "animal-companion",
+      "sourceRecordId": "psc-v1-animal-companion",
+      "spellName": "Animal Companion",
+      "materialComponents": "The material components of this spell are the caster’s holy symbol and food.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "animate-rock",
+      "sourceRecordId": "psc-v1-animate-rock",
+      "spellName": "Animate Rock",
+      "materialComponents": "The material components for the spell are a stone and drop of the caster’s blood.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "animate-tree",
+      "sourceRecordId": "psc-v1-animate-tree",
+      "spellName": "Animate Tree",
+      "materialComponents": "The material component is mistletoe.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "archers-redoubt-elf",
+      "sourceRecordId": "psc-v1-archers-redoubt-elf",
+      "spellName": "Archer’s Redoubt — Elf",
+      "materialComponents": "The material component of this spell is the priest's holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "attunement-drow",
+      "sourceRecordId": "psc-v1-attunement-drow",
+      "spellName": "Attunement — Drow",
+      "materialComponents": "The material components of this spell are the holy symbol of the caster, at least one drop of the recipi- ent’s tears, and a tiny moonstone or diamond (all but the holy symbol are consumed in the spellcasting).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "augury",
+      "sourceRecordId": "psc-v1-augury",
+      "spellName": "Augury",
+      "materialComponents": "The material component for an augury spell is a set of gem-inlaid sticks, dragon bones, or similar tokens of at least 1,000 gp value (which are not ex- pended in casting).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "battle-trident",
+      "sourceRecordId": "psc-v1-battle-trident",
+      "spellName": "Battle Trident",
+      "materialComponents": "The material components of a battle trident spell are three drops of water and three pointed pieces of any sort of hard ferrous metal.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "battlefate",
+      "sourceRecordId": "psc-v1-battlefate",
+      "spellName": "Battlefate",
+      "materialComponents": "The material component for this spell is an electrum coin tossed by the priest as he casts the spell.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "beckon-old-empire",
+      "sourceRecordId": "psc-v1-beckon-old-empire",
+      "spellName": "Beckon — Old Empire",
+      "materialComponents": "The material component for this spell is a piece of food that is favored by the animal or pet.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "bind-fetish",
+      "sourceRecordId": "psc-v1-bind-fetish",
+      "spellName": "Bind Fetish",
+      "materialComponents": "Components: V, S, M Casting Time: 1 rd. Duration: Permanent Area of Effect: Special Saving Throw: Neg. This spell is used to bind a guardian spirit to a new site or to a physical object. The spirit gets a saving throw vs. spell to resist. A successful save means the spirit remains free and can attac",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "blacklight",
+      "sourceRecordId": "psc-v1-blacklight",
+      "spellName": "Blacklight",
+      "materialComponents": "The material components of this spell are a piece of coal and the dried eyeball of any creature.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "blaenthers-bowls",
+      "sourceRecordId": "psc-v1-blaenthers-bowls",
+      "spellName": "Blaenther’s Bowls",
+      "materialComponents": "The material components are a pinch of gold dust, a spiral of fine wire, and a carved ivory or bone arrow of any size with arrowheads at both ends.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "blood-rage",
+      "sourceRecordId": "psc-v1-blood-rage",
+      "spellName": "Blood Rage",
+      "materialComponents": "The material components for this spell are a bloodstone or pieces of bloodstone and the priest’s holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "bolt-of-glory",
+      "sourceRecordId": "psc-v1-bolt-of-glory",
+      "spellName": "Bolt of Glory",
+      "materialComponents": "The material component of this spell is a small amber rod banded with bronze.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "bonewood",
+      "sourceRecordId": "psc-v1-bonewood",
+      "spellName": "Bonewood",
+      "materialComponents": "The material components for this spell are a 3- inch strip of wood and a bone of roughly equal length.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "call-aerial-beings",
+      "sourceRecordId": "psc-v1-call-aerial-beings",
+      "spellName": "Call Aerial Beings",
+      "materialComponents": "The material components of this spell are three feathers from three different winged—not neces- sarily avian—species.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "call-ghost-pack",
+      "sourceRecordId": "psc-v1-call-ghost-pack",
+      "spellName": "Call Ghost Pack",
+      "materialComponents": "The material components are the shaman’s drum and a small amount of food preferred by the animal type the shaman is calling.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "call-upon-gargauth",
+      "sourceRecordId": "psc-v1-call-upon-gargauth",
+      "spellName": "Call Upon Gargauth",
+      "materialComponents": "The material components of this spell are an unblessed broken horn manifested by Gargauth and the priest's holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "call-woodland-beings",
+      "sourceRecordId": "psc-v1-call-woodland-beings",
+      "spellName": "Call Woodland Beings",
+      "materialComponents": "The material components of this spell are a pine cone and eight holly berries.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "calm",
+      "sourceRecordId": "psc-v1-calm",
+      "spellName": "Calm",
+      "materialComponents": "The material component for this spell is a prayer wheel or a page of sutras.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "castigate",
+      "sourceRecordId": "psc-v1-castigate",
+      "spellName": "Castigate",
+      "materialComponents": "The material component is the shukenja’s holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "chain-madness",
+      "sourceRecordId": "psc-v1-chain-madness",
+      "spellName": "Chain Madness",
+      "materialComponents": "The material component for this spell is a small vial of brain tissue from an illithid.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "chant-of-fangs",
+      "sourceRecordId": "psc-v1-chant-of-fangs",
+      "spellName": "Chant of Fangs",
+      "materialComponents": "The material component of a chant of fangs spell is a tooth from any wild mammalian predator (that is, one not slain while in captivity or reared domestically).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "chaotic-commands",
+      "sourceRecordId": "psc-v1-chaotic-commands",
+      "spellName": "Chaotic Commands",
+      "materialComponents": "The material component is a piece of eelskin.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "chariot-of-sustarre",
+      "sourceRecordId": "psc-v1-chariot-of-sustarre",
+      "spellName": "Chariot of Sustarre",
+      "materialComponents": "The material components are a small piece of wood, two holly berries, and a fire source at least equal to a torch.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "charm-spirit",
+      "sourceRecordId": "psc-v1-charm-spirit",
+      "spellName": "Charm Spirit",
+      "materialComponents": "The material component is a crystal ball, worth at least 50 gp.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "clawcloud",
+      "sourceRecordId": "psc-v1-clawcloud",
+      "spellName": "Clawcloud",
+      "materialComponents": "The material component is a raven’s feather.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "commune-with-earth-dwarf",
+      "sourceRecordId": "psc-v1-commune-with-earth-dwarf",
+      "spellName": "Commune With Earth — Dwarf",
+      "materialComponents": "The material components are the priest’s holy symbol and a bit of earth, rock, or clay.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "commune-with-greater-spirit",
+      "sourceRecordId": "psc-v1-commune-with-greater-spirit",
+      "spellName": "Commune With Greater Spirit",
+      "materialComponents": "The material component for this spell is an of- fering of appropriate type and value to the spirit contacted, Notes: Common for priests from an oriental setting; otherwise, very rare.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "commune-with-lesser-spirit",
+      "sourceRecordId": "psc-v1-commune-with-lesser-spirit",
+      "spellName": "Commune With Lesser Spirit",
+      "materialComponents": "The material components of this spell are incense and an offering appropriate to the nature of the spirit.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "compel-shukenja",
+      "sourceRecordId": "psc-v1-compel-shukenja",
+      "spellName": "Compel — Shukenja",
+      "materialComponents": "The material components for this spell are the shukenja’s holy symbol and a set of coarse white robes to be given to the subject once the spell has taken effect.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "compulsive-order",
+      "sourceRecordId": "psc-v1-compulsive-order",
+      "spellName": "Compulsive Order",
+      "materialComponents": "The material component is a perfect cube made of metal.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "contain-spirit-shaman",
+      "sourceRecordId": "psc-v1-contain-spirit-shaman",
+      "spellName": "Contain Spirit — Shaman",
+      "materialComponents": "The material components of this spell are a piece of foxfire, a drop of water, a pinch of ashes, and pinch of bone dust.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "control-giant-insect",
+      "sourceRecordId": "psc-v1-control-giant-insect",
+      "spellName": "Control Giant Insect",
+      "materialComponents": "The material component is a scale, piece of chitin, or body part of the same type of insect.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "control-lycanthropes",
+      "sourceRecordId": "psc-v1-control-lycanthropes",
+      "spellName": "Control Lycanthropes",
+      "materialComponents": "The material component for this spell is a strip of willow bark (to lower temperatures) or rasp- berry leaves (to raise temperatures).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "council-of-spirits-shaman",
+      "sourceRecordId": "psc-v1-council-of-spirits-shaman",
+      "spellName": "Council Of Spirits — Shaman",
+      "materialComponents": "The material components of the spell are the markers that identify the spell’s area, which crum- ble when the spell expires.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "create-mask-shaman",
+      "sourceRecordId": "psc-v1-create-mask-shaman",
+      "spellName": "Create Mask — Shaman",
+      "materialComponents": "The material components are those items incor- porated into the finished mask.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "creature-of-darkness",
+      "sourceRecordId": "psc-v1-creature-of-darkness",
+      "spellName": "Creature of Darkness",
+      "materialComponents": "The material components are a bit of black or gray fur or down from any flying creature, a pinch of soot, and a strand of spider web.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "crown-of-brilliance-archon",
+      "sourceRecordId": "psc-v1-crown-of-brilliance-archon",
+      "spellName": "Crown of Brilliance — Archon",
+      "materialComponents": "The material component is an opal worth at least 100 gp, carried on the caster’s person.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "crown-of-glory-archon",
+      "sourceRecordId": "psc-v1-crown-of-glory-archon",
+      "spellName": "Crown Of Glory — Archon",
+      "materialComponents": "The material component is an opal worth at least 200 gp, carried on the caster’s person.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "crushing-walls",
+      "sourceRecordId": "psc-v1-crushing-walls",
+      "spellName": "Crushing Walls",
+      "materialComponents": "The material components are a l-inch iron cube and a walnut shell.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "crystallomancy-elf",
+      "sourceRecordId": "psc-v1-crystallomancy-elf",
+      "spellName": "Crystallomancy — Elf",
+      "materialComponents": "Components: V, S Casting Time: 1 rd. Duration: Instantaneous Area of Effect: Creature touched Saving Throw: Special By touching the creature afflicted, the priest employing the spell can permanently cure some forms of blindness or deafness. This spell does not restore or repair visual or auditory or",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "cure-rot",
+      "sourceRecordId": "psc-v1-cure-rot",
+      "spellName": "Cure Rot",
+      "materialComponents": "The material components for this spel) are mistletoe and a dead woodborer beetle.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "dark-fire",
+      "sourceRecordId": "psc-v1-dark-fire",
+      "spellName": "Dark Fire",
+      "materialComponents": "The material components is a small piece of charcoal.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "death-candle-shaman",
+      "sourceRecordId": "psc-v1-death-candle-shaman",
+      "spellName": "Death Candle — Shaman",
+      "materialComponents": "The material component is a previously unlit candle.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "death-curse",
+      "sourceRecordId": "psc-v1-death-curse",
+      "spellName": "Death Curse",
+      "materialComponents": "The material component is a necklace made of the teeth of large carnivores.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "death-dragon",
+      "sourceRecordId": "psc-v1-death-dragon",
+      "spellName": "Death Dragon",
+      "materialComponents": "The material components of a death dragon spell are four bones, all of which must be complete and intact.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "death-prayer",
+      "sourceRecordId": "psc-v1-death-prayer",
+      "spellName": "Death Prayer",
+      "materialComponents": "The material component is the priest’s holy symbol and a vial of holy water, which is sprinkled over the body.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "depress-resistance-elf-gnome",
+      "sourceRecordId": "psc-v1-depress-resistance-elf-gnome",
+      "spellName": "Depress Resistance — Elf, Gnome",
+      "materialComponents": "The material components of this spell are the priest’s holy symbol and a broken iron rod.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "detect-animal-attacker",
+      "sourceRecordId": "psc-v1-detect-animal-attacker",
+      "spellName": "Detect Animal Attacker",
+      "materialComponents": "The material component is the priest's holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "detect-life",
+      "sourceRecordId": "psc-v1-detect-life",
+      "spellName": "Detect Life",
+      "materialComponents": "The material component of this spell is the priest's holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "dictation",
+      "sourceRecordId": "psc-v1-dictation",
+      "spellName": "Dictation",
+      "materialComponents": "The material component for this spell is the blank page, scroll, or paper on which the dictation will appear.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "disc-of-concordant-opposition",
+      "sourceRecordId": "psc-v1-disc-of-concordant-opposition",
+      "spellName": "Disc of Concordant Opposition",
+      "materialComponents": "The material components of the spell are a holy symbol of Boccob and a small iron and electrum wheel with a rod rising from the center of one side; this is flung at the target creature as the spell is cast.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "dispel-fatigue",
+      "sourceRecordId": "psc-v1-dispel-fatigue",
+      "spellName": "Dispel Fatigue",
+      "materialComponents": "The material component is a sprinkle of fresh, blessed springwater.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "divine-event",
+      "sourceRecordId": "psc-v1-divine-event",
+      "spellName": "Divine Event",
+      "materialComponents": "The material component for all versions is a rare incense conducive to meditation (100 gp).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "divine-investiture",
+      "sourceRecordId": "psc-v1-divine-investiture",
+      "spellName": "Divine Investiture",
+      "materialComponents": "The material components for this spell are a chalice of holy water and a small amount of dye laced with gold flakes.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "divining-rod",
+      "sourceRecordId": "psc-v1-divining-rod",
+      "spellName": "Divining Rod",
+      "materialComponents": "The material component for the spell is a wand cut from a ginkgo tree.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "doomhound-halfling",
+      "sourceRecordId": "psc-v1-doomhound-halfling",
+      "spellName": "Doomhound — Halfling",
+      "materialComponents": "The material component of this spell is the priest's holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "doublecoin",
+      "sourceRecordId": "psc-v1-doublecoin",
+      "spellName": "Doublecoin",
+      "materialComponents": "The material component of this spell is a single coin or metal disc.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "dream-sight",
+      "sourceRecordId": "psc-v1-dream-sight",
+      "spellName": "Dream Sight",
+      "materialComponents": "The material component for this spell is a stick of incense worth at least one chain (5 gp).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "druidsight",
+      "sourceRecordId": "psc-v1-druidsight",
+      "spellName": "Druidsight",
+      "materialComponents": "The material components for this spell are a bit of food desirable to the animal.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "duplicate",
+      "sourceRecordId": "psc-v1-duplicate",
+      "spellName": "Duplicate",
+      "materialComponents": "The material component of this spell is a feather.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "earth-anchor-halfling",
+      "sourceRecordId": "psc-v1-earth-anchor-halfling",
+      "spellName": "Earth Anchor — Halfling",
+      "materialComponents": "The material components of this spell are the priest's holy symbol and a small amount of mud.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "elemental-breach",
+      "sourceRecordId": "psc-v1-elemental-breach",
+      "spellName": "Elemental Breach",
+      "materialComponents": "The material components for the spell are sam- ples of the two planes’ elemental material, or silver symbols signifying such.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "emotion-control",
+      "sourceRecordId": "psc-v1-emotion-control",
+      "spellName": "Emotion Control",
+      "materialComponents": "The material component for both versions of the spell is a small bunch of fleece or uncarded wool that is consumed in the casting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "emotion-read",
+      "sourceRecordId": "psc-v1-emotion-read",
+      "spellName": "Emotion Read",
+      "materialComponents": "The material component is a square of un- marked white wax.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "enchant-runestones-dwarf",
+      "sourceRecordId": "psc-v1-enchant-runestones-dwarf",
+      "spellName": "Enchant Runestones — Dwarf",
+      "materialComponents": "The material component is the priest’s holy symbol, which is touched to the runestones.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "entangle",
+      "sourceRecordId": "psc-v1-entangle",
+      "spellName": "Entangle",
+      "materialComponents": "The material component is the caster’s holy symbol, Notes: Common for druids (PHB).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "exaction",
+      "sourceRecordId": "psc-v1-exaction",
+      "spellName": "Exaction",
+      "materialComponents": "The material components of this spell are the priest's holy symbol, some matter or substance from the plane of the creature from whom an exac- tion is expected, and knowledge of the creature's nature or actions that is written out on a parchment that is burned to seal the pledge.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "extract-spirit-shaman",
+      "sourceRecordId": "psc-v1-extract-spirit-shaman",
+      "spellName": "Extract Spirit — Shaman",
+      "materialComponents": "The material component is a strip of gold tissue worth at least 5 gp, given a half twist and joined at the ends during the casting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "faith-magic-zone",
+      "sourceRecordId": "psc-v1-faith-magic-zone",
+      "spellName": "Faith Magic Zone",
+      "materialComponents": "The material components for this spell are the priest’s holy symbol and a vial of honey collected from a beehive or a honeycomb.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "fangs-of-retribution",
+      "sourceRecordId": "psc-v1-fangs-of-retribution",
+      "spellName": "Fangs of Retribution",
+      "materialComponents": "The material component of this spell is a fang from any type or size of snake.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "favor-of-shaundakul",
+      "sourceRecordId": "psc-v1-favor-of-shaundakul",
+      "spellName": "Favor of Shaundakul",
+      "materialComponents": "The material component is the caster’s holy symbol, which is not consumed in the casting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "favor-of-yathaghera",
+      "sourceRecordId": "psc-v1-favor-of-yathaghera",
+      "spellName": "Favor of Yathaghera",
+      "materialComponents": "The material components for this spell are a feather from a pegasus (freely granted) and the priestess’s holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "find-drinkable-water",
+      "sourceRecordId": "psc-v1-find-drinkable-water",
+      "spellName": "Find Drinkable Water",
+      "materialComponents": "The material component is a drop of water that need not be pure, a drop of dew, or one of the caster’s tears, which is touched to the caster’s holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "fire-purge",
+      "sourceRecordId": "psc-v1-fire-purge",
+      "spellName": "Fire Purge*",
+      "materialComponents": "The material components are the priest's holy symbol and a scorched sliver of wood.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "fire-seeds",
+      "sourceRecordId": "psc-v1-fire-seeds",
+      "spellName": "Fire Seeds",
+      "materialComponents": "material components beyond acorns or holly berries are needed for this spell.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "firelight",
+      "sourceRecordId": "psc-v1-firelight",
+      "spellName": "Firelight",
+      "materialComponents": "The material component is a mix of resins and incense, thrown into the flame to be affected.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "fireward",
+      "sourceRecordId": "psc-v1-fireward",
+      "spellName": "Fireward",
+      "materialComponents": "The material components of this spell are a pinch of sand and a drop of water.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "flame-shield",
+      "sourceRecordId": "psc-v1-flame-shield",
+      "spellName": "Flame Shield",
+      "materialComponents": "The material components for this spell are a piece of phosphorous, a drop of mercury, and a cobweb.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "focus",
+      "sourceRecordId": "psc-v1-focus",
+      "spellName": "Focus",
+      "materialComponents": "The material components are many, including special vestments, incense, oils, waters, and other equipment the DM deems appropriate.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "foresight",
+      "sourceRecordId": "psc-v1-foresight",
+      "spellName": "Foresight",
+      "materialComponents": "The material components for this spell include the bundle of sticks or lump of coal used as starter fuel and a pinch of sulphur.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "fortitude-of-uthgar",
+      "sourceRecordId": "psc-v1-fortitude-of-uthgar",
+      "spellName": "Fortitude of Uthgar",
+      "materialComponents": "The material component of this spell is the priest's holy symbol (the shaman’s sacred bundle).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "fostered-protection",
+      "sourceRecordId": "psc-v1-fostered-protection",
+      "spellName": "Fostered Protection",
+      "materialComponents": "The material component for this spell is a drop of blood or ichor from a magic-resistant creature.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "frenzy-of-the-celts",
+      "sourceRecordId": "psc-v1-frenzy-of-the-celts",
+      "spellName": "Frenzy of the Celts",
+      "materialComponents": "The material component for this spell is a tiny chariot wheel and a spark created with flint and steel.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "frisky-chest",
+      "sourceRecordId": "psc-v1-frisky-chest",
+      "spellName": "Frisky Chest",
+      "materialComponents": "The material components are a dried frog’s leg, a feather, and a fish scale.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 1,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "gauntlet-of-winds",
+      "sourceRecordId": "psc-v2-gauntlet-of-winds",
+      "spellName": "Gauntlet of Winds",
+      "materialComponents": "The material component is the priest's holy symbol, which is not consumed in the casting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "ghost-knight",
+      "sourceRecordId": "psc-v2-ghost-knight",
+      "spellName": "Ghost Knight",
+      "materialComponents": "The material component is a piece of metal armor of any size.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "gloomcloud",
+      "sourceRecordId": "psc-v2-gloomcloud",
+      "spellName": "Gloomcloud",
+      "materialComponents": "The material component is a drop of dirty water.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "glow",
+      "sourceRecordId": "psc-v2-glow",
+      "spellName": "Glow",
+      "materialComponents": "The material component is a holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "greater-creature-of-darkness",
+      "sourceRecordId": "psc-v2-greater-creature-of-darkness",
+      "spellName": "Greater Creature of Darkness",
+      "materialComponents": "The material components are a strand of spi- derweb, a pinch of soot or pitch, a piece of shell, beak, or bone that has been dyed black or black- ened in a fire, and a black feather, scale, clump of fur, or piece of skin from any flying creature.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "greater-guardian-seal",
+      "sourceRecordId": "psc-v2-greater-guardian-seal",
+      "spellName": "Greater Guardian Seal",
+      "materialComponents": "Components: V, S Casting Time: 9 Duration: | tumn/level Area of Effect: Creature touched Saving Throw: None This spell creates an invisible magical aura around its recipient (who must be willing or at least unaware; the spell fails instantly if cast on hostile, unwilling creatures). When a specific ",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "ground-trace",
+      "sourceRecordId": "psc-v2-ground-trace",
+      "spellName": "Ground Trace",
+      "materialComponents": "The material components are a hair from the caster’s body and a piece of string, cord, or thread.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "hammer-of-justice",
+      "sourceRecordId": "psc-v2-hammer-of-justice",
+      "spellName": "Hammer of Justice",
+      "materialComponents": "The material component is a miniature war hammer fashioned from diamond, obsidian, ivory, glass, or another pure, single-hued, black, white, or red, nonliving substance (cost varies with mate- rials, but average is 25 gp).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "hand-of-borogar-dwarf",
+      "sourceRecordId": "psc-v2-hand-of-borogar-dwarf",
+      "spellName": "Hand of Borogar — Dwarf",
+      "materialComponents": "The material components for this spell are a pinch of earth and a finely crafted, miniature stone fist worth no less than 1,000 gp.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "haunted-visions",
+      "sourceRecordId": "psc-v2-haunted-visions",
+      "spellName": "Haunted Visions",
+      "materialComponents": "The material components for this spell are the priest's holy symbol and a puff of smoke.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "haunting-notes-shaman",
+      "sourceRecordId": "psc-v2-haunting-notes-shaman",
+      "spellName": "Haunting Notes — Shaman",
+      "materialComponents": "The material component for both forms is mistletoe.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "helping-hand",
+      "sourceRecordId": "psc-v2-helping-hand",
+      "spellName": "Helping Hand",
+      "materialComponents": "The material component is a black silk glove.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "higher-consecration",
+      "sourceRecordId": "psc-v2-higher-consecration",
+      "spellName": "Higher Consecration",
+      "materialComponents": "The material components are the priest's holy symbol and a spark struck from flint by a piece of cold iron; a pinch of earth from a dung heap on which plants have grown; a drop of holy water; a drop of unholy water; and a vial of air from a cavern, room, or passage in which a dragon used its breath weapon within 1 tum of the sealing of the vial.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "hovering-road",
+      "sourceRecordId": "psc-v2-hovering-road",
+      "spellName": "Hovering Road",
+      "materialComponents": "The material components are a chunk of black marble and a loop of gold wire.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "hunt-nemesis-barbarian",
+      "sourceRecordId": "psc-v2-hunt-nemesis-barbarian",
+      "spellName": "Hunt Nemesis — Barbarian",
+      "materialComponents": "The material component is a tiny pebble, held in the priest's hand and not consumed during casting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "infestation",
+      "sourceRecordId": "psc-v2-infestation",
+      "spellName": "Infestation",
+      "materialComponents": "The material components of this spell are the priest’s holy symbol and a drop of fire beetle ichor.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "inscribe-speech-old-empire",
+      "sourceRecordId": "psc-v2-inscribe-speech-old-empire",
+      "spellName": "Inscribe Speech — Old Empire",
+      "materialComponents": "The material components for this spell are squid ink, a hawk’s feather, and papyrus.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "inverted-ethics",
+      "sourceRecordId": "psc-v2-inverted-ethics",
+      "spellName": "Inverted Ethics",
+      "materialComponents": "The material component is a miniature golden balance, Notes: Common for priests with major access to the sphere of Chaos.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "istishias-tsunami",
+      "sourceRecordId": "psc-v2-istishias-tsunami",
+      "spellName": "Istishia’s Tsunami",
+      "materialComponents": "The material components are the priest's holy symbol and a small stone, which is thrown into the water, Notes: Granted by Istishia the Water Lord of the FORGOTTEN REALMS setting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "lair-divination",
+      "sourceRecordId": "psc-v2-lair-divination",
+      "spellName": "Lair Divination",
+      "materialComponents": "The material components are a handful of coins, incense, and the caster’s holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "levitate-shukenja",
+      "sourceRecordId": "psc-v2-levitate-shukenja",
+      "spellName": "Levitate — Shukenja",
+      "materialComponents": "The material component is a small kite and string.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "lighten-load",
+      "sourceRecordId": "psc-v2-lighten-load",
+      "spellName": "Lighten Load",
+      "materialComponents": "The material components are a feather and a slip of paper moistened by a soap bubble.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "lightning-water",
+      "sourceRecordId": "psc-v2-lightning-water",
+      "spellName": "Lightning Water",
+      "materialComponents": "The material components for this spell are a miniature silver lightning rod worth at least 500 gp and a vial of holy water sprinkled into the trough of water to be ensorcelled.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "locate-spirit-animal",
+      "sourceRecordId": "psc-v2-locate-spirit-animal",
+      "spellName": "Locate Spirit Animal",
+      "materialComponents": "The material components for this spell are a bow!",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "maelstrom",
+      "sourceRecordId": "psc-v2-maelstrom",
+      "spellName": "Maelstrom",
+      "materialComponents": "The material component is a drop of water blessed by Umberlee or by a senior Umberlant in the name of the goddess.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "magical-stone",
+      "sourceRecordId": "psc-v2-magical-stone",
+      "spellName": "Magical Stone",
+      "materialComponents": "The material components are the priest's holy symbol and three small pebbles, unworked by tools or magic of any type.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "meld",
+      "sourceRecordId": "psc-v2-meld",
+      "spellName": "Meld",
+      "materialComponents": "The material component is a miniature crystal chalice worth no less than 1,000 gp, which is smashed as the casting is completed.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "memory-wrack",
+      "sourceRecordId": "psc-v2-memory-wrack",
+      "spellName": "Memory Wrack",
+      "materialComponents": "The material component is a ruby of at least 200 gp value, which is crushed during the casting, Notes: Common for priests with major access 10 the sphere of Thought (ToM).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "mental-domination",
+      "sourceRecordId": "psc-v2-mental-domination",
+      "spellName": "Mental Domination",
+      "materialComponents": "The material component is a mesh of fine threads that the priest loops around the fingertips of one hand and manipulates in the way that a pup- peteer controls a puppet.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "mindkiller",
+      "sourceRecordId": "psc-v2-mindkiller",
+      "spellName": "Mindkiller",
+      "materialComponents": "The material component is a gem of at least 500 gp value, which is consumed in the casting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "minor-wealthtwist",
+      "sourceRecordId": "psc-v2-minor-wealthtwist",
+      "spellName": "Minor Wealthtwist",
+      "materialComponents": "The material component is the wealth needed to cast the level of spell desired.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "mist-of-the-goddess",
+      "sourceRecordId": "psc-v2-mist-of-the-goddess",
+      "spellName": "Mist of the Goddess",
+      "materialComponents": "The material component is a drop of water blessed by Eldath, blessed by one of her personal servants (her servitor creatures) in her name, or consecrated to her by an Exalted of Eldath.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "mistaken-missive",
+      "sourceRecordId": "psc-v2-mistaken-missive",
+      "spellName": "Mistaken Missive",
+      "materialComponents": "The material component is three drops of ink.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "moon-path",
+      "sourceRecordId": "psc-v2-moon-path",
+      "spellName": "Moon Path",
+      "materialComponents": "The material component is a handful of pow- dered moonstone.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "moonbow-elf",
+      "sourceRecordId": "psc-v2-moonbow-elf",
+      "spellName": "Moonbow — Elf",
+      "materialComponents": "The material components are the priest's holy symbol and the silken thread of a cobweb coated in dew gathered beneath the light of a full moon.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "moonbridge-elf",
+      "sourceRecordId": "psc-v2-moonbridge-elf",
+      "spellName": "Moonbridge — Elf",
+      "materialComponents": "The material components of this spell are the priest's holy symbol and a vial of holy water that has been bathed in the light of the last full moon for at least six consecutive hours.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "mortal-snare-shaman",
+      "sourceRecordId": "psc-v2-mortal-snare-shaman",
+      "spellName": "Mortal Snare — Shaman",
+      "materialComponents": "The material components are a piece of human bone, a pinch of ash from something organic that has been burned in a fire of natural origin (light- ning, for example, not caused by magic or deliber- ately set by a person), and a bone from a creature that froze to death.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "murk-sahuagin",
+      "sourceRecordId": "psc-v2-murk-sahuagin",
+      "spellName": "Murk — Sahuagin",
+      "materialComponents": "The material component is spittle.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "music-of-the-spheres",
+      "sourceRecordId": "psc-v2-music-of-the-spheres",
+      "spellName": "Music of the Spheres",
+      "materialComponents": "The material component comprises a set of three small bows made from fine silver, each cost- ing 100 gp.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "mystic-lash",
+      "sourceRecordId": "psc-v2-mystic-lash",
+      "spellName": "Mystic Lash",
+      "materialComponents": "material components are the priest's holy symbol and a piece of amber.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "nymphs-beauty-elf",
+      "sourceRecordId": "psc-v2-nymphs-beauty-elf",
+      "spellName": "Nymph’s Beauty — Elf",
+      "materialComponents": "The material components are the priest’s holy symbol and the tear of a nymph that is placed on the tongue during the casting and vanishes upon completion.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "part-water",
+      "sourceRecordId": "psc-v2-part-water",
+      "spellName": "Part Water",
+      "materialComponents": "The material component is the priest's holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "physical-mirror",
+      "sourceRecordId": "psc-v2-physical-mirror",
+      "spellName": "Physical Mirror",
+      "materialComponents": "The material component is a tiny mirror of pol- ished platinum, worth at least 500 gp.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "plant-door",
+      "sourceRecordId": "psc-v2-plant-door",
+      "spellName": "Plant Door",
+      "materialComponents": "The material components for this spell are a piece of charcoal and the caster’s holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "pool-of-deeds-vedic",
+      "sourceRecordId": "psc-v2-pool-of-deeds-vedic",
+      "spellName": "Pool of Deeds — Vedic",
+      "materialComponents": "The material component is either a numbered wheel or tea leaves.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "possess-animal",
+      "sourceRecordId": "psc-v2-possess-animal",
+      "spellName": "Possess Animal",
+      "materialComponents": "The material component is a bowl of incense and a morsel of food appealing to the animal.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "probing-arm",
+      "sourceRecordId": "psc-v2-probing-arm",
+      "spellName": "Probing Arm",
+      "materialComponents": "The material components of a probing arm are two short sticks or small straight rods, two smooth wooden or glass balls (or a real socket joint from any dead creature), and two human hairs.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "protection-from-electricity-10-radius",
+      "sourceRecordId": "psc-v2-protection-from-electricity-10-radius",
+      "spellName": "Protection From Electricity, 10’ Radius",
+      "materialComponents": "The material component is a thread of copper for each protected creature.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "protection-from-gas-5-radius",
+      "sourceRecordId": "psc-v2-protection-from-gas-5-radius",
+      "spellName": "Protection From Gas, 5' Radius",
+      "materialComponents": "The material components of the spell consist of ground insect bodies.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "protection-from-spirits",
+      "sourceRecordId": "psc-v2-protection-from-spirits",
+      "spellName": "Protection From Spirits",
+      "materialComponents": "The material component is a ginkgo wand with paper prayer strips attached.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "quench-the-spi",
+      "sourceRecordId": "psc-v2-quench-the-spi",
+      "spellName": "Quench The Spi",
+      "materialComponents": "The material component is a fleshless human finger bone.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "rainbow",
+      "sourceRecordId": "psc-v2-rainbow",
+      "spellName": "Rainbow",
+      "materialComponents": "The material component is a bronze die.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "reflecting-pool",
+      "sourceRecordId": "psc-v2-reflecting-pool",
+      "spellName": "Reflecting Pool",
+      "materialComponents": "The material component is the oil extracted from such nuts as the hickory and the walnut, refined, and dropped in three measures upon the surface of the pool.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "reincarnation-sight-vedic",
+      "sourceRecordId": "psc-v2-reincarnation-sight-vedic",
+      "spellName": "Reincarnation Sight — Vedic",
+      "materialComponents": "The material component is a seed (of any type) and a drop of water.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "resist",
+      "sourceRecordId": "psc-v2-resist",
+      "spellName": "Resist",
+      "materialComponents": "The material components of this spell are a piece of rice cake or dumpling, a scrap of cloth, a drop of water, and an owl's feather.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "restore-earth",
+      "sourceRecordId": "psc-v2-restore-earth",
+      "spellName": "Restore Earth",
+      "materialComponents": "The material component is a piece of clay with iron filings mixed into it, which is then shaped to resemble the original appearance of the structure to be repaired.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "retarget",
+      "sourceRecordId": "psc-v2-retarget",
+      "spellName": "Retarget",
+      "materialComponents": "The material components for this spell are the caster's holy symbol and a silver mirror.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "reverse-time",
+      "sourceRecordId": "psc-v2-reverse-time",
+      "spellName": "Reverse Time",
+      "materialComponents": "The material component is an etched silver arrow bent into a circle, The arrow must be no more than 3 inches long and worth no less than 500 gp.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "revive-spirit-shaman",
+      "sourceRecordId": "psc-v2-revive-spirit-shaman",
+      "spellName": "Revive Spirit — Shaman",
+      "materialComponents": "The material component is the priest’s holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "ripen",
+      "sourceRecordId": "psc-v2-ripen",
+      "spellName": "Ripen",
+      "materialComponents": "The material component is mistletoe.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "rites-of-istishia",
+      "sourceRecordId": "psc-v2-rites-of-istishia",
+      "spellName": "Rites of Istishia*",
+      "materialComponents": "The material components for this spell is the priest’s holy symbol and a pinch of ground sea shell for each priest involved in the dispute.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "ritual-of-transference",
+      "sourceRecordId": "psc-v2-ritual-of-transference",
+      "spellName": "Ritual of Transference*",
+      "materialComponents": "The material components are two properly con- secrated holy symbols: the priest's own and another dedicated to the same deity that is con- sumed during the casting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "sacred-guardian",
+      "sourceRecordId": "psc-v2-sacred-guardian",
+      "spellName": "Sacred Guardian",
+      "materialComponents": "The material component is a rose petal that has been kissed by the spell recipient.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "sarcophagus-of-death-old-empire",
+      "sourceRecordId": "psc-v2-sarcophagus-of-death-old-empire",
+      "spellName": "Sarcophagus of Death — Old Empire",
+      "materialComponents": "material components are a fragment of a sarcophagus consecrated by a priest of Osiris or Nephthys and the priest's holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "screaming-skull",
+      "sourceRecordId": "psc-v2-screaming-skull",
+      "spellName": "Screaming Skull",
+      "materialComponents": "material component) to be capable of flight and attack as the priest wills. The skull has AC 0, MV 21 (flying), 4+4 HD, | bite for 1d6 damage, ML 20. The skull’s bite causes fear as the Ist-level priest spell (save vs. spell to negate). The skull falls to the ground at the expiration of the spell or",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "scroll",
+      "sourceRecordId": "psc-v2-scroll",
+      "spellName": "Scroll",
+      "materialComponents": "The material component is a mouthful of sea water, swallowed by the recipient.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "seal-of-cyrrollalee-halfling",
+      "sourceRecordId": "psc-v2-seal-of-cyrrollalee-halfling",
+      "spellName": "Seal of Cyrrollalee — Halfling",
+      "materialComponents": "The material component is the priest’s holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "sense-spirit-shaman",
+      "sourceRecordId": "psc-v2-sense-spirit-shaman",
+      "spellName": "Sense Spirit — Shaman",
+      "materialComponents": "The material component is a small crystal, worth at least 10 sp, held in the right hand during casting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "shadow-sword",
+      "sourceRecordId": "psc-v2-shadow-sword",
+      "spellName": "Shadow Sword",
+      "materialComponents": "The material component is the priest's holy symbol (a gauntlet) in which the shadow sword must be wielded.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "shatter-stone-and-metal",
+      "sourceRecordId": "psc-v2-shatter-stone-and-metal",
+      "spellName": "Shatter Stone and Metal",
+      "materialComponents": "The material component is a miniature stone hammer.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "sheelas-entangle-halfling",
+      "sourceRecordId": "psc-v2-sheelas-entangle-halfling",
+      "spellName": "Sheela’s Entangle — Halfling",
+      "materialComponents": "The material components are the caster's holy symbol and a small piece of vine.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "shrieking-walls",
+      "sourceRecordId": "psc-v2-shrieking-walls",
+      "spellName": "Shrieking Walls",
+      "materialComponents": "The material components are a small golden bell and a bee’s wing.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "singing-stone",
+      "sourceRecordId": "psc-v2-singing-stone",
+      "spellName": "Singing Stone",
+      "materialComponents": "The material component is a small hollow metal tube (chime).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "sirocco",
+      "sourceRecordId": "psc-v2-sirocco",
+      "spellName": "Sirocco",
+      "materialComponents": "The material components are the priest’s holy symbol and a drop of sweat.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "sleep-of-dragons",
+      "sourceRecordId": "psc-v2-sleep-of-dragons",
+      "spellName": "Sleep of Dragons",
+      "materialComponents": "The material components are the priest's holy symbol and a thimbleful of dragon’s blood.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "slow-rot",
+      "sourceRecordId": "psc-v2-slow-rot",
+      "spellName": "Slow Rot",
+      "materialComponents": "The material component is a pinch of sugar, Notes: Uncommon for druids and priests with access to the sphere of Plants (ToM).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "snake-skin",
+      "sourceRecordId": "psc-v2-snake-skin",
+      "spellName": "Snake Skin",
+      "materialComponents": "The material component is a small piece of desiccated skin shed by any serpent.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "snake-summoning",
+      "sourceRecordId": "psc-v2-snake-summoning",
+      "spellName": "Snake Summoning",
+      "materialComponents": "The material component is a small silver flute, which is played throughout the duration of the spell.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "snapdragon",
+      "sourceRecordId": "psc-v2-snapdragon",
+      "spellName": "Snapdragon",
+      "materialComponents": "The material component is a snapdragon blos- som.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "sols-searing-orb",
+      "sourceRecordId": "psc-v2-sols-searing-orb",
+      "spellName": "Sol’s Searing Orb",
+      "materialComponents": "The material component is a topaz gemstone worth at least 500 gp.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "soul-forge-dwarf",
+      "sourceRecordId": "psc-v2-soul-forge-dwarf",
+      "spellName": "Soul Forge — Dwarf",
+      "materialComponents": "The material component is the priest’s holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "soultheft-drow",
+      "sourceRecordId": "psc-v2-soultheft-drow",
+      "spellName": "Soultheft — Drow",
+      "materialComponents": "The material component is the priest's holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "speak-with-ancient-dead-elf",
+      "sourceRecordId": "psc-v2-speak-with-ancient-dead-elf",
+      "spellName": "Speak With Ancient Dead — Elf",
+      "materialComponents": "Components: V, S Casting Time: 5 Duration: 2 rds./level Area of Effect: 1 animal within 30 ft. Saving Throw: None This spell empowers the priest to comprehend and communicate with any warm- or cold-blooded Aaa ae a a ee Speak With Dead EEE normal or giant animal that is not mindless, The priest is a",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "speak-with-dead",
+      "sourceRecordId": "psc-v2-speak-with-dead",
+      "spellName": "Speak With Dead",
+      "materialComponents": "The priest needs a holy symbol and burning incense in order to cast this spell upon the body, remains, or a portion thereof.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC",
+      "recordStatus": "CORRECTED_FROM_VISUAL_SOURCE",
+      "reviewFlag": false
+    },
+    {
+      "id": "spectral-senses",
+      "sourceRecordId": "psc-v2-spectral-senses",
+      "spellName": "Spectral Senses",
+      "materialComponents": "The material components are the priest’s unholy symbol and a black, hooded cowl, which must be worn over the eyes and ears of the priest to benefit from the spell.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "speed-rot",
+      "sourceRecordId": "psc-v2-speed-rot",
+      "spellName": "Speed Rot",
+      "materialComponents": "The material component is a bit of mold.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "speeding-trident",
+      "sourceRecordId": "psc-v2-speeding-trident",
+      "spellName": "Speeding Trident",
+      "materialComponents": "The material components are three drops of water and three arrowheads, dagger points, or metal wedges (they must be of a hard ferrous metal, but need not be tempered or ever been intended or used as weapons).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "spelltouch",
+      "sourceRecordId": "psc-v2-spelltouch",
+      "spellName": "Spelltouch",
+      "materialComponents": "The material components of this spell are a pinch of powdered gemstone (of 200 gp value per evel of the stored spell) and a pinch of the ash left by any fire created or augmented by a spell, com- bined with a drop of water and touched to the item during the casting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "spellweb-drow",
+      "sourceRecordId": "psc-v2-spellweb-drow",
+      "spellName": "Spellweb — Drow",
+      "materialComponents": "The material components are the priest's holy symbol, a crystal of any size and type (e.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 2,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "spirit-of-flame",
+      "sourceRecordId": "psc-v3-spirit-of-flame",
+      "spellName": "Spirit of Flame",
+      "materialComponents": "The material component is an offering appro- priate to the deity.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "spiritual-hammer",
+      "sourceRecordId": "psc-v3-spiritual-hammer",
+      "spellName": "Spiritual Hammer",
+      "materialComponents": "The material component is a normal war hammer that the priest must hur] toward opponents while uttering a plea to his deity.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "spring-mastery",
+      "sourceRecordId": "psc-v3-spring-mastery",
+      "spellName": "Spring Mastery",
+      "materialComponents": "The material components are three drops of water blessed by Eldath, blessed by one of her per- sonal servants (her servitor creatures) in her name, or consecrated to her by an Exalted of Eldath.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "steal-psionic-strength-duergar",
+      "sourceRecordId": "psc-v3-steal-psionic-strength-duergar",
+      "spellName": "Steal Psionic Strength — Duergar",
+      "materialComponents": "The material component is the priestess's holy symbol, which is touched to her brow during the casting of the spell.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "stone-seeing-dwarf",
+      "sourceRecordId": "psc-v3-stone-seeing-dwarf",
+      "spellName": "Stone Seeing — Dwarf",
+      "materialComponents": "The material components are the priest's holy symbol and a small stone chip of the type of rock on which the spell is centered.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "stone-tell",
+      "sourceRecordId": "psc-v3-stone-tell",
+      "spellName": "Stone Tell",
+      "materialComponents": "The material components for this spell are a drop of mercury and a bit of clay.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "stone-walk",
+      "sourceRecordId": "psc-v3-stone-walk",
+      "spellName": "Stone Walk",
+      "materialComponents": "The material component of the preparatory ritual for the end sites of the spell is a paste with 602 which each end of the stone walk is outlined.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "stonefall-dwarf",
+      "sourceRecordId": "psc-v3-stonefall-dwarf",
+      "spellName": "Stonefall — Dwarf",
+      "materialComponents": "The material component is a handful (at least three) of fingerjoint-sized or larger stones or pebbles.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "stonewood",
+      "sourceRecordId": "psc-v3-stonewood",
+      "spellName": "Stonewood",
+      "materialComponents": "The material components are a gemstone of at least 500 gp value and a small piece of hardwood.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "stormrage",
+      "sourceRecordId": "psc-v3-stormrage",
+      "spellName": "Stormrage",
+      "materialComponents": "The material components are a feather from any sort of bird that can fly, a pinch of ash from any burnt organic material that was struck by lightning, and a piece of flint.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "striking-wave",
+      "sourceRecordId": "psc-v3-striking-wave",
+      "spellName": "Striking Wave",
+      "materialComponents": "The material component is a drop of water blessed by Umberlee or by a senior Umberlant in the name of the goddess.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "substitution",
+      "sourceRecordId": "psc-v3-substitution",
+      "spellName": "Substitution",
+      "materialComponents": "The material components are the priest’s holy symbol and a drop of holy water.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "summon-ancestor",
+      "sourceRecordId": "psc-v3-summon-ancestor",
+      "spellName": "Summon Ancestor",
+      "materialComponents": "The material components are the priest’s holy symbol (the shaman’s sacred bundle), a relic of the desired ancestor (though another may appear), and a small bonfire.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "summon-animal-spirit",
+      "sourceRecordId": "psc-v3-summon-animal-spirit",
+      "spellName": "Summon Animal Spirit",
+      "materialComponents": "The material component is a small whistle carved from a bone taken from the appropriate type of animal.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "old-empire",
+      "sourceRecordId": "psc-v3-old-empire",
+      "spellName": "Old Empire",
+      "materialComponents": "The material components are the priest’s holy symbol and a large gem of at least 1,000 gp value, which must be sacrificed to the deity in the casting (and is destroyed in the process).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "summon-lock-lurker",
+      "sourceRecordId": "psc-v3-summon-lock-lurker",
+      "spellName": "Summon Lock Lurker",
+      "materialComponents": "The material component is a gold coin.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "summon-spectator",
+      "sourceRecordId": "psc-v3-summon-spectator",
+      "spellName": "Summon Spectator",
+      "materialComponents": "The material components are the priest's holy symbol and a steel gauntlet blessed in the name of Helm; the latter is consumed in the casting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "summon-varrangoin",
+      "sourceRecordId": "psc-v3-summon-varrangoin",
+      "spellName": "Summon Varrangoin",
+      "materialComponents": "The material component is a small quartz prism crafted with asymmetric facets, contained within a brass sphere.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "sunstroke-old-empire",
+      "sourceRecordId": "psc-v3-sunstroke-old-empire",
+      "spellName": "Sunstroke —Old Empire",
+      "materialComponents": "The material components are the priest's holy symbol and a small piece of flammable material (paper, cloth, dry wood).",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "surf-surface-sojourn-sea-elf",
+      "sourceRecordId": "psc-v3-surf-surface-sojourn-sea-elf",
+      "spellName": "Surf Surface Sojourn — Sea Elf",
+      "materialComponents": "The material components are the priest's holy symbol and a snail shell.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "swordward",
+      "sourceRecordId": "psc-v3-swordward",
+      "spellName": "Swordward",
+      "materialComponents": "The material components are an edged weapon (or a fragment of such a blade) that has drawn blood in battle, a piece of lodestone, and an amethyst of at least 5 gp value.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "sylvan-form-elf",
+      "sourceRecordId": "psc-v3-sylvan-form-elf",
+      "spellName": "Sylvan Form — Elf",
+      "materialComponents": "the material components are available.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "temporal-anomaly-elf",
+      "sourceRecordId": "psc-v3-temporal-anomaly-elf",
+      "spellName": "Temporal Anomaly — Elf",
+      "materialComponents": "The material components are the priest's holy symbol and a powdered ruby worth at least 1,000 gp.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "tentacle-of-withering",
+      "sourceRecordId": "psc-v3-tentacle-of-withering",
+      "spellName": "Tentacle of Withering",
+      "materialComponents": "The material components are a fragment of bone or small complete bone and a piece of rubber or eel flesh.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "test-of-maat-old-empire",
+      "sourceRecordId": "psc-v3-test-of-maat-old-empire",
+      "spellName": "Test of Maat — Old Empire",
+      "materialComponents": "The material component is the priest's holy symbol held over his left eye with his right hand.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "time-pool",
+      "sourceRecordId": "psc-v3-time-pool",
+      "spellName": "Time Pool",
+      "materialComponents": "The material components is a pinch of pow- dered quartz.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "totem-beast",
+      "sourceRecordId": "psc-v3-totem-beast",
+      "spellName": "Totem Beast",
+      "materialComponents": "The material components are 10 gp worth of high quality food appropriate for local animals (both carnivores and herbivores) and a miniature leash made of fine gold wire.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "tree-growth",
+      "sourceRecordId": "psc-v3-tree-growth",
+      "spellName": "Tree Growth",
+      "materialComponents": "The material component is the seed itself, which must be undamaged but need not be magically enchanted before this spell is cast.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "tumblethorns",
+      "sourceRecordId": "psc-v3-tumblethorns",
+      "spellName": "Tumblethorns",
+      "materialComponents": "The material components are the priest's holy symbol and a small golden circlet worth at least 250 gp.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "unwilling-wood",
+      "sourceRecordId": "psc-v3-unwilling-wood",
+      "spellName": "Unwilling Wood",
+      "materialComponents": "The material components are a bit of tree root and the caster’s holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "venom-of-varae",
+      "sourceRecordId": "psc-v3-venom-of-varae",
+      "spellName": "Venom of Varae",
+      "materialComponents": "The material components are a small vial of any sort of snake venom, which is poured into the spell- caster’s mouth during the incantation, and the priest’s holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "venomed-claws",
+      "sourceRecordId": "psc-v3-venomed-claws",
+      "spellName": "Venomed Claws",
+      "materialComponents": "The material component is a snake fang or the poison sac of a venomous spider.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "wall-of-fire",
+      "sourceRecordId": "psc-v3-wall-of-fire",
+      "spellName": "Wall of Fire",
+      "materialComponents": "The material component is a pinch of phospho- rus.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "wall-of-shadow",
+      "sourceRecordId": "psc-v3-wall-of-shadow",
+      "spellName": "Wall of Shadow",
+      "materialComponents": "The material components are the priest's holy symbol and an area of shadow.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "warp-stone-or-metal",
+      "sourceRecordId": "psc-v3-warp-stone-or-metal",
+      "spellName": "Warp Stone or Metal",
+      "materialComponents": "The material component is a small piece of iron ore that can be crumbled by hand.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "water-witch",
+      "sourceRecordId": "psc-v3-water-witch",
+      "spellName": "Water Witch",
+      "materialComponents": "The material components are a tooth from any sort of animal, and three scales from any aquatic creature.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "waterfloat",
+      "sourceRecordId": "psc-v3-waterfloat",
+      "spellName": "Waterfloat",
+      "materialComponents": "The material component is the priest's holy symbol.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "waterspout",
+      "sourceRecordId": "psc-v3-waterspout",
+      "spellName": "Waterspout",
+      "materialComponents": "The material component is a drop of water blessed by Umberlee or by a senior Umberlant in the name of the goddess.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "wealthtwist",
+      "sourceRecordId": "psc-v3-wealthtwist",
+      "spellName": "Wealthtwist",
+      "materialComponents": "The material component is the wealth needed to cast the level of spell desired.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "wealthword",
+      "sourceRecordId": "psc-v3-wealthword",
+      "spellName": "Wealthword",
+      "materialComponents": "The material component is the wealth needed to cast the level of spell desired.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "weapon-bless",
+      "sourceRecordId": "psc-v3-weapon-bless",
+      "spellName": "Weapon Bless",
+      "materialComponents": "The material component is a writing brush and ink made from dragon’s blood.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "weapon-of-the-earth-dwarf",
+      "sourceRecordId": "psc-v3-weapon-of-the-earth-dwarf",
+      "spellName": "Weapon of the Earth — Dwarf",
+      "materialComponents": "The material components are the priest’s holy symbol and a small chunk of iron ore.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "weighty-chest",
+      "sourceRecordId": "psc-v3-weighty-chest",
+      "spellName": "Weighty Chest",
+      "materialComponents": "The material component is a small lead ball.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "wheel-of-bones",
+      "sourceRecordId": "psc-v3-wheel-of-bones",
+      "spellName": "Wheel of Bones",
+      "materialComponents": "The material components are at least two bones or bone fragments from any source.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "whip-of-pain",
+      "sourceRecordId": "psc-v3-whip-of-pain",
+      "spellName": "Whip of Pain",
+      "materialComponents": "The material components are a drop of unholy water and one of the caster's hairs.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "whip-of-woe",
+      "sourceRecordId": "psc-v3-whip-of-woe",
+      "spellName": "Whip of Woe",
+      "materialComponents": "The material component is a length of any sort of metal chain longer than the length of the caster’s hand.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "wind-and-rain-protection",
+      "sourceRecordId": "psc-v3-wind-and-rain-protection",
+      "spellName": "Wind and Rain Protection",
+      "materialComponents": "The material component is a fan-shaped leaf, which is crushed in the casting, and a diamond of 500 gp or greater value, which is destroyed in the casting.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "wind-walk-shukenja",
+      "sourceRecordId": "psc-v3-wind-walk-shukenja",
+      "spellName": "Wind Walk — Shukenja",
+      "materialComponents": "The material components are fire and a few drops of holy water.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "wood-sword",
+      "sourceRecordId": "psc-v3-wood-sword",
+      "spellName": "Wood Sword",
+      "materialComponents": "The material component is a twig, branch, or any fragment of wood that still retains some bark and has not been cut, stained, varnished, or otherwise altered by tools.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "woodiron",
+      "sourceRecordId": "psc-v3-woodiron",
+      "spellName": "Woodiron",
+      "materialComponents": "The material component is a chip of the bronze- hard agafari wood of Nibenay.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "zin-carla",
+      "sourceRecordId": "psc-v3-zin-carla",
+      "spellName": "Zin-Carla",
+      "materialComponents": "The material component is a treasured object that belonged to the body to be controlled.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "caltrops",
+      "sourceRecordId": "psc-v3-caltrops",
+      "spellName": "Caltrops",
+      "materialComponents": "The material component is a golden caltrop.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    },
+    {
+      "id": "illusory-fortification",
+      "sourceRecordId": "psc-v3-illusory-fortification",
+      "spellName": "Illusory Fortification",
+      "materialComponents": "The material components are the priest’s holy symbol, a handful of stones, powdered mortar, and a gem worth at least 3,000 gp.",
+      "sourceBook": "Priest Spell Compendium",
+      "sourceVolume": 3,
+      "sourceAuthority": "PSC"
+    }
+  ]
+}

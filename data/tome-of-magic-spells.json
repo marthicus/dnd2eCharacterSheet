@@ -1,0 +1,261 @@
+[
+  {
+    "id": "conjure-spell-component",
+    "name": "Conjure Spell Component",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Conjuration",
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "1 mile/level",
+    "duration": "1 round",
+    "castingTime": "1",
+    "areaOfEffect": "3 components/level",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "nahals-reckless-dweomer",
+    "name": "Nahal’s Reckless Dweomer",
+    "level": 1,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Invocation",
+      "Evocation"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Special",
+    "duration": "Special",
+    "castingTime": "5",
+    "areaOfEffect": "Special",
+    "savingThrow": "Special",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "watery-double",
+    "name": "Watery Double",
+    "level": 3,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Conjuration",
+      "Summoning, Enchantment"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "duration": "Special",
+    "castingTime": "3",
+    "areaOfEffect": "One body of liquid",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "mordenkainens-celerity",
+    "name": "Mordenkainen’s Celerity",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Alteration, Invocation"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "0",
+    "duration": "1 turn",
+    "castingTime": "4",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "summon-lycanthrope",
+    "name": "Summon Lycanthrope",
+    "level": 4,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Conjuration",
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Special",
+    "duration": "Special",
+    "castingTime": "1 turn",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "khazids-procurement",
+    "name": "Khazid’s Procurement",
+    "level": 5,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Divination, Summoning"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Special",
+    "duration": "1 round/level",
+    "castingTime": "1 turn",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "forests-fiery-constrictor",
+    "name": "Forest’s Fiery Constrictor",
+    "level": 6,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Conjuration",
+      "Summoning"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "10 yards/level",
+    "duration": "1 round/level",
+    "castingTime": "6",
+    "areaOfEffect": "One source of fire",
+    "savingThrow": "Special",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "lorloveims-shadowy-transformation",
+    "name": "Lorloveim’s Shadowy Transformation",
+    "level": 6,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Illusion"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "Touch",
+    "duration": "1d4 rounds +1 round/level",
+    "castingTime": "6",
+    "areaOfEffect": "Special",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "hatch-the-stone-from-the-egg",
+    "name": "Hatch the Stone from the Egg",
+    "level": 7,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Alteration, Enchantment, Evocation"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Touch",
+    "duration": "Special",
+    "castingTime": "1d4+4 hours",
+    "areaOfEffect": "One alchemical mixture",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "intensify-summoning",
+    "name": "Intensify Summoning",
+    "level": 7,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Conjuration",
+      "Summoning, Necromancy"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "Special",
+    "duration": "1 turn",
+    "castingTime": "6",
+    "areaOfEffect": "Special",
+    "savingThrow": "None",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "abi-dalzims-horrid-wilting",
+    "name": "Abi-Dalzim’s Horrid Wilting",
+    "level": 8,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Alteration, Necromancy"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialComponents": null,
+    "range": "20 yards/level",
+    "duration": "Instantaneous",
+    "castingTime": "8",
+    "areaOfEffect": "30-foot cube",
+    "savingThrow": "1/2",
+    "source": "Tome of Magic",
+    "notes": []
+  },
+  {
+    "id": "gunthers-kaleidoscopic-strike",
+    "name": "Gunther’s Kaleidoscopic Strike",
+    "level": 8,
+    "type": "Spell",
+    "school": "Wizard",
+    "schools": [
+      "Invocation",
+      "Evocation"
+    ],
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "materialComponents": null,
+    "range": "5 yards/level",
+    "duration": "Instantaneous",
+    "castingTime": "8",
+    "areaOfEffect": "One creature",
+    "savingThrow": "Neg.",
+    "source": "Tome of Magic",
+    "notes": []
+  }
+]

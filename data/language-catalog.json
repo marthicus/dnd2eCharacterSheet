@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "status": "expanded-language-catalog-seed",
+  "languages": [
+    {
+      "id": "common",
+      "name": "Common",
+      "category": "common",
+      "literacySupported": true,
+      "source": "PHB",
+      "notes": []
+    },
+    {
+      "id": "dwarven",
+      "name": "Dwarven",
+      "category": "racial",
+      "speakers": [
+        "dwarf"
+      ],
+      "literacySupported": true,
+      "source": "PHB",
+      "notes": []
+    },
+    {
+      "id": "elven",
+      "name": "Elven",
+      "category": "racial",
+      "speakers": [
+        "elf"
+      ],
+      "literacySupported": true,
+      "source": "PHB",
+      "notes": []
+    },
+    {
+      "id": "gnomish",
+      "name": "Gnomish",
+      "category": "racial",
+      "speakers": [
+        "gnome"
+      ],
+      "literacySupported": true,
+      "source": "PHB",
+      "notes": []
+    },
+    {
+      "id": "halfling",
+      "name": "Halfling",
+      "category": "racial",
+      "speakers": [
+        "halfling"
+      ],
+      "literacySupported": true,
+      "source": "PHB",
+      "notes": []
+    },
+    {
+      "id": "orc",
+      "name": "Orc",
+      "category": "humanoid",
+      "speakers": [
+        "orc"
+      ],
+      "literacySupported": false,
+      "source": "PHBR10",
+      "notes": []
+    },
+    {
+      "id": "goblin",
+      "name": "Goblin",
+      "category": "humanoid",
+      "speakers": [
+        "goblin"
+      ],
+      "literacySupported": false,
+      "source": "PHBR10",
+      "notes": []
+    },
+    {
+      "id": "hobgoblin",
+      "name": "Hobgoblin",
+      "category": "humanoid",
+      "speakers": [
+        "hobgoblin"
+      ],
+      "literacySupported": false,
+      "source": "PHBR10",
+      "notes": []
+    },
+    {
+      "id": "kobold",
+      "name": "Kobold",
+      "category": "humanoid",
+      "speakers": [
+        "kobold"
+      ],
+      "literacySupported": false,
+      "source": "PHBR10",
+      "notes": []
+    },
+    {
+      "id": "druidic",
+      "name": "Druidic",
+      "category": "secret-tongue",
+      "literacySupported": false,
+      "source": "PHB",
+      "notes": [
+        "Restricted language."
+      ]
+    }
+  ]
+}
