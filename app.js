@@ -2421,6 +2421,33 @@ function setupBladesingerReferenceSection() {
     document.querySelector('.grid').append(section);
 }
 
+function referenceRecords() {
+    const equipment = equipmentCatalogue.map(record => ({ ...record, referenceType: 'equipment', referenceLabel: 'Equipment' }));
+    const ranges = missileRangeProfiles.map(record => ({ ...record, name: record.name || record.id, referenceType: 'range', referenceLabel: 'Ranges' }));
+    const rules = [
+        ...Object.entries(classRequirements).map(([name, requirements]) => ({ id: `class-requirements-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`, name: `${name} requirements`, requirements, referenceType: 'rule', referenceLabel: 'Rules', source: 'PHB' })),
+        ...Object.entries(experienceTables).map(([id, values]) => ({ id: `experience-${id}`, name: `${id === 'paladinRanger' ? 'Paladin / Ranger' : id} experience`, levels: values.slice(1), referenceType: 'rule', referenceLabel: 'Rules', source: 'PHB' }))
+    ];
+    return [
+        ...spellCatalogRecords.map(record => ({ ...record, referenceType: 'spell', referenceLabel: 'Spells' })),
+        ...classAbilityRecords.map(record => ({ ...record, referenceType: 'ability', referenceLabel: 'Abilities' })),
+        ...nonweaponCatalog.map(record => ({ ...record, referenceType: 'proficiency', referenceLabel: 'Proficiencies' })),
+        ...languageRecords.map(record => ({ ...record, referenceType: 'language', referenceLabel: 'Languages' })),
+        ...equipment,
+        ...ranges,
+        ...rules
+    ];
+}
+
+function referenceValueText(value) {
+    return Array.isArray(value) ? value.join(', ') : typeof value === 'object' && value !== null ? JSON.stringify(value) : value;
+}
+
+function referenceTooltip(record) {
+    const fields = [record.referenceLabel, record.source, record.abilityType, record.category, record.level != null ? `Level ${record.level}` : '', record.materialComponents ? `Material: ${record.materialComponents}` : '', record.description || record.effect, Array.isArray(record.notes) ? record.notes.join('; ') : record.notes];
+    return fields.filter(Boolean).map(referenceValueText).join(' | ');
+}
+
 function setupReferenceLibrary() {
     const grid = document.querySelector('.grid');
     if (!grid) return;
@@ -2430,11 +2457,15 @@ function setupReferenceLibrary() {
         section.className = 'card wide reference-library-section';
         grid.append(section);
     }
+    const allRecords = referenceRecords();
     const modes = {
-        spells: { label: 'Spells', records: spellCatalogRecords },
-        abilities: { label: 'Abilities', records: classAbilityRecords },
-        proficiencies: { label: 'Proficiencies', records: nonweaponCatalog },
-        languages: { label: 'Languages', records: languageRecords }
+        all: { label: 'All', records: allRecords },
+        spells: { label: 'Spells', records: allRecords.filter(record => record.referenceType === 'spell') },
+        abilities: { label: 'Abilities', records: allRecords.filter(record => record.referenceType === 'ability') },
+        proficiencies: { label: 'Proficiencies', records: allRecords.filter(record => record.referenceType === 'proficiency') },
+        languages: { label: 'Languages', records: allRecords.filter(record => record.referenceType === 'language') },
+        equipment: { label: 'Equipment', records: allRecords.filter(record => record.referenceType === 'equipment') },
+        rules: { label: 'Rules', records: allRecords.filter(record => record.referenceType === 'rule') }
     };
     const mode = section.dataset.mode || 'spells';
     const active = modes[mode] || modes.spells;
@@ -2451,21 +2482,21 @@ function setupReferenceLibrary() {
     const detail = section.querySelector('[data-reference-detail]');
     const getName = record => record.name || record.spellName || record.proficiencyName || record.languageName || 'Unnamed record';
     const renderDetail = record => {
-        const fields = mode === 'spells'
+        const fields = record.referenceType === 'spell'
             ? [['Level', record.level], ['Class', (record.classLists || []).join(', ')], ['School / sphere', record.school || record.spellGroup || (record.sphere || []).join(', ')], ['Components', [record.verbal ? 'V' : '', record.somatic ? 'S' : '', record.material ? 'M' : ''].filter(Boolean).join(', ')], ['Material', record.materialComponents], ['Range', record.range], ['Casting time', record.castingTime], ['Duration', record.duration], ['Area', record.areaOfEffect], ['Saving throw', record.savingThrow], ['Description', record.description || record.effect], ['Notes', Array.isArray(record.notes) ? record.notes.join('; ') : record.notes], ['Source', record.source], ['Occurrence', record.sourceRecordId]]
-            : [['Description', record.description || record.effect], ['Notes', Array.isArray(record.notes) ? record.notes.join('; ') : record.notes], ...Object.entries(record).filter(([key]) => !['id', 'name', 'spellName', 'description', 'effect', 'notes'].includes(key)).slice(0, 6).map(([key, value]) => [key, Array.isArray(value) ? value.join(', ') : typeof value === 'object' && value !== null ? JSON.stringify(value) : value])];
+            : [['Description', record.description || record.effect], ['Notes', Array.isArray(record.notes) ? record.notes.join('; ') : record.notes], ...Object.entries(record).filter(([key]) => !['id', 'name', 'spellName', 'description', 'effect', 'notes', 'referenceType', 'referenceLabel'].includes(key)).slice(0, 8).map(([key, value]) => [key, referenceValueText(value)])];
         detail.innerHTML = `<strong>${esc(getName(record))}</strong><dl>${fields.filter(([, value]) => value !== undefined && value !== null && value !== '').map(([label, value]) => `<dt>${esc(label)}</dt><dd>${esc(value)}</dd>`).join('')}</dl>`;
     };
     const renderResults = () => {
         const needle = String(search?.value || '').trim().toLowerCase();
         const matches = records.filter(record => {
             const name = getName(record).toLowerCase();
-            const source = String(record.source || '').toLowerCase();
+            const source = referenceValueText(record.source || '').toLowerCase();
             const recordClasses = record.classLists || record.classes || [];
             const group = record.category || record.group || record.abilityType || '';
             return (!needle || name.includes(needle) || source.includes(needle)) && (!classFilter || !classFilter.value || recordClasses.includes(classFilter.value)) && (!groupFilter || !groupFilter.value || group === groupFilter.value) && (!sourceFilter || !sourceFilter.value || spellSources(record).includes(sourceFilter.value));
         }).slice(0, 40);
-        results.innerHTML = matches.map((record, index) => `<button type="button" class="reference-library-result" data-reference-result="${index}"><strong>${esc(getName(record))}</strong><small>${esc(record.source || record.abilityType || record.category || '')}</small></button>`).join('') || '<small>No matching reference records.</small>';
+        results.innerHTML = matches.map((record, index) => `<button type="button" class="reference-library-result" title="${esc(referenceTooltip(record))}" data-reference-result="${index}"><strong>${esc(getName(record))}</strong><small>${esc(record.referenceLabel || record.abilityType || record.category || '')} · ${esc(referenceValueText(record.source || ''))}</small></button>`).join('') || '<small>No matching reference records.</small>';
         results.querySelectorAll('[data-reference-result]').forEach(button => button.onclick = () => renderDetail(matches[+button.dataset.referenceResult]));
     };
     section.querySelectorAll('[data-reference-mode]').forEach(button => button.onclick = () => { section.dataset.mode = button.dataset.referenceMode; setupReferenceLibrary(); });
