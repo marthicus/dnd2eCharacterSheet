@@ -153,6 +153,7 @@ let languageSourceTypes = [];
 let intelligenceBonusLanguages = [];
 let languageRaceRules = {};
 let languageCatalogStatus = 'loading';
+let spellCatalogStatus = 'loading';
 const gameRules = {
     currencyConversion: { cp: 1, sp: 10, ep: 50, gp: 100, pp: 500 },
     wealthCalculations: { baseCurrency: 'cp', displayCurrency: 'gp', allowCurrencyBreakdown: true, autoCalculateInventoryValue: true }
@@ -641,12 +642,16 @@ async function loadSpellCatalog() {
             type: 'Spell',
             notes: Array.isArray(item.notes) ? item.notes : []
         }));
+        spellCatalogStatus = 'ready';
     } catch {
         spellCatalogRecords = [];
         spellCatalogValidation = [];
         spellCatalog = [];
         spellCatalogConflicts = [];
         spellCatalogSourceRecords = [];
+        spellCatalogStatus = 'error';
+    } finally {
+        if (document.querySelector('.reference-library-section')) setupReferenceLibrary();
     }
 }
 
@@ -766,6 +771,8 @@ async function loadLanguageCatalog() {
         intelligenceBonusLanguages = [];
         languageRaceRules = {};
         languageCatalogStatus = 'error';
+    } finally {
+        if (document.querySelector('.reference-library-section')) setupReferenceLibrary();
     }
 }
 
@@ -2496,7 +2503,18 @@ function setupReferenceLibrary() {
             const group = record.category || record.group || record.abilityType || '';
             return (!needle || name.includes(needle) || source.includes(needle)) && (!classFilter || !classFilter.value || recordClasses.includes(classFilter.value)) && (!groupFilter || !groupFilter.value || group === groupFilter.value) && (!sourceFilter || !sourceFilter.value || spellSources(record).includes(sourceFilter.value));
         }).slice(0, 40);
-        results.innerHTML = matches.map((record, index) => `<button type="button" class="reference-library-result" title="${esc(referenceTooltip(record))}" data-reference-result="${index}"><strong>${esc(getName(record))}</strong><small>${esc(record.referenceLabel || record.abilityType || record.category || '')} · ${esc(referenceValueText(record.source || ''))}</small></button>`).join('') || '<small>No matching reference records.</small>';
+        const loadingMessage = mode === 'spells' && spellCatalogStatus === 'loading'
+            ? 'Loading spell reference records...'
+            : mode === 'languages' && languageCatalogStatus === 'loading'
+                ? 'Loading language reference records...'
+                : '';
+        const unavailableMessage = mode === 'spells' && spellCatalogStatus === 'error'
+            ? 'Spell reference records unavailable.'
+            : mode === 'languages' && languageCatalogStatus === 'error'
+                ? 'Language reference records unavailable.'
+                : '';
+        const emptyMessage = loadingMessage || unavailableMessage || 'No matching reference records.';
+        results.innerHTML = matches.map((record, index) => `<button type="button" class="reference-library-result" title="${esc(referenceTooltip(record))}" data-reference-result="${index}"><strong>${esc(getName(record))}</strong><small>${esc(record.referenceLabel || record.abilityType || record.category || '')} · ${esc(referenceValueText(record.source || ''))}</small></button>`).join('') || `<small>${esc(emptyMessage)}</small>`;
         results.querySelectorAll('[data-reference-result]').forEach(button => button.onclick = () => renderDetail(matches[+button.dataset.referenceResult]));
     };
     section.querySelectorAll('[data-reference-mode]').forEach(button => button.onclick = () => { section.dataset.mode = button.dataset.referenceMode; setupReferenceLibrary(); });
