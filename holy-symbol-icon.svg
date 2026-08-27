@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="geometricPrecision" role="img" aria-label="Priest source">
+  <circle cx="32" cy="32" r="24" fill="#c69c3a" stroke="#211a14" stroke-width="4"/>
+  <path fill="#211a14" d="M28 12h8v16h16v8H36v16h-8V36H12v-8h16z"/>
+  <circle cx="32" cy="32" r="5" fill="#f2d27a"/>
+</svg>

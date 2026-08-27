@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "id": "paladin-spell-progression",
+  "name": "PALADIN SPELL PROGRESSION",
+  "recordType": "spell-progression",
+  "class": "paladin",
+  "source": "AD&D 2E PHB",
+  "sourceTable": 8,
+  "bonusSpellsFromAbility": false,
+  "abilityScore": "wisdom",
+  "castingProgression": [
+    { "paladinLevel": 9, "castingLevel": 1, "spells": { "1": 1, "2": 0, "3": 0, "4": 0 } },
+    { "paladinLevel": 10, "castingLevel": 2, "spells": { "1": 2, "2": 0, "3": 0, "4": 0 } },
+    { "paladinLevel": 11, "castingLevel": 3, "spells": { "1": 2, "2": 1, "3": 0, "4": 0 } },
+    { "paladinLevel": 12, "castingLevel": 4, "spells": { "1": 2, "2": 2, "3": 0, "4": 0 } },
+    { "paladinLevel": 13, "castingLevel": 5, "spells": { "1": 2, "2": 2, "3": 1, "4": 0 } },
+    { "paladinLevel": 14, "castingLevel": 6, "spells": { "1": 3, "2": 2, "3": 1, "4": 0 } },
+    { "paladinLevel": 15, "castingLevel": 7, "spells": { "1": 3, "2": 2, "3": 1, "4": 1 } },
+    { "paladinLevel": 16, "castingLevel": 8, "spells": { "1": 3, "2": 3, "3": 2, "4": 1 } },
+    { "paladinLevel": 17, "castingLevel": 9, "spells": { "1": 3, "2": 3, "3": 3, "4": 1 } },
+    { "paladinLevel": 18, "castingLevel": 9, "spells": { "1": 3, "2": 3, "3": 3, "4": 2 } },
+    { "paladinLevel": 19, "castingLevel": 9, "spells": { "1": 3, "2": 3, "3": 3, "4": 2 } },
+    { "paladinLevel": 20, "castingLevel": 9, "spells": { "1": 3, "2": 3, "3": 3, "4": 3 } }
+  ],
+  "specialRules": [
+    "Paladins do not receive bonus spells for high Wisdom."
+  ]
+}

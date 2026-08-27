@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "id": "druid-sphere-access",
+  "recordType": "spell-access-rule",
+  "class": "druid",
+  "source": "AD&D 2E PHB",
+  "majorSpheres": [
+    "all",
+    "animal",
+    "elemental",
+    "healing",
+    "plant",
+    "weather"
+  ],
+  "minorSpheres": [
+    "divination"
+  ],
+  "elementalSubSpheres": [
+    "air",
+    "earth",
+    "fire",
+    "water"
+  ],
+  "minorSphereMaxLevel": 3,
+  "spellProgression": "priest-spell-progression"
+}

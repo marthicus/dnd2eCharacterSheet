@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="geometricPrecision" role="img" aria-label="Cast spell">
+  <g fill="#211a14" stroke="#211a14" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 53 44 19l7 7-34 34a5 5 0 0 1-7-7Z"/>
+    <path d="m42 17 5-5 8 8-5 5Z"/>
+    <path d="M48 7v7M57 13l-5 5M61 24l-8 2M55 35l-6-5" fill="none" stroke-width="3"/>
+    <path d="M14 11 20 17 14 23 8 17ZM48 42 54 48 48 54 42 48Z" stroke="none"/>
+  </g>
+</svg>

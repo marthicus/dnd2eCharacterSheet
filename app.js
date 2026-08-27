@@ -113,6 +113,8 @@ const FIXED = {
     nwpSettings: { autoCalculate: true, exemptBonusProficiencies: true, availableSlots: 0 },
     inventory: [],
     spells: [],
+    spellUsageLog: [],
+    recoveryLog: [],
     resistances: [],
     surpriseBonus: {
         active: true,
@@ -133,6 +135,7 @@ const FIXED = {
     sectionOrder: []
 };
 const clone = o => JSON.parse(JSON.stringify(o));
+FIXED.spellSlotPools = Object.fromEntries(['priest', 'wizard', 'bard', 'ranger', 'paladin'].map(source => [source, clone(FIXED.spellSlots)]));
 let data = clone(FIXED);
 let equipmentCatalogue = [];
 let catalogueValidation = [];
@@ -152,6 +155,15 @@ let languageCategories = [];
 let languageSourceTypes = [];
 let intelligenceBonusLanguages = [];
 let languageRaceRules = {};
+let priestSpellProgression = null;
+let wizardSpellProgression = null;
+let rangerSpellProgression = null;
+let druidSphereAccess = null;
+let rangerSpellAccess = null;
+let paladinSpellProgression = null;
+let paladinSpellAccess = null;
+let bardSpellProgression = null;
+let shamanSpellcasting = null;
 let languageCatalogStatus = 'loading';
 let spellCatalogStatus = 'loading';
 const gameRules = {
@@ -189,7 +201,7 @@ function normalize(x = {}) {
     d.racialBonuses = x.racialBonuses && typeof x.racialBonuses === 'object' && !Array.isArray(x.racialBonuses) ? x.racialBonuses : {};
     d.sectionStates = x.sectionStates && typeof x.sectionStates === 'object' && !Array.isArray(x.sectionStates) ? x.sectionStates : {};
     d.sectionOrder = Array.isArray(x.sectionOrder) ? x.sectionOrder.filter(key => typeof key === 'string') : [];
-    for (const k of ['weapons', 'henchmen', 'proficiencies', 'inventory', 'spells', 'resistances']) d[k] = Array.isArray(x[k]) ? x[k] : [];
+    for (const k of ['weapons', 'henchmen', 'proficiencies', 'inventory', 'spells', 'resistances', 'spellUsageLog', 'recoveryLog']) d[k] = Array.isArray(x[k]) ? x[k] : [];
     d.proficiencies = d.proficiencies.map(item => ({
         ...item,
         id: item.id ?? '',
@@ -244,8 +256,15 @@ function normalize(x = {}) {
         equipped: item.equipped !== false
     }));
     for (const k of ['thiefSkills', 'undeadTurning', 'spellLevels']) d[k] = Array.isArray(x[k]) && x[k].length ? x[k] : d[k];
-    d.spellSlots = Array.isArray(x.spellSlots) && x.spellSlots.length ? x.spellSlots.map((slot, index) => ({ level: typeof slot.level === 'string' ? slot.level : d.spellSlots[index]?.level || `${index + 1}th`, available: slot.available ?? '', used: slot.used ?? '' })) : clone(d.spellSlots);
-    d.spells = d.spells.map(spell => ({ ...spell, name: typeof spell.name === 'string' ? spell.name : '', level: spell.level ?? '', type: typeof spell.type === 'string' ? spell.type : 'Spell', school: spell.school ?? '', known: spell.known ?? '', memorized: spell.memorized === true || spell.memorized === 'true' || spell.memorized === 'yes' || spell.memorized === '1', memorizedQty: spell.memorizedQty ?? '', castQty: spell.castQty ?? '', verbal: spell.verbal === true, somatic: spell.somatic === true, material: spell.material === true, materialComponents: typeof spell.materialComponents === 'string' ? spell.materialComponents : '', notes: spell.notes ?? '' }));
+    const normalizeSlotPool = slots => Array.isArray(slots) && slots.length ? slots.map((slot, index) => ({ level: typeof slot.level === 'string' ? slot.level : d.spellSlots[index]?.level || `${index + 1}th`, available: slot.available ?? '', used: slot.used ?? '' })) : clone(d.spellSlots);
+    const legacySlots = normalizeSlotPool(x.spellSlots);
+    const classText = (d.identity.classEntries || []).map(entry => String(entry.className || '').toLowerCase()).join(' ');
+    const legacySource = /priest|cleric|druid|shaman/.test(classText) ? 'priest' : /paladin/.test(classText) ? 'paladin' : /bard/.test(classText) ? 'bard' : /wizard|mage/.test(classText) ? 'wizard' : /ranger/.test(classText) ? 'ranger' : 'priest';
+    d.spellSlotPools = Object.fromEntries(Object.keys(FIXED.spellSlotPools).map(source => [source, normalizeSlotPool(x.spellSlotPools?.[source] || (source === legacySource ? legacySlots : null))]));
+    d.spellSlots = d.spellSlotPools[legacySource];
+    d.spells = d.spells.map(spell => ({ ...spell, name: typeof spell.name === 'string' ? spell.name : '', level: spell.level ?? '', type: typeof spell.type === 'string' ? spell.type : 'Spell', school: spell.school ?? '', castingSource: typeof spell.castingSource === 'string' ? spell.castingSource : '', known: spell.known ?? '', memorized: spell.memorized === true || spell.memorized === 'true' || spell.memorized === 'yes' || spell.memorized === '1', memorizedQty: spell.memorizedQty ?? '', uses: spell.uses ?? spell.castQty ?? '', castQty: spell.castQty ?? spell.uses ?? '', verbal: spell.verbal === true, somatic: spell.somatic === true, material: spell.material === true, materialComponents: typeof spell.materialComponents === 'string' ? spell.materialComponents : '', notes: spell.notes ?? '' }));
+    d.spellUsageLog = d.spellUsageLog.map(entry => ({ timestamp: typeof entry.timestamp === 'string' ? entry.timestamp : '', castingSource: typeof entry.castingSource === 'string' ? entry.castingSource : '', spellName: typeof entry.spellName === 'string' ? entry.spellName : '', spellLevel: entry.spellLevel ?? '', slotLevel: typeof entry.slotLevel === 'string' ? entry.slotLevel : '', target: typeof entry.target === 'string' ? entry.target : '', purpose: typeof entry.purpose === 'string' ? entry.purpose : '', notes: typeof entry.notes === 'string' ? entry.notes : '' }));
+    d.recoveryLog = d.recoveryLog.map(entry => ({ timestamp: typeof entry.timestamp === 'string' ? entry.timestamp : '', eventType: typeof entry.eventType === 'string' ? entry.eventType : 'recovery', hours: entry.hours ?? '', location: typeof entry.location === 'string' ? entry.location : '', notes: typeof entry.notes === 'string' ? entry.notes : '' }));
     const maximumHitPoints = Number.parseInt(d.combat.hpMax, 10);
     const currentHitPoints = Number.parseInt(d.combat.hpCurrent, 10);
     if (Number.isInteger(maximumHitPoints) && Number.isInteger(currentHitPoints) && currentHitPoints > maximumHitPoints) d.combat.hpCurrent = String(maximumHitPoints);
@@ -639,7 +658,7 @@ async function loadSpellCatalog() {
         spellCatalog = spellCatalogRecords.map(item => ({
             ...item,
             source: item.source || item.sourceRefs?.[0] || (item.spellGroup ? normalizeLegacySpellSource(item.spellGroup) : 'Unknown'),
-            school: item.school || item.source || item.spellGroup || (Array.isArray(item.schools) ? item.schools[0] : Array.isArray(item.sphere) ? item.sphere[0] : 'Unknown'),
+            school: item.school || item.spellGroup || (Array.isArray(item.schools) ? item.schools[0] : Array.isArray(item.sphere) ? item.sphere[0] : ''),
             level: String(item.level),
             type: 'Spell',
             notes: Array.isArray(item.notes) ? item.notes : []
@@ -655,6 +674,249 @@ async function loadSpellCatalog() {
     } finally {
         if (document.querySelector('.reference-library-section')) setupReferenceLibrary();
     }
+}
+
+async function loadPriestSpellProgression() {
+    try {
+        const response = await fetch('data/priest-spell-progression.json');
+        if (!response.ok) throw new Error('Priest spell progression unavailable');
+        const catalog = await response.json();
+        if (catalog.recordType !== 'spell-progression' || !Array.isArray(catalog.levels)) throw new Error('Invalid priest spell progression');
+        priestSpellProgression = catalog;
+    } catch (error) {
+        priestSpellProgression = null;
+        console.warn(error.message);
+    }
+}
+
+async function loadWizardSpellProgression() {
+    try {
+        const response = await fetch('data/wizard-spell-progression.json');
+        if (!response.ok) throw new Error('Wizard spell progression unavailable');
+        const catalog = await response.json();
+        if (catalog.recordType !== 'spell-progression' || catalog.class !== 'wizard' || !Array.isArray(catalog.levels)) throw new Error('Invalid wizard spell progression');
+        wizardSpellProgression = catalog;
+    } catch (error) {
+        wizardSpellProgression = null;
+        console.warn(error.message);
+    }
+}
+
+async function loadRangerSpellProgression() {
+    try {
+        const response = await fetch('data/ranger-spell-progression.json');
+        if (!response.ok) throw new Error('Ranger spell progression unavailable');
+        const catalog = await response.json();
+        if (catalog.recordType !== 'spell-progression' || catalog.class !== 'ranger' || !Array.isArray(catalog.castingProgression)) throw new Error('Invalid ranger spell progression');
+        rangerSpellProgression = catalog;
+    } catch (error) {
+        rangerSpellProgression = null;
+        console.warn(error.message);
+    }
+}
+
+async function loadDruidSphereAccess() {
+    try {
+        const response = await fetch('data/druid-sphere-access.json');
+        if (!response.ok) throw new Error('Druid sphere access unavailable');
+        const catalog = await response.json();
+        if (catalog.recordType !== 'spell-access-rule' || catalog.class !== 'druid' || !Array.isArray(catalog.majorSpheres) || !Array.isArray(catalog.minorSpheres)) throw new Error('Invalid druid sphere access');
+        druidSphereAccess = catalog;
+    } catch (error) {
+        druidSphereAccess = null;
+        console.warn(error.message);
+    }
+}
+
+async function loadRangerSpellAccess() {
+    try {
+        const response = await fetch('data/ranger-spell-access.json');
+        if (!response.ok) throw new Error('Ranger spell access unavailable');
+        const catalog = await response.json();
+        if (catalog.recordType !== 'spell-access-rule' || catalog.class !== 'ranger' || !Array.isArray(catalog.majorSpheres)) throw new Error('Invalid ranger spell access');
+        rangerSpellAccess = catalog;
+    } catch (error) {
+        rangerSpellAccess = null;
+        console.warn(error.message);
+    }
+}
+
+async function loadPaladinSpellData() {
+    try {
+        const [progressionResponse, accessResponse] = await Promise.all([fetch('data/paladin-spell-progression.json'), fetch('data/paladin-spell-access.json')]);
+        if (!progressionResponse.ok || !accessResponse.ok) throw new Error('Paladin spell data unavailable');
+        const progression = await progressionResponse.json();
+        const access = await accessResponse.json();
+        if (progression.recordType !== 'spell-progression' || progression.class !== 'paladin' || !Array.isArray(progression.castingProgression)) throw new Error('Invalid paladin spell progression');
+        if (access.recordType !== 'spell-access-rule' || access.class !== 'paladin' || !Array.isArray(access.majorSpheres)) throw new Error('Invalid paladin spell access');
+        paladinSpellProgression = progression;
+        paladinSpellAccess = access;
+    } catch (error) {
+        paladinSpellProgression = null;
+        paladinSpellAccess = null;
+        console.warn(error.message);
+    }
+}
+
+async function loadBardSpellProgression() {
+    try {
+        const response = await fetch('data/bard-spell-progression.json');
+        if (!response.ok) throw new Error('Bard spell progression unavailable');
+        const catalog = await response.json();
+        if (catalog.recordType !== 'spell-progression' || catalog.class !== 'bard' || !Array.isArray(catalog.levels)) throw new Error('Invalid bard spell progression');
+        bardSpellProgression = catalog;
+    } catch (error) {
+        bardSpellProgression = null;
+        console.warn(error.message);
+    }
+}
+
+async function loadShamanSpellcasting() {
+    try {
+        const response = await fetch('data/shaman-spellcasting.json');
+        if (!response.ok) throw new Error('Shaman spellcasting unavailable');
+        const catalog = await response.json();
+        if (catalog.recordType !== 'class-spellcasting' || catalog.class !== 'shaman' || catalog.spellProgression !== 'priest-spell-progression') throw new Error('Invalid shaman spellcasting');
+        shamanSpellcasting = catalog;
+    } catch (error) {
+        shamanSpellcasting = null;
+        console.warn(error.message);
+    }
+}
+
+function druidSpellIsAccessible(record) {
+    if (!druidSphereAccess || record.catalogueType !== 'spell') return true;
+    const spheres = [
+        ...(Array.isArray(record.sphere) ? record.sphere : []),
+        ...(Array.isArray(record.spheres) ? record.spheres : []),
+        record.spellGroup,
+        record.school
+    ].filter(Boolean).map(value => String(value).toLowerCase().trim());
+    const majorSpheres = new Set([...druidSphereAccess.majorSpheres, ...(druidSphereAccess.elementalSubSpheres || [])]);
+    if (spheres.some(sphere => majorSpheres.has(sphere))) return true;
+    const level = Number.parseInt(record.level, 10);
+    return Number.isInteger(level) && level <= druidSphereAccess.minorSphereMaxLevel && spheres.some(sphere => druidSphereAccess.minorSpheres.includes(sphere));
+}
+
+function rangerSpellIsAccessible(record) {
+    if (!rangerSpellAccess || record.catalogueType !== 'spell') return true;
+    const spheres = [
+        ...(Array.isArray(record.sphere) ? record.sphere : []),
+        ...(Array.isArray(record.spheres) ? record.spheres : []),
+        record.spellGroup,
+        record.school
+    ].filter(Boolean).map(value => String(value).toLowerCase().trim());
+    return spheres.some(sphere => rangerSpellAccess.majorSpheres.includes(sphere));
+}
+
+function paladinSpellIsAccessible(record) {
+    if (!paladinSpellAccess || record.catalogueType !== 'spell') return true;
+    const spheres = [
+        ...(Array.isArray(record.sphere) ? record.sphere : []),
+        ...(Array.isArray(record.spheres) ? record.spheres : []),
+        record.spellGroup,
+        record.school
+    ].filter(Boolean).map(value => String(value).toLowerCase().trim());
+    return spheres.some(sphere => paladinSpellAccess.majorSpheres.includes(sphere));
+}
+
+function spellSlotProgressionContext(source = availableCastingSources()[0] || 'priest') {
+    const classEntries = data.identity.classEntries || [];
+    const paladinEntries = classEntries.filter(entry => /paladin/i.test(entry.className || ''));
+    const priestEntries = classEntries.filter(entry => /priest|cleric|druid|shaman/i.test(entry.className || ''));
+    const bardEntries = classEntries.filter(entry => /bard/i.test(entry.className || ''));
+    const wizardEntries = classEntries.filter(entry => /wizard|mage/i.test(entry.className || ''));
+    const rangerEntries = classEntries.filter(entry => /ranger/i.test(entry.className || ''));
+    const selectedEntries = source === 'priest' ? priestEntries : source === 'paladin' ? paladinEntries : source === 'bard' ? bardEntries : source === 'wizard' ? wizardEntries : rangerEntries;
+    const selectedEntry = selectedEntries.slice().sort((left, right) => (Number.parseInt(right.level, 10) || 0) - (Number.parseInt(left.level, 10) || 0))[0];
+    const selectedIsRanger = source === 'ranger';
+    const progressionCatalog = source === 'priest' ? priestSpellProgression : source === 'paladin' ? paladinSpellProgression : source === 'bard' ? bardSpellProgression : source === 'wizard' ? wizardSpellProgression : rangerSpellProgression;
+    const selectedLevel = Number.parseInt(selectedEntry?.level, 10);
+    if (!progressionCatalog || !selectedEntry || !Number.isInteger(selectedLevel) || selectedLevel < 1) return null;
+    const selectedIsLimitedCaster = selectedIsRanger || source === 'paladin' || source === 'bard';
+    const progression = selectedIsRanger ? progressionCatalog.castingProgression.find(entry => entry.rangerLevel === Math.min(selectedLevel, 16)) : source === 'paladin' ? progressionCatalog.castingProgression.find(entry => entry.paladinLevel === Math.min(selectedLevel, 20)) : progressionCatalog.levels.find(entry => entry.level === Math.min(selectedLevel, 20));
+    if (!progression) return null;
+    const wisdom = Number.parseInt(data.abilities.wis, 10) || 0;
+    const wisdomBonus = progressionCatalog === priestSpellProgression && !selectedIsLimitedCaster && (wisdom >= 18 ? [2, 2, 1, 1] : wisdom === 17 ? [2, 2, 1] : wisdom === 16 ? [2, 2] : wisdom === 15 ? [1, 1] : wisdom >= 13 ? [1] : []);
+    return { source, selectedEntry, selectedLevel, progressionCatalog, progression, selectedIsRanger, selectedIsLimitedCaster, wisdom, wisdomBonus };
+}
+
+function spellSlotRecommendations(source = availableCastingSources()[0] || 'priest') {
+    const context = spellSlotProgressionContext(source);
+    if (!context) return null;
+    return spellSlotPool(source).map((slot, index) => {
+        const spellLevel = index + 1;
+        const base = Number(context.progression.spells[String(spellLevel)] || 0);
+        return String(base + (context.wisdomBonus[index] || 0));
+    });
+}
+
+function spellCasterMode() {
+    const classes = (data.identity.classEntries || []).map(entry => String(entry.className || '').toLowerCase()).join(' ');
+    return { preparation: /priest|cleric|druid|paladin|wizard|mage/.test(classes), repertoire: /bard|ranger|shaman/.test(classes) };
+}
+
+function availableCastingSources() {
+    const classes = (data.identity.classEntries || []).map(entry => String(entry.className || '').toLowerCase()).join(' ');
+    const sources = [];
+    if (/priest|cleric|druid|shaman/.test(classes)) sources.push('priest');
+    if (/wizard|mage/.test(classes)) sources.push('wizard');
+    if (/bard/.test(classes)) sources.push('bard');
+    if (/ranger/.test(classes)) sources.push('ranger');
+    if (/paladin/.test(classes)) sources.push('paladin');
+    return sources;
+}
+
+function spellSlotPool(source = availableCastingSources()[0] || 'priest') {
+    if (!source) return [];
+    if (!data.spellSlotPools[source]) data.spellSlotPools[source] = clone(FIXED.spellSlots);
+    return data.spellSlotPools[source];
+}
+
+function inferredCastingSource(spell) {
+    const source = String(spell?.castingSource || '').toLowerCase();
+    if (source) return source;
+    const spellSource = String(spell.source || '').toLowerCase();
+    if (spellSource.includes('priest')) return 'priest';
+    if (spellSource.includes('wizard')) return 'wizard';
+    return '';
+}
+
+function spellCanBeCast(spell, source = inferredCastingSource(spell)) {
+    const level = normalizeSpellLevel(spell.level);
+    const mode = spellCasterMode();
+    if (source && !availableCastingSources().includes(source)) return false;
+    const known = String(spell.known || '').trim().toLowerCase();
+    const isKnown = spell.spellCatalogId || ['yes', 'true', 'known', '1', 'x'].includes(known);
+    const prepared = spell.memorized === true || (Number.parseInt(spell.memorizedQty, 10) || 0) > 0;
+    const slot = spellSlotPool(source).find(item => normalizeSpellLevel(item.level) === level);
+    const available = Number.parseInt(slot?.available, 10) || 0;
+    const used = Number.parseInt(slot?.used, 10) || 0;
+    return level > 0 && isKnown && (!mode.preparation || prepared) && slot && used < available;
+}
+
+function showSpellCastDialog(spell) {
+    return new Promise(resolve => {
+        const modal = document.createElement('div');
+        modal.className = 'recovery-modal';
+        modal.innerHTML = `<form class="recovery-dialog cast-dialog"><h3>Cast ${esc(spell.name || 'spell')}</h3><label>Enter what this spell is cast for<input name="purpose" autocomplete="off" required></label><label>Enter the target (optional)<input name="target" autocomplete="off"></label><label>Enter any casting notes (optional)<input name="notes" autocomplete="off"></label><div class="recovery-dialog-actions"><button type="button" data-recovery-cancel>Cancel</button><button type="submit" class="primary">Cast spell</button></div></form>`;
+        const close = value => { modal.remove(); resolve(value); };
+        modal.querySelector('[data-recovery-cancel]').onclick = () => close(null);
+        modal.querySelector('form').onsubmit = event => { event.preventDefault(); close({ purpose: modal.querySelector('[name="purpose"]').value.trim(), target: modal.querySelector('[name="target"]').value.trim(), notes: modal.querySelector('[name="notes"]').value.trim() }); };
+        document.body.append(modal);
+        modal.querySelector('[name="purpose"]').focus();
+    });
+}
+
+function setSpellSlotsFromProgression(source = availableCastingSources()[0] || 'priest') {
+    const recommendations = spellSlotRecommendations(source);
+    if (!recommendations) return false;
+    spellSlotPool(source).forEach((slot, index) => {
+        slot.available = recommendations[index];
+        const used = Number.parseInt(slot.used, 10);
+        if (Number.isInteger(used) && used > Number.parseInt(slot.available, 10)) slot.used = slot.available;
+    });
+    return true;
 }
 
 async function loadClassAbilitiesCatalog() {
@@ -1103,7 +1365,7 @@ function thac0Families(className) {
     const name = String(className || '').toLowerCase();
     const families = [];
     if (/fighter|ranger|paladin|barbarian/.test(name)) families.push('fighter');
-    if (/priest|cleric|druid|witchdoctor/.test(name)) families.push('priest');
+    if (/priest|cleric|druid|witchdoctor|shaman/.test(name)) families.push('priest');
     if (/wizard|mage|specialist/.test(name)) families.push('wizard');
     if (/thief|bard|ninja/.test(name)) families.push('rogue');
     if (/psionicist/.test(name)) families.push('psionicist');
@@ -2225,7 +2487,7 @@ function namedInputTable(key, heading, valueLabel) {
 
 function classAbilitiesVisibility() {
     const classNames = (data.identity.classEntries || []).map(entry => String(entry.className || '').toLowerCase());
-    const hasPriest = classNames.some(className => /priest|cleric|druid|paladin/.test(className));
+    const hasPriest = classNames.some(className => /priest|cleric|druid|paladin|shaman/.test(className));
     const hasRogue = classNames.some(className => /thief|rogue|bard|ranger/.test(className));
     return { hasPriest, hasRogue, visible: hasPriest || hasRogue };
 }
@@ -2268,7 +2530,7 @@ function setupClassAbilitiesSection() {
         const renderCatalog = () => {
             const records = spellsAndAbilitiesCatalogueRecords();
             const query = search.value.trim().toLowerCase();
-            const matches = classAbilityLookup({ className: classFilter.value, abilityType: typeFilter.value, source: sourceFilter.value, catalogueType: catalogueTypeFilter.value }, records).filter(record => !query || [record.name, record.source, ...(record.classes || [])].join(' ').toLowerCase().includes(query));
+            const matches = classAbilityLookup({ className: classFilter.value, abilityType: typeFilter.value, source: sourceFilter.value, catalogueType: catalogueTypeFilter.value }, records).filter(record => classFilter.value !== 'druid' || druidSpellIsAccessible(record)).filter(record => classFilter.value !== 'ranger' || rangerSpellIsAccessible(record)).filter(record => classFilter.value !== 'paladin' || paladinSpellIsAccessible(record)).filter(record => !query || [record.name, record.source, ...(record.classes || [])].join(' ').toLowerCase().includes(query));
             const visibleMatches = matches.slice(0, 40);
             const results = catalogPanel.querySelector('#class-ability-catalog-results');
             results.innerHTML = visibleMatches.map(record => {
@@ -2284,8 +2546,8 @@ function setupClassAbilitiesSection() {
                 const trackedKey = record.catalogueType === 'spell' ? 'spellCatalogId' : 'classAbilityId';
                 if (data.spells.some(item => item[trackedKey] === record.id)) return;
                 data.spells.push(record.catalogueType === 'spell'
-                    ? { spellCatalogId: record.id, name: record.name, level: record.level ?? '', type: 'Spell', school: record.school || record.spellGroup || '', known: '', memorized: false, memorizedQty: '', castQty: '', verbal: record.components?.verbal === true, somatic: record.components?.somatic === true, material: record.components?.material === true, materialComponents: record.materialComponents || '', notes: Array.isArray(record.notes) ? record.notes.join('; ') : record.notes || '', source: record.source || '' }
-                    : { classAbilityId: record.id, name: record.name, level: record.levelRequired ?? '', type: 'Class ability', school: record.abilityType || '', known: '', memorized: false, memorizedQty: '', castQty: '', verbal: false, somatic: false, material: false, materialComponents: '', notes: Array.isArray(record.notes) ? record.notes.join('; ') : record.notes || '', source: record.source || '' });
+                    ? { spellCatalogId: record.id, name: record.name, level: record.level ?? '', type: 'Spell', school: record.school || record.spellGroup || '', castingSource: Array.isArray(record.classLists) && record.classLists.some(className => /wizard|mage/.test(String(className).toLowerCase())) ? 'wizard' : 'priest', known: '', memorized: false, memorizedQty: '', uses: '', castQty: '', verbal: record.components?.verbal === true, somatic: record.components?.somatic === true, material: record.components?.material === true, materialComponents: record.materialComponents || '', notes: Array.isArray(record.notes) ? record.notes.join('; ') : record.notes || '', source: record.source || '' }
+                    : { classAbilityId: record.id, name: record.name, level: record.levelRequired ?? '', type: 'Class ability', school: record.abilityType || '', known: '', memorized: false, memorizedQty: '', uses: '', castQty: '', verbal: false, somatic: false, material: false, materialComponents: '', notes: Array.isArray(record.notes) ? record.notes.join('; ') : record.notes || '', source: record.source || '' });
                 changed();
                 render();
             });
@@ -2669,12 +2931,134 @@ function setupSpellTracking() {
     const section = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Spells'));
     if (!section) return;
     section.innerHTML = `<h2>Spells and abilities</h2><div class="spell-slots"><h3>Spell slots</h3><table class="spell-slots-table"><thead><tr><th>Level</th><th>Available</th><th>Used</th><th>Remaining</th></tr></thead><tbody>${data.spellSlots.map((slot, index) => `<tr><th>${esc(slot.level)}</th><td><input type="number" min="0" step="1" data-spell-slot="${index}" data-spell-slot-key="available" value="${esc(slot.available)}"></td><td><input type="number" min="0" step="1" data-spell-slot="${index}" data-spell-slot-key="used" value="${esc(slot.used)}"></td><td><output data-spell-remaining="${index}">-</output></td></tr>`).join('')}</tbody></table><small>Enter the slots available for this character. Used slots are tracked separately and never exceed the available count.</small></div><div class="manual-spells"><h3>Manual spells and abilities</h3><div class="tableWrap"><table class="spells-table"><thead><tr><th>Name</th><th>Level</th><th>Type</th><th>School / sphere</th><th>Known</th><th>Memorized</th><th>Cast / used</th><th>Notes</th><th></th></tr></thead><tbody>${data.spells.map((spell, index) => { const preset = spellCatalog.some(item => item.name === spell.name); return `<tr><td><select data-spell-preset="${index}"><option value="Other" ${preset ? '' : 'selected'}>Other</option><optgroup label="Wizard 1st level">${spellCatalog.filter(item => item.source === 'Wizard').map(item => `<option value="${esc(item.name)}" ${spell.name === item.name ? 'selected' : ''}>${esc(item.name)}</option>`).join('')}</optgroup><optgroup label="Priest 1st level">${spellCatalog.filter(item => item.source === 'Priest').map(item => `<option value="${esc(item.name)}" ${spell.name === item.name ? 'selected' : ''}>${esc(item.name)}</option>`).join('')}</optgroup></select><input data-spell-item="${index}" data-spell-key="name" value="${esc(spell.name)}" placeholder="Spell or ability" ${preset ? 'hidden' : ''}></td><td><input data-spell-item="${index}" data-spell-key="level" value="${esc(spell.level)}" placeholder="1st"></td><td><select data-spell-item="${index}" data-spell-key="type"><option ${spell.type === 'Spell' ? 'selected' : ''}>Spell</option><option ${spell.type === 'Racial ability' ? 'selected' : ''}>Racial ability</option><option ${spell.type === 'Class ability' ? 'selected' : ''}>Class ability</option><option ${spell.type === 'Other' ? 'selected' : ''}>Other</option></select></td><td><input data-spell-item="${index}" data-spell-key="school" value="${esc(spell.school)}" placeholder="School / sphere"></td><td><input data-spell-item="${index}" data-spell-key="known" value="${esc(spell.known)}"></td><td><input data-spell-item="${index}" data-spell-key="memorizedQty" value="${esc(spell.memorizedQty)}" type="number" min="0" step="1"></td><td><input data-spell-item="${index}" data-spell-key="castQty" value="${esc(spell.castQty)}" type="number" min="0" step="1"></td><td><input data-spell-item="${index}" data-spell-key="notes" value="${esc(spell.notes)}"></td><td><button type="button" class="remove" data-spell-remove="${index}" aria-label="Remove spell or ability">×</button></td></tr>`; }).join('')}</tbody></table></div><button type="button" class="add" data-spell-add>Add spell or ability</button></div>`;
+    const spellSlots = section.querySelector('.spell-slots');
+    const sourceNames = { priest: 'Priest', wizard: 'Wizard', bard: 'Bard', ranger: 'Ranger', paladin: 'Paladin' };
+    const slotSources = availableCastingSources();
+    const primarySlotTable = section.querySelector('.spell-slots-table');
+    const slotTableTemplate = primarySlotTable.cloneNode(true);
+    spellSlots.querySelectorAll('.spell-slots-table').forEach(table => table.remove());
+    const sourceGrid = document.createElement('div');
+    sourceGrid.className = 'spell-slot-sources';
+    slotSources.forEach((source, sourceIndex) => {
+        const table = sourceIndex === 0 ? primarySlotTable : slotTableTemplate.cloneNode(true);
+        const pool = spellSlotPool(source);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'spell-slot-source';
+        wrapper.innerHTML = `<h4>${esc(sourceNames[source] || source)} spell slots</h4>`;
+        table.querySelectorAll('[data-spell-slot]').forEach(input => {
+            input.dataset.spellSlotSource = source;
+            const slot = pool[+input.dataset.spellSlot];
+            if (input.dataset.spellSlotKey === 'available') input.value = slot.available;
+            if (input.dataset.spellSlotKey === 'used') input.value = slot.used;
+        });
+        table.querySelectorAll('[data-spell-remaining]').forEach(output => output.dataset.spellRemainingSource = source);
+        wrapper.append(table);
+        sourceGrid.append(wrapper);
+    });
+    if (slotSources.length) spellSlots.append(sourceGrid);
+    else spellSlots.insertAdjacentHTML('beforeend', '<p class="spell-slot-empty">Set a supported casting class to display spell slots.</p>');
+    const slotSummary = document.createElement('div');
+    slotSummary.className = 'spell-slot-summary';
+    slotSummary.innerHTML = '<strong>Spell slot summary</strong><button type="button" class="set-spell-slots">Set from class progression</button><div class="spell-slot-summary-details"></div><div class="spell-slot-session"></div>';
+    slotSummary.querySelector('.set-spell-slots').disabled = !slotSources.length;
+    slotSummary.querySelector('.set-spell-slots').title = slotSources.length ? 'Set each active source from its class progression.' : 'Set a supported casting class first.';
+    section.querySelector('.spell-slots').prepend(slotSummary);
+    const updateSlotSummary = () => {
+        const context = spellSlotProgressionContext();
+        const recommendations = spellSlotRecommendations();
+        const details = slotSummary.querySelector('.spell-slot-summary-details');
+        const session = slotSummary.querySelector('.spell-slot-session');
+        if (!context || !recommendations) {
+            details.textContent = 'No supported class progression detected. Set slots manually.';
+        } else {
+            const className = context.selectedEntry.className || 'Class';
+            const progressionName = context.progressionCatalog.name || 'Class progression';
+            details.textContent = `${className} level ${context.selectedLevel} · ${progressionName} · Suggested available: ${recommendations.join(' / ')}`;
+        }
+        const pools = slotSources.map(source => spellSlotPool(source));
+        const used = pools.flat().reduce((total, slot) => total + (Number.parseInt(slot.used, 10) || 0), 0);
+        const remaining = pools.flat().reduce((total, slot) => total + Math.max(0, (Number.parseInt(slot.available, 10) || 0) - (Number.parseInt(slot.used, 10) || 0)), 0);
+        session.textContent = `Session usage: ${used} used · ${remaining} remaining across ${slotSources.length} source${slotSources.length === 1 ? '' : 's'}`;
+    };
+    slotSummary.querySelector('.set-spell-slots').onclick = () => {
+        const updated = slotSources.reduce((changed, source) => setSpellSlotsFromProgression(source) || changed, false);
+        if (updated) {
+            changed();
+            render();
+        }
+    };
+    const usageLog = document.createElement('div');
+    usageLog.className = 'spell-usage-log';
+    usageLog.innerHTML = '<strong>Session spell usage</strong><div class="spell-usage-log-entries"></div>';
+    section.querySelector('.spell-slots').append(usageLog);
+    const renderUsageLog = () => {
+        const entries = usageLog.querySelector('.spell-usage-log-entries');
+        entries.innerHTML = data.spellUsageLog.length ? data.spellUsageLog.map((entry, index) => `<div class="spell-usage-entry"><span>${esc(entry.spellName)} · ${esc(entry.spellLevel)} · ${esc(entry.purpose || 'No purpose recorded')}${entry.target ? ` · Target: ${esc(entry.target)}` : ''}</span><button type="button" data-spell-usage-remove="${index}" aria-label="Undo spell cast">Undo</button></div>`).join('') : '<small>No spells cast this session.</small>';
+        entries.querySelectorAll('[data-spell-usage-remove]').forEach(button => button.onclick = () => {
+            const entry = data.spellUsageLog[+button.dataset.spellUsageRemove];
+            const slot = spellSlotPool(entry?.castingSource).find(item => item.level === entry?.slotLevel);
+            if (slot) slot.used = String(Math.max(0, (Number.parseInt(slot.used, 10) || 0) - 1));
+            data.spellUsageLog.splice(+button.dataset.spellUsageRemove, 1);
+            changed();
+            render();
+        });
+    };
+    renderUsageLog();
+    const castToolbar = document.createElement('div');
+    castToolbar.className = 'spell-cast-toolbar';
+    castToolbar.innerHTML = '<div class="spell-cast-picker"><img class="casting-source-icon" data-casting-source-icon src="wand-icon.svg" alt=""><label>Cast from<select data-configured-source></select></label><label>Cast configured spell<select data-configured-spell><option value="">Choose a spell</option></select><span data-configured-spell-info>Select a spell to see its slot.</span></label><button type="button" class="spell-cast-button" data-configured-cast aria-label="Cast selected spell" title="Cast selected spell"><img src="wand-icon.svg" alt=""></button></div>';
+    slotSummary.after(castToolbar);
+    const configuredSpell = castToolbar.querySelector('[data-configured-spell]');
+    const configuredSource = castToolbar.querySelector('[data-configured-source]');
+    const configuredInfo = castToolbar.querySelector('[data-configured-spell-info]');
+    const sourceIcon = castToolbar.querySelector('[data-casting-source-icon]');
+    const sourceIcons = { wizard: 'wizard-hat-icon.svg', priest: 'holy-symbol-icon.svg' };
+    const updateSourceIcon = () => {
+        const source = configuredSource.value;
+        sourceIcon.src = sourceIcons[source] || 'wand-icon.svg';
+        sourceIcon.alt = source === 'wizard' ? 'Wizard source' : source === 'priest' ? 'Priest source' : 'Cast source';
+    };
+    availableCastingSources().forEach(source => configuredSource.insertAdjacentHTML('beforeend', `<option value="${source}">${esc(source)}</option>`));
+    const refreshConfiguredSpells = () => {
+        configuredSpell.innerHTML = '<option value="">Choose a spell</option>';
+        data.spells.forEach((spell, index) => { if (spellCanBeCast(spell, configuredSource.value || inferredCastingSource(spell)) && (!spell.castingSource || inferredCastingSource(spell) === configuredSource.value)) configuredSpell.insertAdjacentHTML('beforeend', `<option value="${index}">${esc(spell.name || 'Unnamed spell')} · ${esc(spell.level || '?')}</option>`); });
+        updateConfiguredSpell();
+    };
+    const updateConfiguredSpell = () => {
+        const spell = data.spells[Number.parseInt(configuredSpell.value, 10)];
+        const level = normalizeSpellLevel(spell?.level);
+        const slot = spellSlotPool(configuredSource.value || inferredCastingSource(spell)).find(item => normalizeSpellLevel(item.level) === level);
+        const available = Number.parseInt(slot?.available, 10) || 0;
+        const used = Number.parseInt(slot?.used, 10) || 0;
+        configuredInfo.textContent = spell && slot ? `Level ${level} · Slot cost 1 · Available ${available} · Used ${used} · Remaining ${Math.max(0, available - used)}` : 'Select a spell with a matching available slot.';
+        castToolbar.querySelector('[data-configured-cast]').disabled = !spell || !spellCanBeCast(spell, configuredSource.value);
+    };
+    configuredSpell.onchange = updateConfiguredSpell;
+    configuredSource.onchange = () => { updateSourceIcon(); refreshConfiguredSpells(); };
+    configuredSource.value = availableCastingSources()[0] || '';
+    updateSourceIcon();
+    refreshConfiguredSpells();
+    updateConfiguredSpell();
+    castToolbar.querySelector('[data-configured-cast]').onclick = async () => {
+        const index = Number.parseInt(configuredSpell.value, 10);
+        const spell = data.spells[index];
+        if (!spell || !spellCanBeCast(spell, configuredSource.value)) return;
+        const details = await showSpellCastDialog(spell);
+        if (!details) return;
+        const level = normalizeSpellLevel(spell.level);
+        const slot = spellSlotPool(configuredSource.value).find(item => normalizeSpellLevel(item.level) === level);
+        slot.used = String((Number.parseInt(slot.used, 10) || 0) + 1);
+        data.spellUsageLog.push({ timestamp: new Date().toISOString(), castingSource: configuredSource.value, spellName: spell.name || 'Unnamed spell', spellLevel: spell.level || `${level}th`, slotLevel: slot.level, ...details });
+        changed();
+        render();
+    };
     const trackedTableHeading = section.querySelector('.manual-spells > h3');
     if (trackedTableHeading) trackedTableHeading.textContent = 'Spells and abilities';
     section.querySelectorAll('[data-spell-preset]').forEach(select => select.remove());
     section.querySelectorAll('[data-spell-key="name"]').forEach(input => input.hidden = false);
     const spellHeader = section.querySelector('.spells-table thead tr');
     const castHeader = [...spellHeader.children].find(cell => cell.textContent.trim() === 'Cast / used');
+    if (castHeader) castHeader.textContent = 'Uses';
     if (castHeader) {
         const headerAnchor = castHeader.nextSibling;
         ['V', 'S', 'M', 'Materials'].forEach(label => { const header = document.createElement('th'); header.textContent = label; spellHeader.insertBefore(header, headerAnchor); });
@@ -2691,6 +3075,13 @@ function setupSpellTracking() {
         spellHeader.children[knownColumnIndex].remove();
         section.querySelectorAll('.spells-table tbody tr').forEach(row => row.children[knownColumnIndex]?.remove());
     }
+    const sourceLabels = { priest: 'Priest table', wizard: 'Wizard table', bard: 'Bard table', ranger: 'Ranger table', paladin: 'Paladin table' };
+    section.querySelectorAll('[data-spell-key="school"]').forEach(input => {
+        const sourceLabel = document.createElement('small');
+        sourceLabel.className = 'spell-source-label';
+        sourceLabel.textContent = sourceLabels[inferredCastingSource(data.spells[+input.dataset.spellItem])] || 'Manual / item source';
+        input.closest('td')?.append(sourceLabel);
+    });
     const memorizedHeader = [...spellHeader.children].find(cell => cell.textContent.trim() === 'Memorized');
     if (memorizedHeader) memorizedHeader.textContent = 'Prep.';
     section.querySelectorAll('[data-spell-key="memorizedQty"]').forEach(input => {
@@ -2700,21 +3091,32 @@ function setupSpellTracking() {
         input.checked = spell.memorized === true || (Number.parseInt(spell.memorizedQty, 10) || 0) > 0;
         input.value = 'true';
     });
+    section.querySelectorAll('[data-spell-key="castQty"]').forEach(input => {
+        input.dataset.spellKey = 'uses';
+        input.type = 'number';
+        input.min = '0';
+        input.step = '1';
+        input.value = data.spells[+input.dataset.spellItem].uses;
+    });
+    const spellCastHeader = document.createElement('th');
+    spellCastHeader.textContent = 'Cast';
+    spellHeader.insertBefore(spellCastHeader, spellHeader.firstElementChild);
     const updateSlots = () => section.querySelectorAll('[data-spell-remaining]').forEach(output => {
-        const slot = data.spellSlots[+output.dataset.spellRemaining];
+        const slot = spellSlotPool(output.dataset.spellRemainingSource)[+output.dataset.spellRemaining];
         const available = Number.parseInt(slot.available, 10);
         const used = Math.max(0, Number.parseInt(slot.used, 10) || 0);
         output.textContent = Number.isInteger(available) ? Math.max(0, available - used) : '-';
         output.title = Number.isInteger(available) ? `Remaining slots = available ${available} - used ${used} = ${Math.max(0, available - used)}.` : 'Remaining slots = available slots - used slots.';
     });
     section.querySelectorAll('[data-spell-slot]').forEach(input => input.oninput = () => {
-        const slot = data.spellSlots[+input.dataset.spellSlot];
+        const slot = spellSlotPool(input.dataset.spellSlotSource)[+input.dataset.spellSlot];
         slot[input.dataset.spellSlotKey] = input.value;
         if (input.dataset.spellSlotKey === 'available') {
             const used = Number.parseInt(slot.used, 10);
             if (Number.isInteger(used) && Number.isInteger(Number.parseInt(slot.available, 10)) && used > Number.parseInt(slot.available, 10)) slot.used = slot.available;
         }
         updateSlots();
+        updateSlotSummary();
         changed();
     });
     section.querySelectorAll('[data-spell-item]').forEach(input => input.oninput = () => {
@@ -2724,8 +3126,33 @@ function setupSpellTracking() {
     });
     section.querySelectorAll('[data-spell-key="notes"]').forEach(input => input.title = input.value || 'No notes');
     section.querySelectorAll('[data-spell-key="materialComponents"]').forEach(input => input.title = input.value || 'No material requirements recorded');
+    section.querySelectorAll('.spells-table tbody tr').forEach((row, index) => {
+        row.dataset.spellSource = inferredCastingSource(data.spells[index]) || availableCastingSources()[0] || 'priest';
+        const actionCell = document.createElement('td');
+        const castButton = document.createElement('button');
+        castButton.type = 'button';
+        castButton.className = 'spell-cast-button';
+        castButton.innerHTML = '<img src="wand-icon.svg" alt="">';
+        castButton.setAttribute('aria-label', `Cast ${data.spells[index].name || 'spell'}`);
+        castButton.disabled = !spellCanBeCast(data.spells[index], row.dataset.spellSource);
+        castButton.title = castButton.disabled ? 'Spell must be known, prepared when required, and have a matching available slot.' : 'Consume one matching spell slot and record the casting.';
+        castButton.onclick = async () => {
+            const spell = data.spells[index];
+            if (!spellCanBeCast(spell, row.dataset.spellSource)) return;
+            const details = await showSpellCastDialog(spell);
+            if (!details) return;
+            const level = normalizeSpellLevel(spell.level);
+            const slot = spellSlotPool(inferredCastingSource(spell)).find(item => normalizeSpellLevel(item.level) === level);
+            slot.used = String((Number.parseInt(slot.used, 10) || 0) + 1);
+            data.spellUsageLog.push({ timestamp: new Date().toISOString(), castingSource: row.dataset.spellSource, spellName: spell.name || 'Unnamed spell', spellLevel: spell.level || `${level}th`, slotLevel: slot.level, ...details });
+            changed();
+            render();
+        };
+        actionCell.append(castButton);
+        row.insertBefore(actionCell, row.firstElementChild);
+    });
     section.querySelector('[data-spell-add]').onclick = () => {
-        data.spells.push({ name: '', level: '', type: 'Spell', school: '', known: '', memorizedQty: '', castQty: '', verbal: false, somatic: false, material: false, materialComponents: '', notes: '' });
+        data.spells.push({ name: '', level: '', type: 'Spell', school: '', known: '', memorizedQty: '', uses: '', verbal: false, somatic: false, material: false, materialComponents: '', notes: '' });
         changed();
         render();
     };
@@ -2735,6 +3162,54 @@ function setupSpellTracking() {
         render();
     });
     updateSlots();
+    updateSlotSummary();
+}
+
+function setupCampRecoverySection() {
+    const target = document.querySelector('.hit-points-section');
+    if (!target) return;
+    const section = document.createElement('section');
+    section.className = 'camp-recovery-section';
+    section.innerHTML = '<h3>Camp & Recovery</h3><div class="camp-recovery-layout"><img class="campfire-pixel" src="campfire-pixel.svg" alt="Pixel-art campfire"><div><div class="camp-recovery-actions"><button type="button" data-recovery-action="spells">Recover spells</button><button type="button" data-recovery-action="rest">Rest 8 hours</button><button type="button" data-recovery-action="day">New day</button><label>HP healed<input type="number" min="0" step="1" data-recovery-healing value="0"></label></div><div class="camp-recovery-summary"></div><div class="camp-recovery-log"></div></div></div>';
+    target.append(section);
+    const promptDetails = title => new Promise(resolve => {
+        const modal = document.createElement('div');
+        modal.className = 'recovery-modal';
+        modal.innerHTML = `<form class="recovery-dialog"><h3>${esc(title)}</h3><label>Enter the location where you are resting<input name="location" autocomplete="off"></label><label>Enter any notes for this recovery<input name="notes" autocomplete="off"></label><div class="recovery-dialog-actions"><button type="button" data-recovery-cancel>Cancel</button><button type="submit" class="primary">Confirm</button></div></form>`;
+        const close = value => { modal.remove(); resolve(value); };
+        modal.querySelector('[data-recovery-cancel]').onclick = () => close(null);
+        modal.querySelector('form').onsubmit = event => { event.preventDefault(); close({ location: modal.querySelector('[name="location"]').value.trim(), notes: modal.querySelector('[name="notes"]').value.trim() }); };
+        document.body.append(modal);
+        modal.querySelector('[name="location"]').focus();
+    });
+    const recordRecovery = (eventType, hours, details) => {
+        const healing = Math.max(0, Number.parseInt(section.querySelector('[data-recovery-healing]').value, 10) || 0);
+        if (healing) data.combat.hpCurrent = String(Math.min(Number.parseInt(data.combat.hpMax, 10) || 0, (Number.parseInt(data.combat.hpCurrent, 10) || 0) + healing));
+        data.recoveryLog.push({ timestamp: new Date().toISOString(), eventType, hours, location: details.location, notes: details.notes });
+        return true;
+    };
+    const recoverSpells = resetCastCounters => {
+        Object.values(data.spellSlotPools).forEach(pool => pool.forEach(slot => slot.used = ''));
+        if (resetCastCounters) data.spells.forEach(spell => { spell.uses = ''; spell.castQty = ''; });
+    };
+    section.querySelectorAll('[data-recovery-action]').forEach(button => button.onclick = async () => {
+        const action = button.dataset.recoveryAction;
+        const labels = { spells: 'Recover spells', rest: 'Rest 8 hours', day: 'Start a new day' };
+        const details = await promptDetails(labels[action]);
+        if (!details) return;
+        if (action === 'spells') recoverSpells(false);
+        if (action === 'day') {
+            recoverSpells(true);
+            data.spellUsageLog = [];
+        }
+        recordRecovery(action === 'day' ? 'new-day' : action === 'spells' ? 'spell-recovery' : 'rest', action === 'rest' ? 8 : '', details);
+        changed();
+        render();
+    });
+    const used = Object.values(data.spellSlotPools).flat().reduce((total, slot) => total + (Number.parseInt(slot.used, 10) || 0), 0);
+    const recoveryLog = section.querySelector('.camp-recovery-log');
+    section.querySelector('.camp-recovery-summary').textContent = `Current HP: ${data.combat.hpCurrent || '-'} / ${data.combat.hpMax || '-'} · Slots used: ${used}`;
+    recoveryLog.innerHTML = data.recoveryLog.slice(-5).reverse().map(entry => `<div>${esc(entry.eventType)}${entry.hours ? ` · ${esc(entry.hours)} hours` : ''}${entry.location ? ` · ${esc(entry.location)}` : ''}${entry.notes ? ` · ${esc(entry.notes)}` : ''}</div>`).join('') || '<small>No recovery events recorded.</small>';
 }
 
 const resistancePresets = [
@@ -3185,6 +3660,7 @@ function render() {
     setupWeaponSection();
     setupSpellSectionPosition();
     setupSpellTracking();
+    setupCampRecoverySection();
     setupClassAbilitiesSection();
     setupSpecialNotesPosition();
     setupResistanceSection();
@@ -3455,7 +3931,7 @@ try {
     data = normalize(JSON.parse(localStorage.getItem('adnd2e-sheet-v1') || '{}'))
 } catch {}
 render();
-Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadLanguageCatalog()]).then(() => {
+Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadPriestSpellProgression(), loadWizardSpellProgression(), loadRangerSpellProgression(), loadDruidSphereAccess(), loadRangerSpellAccess(), loadPaladinSpellData(), loadBardSpellProgression(), loadShamanSpellcasting(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadLanguageCatalog()]).then(() => {
     const enrichmentResult = applySpellMaterialEnrichments(spellCatalogSourceRecords, spellMaterialEnrichmentRecords);
     spellCatalogSourceRecords = enrichmentResult.records;
     spellMaterialEnrichmentConflicts = enrichmentResult.conflicts;
@@ -3467,7 +3943,7 @@ Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(
     spellCatalog = spellCatalogRecords.map(item => ({
         ...item,
         source: spellSources(item).length ? spellSources(item) : [item.spellGroup ? normalizeLegacySpellSource(item.spellGroup) : 'Unknown'],
-        school: item.school || item.source || item.spellGroup || (Array.isArray(item.schools) ? item.schools[0] : Array.isArray(item.sphere) ? item.sphere[0] : 'Unknown'),
+        school: item.school || item.spellGroup || (Array.isArray(item.schools) ? item.schools[0] : Array.isArray(item.sphere) ? item.sphere[0] : ''),
         level: String(item.level),
         type: 'Spell',
         notes: Array.isArray(item.notes) ? item.notes : []

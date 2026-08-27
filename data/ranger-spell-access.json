@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0",
+  "id": "ranger-spell-access",
+  "recordType": "spell-access-rule",
+  "class": "ranger",
+  "source": "PHBR11",
+  "spellSource": "priest",
+  "majorSpheres": [
+    "animal",
+    "plant"
+  ],
+  "progression": "ranger-spell-progression",
+  "specialRules": [
+    "Ranger spells are a restricted subset of priest magic.",
+    "Rangers do not receive bonus spells for high Wisdom."
+  ]
+}

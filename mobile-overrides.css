@@ -1,10 +1,12 @@
 /* Late overrides for mobile toolbar placement and table overflow handling. */
 
 .tableWrap {
-    width: calc(100% + 20px);
-    max-width: none;
-    margin-left: -10px;
-    margin-right: -10px;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
@@ -76,6 +78,59 @@ html,
 body {
     width: 100%;
     overflow-x: hidden;
+}
+
+.spell-slot-sources { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 700px) {
+    .spell-slot-sources { grid-template-columns: 1fr; }
+}
+
+.spells-table th:nth-child(5),
+.spells-table td:nth-child(5) { min-width: 34px; }
+.spells-table th:nth-child(6),
+.spells-table td:nth-child(6) { min-width: 62px; }
+.spells-table th:nth-child(7),
+.spells-table td:nth-child(7),
+.spells-table th:nth-child(8),
+.spells-table td:nth-child(8),
+.spells-table th:nth-child(9),
+.spells-table td:nth-child(9) { min-width: 34px; }
+.spells-table th:nth-child(12),
+.spells-table td:nth-child(12) { min-width: 52px; }
+.spells-table th:nth-child(13),
+.spells-table td:nth-child(13) { min-width: 28px; }
+.manual-spells .spells-table th:nth-child(1),
+.manual-spells .spells-table td:nth-child(1) { min-width: 42px; }
+.manual-spells .spells-table th:nth-child(2),
+.manual-spells .spells-table td:nth-child(2) { min-width: 180px; }
+.manual-spells .spells-table th:nth-child(3),
+.manual-spells .spells-table td:nth-child(3) { min-width: 64px; }
+.manual-spells .spells-table th:nth-child(4),
+.manual-spells .spells-table td:nth-child(4) { min-width: 100px; }
+.manual-spells .spells-table th:nth-child(5),
+.manual-spells .spells-table td:nth-child(5) { min-width: 150px; }
+.manual-spells .spells-table th:nth-child(6),
+.manual-spells .spells-table td:nth-child(6) { min-width: 34px; }
+.manual-spells .spells-table th:nth-child(7),
+.manual-spells .spells-table td:nth-child(7) { min-width: 62px; }
+.manual-spells .spells-table th:nth-child(8),
+.manual-spells .spells-table td:nth-child(8),
+.manual-spells .spells-table th:nth-child(9),
+.manual-spells .spells-table td:nth-child(9),
+.manual-spells .spells-table th:nth-child(10),
+.manual-spells .spells-table td:nth-child(10) { min-width: 34px; }
+.manual-spells .spells-table th:nth-child(11),
+.manual-spells .spells-table td:nth-child(11),
+.manual-spells .spells-table th:nth-child(12),
+.manual-spells .spells-table td:nth-child(12) { min-width: 180px; }
+.manual-spells .spells-table th:nth-child(13),
+.manual-spells .spells-table td:nth-child(13) { min-width: 40px; }
+@media (max-width: 700px) {
+    .spell-cast-picker { grid-template-columns: 36px minmax(0, 1fr) 38px; width: 100%; }
+    .casting-source-icon { width: 30px; height: 30px; }
+    .spell-cast-picker label:first-of-type,
+    .spell-cast-picker label:last-of-type { grid-column: 2; }
+    .spell-cast-picker .spell-cast-button { grid-column: 3; grid-row: 1 / span 2; }
 }
 
 @media (max-width: 700px) {

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0",
+  "id": "shaman-spellcasting",
+  "recordType": "class-spellcasting",
+  "class": "shaman",
+  "source": "The Complete Barbarian's Handbook",
+  "spellProgression": "priest-spell-progression",
+  "spellAcquisition": {
+    "method": "patron-spirit-granted",
+    "dailyPreparation": false
+  },
+  "specialFeatures": [
+    "minor-spirit-powers",
+    "major-spirit-powers",
+    "great-spirit-powers"
+  ],
+  "notes": [
+    "Shamans use the Priest spell progression.",
+    "Shamans cast from a patron-spirit-granted repertoire."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "id": "ranger-spell-progression",
+  "name": "RANGER SPELL PROGRESSION",
+  "recordType": "spell-progression",
+  "class": "ranger",
+  "source": "PHBR11",
+  "sourceTable": 5,
+  "bonusSpellsFromAbility": false,
+  "abilityScore": "wisdom",
+  "castingProgression": [
+    { "rangerLevel": 8, "castingLevel": 1, "spells": { "1": 1, "2": 0, "3": 0 } },
+    { "rangerLevel": 9, "castingLevel": 2, "spells": { "1": 2, "2": 0, "3": 0 } },
+    { "rangerLevel": 10, "castingLevel": 3, "spells": { "1": 2, "2": 1, "3": 0 } },
+    { "rangerLevel": 11, "castingLevel": 4, "spells": { "1": 2, "2": 2, "3": 0 } },
+    { "rangerLevel": 12, "castingLevel": 5, "spells": { "1": 2, "2": 2, "3": 1 } },
+    { "rangerLevel": 13, "castingLevel": 6, "spells": { "1": 3, "2": 2, "3": 1 } },
+    { "rangerLevel": 14, "castingLevel": 7, "spells": { "1": 3, "2": 2, "3": 2 } },
+    { "rangerLevel": 15, "castingLevel": 8, "spells": { "1": 3, "2": 3, "3": 2 } },
+    { "rangerLevel": 16, "castingLevel": 9, "spells": { "1": 3, "2": 3, "3": 3 } }
+  ],
+  "specialRules": [
+    { "rule": "No spellcasting before Ranger level 8." },
+    { "rule": "Ranger spells are cast using priest spell progression." },
+    { "rule": "Regardless of actual Ranger level, spells are never cast above casting level 9." },
+    { "rule": "Rangers do not receive bonus spells for high Wisdom." }
+  ]
+}
