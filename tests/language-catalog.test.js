@@ -5,6 +5,7 @@ const test = require('node:test');
 
 const catalogPath = path.join(__dirname, '..', 'data', 'language-catalog.json');
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+const languageRules = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'languages.json'), 'utf8'));
 const languages = catalog.languages;
 const validCategories = new Set(['common', 'racial', 'humanoid', 'secret-tongue']);
 
@@ -54,4 +55,8 @@ test('filters languages by literacy support', () => {
 
 test('filters languages by source', () => {
     assert.deepEqual(filterLanguages({ source: 'PHBR10' }).map(language => language.id), ['orc', 'goblin', 'hobgoblin', 'kobold']);
+});
+
+test('Intelligence 6 grants no bonus languages', () => {
+    assert.equal(languageRules.intelligenceBonusLanguages[5], 0);
 });
