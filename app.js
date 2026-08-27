@@ -1153,12 +1153,16 @@ function classMinimumsHTML() {
         const name = requirementClassName(entry.className);
         const requirements = classRequirements[name];
         const values = Object.entries(requirements).map(([ability, minimum]) => {
-            const score = Number.parseInt(data.abilities[ability], 10);
+            const score = Number.parseInt(currentAbilityScore(ability), 10);
             const status = Number.isInteger(score) ? `${score}/${minimum}` : `-/${minimum}`;
             return `<span class="class-minimum${Number.isInteger(score) && score < minimum ? ' class-minimum-missing' : ''}"><strong>${ability.toUpperCase()}</strong> ${status}</span>`;
         }).join('');
         return `<div class="class-minimum-row"><strong>${esc(name)}</strong><div>${values}</div></div>`;
     }).join('');
+}
+
+function currentAbilityScore(ability) {
+    return document.querySelector(`[data-section="abilities"][data-key="${ability}"]`)?.value ?? data.abilities[ability];
 }
 
 function updateClassMinimums() {
@@ -2186,7 +2190,7 @@ function currentBenefitValues(ability, score) {
 function abilitySummaryHTML() {
     return Object.keys(labels).map(ability => {
         const columns = benefitColumns[ability];
-        const current = currentBenefitValues(ability, data.abilities[ability]);
+        const current = currentBenefitValues(ability, currentAbilityScore(ability));
         return `<div class="ability-summary-row"><div class="ability-summary-name">${labels[ability]}<span>${current.score}</span></div><table class="ability-summary-table"><thead><tr>${columns.map(([label]) => `<th>${label}</th>`).join('')}</tr></thead><tbody><tr>${current.values.map(value => `<td>${esc(value)}</td>`).join('')}</tr></tbody></table></div>`;
     }).join('');
 }
