@@ -56,7 +56,9 @@
 .weapon-proficiencies-table th:nth-child(3) { width: 10%; }
 .weapon-proficiencies-table th:nth-child(4) { width: 14%; }
 .weapon-proficiencies-table th:nth-child(5) { width: 24%; }
-.weapon-proficiencies-table th:nth-child(6) { width: 2%; }
+.weapon-proficiencies-table th:nth-child(6) { width: 28px; }
+.weapon-proficiencies-table th:last-child,
+.weapon-proficiencies-table td:last-child { width: 28px; min-width: 28px; padding-left: 2px; padding-right: 2px; }
 
 /* Keep the ambush bush panel vertically aligned with the surprise fields. */
 .surprise-layout {
@@ -99,6 +101,8 @@ body {
 .spells-table td:nth-child(12) { min-width: 52px; }
 .spells-table th:nth-child(13),
 .spells-table td:nth-child(13) { min-width: 28px; }
+.ranger-thief-results { grid-template-columns: 1fr; }
+.ranger-thief-settings { align-items: flex-start; }
 .manual-spells .spells-table th:nth-child(1),
 .manual-spells .spells-table td:nth-child(1) { min-width: 42px; }
 .manual-spells .spells-table th:nth-child(2),

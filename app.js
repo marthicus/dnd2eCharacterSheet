@@ -112,6 +112,8 @@ const FIXED = {
     languages: [],
     languageTracking: { availableBonusLanguages: null },
     nwpSettings: { autoCalculate: true, exemptBonusProficiencies: true, availableSlots: 0 },
+    rangerThiefSettings: { environment: 'wilderness', rounding: 'floor', optionalHeavyArmor: false, allowHeavyArmor: false, other: { hideInShadows: 0, moveSilently: 0 }, manualOverrides: { hideInShadows: null, moveSilently: null } },
+    rangerThiefCalculations: {},
     inventory: [],
     spells: [],
     spellUsageLog: [],
@@ -168,6 +170,7 @@ let paladinSpellProgression = null;
 let paladinSpellAccess = null;
 let bardSpellProgression = null;
 let shamanSpellcasting = null;
+let rangerThiefAbilities = null;
 let languageCatalogStatus = 'loading';
 let spellCatalogStatus = 'loading';
 const gameRules = {
@@ -235,6 +238,8 @@ function normalize(x = {}) {
     d.languages = Array.isArray(x.languages) && x.languages.length ? x.languages.map(language => ({ id: typeof language.id === 'string' ? language.id : '', name: typeof language.name === 'string' ? language.name : '', category: language.category ?? null, sourceType: ['native', 'racial', 'bonus', 'class', 'kit', 'campaign', 'magic'].includes(language.sourceType) ? language.sourceType : language.source === 'racial' ? 'racial' : 'native', isAutomatic: language.isAutomatic === true, speaks: language.speaks !== false, reads: language.reads === true, writes: language.writes === true, usesLanguageSlot: language.usesLanguageSlot === true, countsAgainstLanguageLimit: language.countsAgainstLanguageLimit === true, notes: language.notes ?? '' })) : d.languages;
     d.languageTracking = { ...d.languageTracking, ...(x.languageTracking || {}) };
     d.nwpSettings = { ...d.nwpSettings, ...(x.nwpSettings || {}) };
+    d.rangerThiefSettings = { ...d.rangerThiefSettings, ...(x.rangerThiefSettings || {}), other: { ...d.rangerThiefSettings.other, ...(x.rangerThiefSettings?.other || {}) }, manualOverrides: { ...d.rangerThiefSettings.manualOverrides, ...(x.rangerThiefSettings?.manualOverrides || {}) } };
+    d.rangerThiefCalculations = x.rangerThiefCalculations && typeof x.rangerThiefCalculations === 'object' ? x.rangerThiefCalculations : {};
     d.resistances = d.resistances.map(item => ({ type: typeof item.type === 'string' ? item.type : 'Other', appliesTo: item.appliesTo ?? '', value: item.value ?? '', source: item.source ?? '', active: item.active !== false, notes: item.notes ?? '' }));
     d.surpriseBonus = { ...d.surpriseBonus, ...(x.surpriseBonus || {}) };
     d.globalModifiers = Array.isArray(x.globalModifiers) ? x.globalModifiers.map(item => ({ category: typeof item.category === 'string' ? item.category : 'Other', value: item.value ?? '', appliesTo: item.appliesTo ?? '', source: item.source ?? '', active: item.active !== false, condition: item.condition ?? '', notes: item.notes ?? '' })) : [];
@@ -469,6 +474,13 @@ function normalizeLegacySpellSource(value) {
 
 function spellSources(record) {
     return [...new Set([...(Array.isArray(record.source) ? record.source : [record.source]), ...(record.sourceRefs || [])].filter(Boolean))];
+}
+
+function readableSourceSummary(value) {
+    const sources = [...new Set(Array.isArray(value) ? value : [value])].filter(Boolean).map(String);
+    if (!sources.length) return 'Source not recorded';
+    if (sources.length === 1) return sources[0];
+    return `Multiple source books (${sources.length})`;
 }
 
 function sourceQualifiedValue(record, value) {
@@ -789,6 +801,19 @@ async function loadShamanSpellcasting() {
         shamanSpellcasting = catalog;
     } catch (error) {
         shamanSpellcasting = null;
+        console.warn(error.message);
+    }
+}
+
+async function loadRangerThiefAbilities() {
+    try {
+        const response = await fetch('data/phbr11-ranger-thief-abilities.json');
+        if (!response.ok) throw new Error('Ranger thief abilities unavailable');
+        const catalog = await response.json();
+        if (catalog.id !== 'phbr11-ranger-thief-abilities' || !Array.isArray(catalog.baseByRangerLevel)) throw new Error('Invalid ranger thief abilities');
+        rangerThiefAbilities = catalog;
+    } catch (error) {
+        rangerThiefAbilities = null;
         console.warn(error.message);
     }
 }
@@ -2427,6 +2452,7 @@ function setupHitPointsSection() {
         section.querySelector('[data-key="hpBonus"]').value = data.combat.hpBonus;
         section.querySelector('[data-key="hpCurrent"]').value = data.combat.hpCurrent;
         updateHitPointDisplay();
+        updateCampRecoverySummary();
         const currentTotal = current + bonus;
         const effectiveMaximum = maximum + bonus;
         const previousEffectiveMaximum = maximum + previousBonus;
@@ -2470,6 +2496,13 @@ function flashHeart(type) {
 function movementRate(base, multiplier) {
     const value = Number.parseInt(base, 10);
     return Number.isInteger(value) && value >= 0 ? Math.floor(value * multiplier) : '-';
+}
+
+function updateCampRecoverySummary() {
+    const summary = document.querySelector('.camp-recovery-summary');
+    if (!summary) return;
+    const used = Object.values(data.spellSlotPools || {}).flat().reduce((total, slot) => total + (Number.parseInt(slot.used, 10) || 0), 0);
+    summary.textContent = `Current HP: ${data.combat.hpCurrent || '-'} / ${data.combat.hpMax || '-'} · Slots used: ${used}`;
 }
 
 function setupMovementSection() {
@@ -2532,6 +2565,46 @@ function classAbilitiesVisibility() {
     return { hasPriest, hasRogue, visible: hasPriest || hasRogue };
 }
 
+function rangerSkillCalculations() {
+    if (!rangerThiefAbilities) return {};
+    const ranger = (data.identity.classEntries || []).find(entry => /ranger/i.test(entry.className || ''));
+    const level = Number.parseInt(ranger?.level, 10);
+    if (!ranger || !Number.isInteger(level) || level < 1) return {};
+    const base = rangerThiefAbilities.baseByRangerLevel.find(row => level >= row.minLevel && (row.maxLevel == null || level <= row.maxLevel)) || rangerThiefAbilities.baseByRangerLevel.at(-1);
+    const race = String(data.raceSelection || data.identity.race || '').toLowerCase().replace(/\s+/g, '-');
+    const racial = rangerThiefAbilities.racialAdjustments[race] || { hideInShadows: 0, moveSilently: 0 };
+    const dex = Number.parseInt(data.abilities.dex, 10);
+    const dexterity = rangerThiefAbilities.dexterityAdjustments.find(row => dex >= row.minDexterity && dex <= row.maxDexterity) || { hideInShadows: 0, moveSilently: 0 };
+    const kit = String(data.identity.classKit || '').toLowerCase().trim().replace(/\s+/g, '-');
+    const kitAdjustment = rangerThiefAbilities.kitAdjustments[kit] || { hideInShadows: 0, moveSilently: 0 };
+    const armorItem = (data.combat.acItems || []).find(item => item.equipped !== false && item.type === 'armor');
+    const armorName = String(armorItem?.name || 'none').toLowerCase();
+    const armor = armorName.includes('none') || armorName.includes('unarmored') ? 'none' : armorName.includes('studded') ? 'studded-leather' : armorName.replace(/\s+\/\s+|\s+/g, '-');
+    const standardArmor = rangerThiefAbilities.standardArmorAdjustments[armor];
+    const heavyArmor = rangerThiefAbilities.optionalHeavyArmorAdjustments[armor];
+    const heavyAllowed = data.rangerThiefSettings.optionalHeavyArmor || data.rangerThiefSettings.allowHeavyArmor;
+    const standardArmorAllowed = ['none', 'leather', 'padded', 'studded-leather'].includes(armor);
+    const armorAdjustment = standardArmorAllowed ? standardArmor : (heavyAllowed ? heavyArmor : null);
+    const calculations = {};
+    ['hideInShadows', 'moveSilently'].forEach(skill => {
+        const unavailable = kitAdjustment.notApplicable ? 'Kit does not grant this Ranger skill.' : !armorAdjustment ? `Unavailable in ${armorItem?.name || 'this armor'} under the standard rule.` : null;
+        const additive = unavailable ? null : base[skill] + (racial[skill] || 0) + (dexterity[skill] || 0) + (kitAdjustment[skill] || 0) + (armorAdjustment[skill] || 0) + (Number(data.rangerThiefSettings.other[skill]) || 0);
+        const multiplied = additive == null ? null : data.rangerThiefSettings.environment === 'wilderness' ? additive : additive * rangerThiefAbilities.calculation.nonWildernessMultiplier;
+        const rounded = multiplied == null ? null : data.rangerThiefSettings.rounding === 'ceil' ? Math.ceil(multiplied) : data.rangerThiefSettings.rounding === 'round' ? Math.round(multiplied) : Math.floor(multiplied);
+        calculations[skill] = { skillId: skill === 'hideInShadows' ? 'hide-in-shadows' : 'move-silently', sourceClass: 'ranger', sourceRuleId: rangerThiefAbilities.id, base: base[skill], modifiers: { race: racial[skill] || 0, dexterity: dexterity[skill] || 0, kit: kitAdjustment[skill] || 0, armor: armorAdjustment?.[skill] || 0, other: Number(data.rangerThiefSettings.other[skill]) || 0 }, environmentMultiplier: data.rangerThiefSettings.environment === 'wilderness' ? 1 : .5, calculatedPercent: rounded == null ? null : Math.max(0, Math.min(99, rounded)), manualOverride: data.rangerThiefSettings.manualOverrides[skill], displayPercent: data.rangerThiefSettings.manualOverrides[skill] == null ? rounded : data.rangerThiefSettings.manualOverrides[skill], available: !unavailable, unavailableReason: unavailable };
+    });
+    data.rangerThiefCalculations = calculations;
+    return calculations;
+}
+
+function rangerSkillControlsHTML(skill, label) {
+    const calculation = rangerSkillCalculations()[skill];
+    if (!calculation) return '';
+    const display = calculation.manualOverride == null ? (calculation.available ? `${calculation.displayPercent}%` : 'N/A') : `${calculation.displayPercent}% (manual)`;
+    const breakdown = calculation.available ? `Base ${calculation.base}; race ${calculation.modifiers.race >= 0 ? '+' : ''}${calculation.modifiers.race}; DEX ${calculation.modifiers.dexterity >= 0 ? '+' : ''}${calculation.modifiers.dexterity}; kit ${calculation.modifiers.kit >= 0 ? '+' : ''}${calculation.modifiers.kit}; armor ${calculation.modifiers.armor >= 0 ? '+' : ''}${calculation.modifiers.armor}; other ${calculation.modifiers.other >= 0 ? '+' : ''}${calculation.modifiers.other}; environment x${calculation.environmentMultiplier}.` : calculation.unavailableReason;
+    return `<div class="ranger-skill-calculation"><strong>${label}: ${display}</strong><small>${esc(breakdown)}</small><label>Manual override <input type="number" min="0" max="99" data-ranger-override="${skill}" value="${calculation.manualOverride ?? ''}"></label><button type="button" data-ranger-reset="${skill}">Reset override</button></div>`;
+}
+
 function updateClassAbilitiesVisibility() {
     const section = document.querySelector('.class-abilities-section');
     if (!section) return;
@@ -2577,7 +2650,7 @@ function setupClassAbilitiesSection() {
                 const trackedKey = record.catalogueType === 'spell' ? 'spellCatalogId' : 'classAbilityId';
                 const tracked = data.spells.some(item => item[trackedKey] === record.id);
                 const classNames = (record.classes || []).join(', ');
-                const metadata = record.catalogueType === 'spell' ? [`Spell${record.level != null ? ` · L${record.level}` : ''}`, classNames, record.source] : ['Ability', record.abilityType, classNames, record.source];
+                const metadata = record.catalogueType === 'spell' ? [`Spell${record.level != null ? ` · L${record.level}` : ''}`, classNames, readableSourceSummary(record.source)] : ['Ability', record.abilityType, classNames, readableSourceSummary(record.source)];
                 return `<button type="button" class="class-ability-result" data-class-ability-add="${esc(record.id)}" data-class-ability-type="${record.catalogueType}"${tracked ? ' disabled' : ''}><strong>${esc(record.name)}</strong><small>${esc(metadata.filter(Boolean).join(' · '))}${tracked ? ' · Tracked' : ''}</small></button>`;
             }).join('') || '<small>No matching class abilities.</small>';
             results.querySelectorAll('[data-class-ability-add]').forEach(button => button.onclick = () => {
@@ -2616,6 +2689,41 @@ function setupClassAbilitiesSection() {
             toggle.setAttribute('aria-expanded', String(!isCollapsed));
             changed();
         };
+    }
+    const thiefGroup = [...section.querySelectorAll('.class-ability-group')].find(group => group.querySelector('h3')?.textContent === 'Thief skills');
+    if (thiefGroup) {
+        thiefGroup.querySelector('.ranger-thief-calculations')?.remove();
+        const hasRanger = (data.identity.classEntries || []).some(entry => /ranger/i.test(entry.className || ''));
+        if (hasRanger && rangerThiefAbilities) {
+            const calculations = rangerSkillCalculations();
+            const panel = document.createElement('div');
+            panel.className = 'ranger-thief-calculations';
+            panel.innerHTML = `<h4>Ranger stealth calculations</h4><div class="ranger-thief-settings"><label>Environment<select data-ranger-environment><option value="wilderness">Wilderness</option><option value="other">Indoor / urban / underground</option></select></label><label>Rounding<select data-ranger-rounding><option value="floor">Round down</option><option value="round">Nearest whole percent</option><option value="ceil">Round up</option></select></label><label><input type="checkbox" data-ranger-heavy> Optional heavy armor rule</label><label><input type="checkbox" data-ranger-heavy-override> Allow heavy armor override</label><label>Other Hide modifier<input type="number" data-ranger-other="hideInShadows" value="${data.rangerThiefSettings.other.hideInShadows}"></label><label>Other Move modifier<input type="number" data-ranger-other="moveSilently" value="${data.rangerThiefSettings.other.moveSilently}"></label></div><div class="ranger-thief-results">${rangerSkillControlsHTML('moveSilently', 'MOVE SILENTLY')}${rangerSkillControlsHTML('hideInShadows', 'HIDE IN SHADOWS')}</div>`;
+            panel.querySelector('[data-ranger-environment]').value = data.rangerThiefSettings.environment;
+            panel.querySelector('[data-ranger-rounding]').value = data.rangerThiefSettings.rounding;
+            panel.querySelector('[data-ranger-heavy]').checked = data.rangerThiefSettings.optionalHeavyArmor;
+            panel.querySelector('[data-ranger-heavy-override]').checked = data.rangerThiefSettings.allowHeavyArmor;
+            panel.querySelectorAll('[data-ranger-environment]').forEach(input => input.onchange = () => { data.rangerThiefSettings.environment = input.value; changed(); render(); });
+            panel.querySelectorAll('[data-ranger-rounding]').forEach(input => input.onchange = () => { data.rangerThiefSettings.rounding = input.value; changed(); render(); });
+            panel.querySelector('[data-ranger-heavy]').onchange = event => { data.rangerThiefSettings.optionalHeavyArmor = event.target.checked; changed(); render(); };
+            panel.querySelector('[data-ranger-heavy-override]').onchange = event => { data.rangerThiefSettings.allowHeavyArmor = event.target.checked; changed(); render(); };
+            panel.querySelectorAll('[data-ranger-other]').forEach(input => input.oninput = () => { data.rangerThiefSettings.other[input.dataset.rangerOther] = Number(input.value) || 0; changed(); render(); });
+            panel.querySelectorAll('[data-ranger-override]').forEach(input => input.oninput = () => { data.rangerThiefSettings.manualOverrides[input.dataset.rangerOverride] = input.value === '' ? null : Math.max(0, Math.min(99, Number(input.value))); changed(); render(); });
+            panel.querySelectorAll('[data-ranger-reset]').forEach(button => button.onclick = () => { data.rangerThiefSettings.manualOverrides[button.dataset.rangerReset] = null; changed(); render(); });
+            thiefGroup.querySelectorAll('tbody tr').forEach(row => {
+                const skill = row.querySelector('th')?.textContent.toLowerCase().replace(/[^a-z]+/g, '-');
+                const key = skill === 'move-silently' ? 'moveSilently' : skill === 'hide-in-shadows' ? 'hideInShadows' : '';
+                const calculation = key ? calculations[key] : null;
+                if (!calculation) return;
+                const valueCell = row.querySelector('td');
+                const calculated = document.createElement('output');
+                calculated.className = 'ranger-calculated-value';
+                calculated.textContent = calculation.available ? `${calculation.displayPercent}% Ranger` : 'N/A';
+                    calculated.title = calculation.available ? `Base ${calculation.base}; race ${calculation.modifiers.race}; DEX ${calculation.modifiers.dexterity}; kit ${calculation.modifiers.kit}; armor ${calculation.modifiers.armor}; other ${calculation.modifiers.other}; environment x${calculation.environmentMultiplier}.` : calculation.unavailableReason;
+                valueCell.prepend(calculated);
+            });
+            thiefGroup.append(panel);
+        }
     }
     updateClassAbilitiesVisibility();
 }
@@ -2664,9 +2772,19 @@ function weaponRacialBonuses(weapon) {
     const axe = /axe/i.test(name);
     const halflingOrElf = data.raceSelection === 'Halfling' || data.raceSelection === 'Elves';
     const halfElfHit = halfElfWeaponApplies(name) ? 1 : 0;
-    const hit = halfElfHit + (halflingOrElf && (thrown || (data.raceSelection === 'Elves' && axe)) ? 1 : 0) + (exceptional?.hit || 0);
-    const damage = (data.raceSelection === 'Halfling' && thrown ? 1 : data.raceSelection === 'Elves' && (thrown || axe) ? 1 : 0) + (exceptional?.damage || 0);
+    const hit = halfElfHit + (halflingOrElf && (thrown || (data.raceSelection === 'Elves' && axe)) ? 1 : 0);
+    const damage = data.raceSelection === 'Halfling' && thrown ? 1 : data.raceSelection === 'Elves' && (thrown || axe) ? 1 : 0;
     return { hit, damage };
+}
+
+function weaponUsesDexterity(weapon) {
+    return String(weapon?.attackType || '').toUpperCase().includes('T') || /sling|bow|crossbow|dart|javelin/i.test(weapon?.name || '');
+}
+
+function weaponAbilityAttackBonus(weapon) {
+    const ability = weaponUsesDexterity(weapon) ? 'dex' : 'str';
+    const exceptional = ability === 'str' ? exceptionalStrengthValues(data.abilities.str) : null;
+    return { ability, bonus: exceptional ? exceptional.hit : Number.parseInt(modifier(ability, data.abilities[ability]), 10) || 0 };
 }
 
 function weaponRowsHTML() {
@@ -2681,10 +2799,11 @@ function updateWeaponThac0() {
     document.querySelectorAll('[data-weapon-thac0]').forEach(output => {
         const weapon = data.weapons[+output.dataset.weaponThac0];
         const racial = weaponRacialBonuses(weapon);
-        const attackAdjustment = (Number.parseInt(weapon?.attackAdj, 10) || 0) + racial.hit + globalModifierTotal('Hit', weapon?.name || '');
+        const abilityAttack = weaponAbilityAttackBonus(weapon);
+        const attackAdjustment = abilityAttack.bonus + (Number.parseInt(weapon?.attackAdj, 10) || 0) + racial.hit + globalModifierTotal('Hit', weapon?.name || '');
         const thac0Adjustment = Number.parseInt(weapon?.thac0Adj, 10) || 0;
         output.textContent = Number.isInteger(base) && weapon?.equipped !== false ? base - attackAdjustment + thac0Adjustment + targetedGlobalModifierTotal('THAC0', weapon?.name) : '-';
-        output.title = weapon?.equipped !== false && Number.isInteger(base) ? `Weapon THAC0 = character THAC0 ${base} - attack adjustment ${Number.parseInt(weapon?.attackAdj, 10) || 0}${racial.hit ? ` - racial hit bonus ${racial.hit}` : ''} + weapon THAC0 adjustment ${thac0Adjustment} = ${output.textContent}.` : 'Weapon is inactive or character THAC0 is not available.';
+        output.title = weapon?.equipped !== false && Number.isInteger(base) ? `Weapon THAC0 = character THAC0 ${base} - ${abilityAttack.ability.toUpperCase()} attack adjustment ${abilityAttack.bonus} - weapon attack adjustment ${Number.parseInt(weapon?.attackAdj, 10) || 0}${racial.hit ? ` - racial hit bonus ${racial.hit}` : ''} + weapon THAC0 adjustment ${thac0Adjustment} = ${output.textContent}.` : 'Weapon is inactive or character THAC0 is not available.';
         const damageInput = output.closest('tr')?.querySelector('[data-weapon-key="damageAdj"]');
         if (damageInput) damageInput.title = racial.damage ? `Manual damage adjustment plus racial ${racial.damage >= 0 ? '+' : ''}${racial.damage} damage from ${data.raceSelection} weapon rules.` : 'Manual weapon damage adjustment. No automatic racial damage bonus applies to this weapon.';
     });
@@ -2878,7 +2997,7 @@ function setupReferenceLibrary() {
                 ? 'Language reference records unavailable.'
                 : '';
         const emptyMessage = loadingMessage || unavailableMessage || 'No matching reference records.';
-        results.innerHTML = matches.map((record, index) => `<button type="button" class="reference-library-result" title="${esc(referenceTooltip(record))}" data-reference-result="${index}"><strong>${esc(getName(record))}</strong><small>${esc(record.referenceLabel || record.abilityType || record.category || '')} · ${esc(referenceValueText(record.source || ''))}</small></button>`).join('') || `<small>${esc(emptyMessage)}</small>`;
+        results.innerHTML = matches.map((record, index) => `<button type="button" class="reference-library-result" title="${esc(referenceTooltip(record))}" data-reference-result="${index}"><strong>${esc(getName(record))}</strong><small>${esc(record.referenceLabel || record.abilityType || record.category || '')} · ${esc(readableSourceSummary(record.source))}</small></button>`).join('') || `<small>${esc(emptyMessage)}</small>`;
         results.querySelectorAll('[data-reference-result]').forEach(button => button.onclick = () => renderDetail(matches[+button.dataset.referenceResult]));
     };
     section.querySelectorAll('[data-reference-mode]').forEach(button => button.onclick = () => { section.dataset.mode = button.dataset.referenceMode; setupReferenceLibrary(); });
@@ -3248,7 +3367,7 @@ function setupCampRecoverySection() {
         changed();
         render();
     });
-    const used = Object.values(data.spellSlotPools).flat().reduce((total, slot) => total + (Number.parseInt(slot.used, 10) || 0), 0);
+    updateCampRecoverySummary();
     const recoveryLog = section.querySelector('.camp-recovery-log');
     section.querySelector('.camp-recovery-summary').textContent = `Current HP: ${data.combat.hpCurrent || '-'} / ${data.combat.hpMax || '-'} · Slots used: ${used}`;
     recoveryLog.innerHTML = data.recoveryLog.slice(-5).reverse().map(entry => `<div>${esc(entry.eventType)}${entry.hours ? ` · ${esc(entry.hours)} hours` : ''}${entry.location ? ` · ${esc(entry.location)}` : ''}${entry.notes ? ` · ${esc(entry.notes)}` : ''}</div>`).join('') || '<small>No recovery events recorded.</small>';
@@ -3819,6 +3938,7 @@ function bind() {
                 }
             }
             updateHitPointDisplay();
+            updateCampRecoverySummary();
         }
         if (e.dataset.section === 'combat' && e.dataset.key === 'movement') updateMovementSection();
         if (e.dataset.section === 'currency') {
@@ -3975,7 +4095,7 @@ try {
     data = normalize(JSON.parse(localStorage.getItem('adnd2e-sheet-v1') || '{}'))
 } catch {}
 render();
-Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadPriestSpellProgression(), loadWizardSpellProgression(), loadRangerSpellProgression(), loadDruidSphereAccess(), loadRangerSpellAccess(), loadPaladinSpellData(), loadBardSpellProgression(), loadShamanSpellcasting(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadLanguageCatalog()]).then(() => {
+Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadPriestSpellProgression(), loadWizardSpellProgression(), loadRangerSpellProgression(), loadDruidSphereAccess(), loadRangerSpellAccess(), loadPaladinSpellData(), loadBardSpellProgression(), loadShamanSpellcasting(), loadRangerThiefAbilities(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadLanguageCatalog()]).then(() => {
     const enrichmentResult = applySpellMaterialEnrichments(spellCatalogSourceRecords, spellMaterialEnrichmentRecords);
     spellCatalogSourceRecords = enrichmentResult.records;
     spellMaterialEnrichmentConflicts = enrichmentResult.conflicts;

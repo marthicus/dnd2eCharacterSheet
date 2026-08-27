@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "id": "phbr11-ranger-thief-abilities",
+  "name": "Ranger Thief Abilities",
+  "source": "PHBR11 - The Complete Ranger's Handbook",
+  "sourceTables": [8, 9, 10, 11, 12, 13],
+  "skills": ["hide-in-shadows", "move-silently"],
+  "baseByRangerLevel": [
+    { "minLevel": 1, "maxLevel": 1, "hideInShadows": 10, "moveSilently": 15 },
+    { "minLevel": 2, "maxLevel": 2, "hideInShadows": 15, "moveSilently": 21 },
+    { "minLevel": 3, "maxLevel": 3, "hideInShadows": 20, "moveSilently": 27 },
+    { "minLevel": 4, "maxLevel": 4, "hideInShadows": 25, "moveSilently": 33 },
+    { "minLevel": 5, "maxLevel": 5, "hideInShadows": 31, "moveSilently": 40 },
+    { "minLevel": 6, "maxLevel": 6, "hideInShadows": 37, "moveSilently": 47 },
+    { "minLevel": 7, "maxLevel": 7, "hideInShadows": 43, "moveSilently": 55 },
+    { "minLevel": 8, "maxLevel": 8, "hideInShadows": 49, "moveSilently": 62 },
+    { "minLevel": 9, "maxLevel": 9, "hideInShadows": 56, "moveSilently": 70 },
+    { "minLevel": 10, "maxLevel": 10, "hideInShadows": 63, "moveSilently": 78 },
+    { "minLevel": 11, "maxLevel": 11, "hideInShadows": 70, "moveSilently": 86 },
+    { "minLevel": 12, "maxLevel": 12, "hideInShadows": 77, "moveSilently": 94 },
+    { "minLevel": 13, "maxLevel": 13, "hideInShadows": 85, "moveSilently": 99 },
+    { "minLevel": 14, "maxLevel": 14, "hideInShadows": 93, "moveSilently": 99 },
+    { "minLevel": 15, "maxLevel": null, "hideInShadows": 99, "moveSilently": 99 }
+  ],
+  "racialAdjustments": {
+    "human": { "hideInShadows": 0, "moveSilently": 0 },
+    "elf": { "hideInShadows": 10, "moveSilently": 5 },
+    "half-elf": { "hideInShadows": 5, "moveSilently": 0 }
+  },
+  "dexterityAdjustments": [
+    { "minDexterity": 13, "maxDexterity": 16, "hideInShadows": 0, "moveSilently": 0 },
+    { "minDexterity": 17, "maxDexterity": 17, "hideInShadows": 5, "moveSilently": 5 },
+    { "minDexterity": 18, "maxDexterity": 18, "hideInShadows": 10, "moveSilently": 10 },
+    { "minDexterity": 19, "maxDexterity": 19, "hideInShadows": 15, "moveSilently": 15 }
+  ],
+  "kitAdjustments": {
+    "beastmaster": { "hideInShadows": 5, "moveSilently": 0 },
+    "explorer": { "hideInShadows": 0, "moveSilently": 0 },
+    "falconer": { "hideInShadows": 0, "moveSilently": 0 },
+    "feralan": { "hideInShadows": 10, "moveSilently": 10 },
+    "forest-runner": { "hideInShadows": 5, "moveSilently": 5 },
+    "giant-killer": { "hideInShadows": 0, "moveSilently": 0 },
+    "greenwood-ranger": { "hideInShadows": 0, "moveSilently": -5 },
+    "guardian": { "hideInShadows": 0, "moveSilently": 0 },
+    "justifier": { "hideInShadows": 5, "moveSilently": 5 },
+    "mountain-man": { "hideInShadows": -5, "moveSilently": -5 },
+    "pathfinder": { "hideInShadows": 0, "moveSilently": 0 },
+    "sea-ranger": { "hideInShadows": null, "moveSilently": null, "notApplicable": true },
+    "seeker": { "hideInShadows": 0, "moveSilently": 0 },
+    "stalker": { "hideInShadows": 10, "moveSilently": 10 },
+    "warden": { "hideInShadows": 0, "moveSilently": 0 }
+  },
+  "standardArmorAdjustments": {
+    "none": { "hideInShadows": 5, "moveSilently": 10 },
+    "leather": { "hideInShadows": 0, "moveSilently": 0 },
+    "padded": { "hideInShadows": -20, "moveSilently": -20 },
+    "studded-leather": { "hideInShadows": -20, "moveSilently": -20 },
+    "ring-mail": { "hideInShadows": -30, "moveSilently": -40 }
+  },
+  "optionalHeavyArmorAdjustments": {
+    "hide": { "hideInShadows": -20, "moveSilently": -30 },
+    "brigandine": { "hideInShadows": -30, "moveSilently": -40 },
+    "scale-mail": { "hideInShadows": -50, "moveSilently": -60 },
+    "chain-mail": { "hideInShadows": -30, "moveSilently": -40 },
+    "elven-chain": { "hideInShadows": -10, "moveSilently": -10 },
+    "splint-mail": { "hideInShadows": -30, "moveSilently": -40 },
+    "banded-mail": { "hideInShadows": -50, "moveSilently": -60 },
+    "bronze-plate": { "hideInShadows": -75, "moveSilently": -80 },
+    "plate-mail": { "hideInShadows": -75, "moveSilently": -80 },
+    "field-plate": { "hideInShadows": -95, "moveSilently": -95 },
+    "full-plate": { "hideInShadows": -95, "moveSilently": -95 }
+  },
+  "calculation": {
+    "formula": "clamp(base + racial + dexterity + kit + armor + other, 0, 99)",
+    "nonWildernessMultiplier": 0.5,
+    "nonWildernessRounding": "app-configurable",
+    "applyNonWildernessAfterAdditiveModifiers": true,
+    "minimumPercent": 0,
+    "maximumPercent": 99,
+    "heavyArmorDefault": "unavailable-unless-optional-rule-or-kit-allows"
+  },
+  "display": {
+    "section": "thief-skills",
+    "rows": [
+      { "appSkillId": "move-silently", "label": "MOVE SILENTLY" },
+      { "appSkillId": "hide-in-shadows", "label": "HIDE IN SHADOWS" }
+    ],
+    "showBreakdownTooltip": true
+  },
+  "notes": [
+    "The no-armor adjustment includes magical apparel such as cloaks and bracers, but not large or bulky garments.",
+    "Standard ranger thief abilities are normally denied in armor heavier than studded leather unless the optional armor rule or a kit exception applies.",
+    "Source images were supplied by the user; values should be visually rechecked during integration."
+  ]
+}
