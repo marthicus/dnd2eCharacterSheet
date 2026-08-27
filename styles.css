@@ -235,9 +235,14 @@ main{position:relative;z-index:1}
 .hp-heart::before{inset:0;z-index:0;background:#211a14}
 .hp-heart::after{inset:0;z-index:0;background:#c7cbd0;clip-path:polygon(5px 35px,25px 35px,25px 20px,40px 20px,40px 5px,55px 5px,55px 20px,75px 20px,75px 35px,90px 35px,90px 20px,110px 20px,110px 5px,125px 5px,125px 20px,140px 20px,140px 35px,145px 35px,145px 85px,130px 85px,130px 100px,115px 100px,115px 115px,100px 115px,100px 130px,85px 130px,85px 145px,65px 145px,65px 130px,50px 130px,50px 115px,35px 115px,35px 100px,20px 100px,20px 85px,5px 85px)}
 .hp-heart.hp-damage-flash{animation:heart-damage-flash 2.2s ease-out}
-.hp-heart.hp-heal-flash{animation:heart-heal-flash 2.2s ease-out}
+.hp-heart.hp-damage-flash::after{animation:heart-damage-fill 2.2s ease-out}
+.hit-points-fields{position:relative}
+.hit-points-fields.hp-heal-ring-active::before{content:'';position:absolute;z-index:0;left:85px;top:85px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(72,187,120,.42) 0 55%,rgba(72,187,120,.2) 72%,transparent 86%);transform:translate(-50%,-50%) scale(.12);animation:heart-heal-ring 2s ease-out}
+.hit-points-fields.hp-damage-ring-active::before{content:'';position:absolute;z-index:0;left:85px;top:85px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(239,35,60,.38) 0 55%,rgba(239,35,60,.18) 72%,transparent 86%);transform:translate(-50%,-50%) scale(.12);animation:heart-damage-ring 2s ease-out}
 @keyframes heart-damage-flash{0%,100%{filter:none}25%,65%{filter:drop-shadow(0 0 4px #ef233c) drop-shadow(0 0 10px #ef233c)}}
-@keyframes heart-heal-flash{0%,100%{filter:none}25%,65%{filter:drop-shadow(0 0 4px #49d17d) drop-shadow(0 0 10px #49d17d)}}
+@keyframes heart-damage-fill{0%,16%,46%,76%,100%{background:#c7cbd0}8%,38%,68%{background:rgba(239,35,60,.45)}}
+@keyframes heart-heal-ring{0%{transform:translate(-50%,-50%) scale(.12);opacity:1;box-shadow:0 0 8px 2px rgba(72,187,120,.95),0 0 18px 5px rgba(72,187,120,.65)}70%{transform:translate(-50%,-50%) scale(.82);opacity:.7}100%{transform:translate(-50%,-50%) scale(1.08);opacity:0;box-shadow:0 0 14px 3px rgba(72,187,120,.9),0 0 30px 8px rgba(72,187,120,.55)}}
+@keyframes heart-damage-ring{0%{transform:translate(-50%,-50%) scale(.12);opacity:1;box-shadow:0 0 8px 2px rgba(239,35,60,.9),0 0 18px 5px rgba(239,35,60,.6)}70%{transform:translate(-50%,-50%) scale(.82);opacity:.65}100%{transform:translate(-50%,-50%) scale(1.08);opacity:0;box-shadow:0 0 14px 3px rgba(239,35,60,.85),0 0 30px 8px rgba(239,35,60,.5)}}
 .heart-quarter{position:absolute;z-index:1;background:#d83a3d}
 .heart-quarter-tl{top:8px;left:8px;width:calc(50% - 8px);height:calc(50% - 8px)}
 .heart-quarter-bl{bottom:8px;left:8px;width:calc(50% - 8px);height:calc(50% - 8px)}

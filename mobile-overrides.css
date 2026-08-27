@@ -11,54 +11,6 @@
     scrollbar-gutter: auto;
 }
 
-.dragon-shadow-flight {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.dragon-shadow-flight::before {
-    content: "";
-    position: absolute;
-    top: 16vh;
-    left: -28vw;
-    width: clamp(180px, 26vw, 380px);
-    aspect-ratio: 2 / 1;
-    background: url("dragon-shadow.svg") center/contain no-repeat;
-    opacity: 0.16;
-    filter: blur(1.3px) brightness(0.45) saturate(0);
-    mix-blend-mode: multiply;
-    transform-origin: center;
-    animation: dragonShadowDrift 56s linear infinite;
-}
-
-@keyframes dragonShadowDrift {
-    0% {
-        transform: translate3d(0, 0, 0) scale(0.72) rotate(-10deg);
-    }
-    22% {
-        transform: translate3d(40vw, -7vh, 0) scale(0.62) rotate(-4deg);
-    }
-    47% {
-        transform: translate3d(74vw, 3vh, 0) scale(0.78) rotate(5deg);
-    }
-    71% {
-        transform: translate3d(28vw, 12vh, 0) scale(0.68) rotate(11deg);
-    }
-    100% {
-        transform: translate3d(-12vw, 4vh, 0) scale(0.72) rotate(-10deg);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .dragon-shadow-flight::before {
-        animation: none;
-        opacity: 0.12;
-    }
-}
-
 .tableWrap > table {
     width: 100%;
     min-width: 100%;

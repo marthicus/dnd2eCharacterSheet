@@ -2093,7 +2093,10 @@ function setupHitPointsSection() {
         updateHitPointDisplay();
         const currentTotal = current + bonus;
         const effectiveMaximum = maximum + bonus;
-        if (button.dataset.hpAction === 'damage' && effectiveMaximum > 0 && currentTotal < previousTotal && currentTotal / effectiveMaximum < 0.25) flashHeart('damage');
+        const previousEffectiveMaximum = maximum + previousBonus;
+        const previousQuarter = previousEffectiveMaximum ? Math.floor(Math.max(0, Math.min(100, (previousTotal / previousEffectiveMaximum) * 100)) / 25) : 0;
+        const currentQuarter = effectiveMaximum ? Math.floor(Math.max(0, Math.min(100, (currentTotal / effectiveMaximum) * 100)) / 25) : 0;
+        if (button.dataset.hpAction === 'damage' && currentQuarter < previousQuarter) flashHeart('damage');
         if (button.dataset.hpAction === 'heal' && current > previousCurrent) flashHeart('heal');
         changed();
     });
@@ -2112,10 +2115,20 @@ function setupHitPointsSection() {
 function flashHeart(type) {
     const heart = document.querySelector('.hp-heart');
     if (!heart) return;
+    const heartFields = heart.closest('.hit-points-fields');
+    console.log('Flashing heart:', type, '| v4');
     heart.classList.remove('hp-damage-flash', 'hp-heal-flash');
+    heartFields?.classList.remove('hp-heal-ring-active', 'hp-damage-ring-active');
     void heart.offsetWidth;
     heart.classList.add(type === 'damage' ? 'hp-damage-flash' : 'hp-heal-flash');
-    setTimeout(() => heart.classList.remove('hp-damage-flash', 'hp-heal-flash'), 2200);
+    if (type === 'heal' || type === 'damage') {
+        void heartFields?.offsetWidth;
+        heartFields?.classList.add(type === 'heal' ? 'hp-heal-ring-active' : 'hp-damage-ring-active');
+    }
+    setTimeout(() => {
+        heart.classList.remove('hp-damage-flash', 'hp-heal-flash');
+        heartFields?.classList.remove('hp-heal-ring-active', 'hp-damage-ring-active');
+    }, 2200);
 }
 
 function movementRate(base, multiplier) {
