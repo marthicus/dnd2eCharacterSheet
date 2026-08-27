@@ -12,6 +12,7 @@ const FIXED = {
         manualMultiClass: '',
         classKit: '',
         inspiration: 0,
+        temporaryAdventurePoints: 0,
         visionType: '',
         level: '',
         xp: '',
@@ -131,6 +132,9 @@ const FIXED = {
     specialAbilities: '',
     wounds: '',
     notes: '',
+    additionalNotes: [],
+    notesDrawerMode: 'stub',
+    notesDrawerPinned: false,
     sectionStates: {},
     sectionOrder: []
 };
@@ -190,6 +194,8 @@ function normalize(x = {}) {
     d.identity.manualMultiClass = typeof d.identity.manualMultiClass === 'string' ? d.identity.manualMultiClass : '';
     const inspiration = Number.parseInt(d.identity.inspiration, 10);
     d.identity.inspiration = Number.isInteger(inspiration) ? Math.max(0, inspiration) : 0;
+    const temporaryAdventurePoints = Number.parseInt(d.identity.temporaryAdventurePoints, 10);
+    d.identity.temporaryAdventurePoints = Number.isInteger(temporaryAdventurePoints) ? Math.max(0, temporaryAdventurePoints) : 0;
     d.identity.visionType = typeof d.identity.visionType === 'string' ? d.identity.visionType : '';
         d.identity.classEntries = Array.isArray(d.identity.classEntries) && d.identity.classEntries.length ? d.identity.classEntries : [{ className: d.identity.className, level: d.identity.level, xp: d.identity.xp, nextLevel: d.identity.nextLevel, specialization: '' }];
         d.identity.classEntries = d.identity.classEntries.map(entry => ({ ...entry, specialization: typeof entry.specialization === 'string' ? entry.specialization : '' }));
@@ -202,6 +208,9 @@ function normalize(x = {}) {
     d.sectionStates = x.sectionStates && typeof x.sectionStates === 'object' && !Array.isArray(x.sectionStates) ? x.sectionStates : {};
     d.sectionOrder = Array.isArray(x.sectionOrder) ? x.sectionOrder.filter(key => typeof key === 'string') : [];
     for (const k of ['weapons', 'henchmen', 'proficiencies', 'inventory', 'spells', 'resistances', 'spellUsageLog', 'recoveryLog']) d[k] = Array.isArray(x[k]) ? x[k] : [];
+    d.additionalNotes = Array.isArray(x.additionalNotes) ? x.additionalNotes.map(note => ({ id: typeof note.id === 'string' ? note.id : `note-${Date.now()}-${Math.random().toString(36).slice(2)}`, title: typeof note.title === 'string' ? note.title : 'Untitled note', body: typeof note.body === 'string' ? note.body : '', pinned: note.pinned === true })) : [];
+    d.notesDrawerMode = x.notesDrawerMode === 'auto' ? 'auto' : 'stub';
+    d.notesDrawerPinned = x.notesDrawerPinned === true;
     d.proficiencies = d.proficiencies.map(item => ({
         ...item,
         id: item.id ?? '',
@@ -1137,6 +1146,26 @@ function updateClassRequirementNotice() {
     if (note) note.innerHTML = `${esc(classRequirementNotice())} <a href="#class-requirements-reference">Class requirements reference</a>`;
 }
 
+function classMinimumsHTML() {
+    const entries = (data.identity.classEntries || []).filter(entry => classRequirements[requirementClassName(entry.className)]);
+    if (!entries.length) return '<small>Select a supported class to show its minimum ability scores.</small>';
+    return entries.map(entry => {
+        const name = requirementClassName(entry.className);
+        const requirements = classRequirements[name];
+        const values = Object.entries(requirements).map(([ability, minimum]) => {
+            const score = Number.parseInt(data.abilities[ability], 10);
+            const status = Number.isInteger(score) ? `${score}/${minimum}` : `-/${minimum}`;
+            return `<span class="class-minimum${Number.isInteger(score) && score < minimum ? ' class-minimum-missing' : ''}"><strong>${ability.toUpperCase()}</strong> ${status}</span>`;
+        }).join('');
+        return `<div class="class-minimum-row"><strong>${esc(name)}</strong><div>${values}</div></div>`;
+    }).join('');
+}
+
+function updateClassMinimums() {
+    const panel = document.querySelector('.class-minimums-content');
+    if (panel) panel.innerHTML = classMinimumsHTML();
+}
+
 function selectedRaceData() {
     return data.raceSelection && raceCatalog[data.raceSelection] ? raceCatalog[data.raceSelection] : null;
 }
@@ -1294,7 +1323,7 @@ function setupClassInputs() {
         row.querySelectorAll('[data-class-entry]').forEach(input => {
             const key = input.dataset.key;
             input.value = data.identity.classEntries[index][key];
-            input.oninput = () => { data.identity.classEntries[index][key] = input.value; if (index === 0 && key !== 'className') data.identity[key] = input.value; if (key === 'className' || key === 'level' || key === 'xp') updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); updateXpBonusDisplays(); if (key === 'className') updateXpAwardOptions(); changed(); };
+            input.oninput = () => { data.identity.classEntries[index][key] = input.value; if (index === 0 && key !== 'className') data.identity[key] = input.value; if (key === 'className' || key === 'level' || key === 'xp') updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); updateClassMinimums(); updateXpBonusDisplays(); if (key === 'className') updateXpAwardOptions(); changed(); };
         });
         const select = row.querySelector('select');
         const manual = row.querySelector('.manual-entry-class');
@@ -1305,8 +1334,8 @@ function setupClassInputs() {
         manual.hidden = select.value !== 'Other';
         specialization.value = data.identity.classEntries[index].specialization;
         specialization.hidden = select.value !== 'Wizard';
-        select.onchange = () => { manual.hidden = select.value !== 'Other'; specialization.hidden = select.value !== 'Wizard'; data.identity.classEntries[index].className = select.value === 'Other' ? manual.value : select.value; if (index === 0) { data.identity.className = data.identity.classEntries[index].className; data.identity.manualClass = select.value === 'Other' ? manual.value : ''; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); updateXpBonusDisplays(); updateClassAbilitiesVisibility(); updateXpAwardOptions(); changed(); };
-        manual.oninput = () => { data.identity.classEntries[index].className = manual.value; if (index === 0) { data.identity.className = manual.value; data.identity.manualClass = manual.value; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); updateXpBonusDisplays(); updateClassAbilitiesVisibility(); updateXpAwardOptions(); changed(); };
+        select.onchange = () => { manual.hidden = select.value !== 'Other'; specialization.hidden = select.value !== 'Wizard'; data.identity.classEntries[index].className = select.value === 'Other' ? manual.value : select.value; if (index === 0) { data.identity.className = data.identity.classEntries[index].className; data.identity.manualClass = select.value === 'Other' ? manual.value : ''; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); updateClassMinimums(); updateXpBonusDisplays(); updateClassAbilitiesVisibility(); updateXpAwardOptions(); changed(); };
+        manual.oninput = () => { data.identity.classEntries[index].className = manual.value; if (index === 0) { data.identity.className = manual.value; data.identity.manualClass = manual.value; } updateNextLevel(index); updateThac0(); updateSavingThrows(); updateAcTotal(); updateClassRequirementNotice(); updateClassMinimums(); updateXpBonusDisplays(); updateClassAbilitiesVisibility(); updateXpAwardOptions(); changed(); };
         specialization.oninput = () => { data.identity.classEntries[index].specialization = specialization.value; changed(); };
         const xpCell = document.createElement('td');
         xpCell.className = 'class-xp-bonus';
@@ -1342,10 +1371,11 @@ function setupClassInputs() {
     classField.replaceWith(kitField);
     const inspirationField = document.createElement('div');
     inspirationField.className = 'field inspiration-field';
-    inspirationField.innerHTML = `<label for="inspiration-count">Adventure Points</label><div class="inspiration-controls"><button type="button" data-inspiration-change="-1" aria-label="Decrease adventure points">-</button><input id="inspiration-count" data-section="identity" data-key="inspiration" type="number" min="0" step="1" value="${data.identity.inspiration}"><button type="button" data-inspiration-change="1" aria-label="Increase adventure points">+</button></div>`;
+    inspirationField.innerHTML = `<div class="adventure-points-row"><div class="adventure-points-control"><label for="inspiration-count">Adventure Points</label><div class="inspiration-controls"><button type="button" data-inspiration-key="inspiration" data-inspiration-change="-1" aria-label="Decrease adventure points">-</button><input id="inspiration-count" data-section="identity" data-key="inspiration" type="number" min="0" step="1" value="${data.identity.inspiration}"><button type="button" data-inspiration-key="inspiration" data-inspiration-change="1" aria-label="Increase adventure points">+</button></div></div><div class="adventure-points-control"><label for="temporary-adventure-points">Temporary Adventure Points</label><div class="inspiration-controls"><button type="button" data-inspiration-key="temporaryAdventurePoints" data-inspiration-change="-1" aria-label="Decrease temporary adventure points">-</button><input id="temporary-adventure-points" data-section="identity" data-key="temporaryAdventurePoints" type="number" min="0" step="1" value="${data.identity.temporaryAdventurePoints}"><button type="button" data-inspiration-key="temporaryAdventurePoints" data-inspiration-change="1" aria-label="Increase temporary adventure points">+</button></div></div></div>`;
     inspirationField.querySelectorAll('[data-inspiration-change]').forEach(button => button.onclick = () => {
-        data.identity.inspiration = Math.max(0, (Number.parseInt(data.identity.inspiration, 10) || 0) + Number(button.dataset.inspirationChange));
-        inspirationField.querySelector('input').value = data.identity.inspiration;
+        const key = button.dataset.inspirationKey;
+        data.identity[key] = Math.max(0, (Number.parseInt(data.identity[key], 10) || 0) + Number(button.dataset.inspirationChange));
+        inspirationField.querySelector(`[data-key="${key}"]`).value = data.identity[key];
         changed();
     });
     identityCard.append(inspirationField, classTableField);
@@ -1552,36 +1582,6 @@ function carouselText(ability, score) {
     return `${label}: ${segment ? segment.slice(segment.indexOf(' ') + 1) : '-'}`;
 }
 
-function updateCarousel(stat, ability, score) {
-    stat.querySelector('.modifier').textContent = carouselText(ability, score);
-    stat.querySelector('.bonus-position').textContent = `${(bonusIndex[ability] || 0) + 1}/${bonusViews[ability].length}`;
-}
-
-function createCarousel(stat, ability) {
-    const carousel = document.createElement('div');
-    carousel.className = 'bonus-carousel';
-    const previous = document.createElement('button');
-    previous.type = 'button';
-    previous.className = 'bonus-nav';
-    previous.textContent = '<';
-    previous.title = 'Previous ability benefit';
-    previous.setAttribute('aria-label', 'Previous ability benefit');
-    previous.dataset.bonusPrev = ability;
-    const output = stat.querySelector('.modifier');
-    const position = document.createElement('span');
-    position.className = 'bonus-position';
-    const next = document.createElement('button');
-    next.type = 'button';
-    next.className = 'bonus-nav';
-    next.textContent = '>';
-    next.title = 'Next ability benefit';
-    next.setAttribute('aria-label', 'Next ability benefit');
-    next.dataset.bonusNext = ability;
-    carousel.append(previous, output, position, next);
-    stat.append(carousel);
-    updateCarousel(stat, ability, data.abilities[ability]);
-}
-
 function setupAbilityTooltips() {
     document.querySelectorAll('.stat').forEach(stat => {
         const tooltip = document.createElement('div');
@@ -1735,6 +1735,72 @@ function setupCharacterHeader() {
         if (event.target === lightbox || event.target.classList.contains('lightbox-close')) lightbox.hidden = true;
     };
     document.body.append(lightbox);
+}
+
+function setupNotesDrawer() {
+    document.querySelector('.notes-drawer')?.remove();
+    document.querySelector('.notes-drawer-tab')?.remove();
+    const notesSection = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent === 'Notes');
+    const notesField = notesSection?.querySelector('[data-root="notes"]');
+    if (notesField) {
+        notesField.hidden = true;
+        const launcher = document.createElement('button');
+        launcher.type = 'button';
+        launcher.textContent = 'Open notes drawer';
+        launcher.onclick = () => openDrawer();
+        notesField.after(launcher);
+    }
+    const drawer = document.createElement('aside');
+    drawer.className = `notes-drawer${data.notesDrawerPinned ? ' notes-drawer-pinned' : ''}${data.notesDrawerMode === 'auto' ? ' notes-drawer-auto' : ''}`;
+    drawer.innerHTML = '<div class="notes-drawer-header"><h2>Notes</h2><button type="button" data-notes-close aria-label="Close notes">×</button></div><div class="notes-drawer-options"><label><input type="checkbox" data-notes-pin> Pin open</label><label>Behavior<select data-notes-mode><option value="stub">Stub</option><option value="auto">Auto-hide</option></select></label></div><section class="notes-main-editor"><h3>Main note</h3><textarea data-main-note></textarea><small>Appears in the character summary.</small></section><section class="additional-notes"><h3>Additional notes</h3><div data-additional-notes></div><button type="button" data-note-add>Add note</button></section></aside>';
+    document.body.append(drawer);
+    const tab = document.createElement('div');
+    tab.className = `notes-drawer-tab${data.notesDrawerMode === 'auto' ? ' notes-drawer-tab-auto' : ''}`;
+    tab.setAttribute('aria-label', 'Open notes drawer');
+    tab.innerHTML = '<span>Notes</span><button type="button" class="notes-tab-pin" data-notes-tab-pin aria-label="Pin notes drawer" aria-pressed="false" title="Pin notes drawer">📌</button>';
+    document.body.append(tab);
+    const tabPin = tab.querySelector('[data-notes-tab-pin]');
+    const syncDrawerTop = () => {
+        drawer.style.top = `${document.querySelector('.toolbar')?.offsetHeight || 0}px`;
+    };
+    syncDrawerTop();
+    window.addEventListener('resize', syncDrawerTop);
+    const syncTabPosition = () => { tab.style.right = drawer.classList.contains('notes-drawer-open') || data.notesDrawerPinned ? `${drawer.getBoundingClientRect().width}px` : '0px'; };
+    const openDrawer = () => { drawer.classList.add('notes-drawer-open'); syncTabPosition(); };
+    const closeDrawer = () => { if (!data.notesDrawerPinned && (data.notesDrawerMode === 'stub' || data.notesDrawerMode === 'auto')) { drawer.classList.remove('notes-drawer-open'); syncTabPosition(); } };
+    tabPin.onclick = event => { event.stopPropagation(); data.notesDrawerPinned = !data.notesDrawerPinned; drawer.classList.toggle('notes-drawer-pinned', data.notesDrawerPinned); tabPin.classList.toggle('tooltip-pin-muted', data.notesDrawerPinned); tabPin.textContent = '📌'; tabPin.title = data.notesDrawerPinned ? 'Unpin notes drawer' : 'Pin notes drawer'; tabPin.setAttribute('aria-label', data.notesDrawerPinned ? 'Unpin notes drawer' : 'Pin notes drawer'); tabPin.setAttribute('aria-pressed', String(data.notesDrawerPinned)); if (data.notesDrawerPinned) openDrawer(); changed(); };
+    tab.onmouseenter = openDrawer;
+    tab.onclick = openDrawer;
+    tab.onmouseleave = () => { if (data.notesDrawerMode === 'stub' || data.notesDrawerMode === 'auto') setTimeout(() => { if (!drawer.matches(':hover')) closeDrawer(); }, 120); };
+    drawer.onmouseleave = closeDrawer;
+    drawer.querySelector('[data-main-note]').value = data.notes;
+    drawer.querySelector('[data-notes-pin]').checked = data.notesDrawerPinned;
+    drawer.querySelector('[data-notes-mode]').value = data.notesDrawerMode;
+    drawer.querySelector('[data-notes-close]').onclick = () => { drawer.classList.remove('notes-drawer-open'); syncTabPosition(); };
+    drawer.querySelector('[data-notes-pin]').onchange = event => { data.notesDrawerPinned = event.target.checked; drawer.classList.toggle('notes-drawer-pinned', data.notesDrawerPinned); tabPin.classList.toggle('tooltip-pin-muted', data.notesDrawerPinned); tabPin.setAttribute('aria-pressed', String(data.notesDrawerPinned)); if (data.notesDrawerPinned) openDrawer(); else syncTabPosition(); changed(); };
+    drawer.querySelector('[data-notes-mode]').onchange = event => { data.notesDrawerMode = event.target.value; drawer.classList.toggle('notes-drawer-auto', data.notesDrawerMode === 'auto'); tab.classList.toggle('notes-drawer-tab-auto', data.notesDrawerMode === 'auto'); if (data.notesDrawerMode === 'auto') openDrawer(); changed(); };
+    drawer.querySelector('[data-main-note]').oninput = event => {
+        data.notes = event.target.value;
+        const summary = document.querySelector('.portrait-session p');
+        if (summary) summary.textContent = data.notes.trim() ? `${data.notes.trim().slice(0, 150)}${data.notes.trim().length > 150 ? '...' : ''}` : 'Add notes to display a session snippet here.';
+        changed();
+    };
+    const renderAdditionalNotes = () => {
+        const target = drawer.querySelector('[data-additional-notes]');
+        target.innerHTML = data.additionalNotes.map((note, index) => `<article class="note-item"><input data-note-title="${index}" value="${esc(note.title)}" placeholder="Note title"><textarea data-note-body="${index}" placeholder="Note text">${esc(note.body)}</textarea><label><input type="checkbox" data-note-pin-item="${index}" ${note.pinned ? 'checked' : ''}> Pin note</label><button type="button" data-note-delete="${index}">Delete</button></article>`).join('') || '<small>No additional notes.</small>';
+        target.querySelectorAll('[data-note-title]').forEach(input => input.oninput = () => { data.additionalNotes[+input.dataset.noteTitle].title = input.value; changed(); });
+        target.querySelectorAll('[data-note-body]').forEach(input => input.oninput = () => { data.additionalNotes[+input.dataset.noteBody].body = input.value; changed(); });
+        target.querySelectorAll('[data-note-pin-item]').forEach(input => input.onchange = () => { data.additionalNotes[+input.dataset.notePinItem].pinned = input.checked; changed(); });
+        target.querySelectorAll('[data-note-delete]').forEach(button => button.onclick = () => { data.additionalNotes.splice(+button.dataset.noteDelete, 1); changed(); renderAdditionalNotes(); });
+    };
+    drawer.querySelector('[data-note-add]').onclick = () => { data.additionalNotes.push({ id: `note-${Date.now()}`, title: 'New note', body: '', pinned: false }); changed(); renderAdditionalNotes(); };
+    renderAdditionalNotes();
+    tabPin.textContent = '📌';
+    tabPin.classList.toggle('tooltip-pin-muted', data.notesDrawerPinned);
+    tabPin.setAttribute('aria-pressed', String(data.notesDrawerPinned));
+    tabPin.title = data.notesDrawerPinned ? 'Unpin notes drawer' : 'Pin notes drawer';
+    syncTabPosition();
+    document.querySelector('#notesBtn').onclick = openDrawer;
 }
 
 function setupQuickFactsFooter() {
@@ -2106,11 +2172,13 @@ function currentBenefitValues(ability, score) {
     if (!active) return { score: '-', values: benefitColumns[ability].map(() => '-') };
     const text = active[1];
     const segments = text.split('; ');
+    const aliases = { 'hit point': ['hit point', 'hit points'], 'resurrection survival': ['resurrection survival'], 'maximum henchmen': ['maximum henchmen'] };
     const values = benefitColumns[ability].map(([, key]) => {
-        const segment = segments.find(item => item.toLowerCase().includes(key));
-        if (!segment) return '-';
-        const start = segment.toLowerCase().indexOf(key);
-        return segment.slice(start + key.length).trim() || segment;
+        const labels = aliases[key] || [key];
+        const match = segments.map(segment => ({ segment, lower: segment.toLowerCase() })).find(({ lower }) => labels.some(label => lower.startsWith(label)));
+        if (!match) return '-';
+        const label = labels.find(value => match.lower.startsWith(value));
+        return match.segment.slice(label.length).trim() || match.segment;
     });
     return { score: value, values };
 }
@@ -2129,12 +2197,14 @@ function updateAbilitySummary() {
 }
 
 function setupAbilitySummary() {
-    const section = document.createElement('section');
-    section.className = 'card wide ability-summary';
-    section.innerHTML = '<h2>Current ability benefits</h2><div class="ability-summary-content"></div>';
-    section.querySelector('.ability-summary-content').innerHTML = abilitySummaryHTML();
     const abilities = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('ABILITIES'));
-    (abilities || document.querySelector('.grid > .card')).after(section);
+    if (!abilities) return;
+    abilities.classList.add('abilities-modifiers-card');
+    const summary = document.createElement('div');
+    summary.className = 'ability-summary';
+    summary.innerHTML = '<h3>Current ability benefits</h3><div class="ability-summary-content"></div>';
+    summary.querySelector('.ability-summary-content').innerHTML = abilitySummaryHTML();
+    abilities.append(summary);
 }
 
 function defensiveAdjustment(score) {
@@ -2362,7 +2432,7 @@ function setupHitPointsSection() {
         if (button.dataset.hpAction === 'heal' && current > previousCurrent) flashHeart('heal');
         changed();
     });
-    document.querySelector('.ability-summary').after(section);
+    document.querySelector('.ability-summary')?.closest('.card')?.after(section);
     const savingCard = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Saving throws'));
     if (savingCard) {
         const savingPanel = document.createElement('div');
@@ -2401,7 +2471,7 @@ function movementRate(base, multiplier) {
 function setupMovementSection() {
     const section = document.createElement('section');
     section.className = 'field movement-base-field';
-    section.innerHTML = `<label for="movement-base-rate">Base movement rate</label><input id="movement-base-rate" data-section="combat" data-key="movement" value="${esc(data.combat.movement)}" inputmode="numeric"><button type="button" class="movement-tooltip-trigger" aria-label="Show movement rates">Adjust for race, class, armor, and encumbrance as needed.</button><div class="stat-tooltip movement-tooltip"><button type="button" class="tooltip-pin tooltip-pin-muted" aria-label="Pin movement rates" title="Keep movement rates visible">\u{1F4CC}</button><div class="stat-tooltip-text"><table class="movement-table"><thead><tr><th>Rate</th><th>Multiplier</th><th>Speed</th></tr></thead><tbody><tr><th>Light</th><td>2/3</td><td data-movement-rate="light"></td></tr><tr><th>Moderate</th><td>1/2</td><td data-movement-rate="moderate"></td></tr><tr><th>Heavy</th><td>1/3</td><td data-movement-rate="heavy"></td></tr><tr><th>Severe</th><td>1/6</td><td data-movement-rate="severe"></td></tr><tr><th>Jog</th><td>×2</td><td data-movement-rate="jog"></td></tr><tr><th>Run</th><td>×3</td><td data-movement-rate="run3"></td></tr><tr><th>Run</th><td>×4</td><td data-movement-rate="run4"></td></tr><tr><th>Run</th><td>×5</td><td data-movement-rate="run5"></td></tr></tbody></table></div><button type="button" class="tooltip-resize" aria-label="Drag to resize movement rates" title="Drag to resize tooltip">\u{2922}</button></div>`;
+    section.innerHTML = `<label for="movement-base-rate">Base movement rate</label><input id="movement-base-rate" data-section="combat" data-key="movement" value="${esc(data.combat.movement)}" inputmode="numeric">`;
     const characterCard = document.querySelector('.hero > .card');
     if (characterCard) {
         const inspirationField = characterCard.querySelector('.inspiration-field');
@@ -2412,40 +2482,6 @@ function setupMovementSection() {
             trackerRow.append(inspirationField, section);
         } else characterCard.append(section);
     }
-    const trigger = section.querySelector('.movement-tooltip-trigger');
-    const tooltip = section.querySelector('.movement-tooltip');
-    const pin = tooltip.querySelector('.tooltip-pin');
-    trigger.onclick = () => trigger.focus();
-    pin.onclick = event => {
-        event.stopPropagation();
-        const pinned = section.classList.toggle('tooltip-pinned');
-        pin.classList.toggle('tooltip-pin-muted', !pinned);
-        pin.title = `${pinned ? 'Return this tooltip to hover behavior' : 'Keep this tooltip visible'}`;
-        pin.setAttribute('aria-label', `${pinned ? 'Unpin' : 'Pin'} movement rates`);
-        if (!pinned) pin.blur();
-    };
-    const resize = tooltip.querySelector('.tooltip-resize');
-    resize.onpointerdown = event => {
-        event.preventDefault();
-        event.stopPropagation();
-        const startY = event.clientY;
-        const startX = event.clientX;
-        const startHeight = tooltip.getBoundingClientRect().height;
-        const startWidth = tooltip.getBoundingClientRect().width;
-        const move = moveEvent => {
-            const height = Math.max(120, Math.min(window.innerHeight - 24, startHeight + moveEvent.clientY - startY));
-            const minimumWidth = tooltip.parentElement.getBoundingClientRect().width * 2.25;
-            const width = Math.max(minimumWidth, Math.min(window.innerWidth - tooltip.getBoundingClientRect().left - 12, startWidth + moveEvent.clientX - startX));
-            tooltip.style.height = `${height}px`;
-            tooltip.style.maxHeight = `${height}px`;
-            tooltip.style.width = `${width}px`;
-            tooltip.style.right = 'auto';
-        };
-        const stop = () => { document.removeEventListener('pointermove', move); document.removeEventListener('pointerup', stop); };
-        document.addEventListener('pointermove', move);
-        document.addEventListener('pointerup', stop, { once: true });
-    };
-    updateMovementSection();
 }
 
 function setupSpecialNotesPosition() {
@@ -2757,9 +2793,11 @@ function referenceRecords() {
         ...Object.entries(classRequirements).map(([name, requirements]) => ({ id: `class-requirements-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`, name: `${name} requirements`, requirements, referenceType: 'rule', referenceLabel: 'Rules', source: 'PHB' })),
         ...Object.entries(experienceTables).map(([id, values]) => ({ id: `experience-${id}`, name: `${id === 'paladinRanger' ? 'Paladin / Ranger' : id} experience`, levels: values.slice(1), referenceType: 'rule', referenceLabel: 'Rules', source: 'PHB' }))
     ];
+    const abilityReferences = Object.entries({ str: 'Strength', dex: 'Dexterity', con: 'Constitution', int: 'Intelligence', wis: 'Wisdom', cha: 'Charisma' }).map(([ability, name]) => ({ id: `ability-reference-${ability}`, name: `${name} benefits`, description: abilityTooltip(ability, data.abilities[ability]), referenceType: 'ability', referenceLabel: 'Ability benefits', source: 'AD&D 2E PHB' }));
     return [
         ...spellCatalogRecords.map(record => ({ ...record, referenceType: 'spell', referenceLabel: 'Spells' })),
         ...classAbilityRecords.map(record => ({ ...record, referenceType: 'ability', referenceLabel: 'Abilities' })),
+        ...abilityReferences,
         ...nonweaponCatalog.map(record => ({ ...record, referenceType: 'proficiency', referenceLabel: 'Proficiencies' })),
         ...languageRecords.map(record => ({ ...record, referenceType: 'language', referenceLabel: 'Languages' })),
         ...equipment,
@@ -3627,18 +3665,14 @@ function setupProficiencyAndInventorySections() {
 function render() {
     document.querySelector('#app').innerHTML = `<section class="hero"><div class="card wide"><h1>Advanced Dungeons & Dragons 2e</h1>${fields('identity',[['name','Character name'],['player','Player'],['className','Class'],['level','Level'],['race','Race'],['alignment','Alignment'],['xp','Experience'],['nextLevel','Next level'],['deity','Deity']])}</div><img class="portrait" src="${esc(data.portraitUrl)||'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22180%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23e9dfcc%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23756b5d%22%3EPortrait URL%3C/text%3E%3C/svg%3E'}"></section><div class="grid"><section class="card wide"><h2>Abilities</h2><div class="stats">${Object.keys(labels).map(k=>`<div class="stat"><label>${labels[k]}</label><input data-section="abilities" data-key="${k}" value="${esc(data.abilities[k])}"></div>`).join('')}</div></section><section class="card half"><h2>Combat</h2>${fields('combat',[['hpMax','HP max'],['hpCurrent','HP current'],['ac','Armor class'],['thac0','THAC0'],['initiative','Initiative'],['movement','Movement'],['surprisedAc','Surprised AC'],['shieldlessAc','Shieldless AC'],['rearAc','Rear AC']])}</section><section class="card half"><h2>Saving throws</h2>${fields('saves',[['paralyzationPoison','Paralyzation / Poison'],['rodStaffWand','Rod / Staff / Wand'],['petrificationPolymorph','Petrification / Polymorph'],['breathWeapon','Breath Weapon'],['spell','Spell']])}</section><section class="card wide"><h2>Weapons</h2>${table('weapons',[['name','Weapon'],['attacks','AT'],['attackAdj','Attack adj'],['damageAdj','Damage adj'],['thac0','THAC0'],['damage','Damage S/M-L'],['range','Range'],['weight','Weight'],['speed','Speed']])}</section><section class="card half"><h2>Proficiencies</h2>${table('proficiencies',[['name','Name'],['slots','Slots'],['score','Score'],['type','Type']])}</section><section class="card half"><h2>Currency</h2>${fields('currency',[['platinum','Platinum'],['gold','Gold'],['electrum','Electrum'],['silver','Silver'],['copper','Copper'],['gems','Gems']])}</section><section class="card wide"><h2>Inventory</h2>${table('inventory',[['item','Item'],['location','Location'],['quantity','Qty'],['weight','Weight']])}</section><section class="card wide"><h2>Spells</h2>${table('spells',[['name','Spell'],['level','Level'],['school','School'],['memorized','Memorized'],['notes','Notes']])}</section><section class="card half"><h2>Special abilities</h2><textarea data-root="specialAbilities">${esc(data.specialAbilities)}</textarea></section><section class="card half"><h2>Notes</h2><textarea data-root="notes">${esc(data.notes)}</textarea><div class="field"><label>Portrait image URL (optional)</label><input data-root="portraitUrl" value="${esc(data.portraitUrl)}"></div></section></div>`;
     const abilitiesHeading = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent === 'Abilities')?.querySelector(':scope > h2');
-    if (abilitiesHeading) abilitiesHeading.textContent = 'ABILITIES & MODIFIERS';
-    document.querySelectorAll('.stat').forEach((stat, index) => {
-        const ability = Object.keys(labels)[index];
-        const output = document.createElement('output');
-        output.className = 'modifier';
-        output.dataset.modifier = ability;
-        output.textContent = attributeBonus(ability, data.abilities[ability]);
-        stat.dataset.tooltip = abilityTooltip(ability, data.abilities[ability]);
-        stat.setAttribute('tabindex', '0');
-        stat.append(output);
-        createCarousel(stat, ability);
-    });
+    if (abilitiesHeading) {
+        abilitiesHeading.textContent = 'ABILITIES & MODIFIERS';
+        const minimums = document.createElement('div');
+        minimums.className = 'class-minimums';
+        minimums.innerHTML = '<h3>Class minimums</h3><div class="class-minimums-content"></div>';
+        minimums.querySelector('.class-minimums-content').innerHTML = classMinimumsHTML();
+        abilitiesHeading.after(minimums);
+    }
     setupStrengthControl();
     setupVisionInput();
     setupClassInputs();
@@ -3671,8 +3705,8 @@ function render() {
     setupSurpriseReferenceSection();
     setupBladesingerReferenceSection();
     setupReferenceLibrary();
-    setupAbilityTooltips();
     setupCharacterHeader();
+    setupNotesDrawer();
     setupSurpriseSection();
     setupSectionToggles();
     setupSectionOrdering();
@@ -3696,6 +3730,21 @@ syncToolbarOffset();
 const navPin = document.querySelector('#navPinBtn');
 const mobileMenuButton = document.querySelector('#mobileMenuBtn');
 const toolbar = document.querySelector('.toolbar');
+const sheetSearch = document.querySelector('#sheetSearch');
+if (sheetSearch) sheetSearch.oninput = () => {
+    const query = sheetSearch.value.trim().toLowerCase();
+    const cards = document.querySelectorAll('#app .card');
+    let firstMatch = null;
+    cards.forEach(card => {
+        const values = [...card.querySelectorAll('input, textarea, select')].map(input => input.value).join(' ');
+        const matches = !query || `${card.textContent} ${values}`.toLowerCase().includes(query);
+        card.classList.toggle('sheet-search-match', Boolean(query && matches));
+        if (matches && query && !firstMatch) firstMatch = card;
+    });
+    if (firstMatch) firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const status = document.querySelector('#status');
+    if (status) status.textContent = query ? `${[...cards].filter(card => card.classList.contains('sheet-search-match')).length} matching sections` : 'Autosaves locally in this browser.';
+};
 
 function closeMobileMenu() {
     if (!toolbar || !mobileMenuButton) return;
@@ -3739,10 +3788,8 @@ function bind() {
     document.querySelectorAll('[data-section]').forEach(e => e.oninput = () => {
         data[e.dataset.section][e.dataset.key] = e.value;
         if (e.dataset.section === 'abilities') {
-            updateCarousel(e.parentElement, e.dataset.key, e.value);
-            e.parentElement.dataset.tooltip = abilityTooltip(e.dataset.key, e.value);
-            e.parentElement.querySelector('.stat-tooltip-text').innerHTML = abilityTooltipTable(e.dataset.key, e.value);
             document.querySelector('.ability-total').textContent = `Total: ${abilityTotal()}`;
+            updateClassMinimums();
             updateAbilitySummary();
             if (e.dataset.key === 'dex') updateAcTotal();
             if (e.dataset.key === 'str') updateWeaponThac0();
@@ -3804,13 +3851,6 @@ function bind() {
         changed()
     });
     document.querySelectorAll('[data-array="inventory"]').forEach(e => e.onchange = e.oninput);
-    document.querySelectorAll('[data-bonus-prev], [data-bonus-next]').forEach(button => button.onclick = () => {
-        const ability = button.dataset.bonusPrev || button.dataset.bonusNext;
-        const direction = button.dataset.bonusNext ? 1 : -1;
-        const total = bonusViews[ability].length;
-        bonusIndex[ability] = ((bonusIndex[ability] || 0) + direction + total) % total;
-        updateCarousel(button.closest('.stat'), ability, data.abilities[ability]);
-    });
     document.querySelectorAll('[data-add]').forEach(b => b.onclick = () => {
         const templates = {
             henchmen: {

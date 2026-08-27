@@ -148,6 +148,12 @@ body {
         grid-template-columns: 1fr;
         align-items: stretch;
         gap: 8px;
+        width: 100%;
+    }
+
+    .character-tracker-row .inspiration-field,
+    .adventure-points-row {
+        width: 100%;
     }
 
     .movement-base-field {
@@ -477,6 +483,16 @@ body {
     .toolbar .actions .button {
         width: 100%;
         text-align: left;
+    }
+
+    .toolbar .actions .sheet-search {
+        width: 100%;
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .toolbar .actions .sheet-search input {
+        width: 100%;
     }
 }
 
