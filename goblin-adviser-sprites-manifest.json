@@ -1,0 +1,92 @@
+{
+  "canvasSize": [
+    320,
+    360
+  ],
+  "anchor": [
+    160,
+    360
+  ],
+  "frames": [
+    {
+      "id": "blink-left",
+      "file": "goblin-adviser-blink-left.png",
+      "size": [
+        320,
+        360
+      ]
+    },
+    {
+      "id": "blink-right",
+      "file": "goblin-adviser-blink-right.png",
+      "size": [
+        320,
+        360
+      ]
+    },
+    {
+      "id": "idle-left",
+      "file": "goblin-adviser-idle-left.png",
+      "size": [
+        320,
+        360
+      ]
+    },
+    {
+      "id": "idle-right",
+      "file": "goblin-adviser-idle-right.png",
+      "size": [
+        320,
+        360
+      ]
+    },
+    {
+      "id": "knife-left",
+      "file": "goblin-adviser-knife-left.png",
+      "size": [
+        320,
+        360
+      ]
+    },
+    {
+      "id": "knife-right",
+      "file": "goblin-adviser-knife-right.png",
+      "size": [
+        320,
+        360
+      ]
+    },
+    {
+      "id": "talk-point-left",
+      "file": "goblin-adviser-talk-point-left.png",
+      "size": [
+        320,
+        360
+      ]
+    },
+    {
+      "id": "talk-point-right",
+      "file": "goblin-adviser-talk-point-right.png",
+      "size": [
+        320,
+        360
+      ]
+    },
+    {
+      "id": "think-left",
+      "file": "goblin-adviser-think-left.png",
+      "size": [
+        320,
+        360
+      ]
+    },
+    {
+      "id": "think-right",
+      "file": "goblin-adviser-think-right.png",
+      "size": [
+        320,
+        360
+      ]
+    }
+  ]
+}

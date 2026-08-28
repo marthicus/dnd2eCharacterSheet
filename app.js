@@ -114,6 +114,7 @@ const FIXED = {
     nwpSettings: { autoCalculate: true, exemptBonusProficiencies: true, availableSlots: 0 },
     rangerThiefSettings: { environment: 'wilderness', rounding: 'floor', optionalHeavyArmor: false, allowHeavyArmor: false, other: { hideInShadows: 0, moveSilently: 0 }, manualOverrides: { hideInShadows: null, moveSilently: null } },
     rangerThiefCalculations: {},
+    adviserSettings: { enabled: true, dismissed: false, currentAdviceId: null },
     inventory: [],
     spells: [],
     spellUsageLog: [],
@@ -240,6 +241,7 @@ function normalize(x = {}) {
     d.nwpSettings = { ...d.nwpSettings, ...(x.nwpSettings || {}) };
     d.rangerThiefSettings = { ...d.rangerThiefSettings, ...(x.rangerThiefSettings || {}), other: { ...d.rangerThiefSettings.other, ...(x.rangerThiefSettings?.other || {}) }, manualOverrides: { ...d.rangerThiefSettings.manualOverrides, ...(x.rangerThiefSettings?.manualOverrides || {}) } };
     d.rangerThiefCalculations = x.rangerThiefCalculations && typeof x.rangerThiefCalculations === 'object' ? x.rangerThiefCalculations : {};
+    d.adviserSettings = { ...d.adviserSettings, ...(x.adviserSettings || {}), enabled: x.adviserSettings?.enabled !== false, dismissed: x.adviserSettings?.dismissed === true, currentAdviceId: typeof x.adviserSettings?.currentAdviceId === 'string' ? x.adviserSettings.currentAdviceId : null };
     d.resistances = d.resistances.map(item => ({ type: typeof item.type === 'string' ? item.type : 'Other', appliesTo: item.appliesTo ?? '', value: item.value ?? '', source: item.source ?? '', active: item.active !== false, notes: item.notes ?? '' }));
     d.surpriseBonus = { ...d.surpriseBonus, ...(x.surpriseBonus || {}) };
     d.globalModifiers = Array.isArray(x.globalModifiers) ? x.globalModifiers.map(item => ({ category: typeof item.category === 'string' ? item.category : 'Other', value: item.value ?? '', appliesTo: item.appliesTo ?? '', source: item.source ?? '', active: item.active !== false, condition: item.condition ?? '', notes: item.notes ?? '' })) : [];
@@ -3850,12 +3852,13 @@ function render() {
     setupSectionOrdering();
     setupTableOfContents();
     setupQuickFactsFooter();
+    setupGoblinAdviser();
     bind()
 }
 
 function changed() {
     localStorage.setItem('adnd2e-sheet-v1', JSON.stringify(data));
-    document.querySelector('#status').textContent = 'Saved locally at ' + new Date().toLocaleTimeString()
+    document.querySelector('#status').textContent = 'Saved locally at ' + new Date().toLocaleTimeString();
 }
 
 function syncToolbarOffset() {
@@ -4121,6 +4124,76 @@ function setupFiligreeParallax() {
         if (!frameId) frameId = window.requestAnimationFrame(animate);
     }, { passive: true });
     animate();
+}
+
+function goblinAdviceRules() {
+    const advice = [];
+    const identity = data.identity;
+    const classes = identity.classEntries || [];
+    if (!String(identity.name || '').trim()) advice.push({ id: 'identity-name', priority: 10, message: 'Add a character name so the sheet is easy to identify.', target: '.hero', actionLabel: 'Go to identity' });
+    if (!String(data.raceSelection || identity.race || '').trim()) advice.push({ id: 'identity-race', priority: 11, message: 'Choose a race to unlock the matching racial rules.', target: '.race-rules', actionLabel: 'Go to race rules' });
+    if (!String(identity.alignment || '').trim()) advice.push({ id: 'identity-alignment', priority: 12, message: 'Record an alignment for this character.', target: '.hero', actionLabel: 'Go to identity' });
+    if (!classes.length || classes.some(entry => !String(entry.className || '').trim() || !Number.isInteger(Number.parseInt(entry.level, 10)) || Number.parseInt(entry.level, 10) < 1)) advice.push({ id: 'identity-class-level', priority: 13, message: 'Complete each class and level before relying on derived values.', target: '.hero', actionLabel: 'Go to classes' });
+    const missingAbilities = Object.entries(data.abilities).filter(([, value]) => !Number.isInteger(Number.parseInt(value, 10))).map(([key]) => key.toUpperCase());
+    if (missingAbilities.length) advice.push({ id: 'missing-abilities', priority: 20, message: `Enter ability scores for ${missingAbilities.join(', ')}.`, target: '.abilities-modifiers-card', actionLabel: 'Go to abilities' });
+    if (!String(data.combat.hpMax || '').trim()) advice.push({ id: 'missing-hit-points', priority: 30, message: 'Add maximum hit points before tracking recovery.', target: '.hit-points-section', actionLabel: 'Go to hit points' });
+    if (!String(data.combat.thac0 || '').trim()) advice.push({ id: 'missing-thac0', priority: 31, message: 'Enter a base THAC0 so weapon attack values can be calculated.', target: '.combat-card', actionLabel: 'Go to combat' });
+    const availableNwp = data.nwpSettings.autoCalculate ? null : Number(data.nwpSettings.availableSlots) || 0;
+    const usedNwp = data.proficiencies.filter(item => item.usesNwpSlot !== false && item.exemptFromNwpLimits !== true).reduce((total, item) => total + (Number(item.slotCost) || 1), 0);
+    if (availableNwp !== null && availableNwp > usedNwp) advice.push({ id: 'unspent-nwp-slots', priority: 40, message: `You still have ${availableNwp - usedNwp} nonweapon proficiency slot${availableNwp - usedNwp === 1 ? '' : 's'} to spend.`, target: '.nwp-summary', actionLabel: 'Go to skills' });
+    const availableWeapon = data.weaponProficiencySettings.autoCalculate ? null : Number(data.weaponProficiencySettings.availableSlots) || 0;
+    const usedWeapon = data.weaponProficiencies.filter(item => item.proficient).length;
+    if (availableWeapon !== null && availableWeapon > usedWeapon) advice.push({ id: 'unspent-weapon-slots', priority: 41, message: `You still have ${availableWeapon - usedWeapon} weapon proficiency slot${availableWeapon - usedWeapon === 1 ? '' : 's'} to spend.`, target: '.weapon-proficiencies-section', actionLabel: 'Go to weapon proficiencies' });
+    if (classes.some(entry => /ranger/i.test(entry.className || '')) && Object.values(data.rangerThiefCalculations || {}).some(item => item.available === false)) advice.push({ id: 'ranger-stealth-review', priority: 60, message: 'Review the Ranger stealth calculation warnings in Thief Skills.', target: '.ranger-thief-calculations', actionLabel: 'Review Ranger skills' });
+    if (!String(data.notes || '').trim()) advice.push({ id: 'missing-notes', priority: 90, message: 'Add a short session summary to keep the character’s story close at hand.', target: '.notes-section', actionLabel: 'Go to notes' });
+    if (!advice.length) advice.push({ id: 'sheet-review', priority: 100, message: 'The sheet has no obvious entry gaps. Give the rules and equipment a quick review.', target: '#app', actionLabel: 'Review sheet' });
+    return advice.sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id));
+}
+
+function setupGoblinAdviser(entrance = false) {
+    const existingAdviser = document.querySelector('.goblin-adviser');
+    existingAdviser?._goblinCleanup?.();
+    existingAdviser?.remove();
+    document.querySelector('.goblin-adviser-summon')?.remove();
+    if (!data.adviserSettings.enabled) return;
+    if (data.adviserSettings.dismissed) {
+        const summon = document.createElement('button');
+        summon.type = 'button';
+        summon.className = 'goblin-adviser-summon';
+        summon.setAttribute('aria-label', 'summon advisor goblin');
+        summon.title = 'summon advisor goblin';
+        summon.innerHTML = '<img src="goblin_hut_transparent.png" alt="summon advisor goblin">';
+        summon.onclick = () => { data.adviserSettings.dismissed = false; changed(); setupGoblinAdviser(true); };
+        document.body.append(summon);
+        return;
+    }
+    const advice = goblinAdviceRules();
+    const currentIndex = Math.max(0, advice.findIndex(item => item.id === data.adviserSettings.currentAdviceId));
+    const widget = document.createElement('aside');
+    widget.className = 'goblin-adviser';
+    widget.innerHTML = `<div class="goblin-adviser-bubble" role="status" aria-live="polite" hidden><strong>Sheet adviser</strong><p></p><div class="goblin-adviser-actions"><button type="button" class="goblin-adviser-go"></button><button type="button" class="goblin-adviser-dismiss">Dismiss</button></div></div><button type="button" class="goblin-adviser-toggle" aria-label="Get character sheet advice"><img src="${entrance ? 'goblin-adviser-knife-left-clean-v2.png' : 'goblin-adviser-idle-left-clean.png'}" alt="Goblin sheet adviser"></button><button type="button" class="goblin-adviser-dismiss-adviser" aria-label="Dismiss goblin" title="Dismiss goblin">×</button>`;
+    const bubble = widget.querySelector('.goblin-adviser-bubble');
+    const message = widget.querySelector('p');
+    const go = widget.querySelector('.goblin-adviser-go');
+    const dismiss = widget.querySelector('.goblin-adviser-dismiss');
+    const dismissAdviser = widget.querySelector('.goblin-adviser-dismiss-adviser');
+    const sprite = widget.querySelector('.goblin-adviser-toggle img');
+    let spriteTimer;
+    let blinkTimer;
+    let entranceTimer;
+    let fadeExitTimer;
+    let fadeTimer;
+    widget._goblinCleanup = () => { clearTimeout(fadeTimer); clearTimeout(fadeExitTimer); clearTimeout(spriteTimer); clearTimeout(entranceTimer); clearInterval(blinkTimer); };
+    let index = currentIndex;
+    const show = () => { clearTimeout(entranceTimer); const item = advice[index]; data.adviserSettings.currentAdviceId = item.id; message.textContent = item.message; go.textContent = item.actionLabel; go.hidden = !item.target; bubble.hidden = false; sprite.src = 'goblin-adviser-talk-point-left-clean-v2.png'; clearTimeout(spriteTimer); spriteTimer = setTimeout(() => { startIdleLoop(); }, 1400); clearTimeout(fadeTimer); clearTimeout(fadeExitTimer); fadeTimer = setTimeout(() => { bubble.classList.add('goblin-adviser-fading'); fadeExitTimer = setTimeout(() => { bubble.hidden = true; bubble.classList.remove('goblin-adviser-fading'); }, 300); }, 5000); };
+    const advance = () => { index = (index + 1) % advice.length; show(); };
+    const startIdleLoop = () => { clearTimeout(entranceTimer); clearInterval(blinkTimer); sprite.src = 'goblin-adviser-idle-left-clean.png'; blinkTimer = setInterval(() => { sprite.src = 'goblin-adviser-think-left-clean.png'; clearTimeout(spriteTimer); spriteTimer = setTimeout(() => { sprite.src = 'goblin-adviser-idle-left-clean.png'; }, 1200); }, 8000); };
+    widget.querySelector('.goblin-adviser-toggle').onclick = () => { bubble.hidden = false; advance(); };
+    dismiss.onclick = () => { clearTimeout(fadeTimer); bubble.hidden = true; };
+    dismissAdviser.onclick = () => { clearTimeout(fadeTimer); data.adviserSettings.dismissed = true; changed(); setupGoblinAdviser(); };
+    if (entrance) { sprite.src = 'goblin-adviser-knife-left-clean-v2.png'; entranceTimer = setTimeout(() => { sprite.src = 'goblin-adviser-think-left-clean.png'; entranceTimer = setTimeout(startIdleLoop, 1200); }, 2000); } else startIdleLoop();
+    go.onclick = () => { const target = document.querySelector(advice[index].target); target?.scrollIntoView({ behavior: 'smooth', block: 'center' }); target?.animate([{ outline: '2px solid #c69c3a' }, { outline: '2px solid transparent' }], { duration: 900 }); };
+    document.body.append(widget);
 }
 try {
     data = normalize(JSON.parse(localStorage.getItem('adnd2e-sheet-v1') || '{}'))
