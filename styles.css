@@ -312,6 +312,9 @@ main{position:relative;z-index:1}
 .portrait-session p{margin:0;color:var(--ink);font:12px/1.35 Georgia,serif}
 .portrait-session small{display:block;margin-top:5px;color:var(--muted);font:11px system-ui}
 .character-details{grid-column:1/-1!important;width:100%;min-width:0;margin-top:10px}
+.hero.character-header{display:grid;grid-template-columns:minmax(0,1fr) 240px!important;align-items:start}
+.hero.character-header>.wide{grid-column:1!important;grid-row:1!important}
+.hero.character-header>.portrait-area{grid-column:2!important;grid-row:1!important}
 .quick-facts-footer{margin-top:12px}
 .quick-facts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
 .quick-facts-grid article{padding:8px;border:1px solid #8f7b61;background:#f8f4e9}

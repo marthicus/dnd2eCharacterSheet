@@ -910,7 +910,7 @@ function spellSlotPool(source = availableCastingSources()[0] || 'priest') {
 function inferredCastingSource(spell) {
     const source = String(spell?.castingSource || '').toLowerCase();
     if (source) return source;
-    const spellSource = String(spell.source || '').toLowerCase();
+    const spellSource = String(spell?.source || '').toLowerCase();
     if (spellSource.includes('priest')) return 'priest';
     if (spellSource.includes('wizard')) return 'wizard';
     return '';
@@ -2743,9 +2743,9 @@ const weaponCatalog = [
     ['Two-Handed Sword', 'M', '1d10', '3d6', '-', '15', '10'], ['Scimitar', 'M', '1d8', '1d8', '-', '4', '4'], ['Sabre', 'M', '1d6', '1d8', '-', '3', '4'], ['Broad Sword', 'M', '2d4', '1d6+1', '-', '4', '6'],
     ['Falchion', 'M', '2d4', '2d4', '-', '15', '8'], ['Rapier', 'M', '1d6', '1d4', '-', '2', '3'], ['Mace', 'M', '1d6+1', '1d6', '-', '8', '7'], ['Morning Star', 'M', '2d4', '1d6+1', '-', '6', '7'],
     ['Flail', 'M', '1d6+1', '2d4', '-', '15', '7'], ['War Hammer', 'M/T', '1d4+1', '1d4', '10/20/30', '5', '4'], ['Quarterstaff', 'M', '1d6', '1d6', '-', '4', '4'], ['Halberd', 'M', '1d10', '2d6', '-', '15', '9'],
-    ['Polearm', 'M', '1d6', '1d6', '-', '15', '7'], ['Glaive', 'M', '1d6', '1d10', '-', '8', '8'], ['Trident', 'M/T', '1d6+1', '3d4', '10/20/30', '5', '7'], ['Bow, Short', 'M', '1d6', '1d6', '50/100/150', '2', '6'],
-    ['Bow, Long', 'M', '1d6', '1d6', '70/140/210', '3', '7'], ['Composite Short Bow', 'M', '1d6', '1d6', '50/100/150', '3', '6'], ['Composite Long Bow', 'M', '1d6', '1d6', '70/140/210', '4', '7'],
-    ['Crossbow, Light', 'M', '1d4+1', '1d4+1', '60/120/180', '5', '7'], ['Crossbow, Heavy', 'M', '1d6+1', '1d10+1', '80/160/240', '16', '10'], ['Crossbow, Hand', 'M', '1d3', '1d2', '20/40/60', '3', '4'], ['Sling', 'M', '1d4', '1d6', '40/80/160', '0', '6'], ['Dart', 'T', '1d3', '1d2', '15/30/60', '0.25', '2']
+    ['Polearm', 'M', '1d6', '1d6', '-', '15', '7'], ['Glaive', 'M', '1d6', '1d10', '-', '8', '8'], ['Trident', 'M/T', '1d6+1', '3d4', '10/20/30', '5', '7'], ['Bow, Short', 'X', '1d6', '1d6', '50/100/150', '2', '6'],
+    ['Bow, Long', 'X', '1d6', '1d6', '70/140/210', '3', '7'], ['Composite Short Bow', 'X', '1d6', '1d6', '50/100/150', '3', '6'], ['Composite Long Bow', 'X', '1d6', '1d6', '70/140/210', '4', '7'],
+    ['Crossbow, Light', 'X', '1d4+1', '1d4+1', '60/120/180', '5', '7'], ['Crossbow, Heavy', 'X', '1d6+1', '1d10+1', '80/160/240', '16', '10'], ['Crossbow, Hand', 'X', '1d3', '1d2', '20/40/60', '3', '4'], ['Sling', 'X', '1d4', '1d6', '40/80/160', '0', '6'], ['Dart', 'T', '1d3', '1d2', '15/30/60', '0.25', '2']
 ];
 const halfElfWeaponGroups = ['Swords', 'Axes', 'Bows', 'Thrown weapons'];
 const racialWeaponGroupNames = {
@@ -2765,6 +2765,20 @@ function halfElfWeaponApplies(weaponName) {
     return data.raceSelection === 'Half-Elf' && racialWeaponGroupNames[data.racialWeaponChoice]?.includes(weaponName);
 }
 
+function weaponProficiencyFor(weapon) {
+    const weaponName = String(weapon?.name || '').trim().toLowerCase();
+    return data.weaponProficiencies.find(item => {
+        const record = weaponProficiencyCatalog.find(entry => (item.proficiencyId && entry.proficiencyId === item.proficiencyId) || (item.weaponId && entry.weaponId === item.weaponId));
+        return String(item.name || record?.name || '').trim().toLowerCase() === weaponName;
+    }) || null;
+}
+
+function weaponSpecializationBonuses(weapon) {
+    const proficiency = weaponProficiencyFor(weapon);
+    const specialized = proficiency?.proficient && proficiency.specialization === 'specialized';
+    return { hit: specialized ? 1 : 0, damage: specialized ? 2 : 0 };
+}
+
 function weaponRacialBonuses(weapon) {
     const name = weapon?.name || '';
     const exceptional = exceptionalStrengthValues(data.abilities.str);
@@ -2778,7 +2792,7 @@ function weaponRacialBonuses(weapon) {
 }
 
 function weaponUsesDexterity(weapon) {
-    return String(weapon?.attackType || '').toUpperCase().includes('T') || /sling|bow|crossbow|dart|javelin/i.test(weapon?.name || '');
+    return String(weapon?.attackType || '').toUpperCase().includes('T') || String(weapon?.attackType || '').toUpperCase().includes('X') || /sling|bow|crossbow|dart|javelin/i.test(weapon?.name || '');
 }
 
 function weaponAbilityAttackBonus(weapon) {
@@ -2799,13 +2813,14 @@ function updateWeaponThac0() {
     document.querySelectorAll('[data-weapon-thac0]').forEach(output => {
         const weapon = data.weapons[+output.dataset.weaponThac0];
         const racial = weaponRacialBonuses(weapon);
+        const specialization = weaponSpecializationBonuses(weapon);
         const abilityAttack = weaponAbilityAttackBonus(weapon);
-        const attackAdjustment = abilityAttack.bonus + (Number.parseInt(weapon?.attackAdj, 10) || 0) + racial.hit + globalModifierTotal('Hit', weapon?.name || '');
+        const attackAdjustment = abilityAttack.bonus + (Number.parseInt(weapon?.attackAdj, 10) || 0) + racial.hit + specialization.hit + globalModifierTotal('Hit', weapon?.name || '');
         const thac0Adjustment = Number.parseInt(weapon?.thac0Adj, 10) || 0;
         output.textContent = Number.isInteger(base) && weapon?.equipped !== false ? base - attackAdjustment + thac0Adjustment + targetedGlobalModifierTotal('THAC0', weapon?.name) : '-';
-        output.title = weapon?.equipped !== false && Number.isInteger(base) ? `Weapon THAC0 = character THAC0 ${base} - ${abilityAttack.ability.toUpperCase()} attack adjustment ${abilityAttack.bonus} - weapon attack adjustment ${Number.parseInt(weapon?.attackAdj, 10) || 0}${racial.hit ? ` - racial hit bonus ${racial.hit}` : ''} + weapon THAC0 adjustment ${thac0Adjustment} = ${output.textContent}.` : 'Weapon is inactive or character THAC0 is not available.';
+        output.title = weapon?.equipped !== false && Number.isInteger(base) ? `Weapon THAC0 = character THAC0 ${base} - ${abilityAttack.ability.toUpperCase()} attack adjustment ${abilityAttack.bonus} - weapon attack adjustment ${Number.parseInt(weapon?.attackAdj, 10) || 0}${racial.hit ? ` - racial hit bonus ${racial.hit}` : ''}${specialization.hit ? ` - specialization hit bonus ${specialization.hit}` : ''} + weapon THAC0 adjustment ${thac0Adjustment} = ${output.textContent}.` : 'Weapon is inactive or character THAC0 is not available.';
         const damageInput = output.closest('tr')?.querySelector('[data-weapon-key="damageAdj"]');
-        if (damageInput) damageInput.title = racial.damage ? `Manual damage adjustment plus racial ${racial.damage >= 0 ? '+' : ''}${racial.damage} damage from ${data.raceSelection} weapon rules.` : 'Manual weapon damage adjustment. No automatic racial damage bonus applies to this weapon.';
+        if (damageInput) damageInput.title = `${racial.damage || specialization.damage ? 'Manual damage adjustment plus' : 'Manual weapon damage adjustment.'}${racial.damage ? ` racial ${racial.damage >= 0 ? '+' : ''}${racial.damage} damage from ${data.raceSelection} weapon rules` : ''}${racial.damage && specialization.damage ? ' and' : ''}${specialization.damage ? ` specialization +${specialization.damage} damage` : ''}.`;
     });
 }
 
@@ -2813,6 +2828,7 @@ function setupWeaponSection() {
     const section = [...document.querySelectorAll('.grid > .card')].find(card => card.querySelector(':scope > h2')?.textContent.includes('Weapons'));
     if (!section) return;
     section.innerHTML = `<h2>Weapons</h2><div class="weapon-best-thac0">Best equipped THAC0: <output>-</output></div><div class="tableWrap"><table class="weapons-table"><thead><tr><th>Active</th><th>Weapon</th><th>AT</th><th>Attack adj</th><th>Damage adj</th><th>THAC0 adj</th><th>Damage S/M</th><th>Damage L</th><th>Range</th><th>Weight</th><th>Speed</th><th>THAC0</th><th></th></tr></thead><tbody>${weaponRowsHTML()}</tbody></table></div><button type="button" class="add" data-weapon-add>Add weapon</button><small class="weapon-key">M = melee, T = thrown, M/T = melee or thrown. Positive attack adjustments improve THAC0.</small>`;
+    section.querySelector('.weapon-key').textContent = 'M = melee, T = thrown, M/T = melee or thrown, X = missile/projectile. Positive attack adjustments improve THAC0.';
     const weaponHeader = section.querySelector('.weapons-table thead tr');
     weaponHeader.children[3].textContent = 'HIT BONUS';
     weaponHeader.children[4].textContent = 'DAMAGE BONUS';
@@ -3369,7 +3385,6 @@ function setupCampRecoverySection() {
     });
     updateCampRecoverySummary();
     const recoveryLog = section.querySelector('.camp-recovery-log');
-    section.querySelector('.camp-recovery-summary').textContent = `Current HP: ${data.combat.hpCurrent || '-'} / ${data.combat.hpMax || '-'} · Slots used: ${used}`;
     recoveryLog.innerHTML = data.recoveryLog.slice(-5).reverse().map(entry => `<div>${esc(entry.eventType)}${entry.hours ? ` · ${esc(entry.hours)} hours` : ''}${entry.location ? ` · ${esc(entry.location)}` : ''}${entry.notes ? ` · ${esc(entry.notes)}` : ''}</div>`).join('') || '<small>No recovery events recorded.</small>';
 }
 
