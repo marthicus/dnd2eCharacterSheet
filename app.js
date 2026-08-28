@@ -4106,9 +4106,26 @@ function setAllSections(collapsed) {
 document.querySelector('#expandAllBtn').onclick = () => setAllSections(false);
 document.querySelector('#collapseAllBtn').onclick = () => setAllSections(true);
 document.querySelector('#topBtn').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+function setupFiligreeParallax() {
+    let currentOffset = 0;
+    let targetOffset = 0;
+    let frameId = 0;
+    const animate = () => {
+        currentOffset += (targetOffset - currentOffset) * 0.08;
+        if (Math.abs(targetOffset - currentOffset) < 0.05) currentOffset = targetOffset;
+        document.documentElement.style.setProperty('--filigree-offset', `${currentOffset.toFixed(2)}px`);
+        frameId = currentOffset === targetOffset ? 0 : window.requestAnimationFrame(animate);
+    };
+    window.addEventListener('scroll', () => {
+        targetOffset = window.scrollY * -0.18;
+        if (!frameId) frameId = window.requestAnimationFrame(animate);
+    }, { passive: true });
+    animate();
+}
 try {
     data = normalize(JSON.parse(localStorage.getItem('adnd2e-sheet-v1') || '{}'))
 } catch {}
+setupFiligreeParallax();
 render();
 Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadPriestSpellProgression(), loadWizardSpellProgression(), loadRangerSpellProgression(), loadDruidSphereAccess(), loadRangerSpellAccess(), loadPaladinSpellData(), loadBardSpellProgression(), loadShamanSpellcasting(), loadRangerThiefAbilities(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadLanguageCatalog()]).then(() => {
     const enrichmentResult = applySpellMaterialEnrichments(spellCatalogSourceRecords, spellMaterialEnrichmentRecords);
