@@ -1801,25 +1801,27 @@ function setupCharacterHeader() {
     })();
     const refresh = document.createElement('button');
     refresh.type = 'button';
-    refresh.className = 'portrait-action';
-    refresh.textContent = 'Refresh';
+    refresh.className = 'portrait-action portrait-refresh';
+    refresh.textContent = '\u21bb';
     refresh.title = 'Reload portrait from the last saved URL';
+    refresh.setAttribute('aria-label', 'Refresh portrait');
     refresh.onclick = () => {
         applyPortraitSource(data.portraitUrl);
     };
-    const expand = document.createElement('button');
-    expand.type = 'button';
-    expand.className = 'portrait-action';
-    expand.textContent = 'Expand';
-    expand.title = 'Open portrait at full size';
-    expand.onclick = () => {
+    const openPortraitLightbox = () => {
         const lightbox = document.querySelector('.lightbox');
         lightbox.querySelector('img').src = portrait.currentSrc || portrait.src;
         lightbox.hidden = false;
     };
+    portrait.classList.add('portrait-clickable');
+    portrait.title = 'Open portrait at full size';
+    portrait.onclick = openPortraitLightbox;
     const portraitInput = portraitField.querySelector('[data-root="portraitUrl"]');
-    if (portraitInput) portraitInput.addEventListener('change', () => applyPortraitSource(portraitInput.value));
-    controls.append(portraitField, refresh, expand);
+    if (portraitInput) {
+        portraitInput.addEventListener('change', () => applyPortraitSource(portraitInput.value));
+        portraitInput.insertAdjacentElement('afterend', refresh);
+    }
+    controls.append(portraitField);
     portraitArea.append(portraitFrame, controls);
 
     const className = data.identity.classEntries?.[0]?.className || data.identity.className || 'Adventurer';

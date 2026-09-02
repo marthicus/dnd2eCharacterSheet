@@ -326,10 +326,13 @@ main{position:relative;z-index:1}
 .portrait-frame{display:flex;justify-content:center}
 .portrait-frame .portrait{width:240px;height:300px}
 .portrait-frame .portrait.portrait-placeholder{background:#3a332d;box-shadow:inset 0 0 0 1px #8a7a67,inset 0 -42px 70px #0000008f,0 10px 18px #0000003d}
+.portrait-frame .portrait.portrait-clickable{cursor:pointer}
 .portrait-controls{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-top:7px;align-items:end}
-.portrait-controls .field{flex:0 0 100%;min-width:0}
-.portrait-controls .field label{display:block;color:var(--muted);font:11px system-ui;text-transform:uppercase;margin-bottom:2px}
+.portrait-controls .field{display:grid;grid-template-columns:1fr auto;gap:4px;align-items:center;flex:0 0 100%;min-width:0}
+.portrait-controls .field label{grid-column:1/-1;display:block;color:var(--muted);font:11px system-ui;text-transform:uppercase;margin-bottom:2px}
+.portrait-controls .field input{min-width:0}
 .portrait-action{padding:6px 8px;white-space:nowrap}
+.portrait-refresh{padding:6px 9px;font-size:15px;line-height:1}
 .portrait-meta{display:grid;gap:8px;width:100%;margin-top:10px;padding:8px;border:1px solid #8f7b61;background:#f3ece0}
 .portrait-emblem{display:flex;align-items:center;gap:8px;padding:6px;border:1px solid #8f7b61;background:#e9deca}
 .portrait-emblem strong{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:#4a3a2f;color:#f8f2e7;font:700 14px system-ui;letter-spacing:.04em}
