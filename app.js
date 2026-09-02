@@ -162,6 +162,7 @@ let languageCategories = [];
 let languageSourceTypes = [];
 let intelligenceBonusLanguages = [];
 let languageRaceRules = {};
+let raceCardRecords = {};
 let priestSpellProgression = null;
 let wizardSpellProgression = null;
 let rangerSpellProgression = null;
@@ -307,6 +308,45 @@ const raceCatalog = {
     Lizardfolk: { classes: ['Fighter', 'Ranger', 'Druid', 'Witchdoctor', 'Thief', 'Fighter / Thief', 'Druid / Thief'], bonuses: {}, choiceAbilities: ['str', 'dex', 'wis', 'cha'], backgrounds: { 'Broken Coast Castaway': 'Survival or Endurance; Swimming', 'Wyrm-Blood Noble': 'Ancient History; Dancing or Singing; 150 starting gold', 'Fringe-Crest Savage': 'Tracking or Survival; Weapon Proficiency', 'Ophidian Acolyte': 'Astrology or Soothsaying; Religion', 'Marsh Warden': 'Set Snares; Hunting; Local History or Animal Lore' }, features: 'Movement rate of 12 in water; natural AC 5 while unarmored; may hold breath; +1 attack every 2 rounds for 1d6 damage; must wet entire body once per day.', activeSkill: { name: 'Apex Predator', condition: 'Once per adventure; remain perfectly still for 1 turn.', description: 'Become invisible while silent and unmoving, then gain the listed attack and surprise benefits.' } }
 };
 
+function integrateRaceCards(records) {
+    records.forEach(record => {
+        if (!record || typeof record.name !== 'string' || !raceCatalog[record.name]) return;
+        const bonuses = Object.fromEntries((record.abilityAdjustments || [])
+            .filter(adjustment => adjustment?.condition == null && ['str', 'dex', 'con', 'int', 'wis', 'cha'].includes(adjustment.ability) && Number.isFinite(adjustment.modifier))
+            .map(adjustment => [adjustment.ability, adjustment.modifier]));
+        const backgrounds = Object.fromEntries((record.backgrounds || [])
+            .filter(background => typeof background?.name === 'string')
+            .map(background => [background.name, (background.benefits || []).join('; ') || background.description || '']));
+        const specialAbility = record.specialAbility || {};
+        raceCatalog[record.name] = {
+            ...raceCatalog[record.name],
+            classes: Array.isArray(record.allowedClasses) ? record.allowedClasses : raceCatalog[record.name].classes,
+            bonuses,
+            choiceAbilities: Array.isArray(record.abilityChoice?.choices) ? record.abilityChoice.choices : [],
+            backgrounds,
+            features: (record.features || []).map(feature => feature.description).filter(Boolean).join('; '),
+            activeSkill: specialAbility.name ? {
+                name: specialAbility.name,
+                condition: [specialAbility.frequency, specialAbility.activation, specialAbility.duration].filter(Boolean).join(' '),
+                description: specialAbility.description || ''
+            } : null
+        };
+        raceCardRecords[record.name] = record;
+    });
+}
+
+async function loadRaceCards() {
+    try {
+        const response = await fetch('data/race-cards-ocr.json');
+        if (!response.ok) throw new Error('Race card data unavailable');
+        const dataset = await response.json();
+        if (dataset.schemaVersion !== 1 || !Array.isArray(dataset.races)) throw new Error('Invalid race card data');
+        integrateRaceCards(dataset.races);
+    } catch {
+        raceCardRecords = {};
+    }
+}
+
 const classRequirements = {
     Fighter: { str: 9 }, Paladin: { str: 12, con: 9, wis: 13, cha: 17 }, Ranger: { str: 13, dex: 13, con: 14, wis: 14 },
     Wizard: { int: 9 }, 'Specialist Wizard': { int: 9 }, Priest: { wis: 9 }, Druid: { wis: 12, cha: 15 },
@@ -448,7 +488,8 @@ async function loadEquipmentCatalogue() {
 
 async function loadNonweaponCatalog() {
     try {
-        const response = await fetch('data/nonweapon-proficiencies.json');
+        let response = await fetch('data/nonweapon-proficiencies-expanded.json');
+        if (!response.ok) response = await fetch('data/nonweapon-proficiencies.json');
         if (!response.ok) throw new Error('Proficiency catalogue unavailable');
         const catalog = await response.json();
         nonweaponCatalog = Array.isArray(catalog) ? catalog : Array.isArray(catalog.proficiencies) ? catalog.proficiencies : [];
@@ -1201,6 +1242,25 @@ function selectedRaceData() {
     return data.raceSelection && raceCatalog[data.raceSelection] ? raceCatalog[data.raceSelection] : null;
 }
 
+function raceCardDetailsMarkup(record) {
+    if (!record) return '';
+    const details = [];
+    const traits = record.unmapped?.traits;
+    if (Array.isArray(traits) && traits.length) details.push(`<p class="race-card-traits">${traits.map(esc).join(' | ')}</p>`);
+    const features = record.features || [];
+    if (features.length) details.push(`<section class="race-card-detail"><h3>Racial abilities</h3><ul>${features.map(feature => `<li><strong>${esc(feature.name)}:</strong> ${esc(feature.description)}</li>`).join('')}</ul></section>`);
+    const rules = [
+        record.vision?.sourceText,
+        record.movement?.sourceText,
+        ...(record.weaponRules || []).map(rule => rule.sourceText),
+        ...(record.surpriseRules || []).map(rule => rule.sourceText),
+        ...(record.resistancesAndImmunities || []).map(rule => rule.sourceText),
+        ...(record.restrictions || []).map(rule => rule.sourceText)
+    ].filter(Boolean);
+    if (rules.length) details.push(`<section class="race-card-detail"><h3>Additional rules</h3><ul>${rules.map(rule => `<li>${esc(rule)}</li>`).join('')}</ul></section>`);
+    return details.join('');
+}
+
 function updateSurpriseFromRace(race) {
     const hasSurpriseBonus = ['Elves', 'Half-Elf', 'Halfling'].includes(race);
         if (hasSurpriseBonus) { 
@@ -1284,9 +1344,10 @@ function setupRaceSystem() {
         data.selectedBackground = preset ? data.selectedBackground : '';
         classList.innerHTML = (preset?.classes || []).map(className => `<option value="${esc(className)}"></option>`).join('');
         const backgrounds = preset ? Object.entries(preset.backgrounds) : [];
+        const raceCardDetails = raceCardDetailsMarkup(raceCardRecords[race]);
         const surpriseSection = rules.querySelector('.surprise-section');
         rules.querySelector('.race-rules-content').innerHTML = preset
-            ? `<div class="race-rule-columns"><div><h3>${esc(race)}</h3><p>${esc(preset.features)}</p><p><strong>Ability bonuses:</strong> ${Object.entries(preset.bonuses).map(([ability, bonus]) => `${ability.toUpperCase()} ${bonus >= 0 ? '+' : ''}${bonus}`).join(', ') || (preset.choiceAbilities ? `+1 to ${preset.choiceAbilities.map(ability => ability.toUpperCase()).join(', ')}` : 'None listed')}</p><p><strong>Legal classes:</strong> ${preset.classes.map(esc).join(', ')}</p>${preset.activeSkill ? `<div class="racial-ability-skill"><h3>Racial Ability Skill</h3><p><strong>${esc(preset.activeSkill.name)}</strong></p><p><strong>Condition:</strong> ${esc(preset.activeSkill.condition)}</p><p><strong>Effect:</strong> ${esc(preset.activeSkill.description)}</p></div>` : ''}</div><div>${preset.choiceAbilities ? `<label for="racial-bonus-choice">Choose +1 ability bonus</label><select id="racial-bonus-choice"><option value="">Choose an ability</option>${preset.choiceAbilities.map(ability => `<option value="${ability}">${ability.toUpperCase()}</option>`).join('')}</select>` : ''}${race === 'Half-Elf' ? `<label for="racial-weapon-choice">Choose +1 weapon to hit</label><select id="racial-weapon-choice"><option value="">Choose a weapon</option>${[...new Set(halfElfWeaponOptions.map(([, group]) => group))].map(group => `<optgroup label="${esc(group)}">${halfElfWeaponOptions.filter(([, itemGroup]) => itemGroup === group).map(([name,, label]) => `<option value="${esc(name)}">${esc(label || name)}</option>`).join('')}</optgroup>`).join('')}</select><small class="racial-weapon-note">Equipped matching weapon rows receive a separate racial +1 to hit.</small>` : ''}<label for="background-select">Background</label><select id="background-select"><option value="">Choose a background</option>${backgrounds.map(([name]) => `<option value="${esc(name)}">${esc(name)}</option>`).join('')}</select><p class="background-benefits"></p><p class="class-validity"></p><p class="class-requirements-note"></p></div></div>`
+            ? `<div class="race-rule-columns"><div><h3>${esc(race)}</h3><p><strong>Ability bonuses:</strong> ${Object.entries(preset.bonuses).map(([ability, bonus]) => `${ability.toUpperCase()} ${bonus >= 0 ? '+' : ''}${bonus}`).join(', ') || (preset.choiceAbilities ? `+1 to ${preset.choiceAbilities.map(ability => ability.toUpperCase()).join(', ')}` : 'None listed')}</p><p><strong>Legal classes:</strong> ${preset.classes.map(esc).join(', ')}</p>${raceCardDetails}${preset.activeSkill ? `<div class="racial-ability-skill"><h3>Racial Ability Skill</h3><p><strong>${esc(preset.activeSkill.name)}</strong></p><p><strong>Condition:</strong> ${esc(preset.activeSkill.condition)}</p><p><strong>Effect:</strong> ${esc(preset.activeSkill.description)}</p></div>` : ''}</div><div>${preset.choiceAbilities ? `<label for="racial-bonus-choice">Choose +1 ability bonus</label><select id="racial-bonus-choice"><option value="">Choose an ability</option>${preset.choiceAbilities.map(ability => `<option value="${ability}">${ability.toUpperCase()}</option>`).join('')}</select>` : ''}${race === 'Half-Elf' ? `<label for="racial-weapon-choice">Choose +1 weapon to hit</label><select id="racial-weapon-choice"><option value="">Choose a weapon</option>${[...new Set(halfElfWeaponOptions.map(([, group]) => group))].map(group => `<optgroup label="${esc(group)}">${halfElfWeaponOptions.filter(([, itemGroup]) => itemGroup === group).map(([name,, label]) => `<option value="${esc(name)}">${esc(label || name)}</option>`).join('')}</optgroup>`).join('')}</select><small class="racial-weapon-note">Equipped matching weapon rows receive a separate racial +1 to hit.</small>` : ''}<label for="background-select">Background</label><select id="background-select"><option value="">Choose a background</option>${backgrounds.map(([name]) => `<option value="${esc(name)}">${esc(name)}</option>`).join('')}</select><p class="background-benefits"></p><p class="class-validity"></p><p class="class-requirements-note"></p></div></div>`
             : '<p>Custom race. Enter the race name manually; class legality, bonuses, and background rules must be entered manually.</p>';
         if (surpriseSection) {
             surpriseSection.hidden = !['Elves', 'Half-Elf', 'Halfling'].includes(race);
@@ -1344,7 +1405,7 @@ function setupClassInputs() {
     const identityCard = classField.closest('.card');
     const classTableField = document.createElement('div');
     classTableField.className = 'field class-entries-field';
-    classTableField.innerHTML = `<label for="class-entries">Classes</label><table id="class-entries" class="class-entries-table"><thead><tr><th>Class</th><th>Level</th><th>Experience</th><th>XP bonus</th><th>Next level</th><th>Actions</th></tr></thead><tbody></tbody></table><button type="button" class="add" id="add-class-entry">Add class</button><div class="xp-award-controls"><label for="xp-award-class">Award XP to</label><select id="xp-award-class"><option value="">Choose a class</option></select><label for="xp-award-amount">XP awarded</label><input id="xp-award-amount" type="number" min="1" step="1"><button type="button" class="add" id="award-xp">Award XP</button><button type="button" class="add" id="toggle-xp-history" aria-expanded="false">Show XP history</button></div><div class="xp-history" hidden></div>`;
+    classTableField.innerHTML = `<label for="class-entries">Classes</label><div class="tableWrap"><table id="class-entries" class="class-entries-table"><thead><tr><th>Class</th><th>Level</th><th>Experience</th><th>XP bonus</th><th>Next level</th><th>Actions</th></tr></thead><tbody></tbody></table></div><button type="button" class="add" id="add-class-entry">Add class</button><div class="xp-award-controls"><label for="xp-award-class">Award XP to</label><select id="xp-award-class"><option value="">Choose a class</option></select><label for="xp-award-amount">XP awarded</label><input id="xp-award-amount" type="number" min="1" step="1"><button type="button" class="add" id="award-xp">Award XP</button><button type="button" class="add" id="toggle-xp-history" aria-expanded="false">Show XP history</button></div><div class="xp-history" hidden></div>`;
     const body = classTableField.querySelector('tbody');
     const addRow = entry => {
         const index = entry ? data.identity.classEntries.indexOf(entry) : data.identity.classEntries.push({ className: '', level: '', xp: '', nextLevel: '', specialization: '', xpBonusEnabled: false }) - 1;
@@ -1373,7 +1434,7 @@ function setupClassInputs() {
         xpCell.innerHTML = `<label><input type="checkbox" class="xp-bonus-checkbox" aria-label="Enable 10 percent XP bonus"> XP bonus</label><output class="xp-bonus-value">${xpBonusLabel(data.identity.classEntries[index])}</output>`;
         const actionCell = document.createElement('td');
         actionCell.className = 'class-actions';
-        actionCell.innerHTML = '<button type="button" class="remove-class-entry" aria-label="Remove class">Remove</button>';
+        actionCell.innerHTML = '<button type="button" class="remove remove-class-entry" aria-label="Remove class">×</button>';
         row.insertBefore(xpCell, row.children[3]);
         row.append(actionCell);
         row.querySelector('.remove-class-entry').onclick = () => { if (data.identity.classEntries.length === 1) return; data.identity.classEntries.splice(index, 1); render(); };
@@ -4171,11 +4232,10 @@ function setupGoblinAdviser(entrance = false) {
     const currentIndex = Math.max(0, advice.findIndex(item => item.id === data.adviserSettings.currentAdviceId));
     const widget = document.createElement('aside');
     widget.className = 'goblin-adviser';
-    widget.innerHTML = `<div class="goblin-adviser-bubble" role="status" aria-live="polite" hidden><strong>GOBLIN SHEET ADVISER</strong><p></p><div class="goblin-adviser-actions"><button type="button" class="goblin-adviser-go"></button><button type="button" class="goblin-adviser-dismiss">Dismiss</button></div></div><button type="button" class="goblin-adviser-toggle" aria-label="Get character sheet advice"><img src="${entrance ? 'goblin-adviser-knife-left-clean-v2.png' : 'goblin-adviser-idle-left-clean.png'}" alt="Goblin sheet adviser"></button><button type="button" class="goblin-adviser-dismiss-adviser" aria-label="Dismiss goblin" title="Dismiss goblin">×</button>`;
+    widget.innerHTML = `<div class="goblin-adviser-bubble" role="status" aria-live="polite" hidden><strong>GOBLIN SHEET ADVISER</strong><p></p><div class="goblin-adviser-actions"><button type="button" class="goblin-adviser-go"></button></div></div><button type="button" class="goblin-adviser-toggle" aria-label="Get character sheet advice"><img src="${entrance ? 'goblin-adviser-knife-left-clean-v2.png' : 'goblin-adviser-idle-left-clean.png'}" alt="Goblin sheet adviser"></button><button type="button" class="goblin-adviser-dismiss-adviser" aria-label="Dismiss advice" title="Dismiss advice">×</button>`;
     const bubble = widget.querySelector('.goblin-adviser-bubble');
     const message = widget.querySelector('p');
     const go = widget.querySelector('.goblin-adviser-go');
-    const dismiss = widget.querySelector('.goblin-adviser-dismiss');
     const dismissAdviser = widget.querySelector('.goblin-adviser-dismiss-adviser');
     const sprite = widget.querySelector('.goblin-adviser-toggle img');
     let spriteTimer;
@@ -4189,8 +4249,16 @@ function setupGoblinAdviser(entrance = false) {
     const advance = () => { index = (index + 1) % advice.length; show(); };
     const startIdleLoop = () => { clearTimeout(entranceTimer); clearInterval(blinkTimer); sprite.src = 'goblin-adviser-idle-left-clean.png'; blinkTimer = setInterval(() => { sprite.src = 'goblin-adviser-think-left-clean.png'; clearTimeout(spriteTimer); spriteTimer = setTimeout(() => { sprite.src = 'goblin-adviser-idle-left-clean.png'; }, 1200); }, 8000); };
     widget.querySelector('.goblin-adviser-toggle').onclick = () => { bubble.hidden = false; advance(); };
-    dismiss.onclick = () => { clearTimeout(fadeTimer); bubble.hidden = true; };
-    dismissAdviser.onclick = () => { clearTimeout(fadeTimer); data.adviserSettings.dismissed = true; changed(); setupGoblinAdviser(); };
+    dismissAdviser.onclick = () => {
+        clearTimeout(fadeTimer);
+        if (!bubble.hidden) {
+            bubble.hidden = true;
+            return;
+        }
+        data.adviserSettings.dismissed = true;
+        changed();
+        setupGoblinAdviser();
+    };
     if (entrance) { sprite.src = 'goblin-adviser-knife-left-clean-v2.png'; entranceTimer = setTimeout(() => { sprite.src = 'goblin-adviser-think-left-clean.png'; entranceTimer = setTimeout(startIdleLoop, 1200); }, 2000); } else startIdleLoop();
     go.onclick = () => { const target = document.querySelector(advice[index].target); target?.scrollIntoView({ behavior: 'smooth', block: 'center' }); target?.animate([{ outline: '2px solid #c69c3a' }, { outline: '2px solid transparent' }], { duration: 900 }); };
     document.body.append(widget);
@@ -4200,7 +4268,7 @@ try {
 } catch {}
 setupFiligreeParallax();
 render();
-Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadPriestSpellProgression(), loadWizardSpellProgression(), loadRangerSpellProgression(), loadDruidSphereAccess(), loadRangerSpellAccess(), loadPaladinSpellData(), loadBardSpellProgression(), loadShamanSpellcasting(), loadRangerThiefAbilities(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadLanguageCatalog()]).then(() => {
+Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadPriestSpellProgression(), loadWizardSpellProgression(), loadRangerSpellProgression(), loadDruidSphereAccess(), loadRangerSpellAccess(), loadPaladinSpellData(), loadBardSpellProgression(), loadShamanSpellcasting(), loadRangerThiefAbilities(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadLanguageCatalog(), loadRaceCards()]).then(() => {
     const enrichmentResult = applySpellMaterialEnrichments(spellCatalogSourceRecords, spellMaterialEnrichmentRecords);
     spellCatalogSourceRecords = enrichmentResult.records;
     spellMaterialEnrichmentConflicts = enrichmentResult.conflicts;

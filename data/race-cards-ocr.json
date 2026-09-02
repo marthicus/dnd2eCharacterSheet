@@ -1,0 +1,1262 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "title": "Race Cards",
+    "edition": "AD&D 2e",
+    "page": null,
+    "imageId": null,
+    "ocrNotes": [
+      "Transcribed from seven supplied race-card images.",
+      "Printed spelling, capitalization, abbreviations, and apparent typographical errors are retained in rawOcrText and sourceText. Structured names use display capitalization; ability-code normalization is noted where applicable."
+    ]
+  },
+  "races": [
+    {
+      "id": "lizardfolk",
+      "name": "Lizardfolk",
+      "source": {
+        "page": null,
+        "imageId": "Lizardfolk_racecard.png",
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "description": "",
+      "allowedClasses": [
+        "Fighter",
+        "Ranger",
+        "Druid",
+        "Witchdoctor",
+        "Thief",
+        "Fighter / Thief",
+        "Druid / Thief"
+      ],
+      "abilityAdjustments": [
+        {
+          "ability": "con",
+          "modifier": 1,
+          "condition": null,
+          "sourceText": "+1 to Constitution"
+        },
+        {
+          "ability": "int",
+          "modifier": -1,
+          "condition": null,
+          "sourceText": "-1 to Intelligence"
+        }
+      ],
+      "abilityChoice": {
+        "modifier": 1,
+        "choices": [
+          "str",
+          "dex",
+          "wis",
+          "cha"
+        ],
+        "selectionCount": 1,
+        "sourceText": "+1 Bonus to Str / Dex / Wis / Cha"
+      },
+      "features": [
+        {
+          "name": "Natural Armor",
+          "description": "Natural AC 5 while unarmored",
+          "mechanics": [],
+          "sourceText": "Natural AC 5 while unarmored"
+        },
+        {
+          "name": "Hold Breath",
+          "description": "May hold breath for up to 1 round + ⅔ CON score (rounded up)",
+          "mechanics": [],
+          "sourceText": "May hold breath for up to 1 round + ⅔ CON score (rounded up)"
+        },
+        {
+          "name": "Bonus Attack",
+          "description": "+1 Bonus attack every 2 rounds for 1d6 dmg. You may use your teeth or tail",
+          "mechanics": [],
+          "sourceText": "+1 Bonus attack every 2 rounds for 1d6 dmg. You may use your teeth or tail"
+        }
+      ],
+      "specialAbility": {
+        "name": "Apex Predator",
+        "activation": "You must remain perfectly still for 1 turn.",
+        "duration": "You may remain like this for a number of hours equal to your CON score.",
+        "frequency": "Once per adventure",
+        "description": "As long as you remain silent and unmoving, you are INVISIBLE. Your first attack or spell gains: Opponents suffer a -4 to their surprise or saving throw roll. You gain +4 to hit with weapons and spells. You deal max damage /may reroll damage with your weapon/spell attack.",
+        "mechanics": [],
+        "sourceText": "ONCE PER ADVENTURE: You must remain perfectly still for 1 turn.\nAs long as you remain silent and unmoving, you are INVISIBLE.\nYou may remain like this for a number of hours equal to your CON score.\nYour first attack or spell gains:\nOpponents suffer a -4 to their surprise or saving throw roll.\nYou gain +4 to hit with weapons and spells.\nYou deal max damage /may reroll damage with your weapon/spell attack."
+      },
+      "movement": {
+        "land": null,
+        "swim": 12,
+        "fly": null,
+        "burrow": null,
+        "sourceText": "Movement rate of 12 in water"
+      },
+      "vision": {
+        "type": null,
+        "rangeFeet": null,
+        "sourceText": ""
+      },
+      "languages": {
+        "automatic": [],
+        "bonusChoices": [],
+        "literacy": null,
+        "sourceText": ""
+      },
+      "weaponRules": [],
+      "surpriseRules": [],
+      "resistancesAndImmunities": [],
+      "restrictions": [
+        {
+          "category": "hydration",
+          "description": "Must wet entire body once per day or temporarily lose 3 constitution per day",
+          "sourceText": "Must wet entire body once per day or temporarily lose 3 constitution per day"
+        }
+      ],
+      "backgrounds": [
+        {
+          "name": "Broken Coast Castaway",
+          "benefits": [
+            "Survival or Endurance",
+            "Swimming"
+          ],
+          "description": "",
+          "sourceText": "Broken Coast Castaway\n+ Survival or Endurance\n+ Swimming"
+        },
+        {
+          "name": "River-Snake Recluse",
+          "benefits": [
+            "Herbalism or Healing",
+            "Navigation"
+          ],
+          "description": "",
+          "sourceText": "River-Snake Recluse\n+ Herbalism or Healing\n+ Navigation"
+        },
+        {
+          "name": "Wyrm-Blood Noble",
+          "benefits": [
+            "Ancient History",
+            "Dancing or Singing",
+            "150 starting gold"
+          ],
+          "description": "",
+          "sourceText": "Wyrm-Blood Noble\n+ Ancient History\n+ Dancing or Singing\n+ 150 starting gold"
+        },
+        {
+          "name": "Fringe-Crest Savage",
+          "benefits": [
+            "Tracking or Survival",
+            "1 Weapon Proficiency"
+          ],
+          "description": "",
+          "sourceText": "Fringe-Crest Savage\n+ Tracking or Survival\n+ 1 Weapon Proficiency"
+        },
+        {
+          "name": "Ophidian Acolyte",
+          "benefits": [
+            "Astrology or Soothsaying",
+            "Religion"
+          ],
+          "description": "",
+          "sourceText": "Ophidian Acolyte\n+ Astrology or Soothsaying\n+ Religion"
+        },
+        {
+          "name": "Marsh Warden",
+          "benefits": [
+            "Set Snares",
+            "Hunting",
+            "Local History or Animal Lore"
+          ],
+          "description": "",
+          "sourceText": "Marsh Warden\n+ Set Snares\n+ Hunting\n+ Local History or Animal Lore"
+        }
+      ],
+      "rawOcrText": "Lizardfolk\nSavage\nInscrutable\nCalculating\n\nRACIAL ABILITIES\nMovement rate of 12 in water\nNatural AC 5 while unarmored\nMay hold breath for up to 1 round + ⅔ CON score (rounded up)\n+1 Bonus attack every 2 rounds for 1d6 dmg. You may use your teeth or tail\nMust wet entire body once per day or temporarily lose 3 constitution per day\n+1 to Constitution, -1 to Intelligence\n\nAPEX PREDATOR\nONCE PER ADVENTURE: You must remain perfectly still for 1 turn.\nAs long as you remain silent and unmoving, you are INVISIBLE.\nYou may remain like this for a number of hours equal to your CON score.\nYour first attack or spell gains:\nOpponents suffer a -4 to their surprise or saving throw roll.\nYou gain +4 to hit with weapons and spells.\nYou deal max damage /may reroll damage with your weapon/spell attack.\n\nCHARACTER CLASSES\nFighter\nRanger\nDruid\nWitchdoctor\nThief\nMulti-Class\nFighter / Thief\nDruid / Thief\n\nANCESTORS OF THE WYRM\nBONUS ABILITY SCORE\n+1 Bonus to Str / Dex / Wis / Cha\nBROKEN COAST CASTAWAY\n+ Survival or Endurance\n+ Swimming\nRIVER-SNAKE RECLUSE\n+ Herbalism or Healing\n+ Navigation\nWYRM-BLOOD NOBLE\n+ Ancient History\n+ Dancing or Singing\n+ 150 starting gold\nFRINGE-CREST SAVAGE\n+ Tracking or Survival\n+ 1 Weapon Proficiency\nOPHIDIAN ACOLYTE\n+ Astrology or Soothsaying\n+ Religion\nMARSH WARDEN\n+ Set Snares\n+ Hunting\n+ Local History or Animal Lore",
+      "unmapped": {
+        "traits": [
+          "Savage",
+          "Inscrutable",
+          "Calculating"
+        ],
+        "backgroundGroup": "Ancestors of the Wyrm"
+      }
+    },
+    {
+      "id": "half-elf",
+      "name": "Half-Elf",
+      "source": {
+        "page": null,
+        "imageId": "HalfElf_racecard.png",
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "description": "",
+      "allowedClasses": [
+        "Fighter",
+        "Ranger",
+        "Paladin",
+        "Cleric",
+        "Druid",
+        "Thief",
+        "Bard",
+        "Mage",
+        "Specialist Mage: All Eight Schools",
+        "Specialist Mage: Wild Mage",
+        "Witch Doctor",
+        "Multi-Class: Every combination but the kitchen sink"
+      ],
+      "abilityAdjustments": [],
+      "abilityChoice": {
+        "modifier": 1,
+        "choices": [
+          "str",
+          "dex",
+          "con",
+          "int",
+          "wis",
+          "cha"
+        ],
+        "selectionCount": 1,
+        "sourceText": "+1 Bonus to any ability score"
+      },
+      "features": [
+        {
+          "name": "Detect Secret Doors - Passive",
+          "description": "Detect secret doors - Passive (10′ radius)  -   1 on 1d6",
+          "mechanics": [],
+          "sourceText": "Detect secret doors - Passive (10′ radius)  -   1 on 1d6"
+        },
+        {
+          "name": "Detect Secret Doors - Active",
+          "description": "Detect secret doors - Active (10′ radius)   -   1-3 on 1d6",
+          "mechanics": [],
+          "sourceText": "Detect secret doors - Active (10′ radius)   -   1-3 on 1d6"
+        }
+      ],
+      "specialAbility": {
+        "name": "Pilgrims Cache",
+        "activation": "Spend 1d4+1 rounds searching your knapsack.",
+        "duration": "It must be used immediately and is consumed on use.",
+        "frequency": "Once per adventure",
+        "description": "Produce one tool or supply of 5gp value or less. It must be used immediately and is consumed on use.",
+        "mechanics": [],
+        "sourceText": "ONCE PER ADVENTURE:\nSpend 1d4+1 rounds searching your knapsack. Produce one tool\nor supply of 5gp value or less. It must be used immediately and is\nconsumed on use."
+      },
+      "movement": {
+        "land": null,
+        "swim": null,
+        "fly": null,
+        "burrow": null,
+        "sourceText": ""
+      },
+      "vision": {
+        "type": "Infravision",
+        "rangeFeet": 60,
+        "sourceText": "Infravision 60′"
+      },
+      "languages": {
+        "automatic": [],
+        "bonusChoices": [],
+        "literacy": null,
+        "sourceText": ""
+      },
+      "weaponRules": [
+        {
+          "type": "attack bonus",
+          "bonus": "+1 to hit",
+          "condition": "when using swords, axes, bows, or thrown weapons (choose one)",
+          "sourceText": "+1 Bonus to hit when using swords, axes, bows, or thrown weapons (choose one)"
+        }
+      ],
+      "surpriseRules": [
+        {
+          "target": "Enemies",
+          "modifier": "-4 / -2",
+          "conditions": "Non-metal armor, party with only halflings/elves/half-elves or 90′ away",
+          "sourceText": "Enemies receive -4 / -2 to their surprise rolls: (Non-metal armor, party with only halflings/elves/half-elves or 90′ away)"
+        }
+      ],
+      "resistancesAndImmunities": [
+        {
+          "category": "sleep and charm",
+          "effect": "immunity",
+          "value": "30%",
+          "condition": "",
+          "sourceText": "30% immunity to all SLEEP and CHARM spells"
+        }
+      ],
+      "restrictions": [],
+      "backgrounds": [
+        {
+          "name": "Ink-Stained Scion",
+          "benefits": [
+            "Ancient History or Arcanology",
+            "1 Bonus Language",
+            "Reading / Writing"
+          ],
+          "description": "",
+          "sourceText": "Ink-Stained Scion\n+ Ancient History or Arcanology\n+ 1 Bonus Language\n+ Reading / Writing"
+        },
+        {
+          "name": "Twice-Scarred Drifter",
+          "benefits": [
+            "1 Weapon Proficiency",
+            "Survival or Endurance"
+          ],
+          "description": "",
+          "sourceText": "Twice-Scarred Drifter\n+ 1 Weapon Proficiency\n+ Survival or Endurance"
+        },
+        {
+          "name": "Rust Shallows Outcast",
+          "benefits": [
+            "Swimming",
+            "Rope Use",
+            "Weather Sense or Navigation"
+          ],
+          "description": "",
+          "sourceText": "Rust Shallows Outcast\n+ Swimming\n+ Rope Use\n+ Weather Sense or Navigation"
+        },
+        {
+          "name": "Forged by the Forest",
+          "benefits": [
+            "Alertness",
+            "Fire Building",
+            "Foraging or Weather Sense"
+          ],
+          "description": "",
+          "sourceText": "Forged by the Forest\n+ Alertness\n+ Fire Building\n+ Foraging or Weather Sense"
+        },
+        {
+          "name": "Open-Hand Pilgrim",
+          "benefits": [
+            "Religion",
+            "Cartography or Cryptography",
+            "Reading / Writing"
+          ],
+          "description": "",
+          "sourceText": "Open-Hand Pilgrim\n+ Religion\n+ Cartography or Cryptography\n+ Reading / Writing"
+        },
+        {
+          "name": "Wayward Ward",
+          "benefits": [
+            "Etiquette",
+            "Musical Instrument or Singing",
+            "150 Starting Gold"
+          ],
+          "description": "",
+          "sourceText": "Wayward Ward\n+ Etiquette\n+ Musical Instrument or Singing\n+ 150 Starting Gold"
+        }
+      ],
+      "rawOcrText": "Half-Elf\nObservant\nPragmatic\nSelf-Reliant\n\nRACIAL ABILITIES\nInfravision 60′\n30% immunity to all SLEEP and CHARM spells\nEnemies receive -4 / -2 to their surprise rolls:\n(Non-metal armor, party with only halflings/elves/half-elves or 90′ away)\n+1 Bonus to hit when using swords, axes, bows, or thrown weapons (choose one)\nDetect secret doors - Passive (10′ radius)  -   1 on 1d6\nDetect secret doors - Active (10′ radius)   -   1-3 on 1d6\n\nPILGRIMS CACHE\nONCE PER ADVENTURE:\nSpend 1d4+1 rounds searching your knapsack. Produce one tool\nor supply of 5gp value or less. It must be used immediately and is\nconsumed on use.\n\nCHARACTER CLASSES\nFighter\nRanger\nPaladin\nCleric\nDruid\nThief\nBard\nMage\nSpecialist Mage*\n*All Eight Schools\n*Wild Mage\nWitch Doctor\nMulti-Class\n*Every combination but the kitchen sink\n\nGHOSTS OF THE BROKEN COAST\n+1 ABILITY SCORE\n+1 Bonus to any ability score\nINK-STAINED SCION\n+ Ancient History or Arcanology\n+ 1 Bonus Language\n+ Reading / Writing\nTWICE-SCARRED DRIFTER\n+ 1 Weapon Proficiency\n+ Survival or Endurance\nRUST SHALLOWS OUTCAST\n+ Swimming\n+ Rope Use\n+ Weather Sense or Navigation\nFORGED BY THE FOREST\n+ Alertness\n+ Fire Building\n+ Foraging or Weather Sense\nOPEN-HAND PILGRIM\n+ Religion\n+ Cartography or Cryptography\n+ Reading / Writing\nWAYWARD WARD\n+ Etiquette\n+ Musical Instrument or Singing\n+ 150 Starting Gold",
+      "unmapped": {
+        "traits": [
+          "Observant",
+          "Pragmatic",
+          "Self-Reliant"
+        ],
+        "backgroundGroup": "Ghosts of the Broken Coast"
+      }
+    },
+    {
+      "id": "halfling",
+      "name": "Halfling",
+      "source": {
+        "page": null,
+        "imageId": "Halfling_racecard.png",
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "description": "",
+      "allowedClasses": [
+        "Fighter",
+        "Cleric",
+        "Thief",
+        "Bard",
+        "Fighter / Cleric",
+        "Fighter / Thief",
+        "Cleric / Thief"
+      ],
+      "abilityAdjustments": [
+        {
+          "ability": "dex",
+          "modifier": 1,
+          "condition": null,
+          "sourceText": "+1 to Dexterity"
+        },
+        {
+          "ability": "str",
+          "modifier": -1,
+          "condition": null,
+          "sourceText": "-1 to Strength"
+        }
+      ],
+      "abilityChoice": {
+        "modifier": 1,
+        "choices": [
+          "con",
+          "int",
+          "wis",
+          "cha"
+        ],
+        "selectionCount": 1,
+        "sourceText": "+1 Bonus to Con / Int / Wis / Cha"
+      },
+      "features": [
+        {
+          "name": "Saving Throw Bonus",
+          "description": "+1 Bonus to saves per 3.5 points of CON (Wands, Staves, Rods, Spells, and Poison)",
+          "mechanics": [],
+          "sourceText": "+1 Bonus to saves per 3.5 points of CON (Wands, Staves, Rods, Spells, and Poison)"
+        },
+        {
+          "name": "Defence Against Large Foes",
+          "description": "Ogres, Trolls, and Giants receive -4 to hit when targeting halflings",
+          "mechanics": [],
+          "sourceText": "Ogres, Trolls, and Giants receive -4 to hit when targeting halflings"
+        }
+      ],
+      "specialAbility": {
+        "name": "Fortune’s Favor",
+        "activation": "Start of the adventure",
+        "duration": "These are temporary and do not carry over to the next adventure.",
+        "frequency": "Start of the adventure",
+        "description": "Gain 1d4 adventure points. These are temporary and do not carry over to the next adventure.",
+        "mechanics": [],
+        "sourceText": "START OF THE ADVENTURE:\nGain 1d4 adventure points.\nThese are temporary and do not carry over to the next adventure."
+      },
+      "movement": {
+        "land": null,
+        "swim": null,
+        "fly": null,
+        "burrow": null,
+        "sourceText": ""
+      },
+      "vision": {
+        "type": "Infravision",
+        "rangeFeet": 60,
+        "sourceText": "Infravision 60′"
+      },
+      "languages": {
+        "automatic": [],
+        "bonusChoices": [],
+        "literacy": null,
+        "sourceText": ""
+      },
+      "weaponRules": [
+        {
+          "type": "attack and damage bonus",
+          "bonus": "+1 to hit and damage",
+          "condition": "when using thrown weapons or slings",
+          "sourceText": "+1 Bonus to hit and damage when using thrown weapons or slings"
+        }
+      ],
+      "surpriseRules": [
+        {
+          "target": "Enemies",
+          "modifier": "-4 / -2",
+          "conditions": "Non-metal armor, in party with only halflings/elves/half-elves or 90′ from others",
+          "sourceText": "Enemies receive -4 / -2 to their surprise rolls: (Non-metal armor, in party with only halflings/elves/half-elves or 90′ from others)"
+        }
+      ],
+      "resistancesAndImmunities": [],
+      "restrictions": [],
+      "backgrounds": [
+        {
+          "name": "Hearthland Tender",
+          "benefits": [
+            "Etiquette",
+            "Cooking",
+            "Brewing or Winemaking"
+          ],
+          "description": "",
+          "sourceText": "Hearthland Tender\n+ Etiquette\n+ Cooking\n+ Brewing or Winemaking"
+        },
+        {
+          "name": "Lord of the Fields",
+          "benefits": [
+            "1 Weapon Proficiency",
+            "Leadership or Oratory",
+            "Local History"
+          ],
+          "description": "",
+          "sourceText": "Lord of the Fields\n+ 1 Weapon Proficiency\n+ Leadership or Oratory\n+ Local History"
+        },
+        {
+          "name": "Deep Lake Seeker",
+          "benefits": [
+            "Fishing or Swimming",
+            "Ancient History",
+            "Arcanology"
+          ],
+          "description": "",
+          "sourceText": "Deep Lake Seeker\n+ Fishing or Swimming\n+ Ancient History\n+ Arcanology"
+        },
+        {
+          "name": "Woodspirit Watcher",
+          "benefits": [
+            "Running",
+            "Signaling",
+            "Alertness or Camoflauge"
+          ],
+          "description": "",
+          "sourceText": "Woodspirit Watcher\n+ Running\n+ Signaling\n+ Alertness or Camoflauge"
+        },
+        {
+          "name": "Harvest-Rite Follower",
+          "benefits": [
+            "Religion",
+            "Agriculture",
+            "Animal Handling or Animal Lore"
+          ],
+          "description": "",
+          "sourceText": "Harvest-Rite Follower\n+ Religion\n+ Agriculture\n+ Animal Handling or Animal Lore"
+        },
+        {
+          "name": "Silver-Tongued Arbiter",
+          "benefits": [
+            "Fast Talking or Bartering",
+            "Gaming",
+            "150 starting gold"
+          ],
+          "description": "",
+          "sourceText": "Silver-Tongued Arbiter\n+ Fast Talking or Bartering\n+ Gaming\n+ 150 starting gold"
+        }
+      ],
+      "rawOcrText": "Halfling\nLucky\nHopeful\nSteadfast\n\nRACIAL ABILITIES\nInfravision 60′\n+1 Bonus to saves per 3.5 points of CON (Wands, Staves, Rods, Spells, and Poison)\nOgres, Trolls, and Giants receive -4 to hit when targeting halflings\n+1 Bonus to hit and damage when using thrown weapons or slings\nEnemies receive -4 / -2 to their surprise rolls:\n(Non-metal armor, in party with only halflings/elves/half-elves or 90′ from others)\n+1 to Dexterity, -1 to Strength,\n\nFORTUNE’S FAVOR\nSTART OF THE ADVENTURE:\nGain 1d4 adventure points.\nThese are temporary and do not carry over to the next adventure.\n\nCHARACTER CLASSES\nFighter\nCleric\nThief\nBard\nMulti-Class\nFighter / Cleric\nFighter / Thief\nCleric / Thief\n\nHALFMEN IN THE HILLS\n+1 ABILITY SCORE\n+1 Bonus to Con / Int / Wis / Cha\nHEARTHLAND TENDER\n+ Etiquette\n+ Cooking\n+ Brewing or Winemaking\nLORD OF THE FIELDS\n+ 1 Weapon Proficiency\n+ Leadership or Oratory\n+ Local History\nDEEP LAKE SEEKER\n+ Fishing or Swimming\n+ Ancient History\n+ Arcanology\nWOODSPIRIT WATCHER\n+ Running\n+ Signaling\n+ Alertness or Camoflauge\nHARVEST-RITE FOLLOWER\n+ Religion\n+ Agriculture\n+ Animal Handling or Animal Lore\nSILVER-TONGUED ARBITER\n+ Fast Talking or Bartering\n+ Gaming\n+ 150 starting gold",
+      "unmapped": {
+        "traits": [
+          "Lucky",
+          "Hopeful",
+          "Steadfast"
+        ],
+        "backgroundGroup": "Halfmen in the Hills"
+      }
+    },
+    {
+      "id": "dwarf",
+      "name": "Dwarf",
+      "source": {
+        "page": null,
+        "imageId": "Dwarf_racecard.png",
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "description": "",
+      "allowedClasses": [
+        "Fighter",
+        "Paladin",
+        "Cleric",
+        "Thief",
+        "Specialist Mage: Illusionist",
+        "Fighter / Cleric",
+        "Fighter / Thief",
+        "Thief / Illusionist"
+      ],
+      "abilityAdjustments": [
+        {
+          "ability": "con",
+          "modifier": 1,
+          "condition": null,
+          "sourceText": "+1 to Constitution"
+        },
+        {
+          "ability": "cha",
+          "modifier": -1,
+          "condition": null,
+          "sourceText": "-1 to Charisma"
+        }
+      ],
+      "abilityChoice": {
+        "modifier": 1,
+        "choices": [
+          "str",
+          "dex",
+          "int",
+          "wis"
+        ],
+        "selectionCount": 1,
+        "sourceText": "+1 Bonus to Str, Dex, Int, or Wis"
+      },
+      "features": [
+        {
+          "name": "Saving Throw Bonus",
+          "description": "+1 Bonus to saves per 3.5 points of CON (Wands, Staves, Rods, Spells, and Poison)",
+          "mechanics": [],
+          "sourceText": "+1 Bonus to saves per 3.5 points of CON (Wands, Staves, Rods, Spells, and Poison)"
+        },
+        {
+          "name": "Defence Against Large Foes",
+          "description": "Ogres, Trolls, and Giants receive -4 to hit when targeting dwarves",
+          "mechanics": [],
+          "sourceText": "Ogres, Trolls, and Giants receive -4 to hit when targeting dwarves"
+        },
+        {
+          "name": "Magic Item Malfunction",
+          "description": "20% chance of non-class magic item malfunction (If cursed, may dispose of it)",
+          "mechanics": [],
+          "sourceText": "20% chance of non-class magic item malfunction (If cursed, may dispose of it)"
+        },
+        {
+          "name": "Detect Grades and Construction",
+          "description": "Detect grades/slopes, new tunnel/passage construction on 1-5 on 1d6",
+          "mechanics": [],
+          "sourceText": "Detect grades/slopes, new tunnel/passage construction on 1-5 on 1d6"
+        },
+        {
+          "name": "Detect Moving Walls",
+          "description": "Detect sliding/shifting walls on 1-4 on 1d6",
+          "mechanics": [],
+          "sourceText": "Detect sliding/shifting walls on 1-4 on 1d6"
+        },
+        {
+          "name": "Detect Depth and Stonework Hazards",
+          "description": "Detect approx. depth, stonework traps/pits/deadfalls on 1-3 on 1d6",
+          "mechanics": [],
+          "sourceText": "Detect approx. depth, stonework traps/pits/deadfalls on 1-3 on 1d6"
+        }
+      ],
+      "specialAbility": {
+        "name": "Tough as Rocks",
+        "activation": "The first time you are reduced to 0 hitpoints or below, roll 1d6",
+        "duration": "",
+        "frequency": "Once per adventure",
+        "description": "(1-2): You are reduced to 0 hitpoints, unconcious, but not bleeding out. (3-6): You are reduced to 1 hitpoint instead",
+        "mechanics": [],
+        "sourceText": "ONCE PER ADVENTURE:\nThe first time you are reduced to 0 hitpoints or below, roll 1d6\n(1-2): You are reduced to 0 hitpoints, unconcious, but not bleeding out.\n(3-6): You are reduced to 1 hitpoint instead"
+      },
+      "movement": {
+        "land": null,
+        "swim": null,
+        "fly": null,
+        "burrow": null,
+        "sourceText": ""
+      },
+      "vision": {
+        "type": "Infravision",
+        "rangeFeet": 60,
+        "sourceText": "Infravision 60′"
+      },
+      "languages": {
+        "automatic": [],
+        "bonusChoices": [],
+        "literacy": null,
+        "sourceText": ""
+      },
+      "weaponRules": [
+        {
+          "type": "attack bonus",
+          "bonus": "+1 to hit",
+          "condition": "Orcs, Half-Orcs, Goblins, and Hob-Goblins",
+          "sourceText": "+1 Bonus to hit Orcs, Half-Orcs, Goblins, and Hob-Goblins"
+        }
+      ],
+      "surpriseRules": [],
+      "resistancesAndImmunities": [],
+      "restrictions": [],
+      "backgrounds": [
+        {
+          "name": "Treeline Tactician",
+          "benefits": [
+            "Survival or Danger Sense",
+            "Danger Sense"
+          ],
+          "description": "",
+          "sourceText": "Treeline Tactician\n+ Survival or Danger Sense\n+ Danger Sense"
+        },
+        {
+          "name": "Stonesail Explorer",
+          "benefits": [
+            "Swimming",
+            "Rope Use",
+            "Slow Respiration or Deep Diving"
+          ],
+          "description": "",
+          "sourceText": "Stonesail Explorer\n+ Swimming\n+ Rope Use\n+ Slow Respiration or Deep Diving"
+        },
+        {
+          "name": "Oathbound Defender",
+          "benefits": [
+            "Endurance or Armorer",
+            "Weapon Proficiency"
+          ],
+          "description": "",
+          "sourceText": "Oathbound Defender\n+ Endurance or Armorer\n+ Weapon Proficiency"
+        },
+        {
+          "name": "Deepvein Touched",
+          "benefits": [
+            "Stonemasonry or Blacksmithing",
+            "Mining or Engineering"
+          ],
+          "description": "",
+          "sourceText": "Deepvein Touched\n+ Stonemasonry or Blacksmithing\n+ Mining or Engineering"
+        },
+        {
+          "name": "Stonefaith Devotee",
+          "benefits": [
+            "Religion",
+            "Dwarf Runes",
+            "Chanting or Brewing"
+          ],
+          "description": "",
+          "sourceText": "Stonefaith Devotee\n+ Religion\n+ Dwarf Runes\n+ Chanting or Brewing"
+        },
+        {
+          "name": "Deephold Ascenandant",
+          "benefits": [
+            "Etiquette or Reading / Writing",
+            "Heraldry",
+            "2 gems worth 80 gp each"
+          ],
+          "description": "",
+          "sourceText": "Deephold Ascenandant\n+ Etiquette or Reading / Writing\n+ Heraldry\n+ 2 gems worth 80 gp each"
+        }
+      ],
+      "rawOcrText": "Dwarf\nLoyal\nResilient\nStubborn\n\nRACIAL ABILITIES\nInfravision 60′\n+1 Bonus to saves per 3.5 points of CON (Wands, Staves, Rods, Spells, and Poison)\nOgres, Trolls, and Giants receive -4 to hit when targeting dwarves\n+1 Bonus to hit Orcs, Half-Orcs, Goblins, and Hob-Goblins\n20% chance of non-class magic item malfunction (If cursed, may dispose of it)\nDetect grades/slopes, new tunnel/passage construction on 1-5 on 1d6\nDetect sliding/shifting walls on 1-4 on 1d6\nDetect approx. depth, stonework traps/pits/deadfalls on 1-3 on 1d6\n+1 to Constitution, -1 to Charisma,\n\nTOUGH AS ROCKS\nONCE PER ADVENTURE:\nThe first time you are reduced to 0 hitpoints or below, roll 1d6\n(1-2): You are reduced to 0 hitpoints, unconcious, but not bleeding out.\n(3-6): You are reduced to 1 hitpoint instead\n\nCHARACTER CLASSES\nFighter\nPaladin\nCleric\nThief\nSpecialist Mage*\n*Illusionist\nMulti-Class\nFighter / Cleric\nFighter / Thief\nThief / Illusionist\n\nDAGGERDEEP CLAN\n+1 ABILITY SCORE\n+1 Bonus to Str, Dex, Int, or Wis\nTREELINE TACTICIAN\n+ Survival or Danger Sense\n+ Danger Sense\nSTONESAIL EXPLORER\n+ Swimming\n+ Rope Use\n+ Slow Respiration or Deep Diving\nOATHBOUND DEFENDER\n+ Endurance or Armorer\n+ Weapon Proficiency\nDEEPVEIN TOUCHED\n+ Stonemasonry or Blacksmithing\n+ Mining or Engineering\nSTONEFAITH DEVOTEE\n+ Religion\n+ Dwarf Runes\n+ Chanting or Brewing\nDEEPHOLD ASCENANDANT\n+ Etiquette or Reading / Writing\n+ Heraldry\n+ 2 gems worth 80 gp each",
+      "unmapped": {
+        "traits": [
+          "Loyal",
+          "Resilient",
+          "Stubborn"
+        ],
+        "backgroundGroup": "Daggerdeep Clan"
+      }
+    },
+    {
+      "id": "goblins",
+      "name": "Goblins",
+      "source": {
+        "page": null,
+        "imageId": "Goblins_racecard.png",
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "description": "",
+      "allowedClasses": [
+        "Fighter",
+        "Cleric",
+        "Thief",
+        "Witchdoctor",
+        "Fighter / Cleric",
+        "Fighter / Thief",
+        "Witchdoctor / Thief"
+      ],
+      "abilityAdjustments": [
+        {
+          "ability": "int",
+          "modifier": 1,
+          "condition": null,
+          "sourceText": "+1 to Intelligence"
+        },
+        {
+          "ability": "con",
+          "modifier": -1,
+          "condition": null,
+          "sourceText": "-1 to Constitution"
+        }
+      ],
+      "abilityChoice": {
+        "modifier": 1,
+        "choices": [
+          "str",
+          "dex",
+          "wis",
+          "cha"
+        ],
+        "selectionCount": 1,
+        "sourceText": "+1 Bonus to Str, Dex, Wis, or Chr"
+      },
+      "features": [
+        {
+          "name": "Defence Against Large Foes",
+          "description": "Ogres, Trolls, and Giants receive -4 to hit when targeting goblins.",
+          "mechanics": [],
+          "sourceText": "Ogres, Trolls, and Giants receive -4 to hit when targeting goblins."
+        },
+        {
+          "name": "Detect Underground Construction",
+          "description": "Detect new/unusual underground construction on a 1-3 on 1d8",
+          "mechanics": [],
+          "sourceText": "Detect new/unusual underground construction on a 1-3 on 1d8"
+        },
+        {
+          "name": "Detect Stonework Hazards",
+          "description": "Detect stonework pits/traps/deadfalls on a 1-3 on 1d8",
+          "mechanics": [],
+          "sourceText": "Detect stonework pits/traps/deadfalls on a 1-3 on 1d8"
+        },
+        {
+          "name": "Detect Crystals and Gems",
+          "description": "Detect nearby crystals/gems on a 1-2 on 1d8",
+          "mechanics": [],
+          "sourceText": "Detect nearby crystals/gems on a 1-2 on 1d8"
+        },
+        {
+          "name": "Appraisal",
+          "description": "Bonus Appraisal non-weapon proficiency; +2 to checks with gems or crystals",
+          "mechanics": [],
+          "sourceText": "Bonus Appraisal non-weapon proficiency; +2 to checks with gems or crystals"
+        }
+      ],
+      "specialAbility": {
+        "name": "Grabby Lil’ Gremlins",
+        "activation": "when treasure hoard is found",
+        "duration": "",
+        "frequency": "Once per adventure",
+        "description": "Secretly tell the DM to roll 1d6. On a 1: Gain an extra share of gold, but you are CAUGHT. On a 2-4: Gain an extra share of gold, but none the wiser. On a 5: A pretty gem vanishes into your pocket. It was never there. On a 6: A shiny item disappears into your bag, and no one sees.",
+        "mechanics": [],
+        "sourceText": "ONCE PER ADVENTURE: when treasure hoard is found\nSecretly tell the DM to roll 1d6.\nOn a 1: Gain an extra share of gold, but you are CAUGHT.\nOn a 2-4: Gain an extra share of gold, but none the wiser.\nOn a 5: A pretty gem vanishes into your pocket. It was never there.\nOn a 6: A shiny item disappears into your bag, and no one sees."
+      },
+      "movement": {
+        "land": null,
+        "swim": null,
+        "fly": null,
+        "burrow": null,
+        "sourceText": ""
+      },
+      "vision": {
+        "type": "Infravision",
+        "rangeFeet": 60,
+        "sourceText": "Infravision 60′"
+      },
+      "languages": {
+        "automatic": [],
+        "bonusChoices": [],
+        "literacy": null,
+        "sourceText": ""
+      },
+      "weaponRules": [],
+      "surpriseRules": [],
+      "resistancesAndImmunities": [],
+      "restrictions": [],
+      "backgrounds": [
+        {
+          "name": "Shallows Scallywag",
+          "benefits": [
+            "Fishing",
+            "Rope Use",
+            "Weather Sense or Navigation"
+          ],
+          "description": "",
+          "sourceText": "Shallows Scallywag\n+ Fishing\n+ Rope Use\n+ Weather Sense or Navigation"
+        },
+        {
+          "name": "Underhill Highborn",
+          "benefits": [
+            "Heraldry or Etiquette",
+            "1 Bonus Language",
+            "Dancing or Singing"
+          ],
+          "description": "",
+          "sourceText": "Underhill Highborn\n+ Heraldry or Etiquette\n+ 1 Bonus Language\n+ Dancing or Singing"
+        },
+        {
+          "name": "Grublight Devoted",
+          "benefits": [
+            "Religion",
+            "Soothsaying or Herbalism"
+          ],
+          "description": "",
+          "sourceText": "Grublight Devoted\n+ Religion\n+ Soothsaying or Herbalism"
+        },
+        {
+          "name": "Glitterdeep Stray",
+          "benefits": [
+            "Gem Cutting or Mining",
+            "Direction Sense"
+          ],
+          "description": "",
+          "sourceText": "Glitterdeep Stray\n+ Gem Cutting or Mining\n+ Direction Sense"
+        },
+        {
+          "name": "Rokpokkit Wanderer",
+          "benefits": [
+            "Gaming or Drinking",
+            "Fast Talking",
+            "150 Starting Gold"
+          ],
+          "description": "",
+          "sourceText": "Rokpokkit Wanderer\n+ Gaming or Drinking\n+ Fast Talking\n+ 150 Starting Gold"
+        },
+        {
+          "name": "Gristleborn",
+          "benefits": [
+            "Weapon Proficiency",
+            "Blind-Fighting or Wild Fighting"
+          ],
+          "description": "",
+          "sourceText": "Gristleborn\n+ Weapon Proficiency\n+ Blind-Fighting or Wild Fighting"
+        }
+      ],
+      "rawOcrText": "Goblins\nCunning\nAvaricious\nResourceful\n\nRACIAL ABILITIES\nInfravision 60′\nOgres, Trolls, and Giants receive -4 to hit when targeting goblins.\nDetect new/unusual underground construction on a 1-3 on 1d8\nDetect stonework pits/traps/deadfalls on a 1-3 on 1d8\nDetect nearby crystals/gems on a 1-2 on 1d8\nBonus Appraisal non-weapon proficiency; +2 to checks with gems or crystals\n+1 to Intelligence, -1 to Constitution\n\nGRABBY LIL’ GREMLINS\nONCE PER ADVENTURE: when treasure hoard is found\nSecretly tell the DM to roll 1d6.\nOn a 1: Gain an extra share of gold, but you are CAUGHT.\nOn a 2-4: Gain an extra share of gold, but none the wiser.\nOn a 5: A pretty gem vanishes into your pocket. It was never there.\nOn a 6: A shiny item disappears into your bag, and no one sees.\n\nCHARACTER CLASSES\nFighter\nCleric\nThief\nWitchdoctor\nMulti-Class\nFighter / Cleric\nFighter / Thief\nWitchdoctor / Thief\n\nCRYSTALKIN TRIBE\nBONUS ABILITY SCORE\n+1 Bonus to Str, Dex, Wis, or Chr\nSHALLOWS SCALLYWAG\n+ Fishing\n+ Rope Use\n+ Weather Sense or Navigation\nUNDERHILL HIGHBORN\n+ Heraldry or Etiquette\n+ 1 Bonus Language\n+ Dancing or Singing\nGRUBLIGHT DEVOTED\n+ Religion\n+ Soothsaying or Herbalism\nGLITTERDEEP STRAY\n+ Gem Cutting or Mining\n+ Direction Sense\nROKPOKKIT WANDERER\n+ Gaming or Drinking\n+ Fast Talking\n+ 150 Starting Gold\nGRISTLEBORN\n+ Weapon Proficiency\n+ Blind-Fighting or Wild Fighting",
+      "unmapped": {
+        "traits": [
+          "Cunning",
+          "Avaricious",
+          "Resourceful"
+        ],
+        "backgroundGroup": "Crystalkin Tribe",
+        "abilityChoiceNote": "Printed “Chr” normalized to ability code “cha”; wording preserved in sourceText."
+      }
+    },
+    {
+      "id": "elves",
+      "name": "Elves",
+      "source": {
+        "page": null,
+        "imageId": "Elves_racecard.png",
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "description": "",
+      "allowedClasses": [
+        "Fighter",
+        "Ranger",
+        "Cleric",
+        "Druid",
+        "Thief",
+        "Mage",
+        "Specialist Mage: Diviner",
+        "Specialist Mage: Enchanter",
+        "Specialist Mage: Wild Mage",
+        "Fighter / Mage",
+        "Fighter / Thief",
+        "Mage / Thief",
+        "Fighter / Mage / Thief"
+      ],
+      "abilityAdjustments": [
+        {
+          "ability": "str",
+          "modifier": 1,
+          "condition": null,
+          "sourceText": "+1 to Strength"
+        },
+        {
+          "ability": "wis",
+          "modifier": -1,
+          "condition": null,
+          "sourceText": "-1 to Wisdom"
+        }
+      ],
+      "abilityChoice": {
+        "modifier": 1,
+        "choices": [
+          "dex",
+          "con",
+          "int",
+          "cha"
+        ],
+        "selectionCount": 1,
+        "sourceText": "+1 Bonus to Dex, Con, Int, or Chr"
+      },
+      "features": [
+        {
+          "name": "Detect Secret Doors - Passive",
+          "description": "Detect secret doors (10′ radius) - Passive   1 on 1d6",
+          "mechanics": [],
+          "sourceText": "Detect secret doors (10′ radius) - Passive   1 on 1d6"
+        },
+        {
+          "name": "Detect Secret Doors - Active",
+          "description": "Detect secret doors (10′ radius) - Active   1-3 on 1d6",
+          "mechanics": [],
+          "sourceText": "Detect secret doors (10′ radius) - Active   1-3 on 1d6"
+        }
+      ],
+      "specialAbility": {
+        "name": "Blood-Tide Frenzy",
+        "activation": "",
+        "duration": "lasts 2 rounds +1 per 3 levels",
+        "frequency": "Once per adventure",
+        "description": "You suffer a +4 AC penalty for the duration. Levels (1-7): +2 to hit/dmg with spells/melee/thrown. Levels (8+): +4 to hit/dmg with spells/melee/thrown. Enemies suffer -2 to their saving throws vs spells.",
+        "mechanics": [],
+        "sourceText": "ONCE PER ADVENTURE: lasts 2 rounds +1 per 3 levels\nYou suffer a +4 AC penalty for the duration\nLevels (1-7): +2 to hit/dmg with spells/melee/thrown\nLevels (8+): +4 to hit/dmg with spells/melee/thrown\nEnemies suffer -2 to their saving throws vs spells"
+      },
+      "movement": {
+        "land": null,
+        "swim": null,
+        "fly": null,
+        "burrow": null,
+        "sourceText": ""
+      },
+      "vision": {
+        "type": "Infravision",
+        "rangeFeet": 60,
+        "sourceText": "Infravision 60′"
+      },
+      "languages": {
+        "automatic": [],
+        "bonusChoices": [],
+        "literacy": null,
+        "sourceText": ""
+      },
+      "weaponRules": [
+        {
+          "type": "attack and damage bonus",
+          "bonus": "+1 to hit/dmg",
+          "condition": "with Axes and Throwing Weapons",
+          "sourceText": "+1 to hit/dmg with Axes and Throwing Weapons"
+        }
+      ],
+      "surpriseRules": [
+        {
+          "target": "Enemies",
+          "modifier": "-4 / -2",
+          "conditions": "Non-metal armor, in party w/ only halflings/elves/half-elves or 90′ away",
+          "sourceText": "Enemies receive -4 / -2 to their surprise rolls: (Non-metal armor, in party w/ only halflings/elves/half-elves or 90′ away)"
+        }
+      ],
+      "resistancesAndImmunities": [
+        {
+          "category": "Sleep and Charm",
+          "effect": "immunity",
+          "value": "90%",
+          "condition": "",
+          "sourceText": "90% immunity to all Sleep and Charm spells"
+        }
+      ],
+      "restrictions": [],
+      "backgrounds": [
+        {
+          "name": "Bone Reef Bred",
+          "benefits": [
+            "1 Weapon Proficiency",
+            "Navigation or Rope Use",
+            "Swimming"
+          ],
+          "description": "",
+          "sourceText": "Bone Reef Bred\n+ 1 Weapon Proficiency\n+ Navigation or Rope Use\n+ Swimming"
+        },
+        {
+          "name": "Obsidian Shaped",
+          "benefits": [
+            "Fast Talking or Bartering",
+            "Blacksmithing",
+            "150 Starting Gold"
+          ],
+          "description": "",
+          "sourceText": "Obsidian Shaped\n+ Fast Talking or Bartering\n+ Blacksmithing\n+ 150 Starting Gold"
+        },
+        {
+          "name": "Vel’Seraak Pit Caste",
+          "benefits": [
+            "Animal Handling or Training",
+            "Intimidation",
+            "Dirty Tricks"
+          ],
+          "description": "",
+          "sourceText": "Vel’Seraak Pit Caste\n+ Animal Handling or Training\n+ Intimidation\n+ Dirty Tricks"
+        },
+        {
+          "name": "Black Forest Faithful",
+          "benefits": [
+            "Herbalism or Healing",
+            "Religion"
+          ],
+          "description": "",
+          "sourceText": "Black Forest Faithful\n+ Herbalism or Healing\n+ Religion"
+        },
+        {
+          "name": "Vel’Seran Loreborn",
+          "benefits": [
+            "Ancient History or Languages",
+            "Reading / Writing",
+            "Agriculture"
+          ],
+          "description": "",
+          "sourceText": "Vel’Seran Loreborn\n+ Ancient History or Languages\n+ Reading / Writing\n+ Agriculture"
+        },
+        {
+          "name": "Deadwind Exile",
+          "benefits": [
+            "Survival or Tracking",
+            "Alertness",
+            "Hunting"
+          ],
+          "description": "",
+          "sourceText": "Deadwind Exile\n+ Survival or Tracking\n+ Alertness\n+ Hunting"
+        }
+      ],
+      "rawOcrText": "Elves\nFierce\nRuthless\nRelentless\n\nRACIAL ABILITIES\nInfravision 60′\n90% immunity to all Sleep and Charm spells\nEnemies receive -4 / -2 to their surprise rolls:\n(Non-metal armor, in party w/ only halflings/elves/half-elves or 90′ away)\n+1 to hit/dmg with Axes and Throwing Weapons\nDetect secret doors (10′ radius) - Passive   1 on 1d6\nDetect secret doors (10′ radius) - Active   1-3 on 1d6\n+1 to Strength, -1 to Wisdom\n\nBLOOD-TIDE FRENZY\nONCE PER ADVENTURE: lasts 2 rounds +1 per 3 levels\nYou suffer a +4 AC penalty for the duration\nLevels (1-7): +2 to hit/dmg with spells/melee/thrown\nLevels (8+): +4 to hit/dmg with spells/melee/thrown\nEnemies suffer -2 to their saving throws vs spells\n\nCHARACTER CLASSES\nFighter\nRanger\nCleric\nDruid\nThief\nMage\nSpecialist Mage*\n*Diviner\n*Enchanter\n*Wild Mage\nMulti-Class\nFighter / Mage*\nFighter / Thief\nMage / Thief\nFighter / Mage* / Thief\n\nOBSIDIAN EMPIRE\nBONUS ABILITY SCORE\n+1 Bonus to Dex, Con, Int, or Chr\nBONE REEF BRED\n+ 1 Weapon Proficiency\n+ Navigation or Rope Use\n+ Swimming\nOBSIDIAN SHAPED\n+ Fast Talking or Bartering\n+ Blacksmithing\n+ 150 Starting Gold\nVEL’SERAAK PIT CASTE\n+ Animal Handling or Training\n+ Intimidation\n+ Dirty Tricks\nBLACK FOREST FAITHFUL\n+ Herbalism or Healing\n+ Religion\nVEL’SERAN LOREBORN\n+ Ancient History or Languages\n+ Reading / Writing\n+ Agriculture\nDEADWIND EXILE\n+ Survival or Tracking\n+ Alertness\n+ Hunting",
+      "unmapped": {
+        "traits": [
+          "Fierce",
+          "Ruthless",
+          "Relentless"
+        ],
+        "backgroundGroup": "Obsidian Empire",
+        "abilityChoiceNote": "Printed “Chr” normalized to ability code “cha”; wording preserved in sourceText."
+      }
+    },
+    {
+      "id": "humans",
+      "name": "Humans",
+      "source": {
+        "page": null,
+        "imageId": "Humans_racecard.png",
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "description": "",
+      "allowedClasses": [
+        "Fighter",
+        "Ranger",
+        "Paladin",
+        "Cleric",
+        "Druid",
+        "Thief",
+        "Bard",
+        "Mage",
+        "Specialist Mage: All Eight Schools",
+        "Specialist Mage: Wild Mage",
+        "Dual-Class"
+      ],
+      "abilityAdjustments": [],
+      "abilityChoice": {
+        "modifier": 1,
+        "choices": [
+          "str",
+          "dex",
+          "con",
+          "int",
+          "wis",
+          "cha"
+        ],
+        "selectionCount": 1,
+        "sourceText": "+1 Bonus to any score"
+      },
+      "features": [
+        {
+          "name": "Bonus Starting Language",
+          "description": "+1 Bonus starting language",
+          "mechanics": [],
+          "sourceText": "+1 Bonus starting language"
+        },
+        {
+          "name": "Bonus Non-Weapon Proficiency",
+          "description": "+1 Bonus non-weapon proficiency",
+          "mechanics": [],
+          "sourceText": "+1 Bonus non-weapon proficiency"
+        },
+        {
+          "name": "Encounter Roll Bonus",
+          "description": "+1 Bonus to encounter rolls when encountering intelligent creatures",
+          "mechanics": [],
+          "sourceText": "+1 Bonus to encounter rolls when encountering intelligent creatures"
+        }
+      ],
+      "specialAbility": {
+        "name": "Manifest Destiny",
+        "activation": "during character creation",
+        "duration": "One time use only",
+        "frequency": "One time use only",
+        "description": "When creating your character, roll 9 sets of ability scores and keep the highest 6.",
+        "mechanics": [],
+        "sourceText": "ONE TIME USE ONLY: during character creation\nWhen creating your character, roll 9 sets of ability\nscores and keep the highest 6."
+      },
+      "movement": {
+        "land": null,
+        "swim": null,
+        "fly": null,
+        "burrow": null,
+        "sourceText": ""
+      },
+      "vision": {
+        "type": null,
+        "rangeFeet": null,
+        "sourceText": ""
+      },
+      "languages": {
+        "automatic": [],
+        "bonusChoices": [],
+        "literacy": null,
+        "sourceText": "+1 Bonus starting language"
+      },
+      "weaponRules": [],
+      "surpriseRules": [],
+      "resistancesAndImmunities": [],
+      "restrictions": [],
+      "backgrounds": [
+        {
+          "name": "Saltwind Soul",
+          "benefits": [
+            "Weather Sense or Navigation",
+            "Swimming",
+            "Rope Use"
+          ],
+          "description": "",
+          "sourceText": "Saltwind Soul\n+ Weather Sense or Navigation\n+ Swimming\n+ Rope Use"
+        },
+        {
+          "name": "Silver Halls Noble",
+          "benefits": [
+            "Etiquette or Dancing",
+            "Reading / Writing",
+            "150 starting gold"
+          ],
+          "description": "",
+          "sourceText": "Silver Halls Noble\n+ Etiquette or Dancing\n+ Reading / Writing\n+ 150 starting gold"
+        },
+        {
+          "name": "Heart of Harvestfall",
+          "benefits": [
+            "Agriculture",
+            "Animal Handling",
+            "Cooking or Brewing"
+          ],
+          "description": "",
+          "sourceText": "Heart of Harvestfall\n+ Agriculture\n+ Animal Handling\n+ Cooking or Brewing"
+        },
+        {
+          "name": "Autumn Line Vanguard",
+          "benefits": [
+            "Survival or Tracking",
+            "Fire Building"
+          ],
+          "description": "",
+          "sourceText": "Autumn Line Vanguard\n+ Survival or Tracking\n+ Fire Building"
+        },
+        {
+          "name": "Child of Flame",
+          "benefits": [
+            "Healing or Herbalism",
+            "Religion"
+          ],
+          "description": "",
+          "sourceText": "Child of Flame\n+ Healing or Herbalism\n+ Religion"
+        },
+        {
+          "name": "Oldcraft Disciple",
+          "benefits": [
+            "Ancient History or Languages",
+            "Engineering"
+          ],
+          "description": "",
+          "sourceText": "Oldcraft Disciple\n+ Ancient History or Languages\n+ Engineering"
+        }
+      ],
+      "rawOcrText": "Humans\nTenacious\nAdaptable\nDiplomatic\n\nRACIAL ABILITIES\n+1 Bonus starting language\n+1 Bonus non-weapon proficiency\n+1 Bonus to encounter rolls when encountering intelligent creatures\n\nMANIFEST DESTINY\nONE TIME USE ONLY: during character creation\nWhen creating your character, roll 9 sets of ability\nscores and keep the highest 6.\n\nCHARACTER CLASSES\nFighter\nRanger\nPaladin\nCleric\nDruid\nThief\nBard\nMage\nSpecialist Mage*\n*All Eight Schools\n*Wild Mage\nDual-Class\n\nKINGDOM OF ALTAIR\nBONUS ABILITY SCORE\n+1 Bonus to any score\nSALTWIND SOUL\n+ Weather Sense or Navigation\n+ Swimming\n+ Rope Use\nSILVER HALLS NOBLE\n+ Etiquette or Dancing\n+ Reading / Writing\n+ 150 starting gold\nHEART OF HARVESTFALL\n+ Agriculture\n+ Animal Handling\n+ Cooking or Brewing\nAUTUMN LINE VANGUARD\n+ Survival or Tracking\n+ Fire Building\nCHILD OF FLAME\n+ Healing or Herbalism\n+ Religion\nOLDCRAFT DISCIPLE\n+ Ancient History or Languages\n+ Engineering",
+      "unmapped": {
+        "traits": [
+          "Tenacious",
+          "Adaptable",
+          "Diplomatic"
+        ],
+        "backgroundGroup": "Kingdom of Altair"
+      }
+    }
+  ]
+}

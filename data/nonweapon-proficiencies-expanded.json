@@ -1,0 +1,5061 @@
+{
+  "schemaVersion": 1,
+  "dataNotes": [
+    "Transcribed from the user-provided reference image.",
+    "Null relevantAbility and checkModifier represent entries shown as NA.",
+    "Proficiencies repeated across groups are merged into one record.",
+    "PHBR11 Table 55 ranger proficiencies added; crossover-group audit remains explicit in record notes."
+  ],
+  "slotProgression": {
+    "warrior": {
+      "initial": 3,
+      "additionalEveryLevels": 3
+    },
+    "wizard": {
+      "initial": 4,
+      "additionalEveryLevels": 3
+    },
+    "priest": {
+      "initial": 4,
+      "additionalEveryLevels": 3
+    },
+    "rogue": {
+      "initial": 3,
+      "additionalEveryLevels": 4
+    }
+  },
+  "classGroupCrossovers": {
+    "fighter": [
+      "warrior",
+      "general"
+    ],
+    "paladin": [
+      "warrior",
+      "priest",
+      "general"
+    ],
+    "ranger": [
+      "warrior",
+      "wizard",
+      "general"
+    ],
+    "cleric": [
+      "priest",
+      "general"
+    ],
+    "druid": [
+      "priest",
+      "warrior",
+      "general"
+    ],
+    "mage": [
+      "wizard",
+      "general"
+    ],
+    "illusionist": [
+      "wizard",
+      "general"
+    ],
+    "thief": [
+      "rogue",
+      "general"
+    ],
+    "bard": [
+      "rogue",
+      "warrior",
+      "wizard",
+      "general"
+    ]
+  },
+  "rules": {
+    "outsideAllowedGroupAdditionalSlots": 1,
+    "additionalSlotCheckBonus": 1,
+    "checkMethod": "Roll 1d20; result succeeds when less than or equal to relevant ability plus modifiers.",
+    "natural20AlwaysFails": true
+  },
+  "proficiencies": [
+    {
+      "id": "agriculture",
+      "name": "Agriculture",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Basic farming, crops, livestock, butchering, and related chores.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Agriculture_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [
+          {
+            "source": "The Complete Barbarian's Handbook",
+            "summary": "Restricted to advanced barbarian cultures and primitive techniques."
+          }
+        ],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Intelligence/Knowledge",
+          "initialRating": 7,
+          "costCP": 3
+        },
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "ancient-history",
+      "name": "Ancient History",
+      "groups": [
+        "priest",
+        "rogue",
+        "wizard"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "animal-handling",
+      "name": "Animal Handling",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Control and calm pack animals and beasts of burden.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Animal_Handling_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Wisdom/Willpower",
+          "initialRating": 7,
+          "costCP": 3
+        },
+        "crossoverGroups": [],
+        "classInteractions": [
+          "Rangers may use Animal Empathy or Animal Handling for one attempt, not both.",
+          "Paladins automatically soothe bonded mounts."
+        ]
+      }
+    },
+    {
+      "id": "animal-lore",
+      "name": "Animal Lore",
+      "groups": [
+        "warrior"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "animal-training",
+      "name": "Animal Training",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Train a selected creature type in tasks and tricks, or tame young wild animals.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Animal_Training_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Wisdom/Willpower, Charisma/Leadership",
+          "initialRating": 5,
+          "costCP": 4
+        },
+        "crossoverGroups": [],
+        "specializationRequired": true,
+        "specializationType": "creature type",
+        "trainingRules": {
+          "simultaneousCreatures": 3,
+          "generalTask": "3 months",
+          "specificTrick": "2d6 weeks",
+          "tamingYoungWildAnimal": "1 month",
+          "maximumLearned": "2d4 tasks or tricks"
+        }
+      }
+    },
+    {
+      "id": "appraising",
+      "name": "Appraising",
+      "groups": [
+        "rogue"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "armorer",
+      "name": "Armorer",
+      "groups": [
+        "warrior"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
+    },
+    {
+      "id": "artistic-ability",
+      "name": "Artistic Ability",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Create and appraise works in one selected art form.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Artistic_Ability_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "astrology",
+      "name": "Astrology",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
+    },
+    {
+      "id": "blacksmithing",
+      "name": "Blacksmithing",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "strength",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Forge iron tools and implements, but not effective weapons or armor.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Blacksmithing_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Strength/Muscle, Intelligence/Knowledge",
+          "initialRating": 6,
+          "costCP": 4
+        },
+        "crossoverGroups": [],
+        "requirements": [
+          "forge",
+          "coal-fed fire",
+          "bellows",
+          "hammer",
+          "anvil"
+        ],
+        "relatedProficiencyBonuses": [
+          {
+            "related": "carpentry",
+            "effect": "Both are required for a durable iron-rimmed wooden wheel."
+          }
+        ]
+      }
+    },
+    {
+      "id": "blind-fighting",
+      "name": "Blind-fighting",
+      "groups": [
+        "rogue",
+        "warrior"
+      ],
+      "relevantAbility": null,
+      "checkModifier": null,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
+    },
+    {
+      "id": "bowyer-fletcher",
+      "name": "Bowyer/Fletcher",
+      "groups": [
+        "warrior"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "brewing",
+      "name": "Brewing",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Brew and age beer, wine, and other strong drink.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Brewing_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "carpentry",
+      "name": "Carpentry",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "strength",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Construct and repair wooden structures and objects.",
+      "relatedProficiencies": [
+        "blacksmithing",
+        "engineering"
+      ],
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Carpentry_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Strength/Stamina, Intelligence/Knowledge",
+          "initialRating": 7,
+          "costCP": 3
+        },
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "charioteering",
+      "name": "Charioteering",
+      "groups": [
+        "warrior"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "cobbling",
+      "name": "Cobbling",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Cobbling_(Proficiency)",
+        "verificationLevel": "metadata-only",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "cooking",
+      "name": "Cooking",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Prepare food; checks are reserved for gourmet meals or difficult ingredients.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Cooking_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "dancing",
+      "name": "Dancing",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Perform common dances and attempt unfamiliar or exceptional dances.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Dancing_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Dexterity/Balance, Charisma/Appearance",
+          "initialRating": 6,
+          "costCP": 2
+        },
+        "crossoverGroups": [],
+        "subsystemBonuses": [
+          {
+            "target": "shamanic ritual",
+            "bonus": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "direction-sense",
+      "name": "Direction Sense",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Determine travel direction after concentration and reduce wilderness loss chance.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Direction_Sense_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "secretDMCheck": true,
+        "activationTime": "1d6 rounds",
+        "criticalResults": {
+          "failedUnder20": "90 degrees wrong",
+          "natural20": "opposite direction"
+        },
+        "lostChanceReductionPercent": 5
+      }
+    },
+    {
+      "id": "disguise",
+      "name": "Disguise",
+      "groups": [
+        "rogue"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "endurance",
+      "name": "Endurance",
+      "groups": [
+        "warrior"
+      ],
+      "relevantAbility": "constitution",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
+    },
+    {
+      "id": "engineering",
+      "name": "Engineering",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -3,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
+    },
+    {
+      "id": "etiquette",
+      "name": "Etiquette",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Know proper forms of behavior and address, especially around rank and nobility.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Etiquette_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Charisma/Appearance, Wisdom/Intuition",
+          "initialRating": 8,
+          "costCP": 2
+        },
+        "crossoverGroups": [],
+        "doesNotReplaceRoleplay": true
+      }
+    },
+    {
+      "id": "fire-building",
+      "name": "Fire-building",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Start fires without flint and steel; adverse conditions require a check.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Fire-building_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Wisdom/Intuition, Intelligence/Reason",
+          "initialRating": 8,
+          "costCP": 2
+        },
+        "crossoverGroups": [],
+        "baseTimePHB": "2d20 minutes",
+        "adverseTimePHB": "3d20 minutes"
+      }
+    },
+    {
+      "id": "fishing",
+      "name": "Fishing",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Catch fish by hook, net, spear, claws, or similar methods.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Fishing_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Wisdom/Intuition, Intelligence/Knowledge",
+          "initialRating": 6,
+          "costCP": 3
+        },
+        "crossoverGroups": [],
+        "checkFrequency": "1 hour",
+        "catchFormulaPHB": "Wisdom minus roll; net triples result",
+        "systemTables": {
+          "spotQuality": {
+            "poor": "1/2 round down",
+            "average": 1,
+            "good": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "forgery",
+      "name": "Forgery",
+      "groups": [
+        "rogue"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "gaming",
+      "name": "Gaming",
+      "groups": [
+        "rogue",
+        "warrior"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "gem-cutting",
+      "name": "Gem Cutting",
+      "groups": [
+        "rogue",
+        "wizard"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
+    },
+    {
+      "id": "healing",
+      "name": "Healing",
+      "groups": [
+        "priest"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
+    },
+    {
+      "id": "heraldry",
+      "name": "Heraldry",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Identify crests, symbols, insignia, and associated people or groups.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Heraldry_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "herbalism",
+      "name": "Herbalism",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
+    },
+    {
+      "id": "hunting",
+      "name": "Hunting",
+      "groups": [
+        "warrior"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "juggling",
+      "name": "Juggling",
+      "groups": [
+        "rogue"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "jumping",
+      "name": "Jumping",
+      "groups": [
+        "rogue"
+      ],
+      "relevantAbility": "strength",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "languages-ancient",
+      "name": "Languages, Ancient",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "languages-modern",
+      "name": "Languages, Modern",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Learn one contemporary language for each purchase.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Languages,_Modern_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "advancementBenefit": {
+          "languagesPerPurchase": 1
+        }
+      }
+    },
+    {
+      "id": "leatherworking",
+      "name": "Leatherworking",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Skin animals, tan hides, and make leather clothing, armor, and equipment.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Leatherworking_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "local-history",
+      "name": "Local History",
+      "groups": [
+        "priest",
+        "rogue"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "mining",
+      "name": "Mining",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -3,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": [],
+      "description": "Survey mineral potential, site mines, and supervise mine operations.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Mining_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Wisdom/Intuition, Strength/Stamina",
+          "initialRating": 5,
+          "costCP": 5
+        },
+        "crossoverGroups": [],
+        "secretDMCheck": true,
+        "surveyTime": "at least 1 week",
+        "surveyArea": "4 square miles"
+      }
+    },
+    {
+      "id": "mountaineering",
+      "name": "Mountaineering",
+      "groups": [
+        "warrior"
+      ],
+      "relevantAbility": null,
+      "checkModifier": null,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "musical-instrument",
+      "name": "Musical Instrument",
+      "groups": [
+        "priest",
+        "rogue"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "navigation",
+      "name": "Navigation",
+      "groups": [
+        "priest",
+        "warrior",
+        "wizard"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "pottery",
+      "name": "Pottery",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Create and fire clay vessels and containers.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Pottery_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Dexterity/Aim",
+          "initialRating": 7,
+          "costCP": 3
+        },
+        "crossoverGroups": [],
+        "productionRules": {
+          "smallOrMediumPerDay": 2,
+          "largePerDay": 1,
+          "firingTime": "1 additional day",
+          "costSmall": "3 cp",
+          "costMedium": "5 cp",
+          "costLarge": "1 sp"
+        }
+      }
+    },
+    {
+      "id": "reading-lips",
+      "name": "Reading Lips",
+      "groups": [
+        "rogue"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
+    },
+    {
+      "id": "reading-writing",
+      "name": "Reading/Writing",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "religion",
+      "name": "Religion",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "riding-airborne",
+      "name": "Riding, Airborne",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": [],
+      "description": "Handle one selected type of flying mount and perform advanced mounted feats.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Riding,_Airborne_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Wisdom/Willpower, Dexterity/Balance",
+          "initialRating": 5,
+          "costCP": 4
+        },
+        "crossoverGroups": [],
+        "specializationRequired": true,
+        "specializationType": "mount species"
+      }
+    },
+    {
+      "id": "riding-land-based",
+      "name": "Riding, Land-based",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 3,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Handle one selected type of ground mount and perform advanced mounted feats.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Riding,_Land-Based_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Wisdom/Willpower, Dexterity/Balance",
+          "initialRating": 8,
+          "costCP": 2
+        },
+        "crossoverGroups": [],
+        "specializationRequired": true,
+        "specializationType": "mount species"
+      }
+    },
+    {
+      "id": "rope-use",
+      "name": "Rope Use",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Tie specialized knots, escape ropes, and gain lasso and rope-climbing benefits.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Rope_Use_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Dexterity/Aim, Wisdom/Intuition",
+          "initialRating": 8,
+          "costCP": 2
+        },
+        "crossoverGroups": [],
+        "interactionModifiers": {
+          "lassoAttack": 2,
+          "ropeClimbingPercent": 10,
+          "ropeMountaineering": 2,
+          "escapeBonds": -6
+        }
+      }
+    },
+    {
+      "id": "running",
+      "name": "Running",
+      "groups": [
+        "warrior"
+      ],
+      "relevantAbility": "constitution",
+      "checkModifier": -6,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "seamanship",
+      "name": "Seamanship",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Work as trained ship crew, operate rigging and helm, and perform routine repairs.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Seamanship_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "seamstress-tailor",
+      "name": "Seamstress/Tailor",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Design, sew, decorate, and repair clothing.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Seamstress%2FTailor_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "set-snares",
+      "name": "Set Snares",
+      "groups": [
+        "rogue",
+        "warrior"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "singing",
+      "name": "Singing",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Perform songs without a check and compose works with a successful check.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Singing_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "spellcraft",
+      "name": "Spellcraft",
+      "groups": [
+        "priest",
+        "wizard"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "stonemasonry",
+      "name": "Stonemasonry",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "strength",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Quarry, cut, lay, and carve stone and supervise laborers.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Stonemasonry_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Strength/Stamina, Wisdom/Intuition",
+          "initialRating": 5,
+          "costCP": 4
+        },
+        "crossoverGroups": [],
+        "productionRules": {
+          "wallPerDay": "10 feet long, 5 feet high, 1 foot thick",
+          "supervision": "1 mason per 5 laborers"
+        },
+        "racialBonuses": {
+          "dwarf": 2
+        }
+      }
+    },
+    {
+      "id": "survival",
+      "name": "Survival",
+      "groups": [
+        "warrior"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
+    },
+    {
+      "id": "swimming",
+      "name": "Swimming",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "strength",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Swim using the game's water-movement rules.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Swimming_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Strength/Stamina",
+          "initialRating": 9,
+          "costCP": 2
+        },
+        "crossoverGroups": [],
+        "advancementBenefit": {
+          "waterMovementPerAdditionalCP": 1
+        }
+      }
+    },
+    {
+      "id": "tightrope-walking",
+      "name": "Tightrope Walking",
+      "groups": [
+        "rogue"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "tracking",
+      "name": "Tracking",
+      "groups": [
+        "warrior"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 2,
+      "notes": []
+    },
+    {
+      "id": "tumbling",
+      "name": "Tumbling",
+      "groups": [
+        "rogue"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "ventriloquism",
+      "name": "Ventriloquism",
+      "groups": [
+        "rogue"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": []
+    },
+    {
+      "id": "weaponsmithing",
+      "name": "Weaponsmithing",
+      "groups": [
+        "warrior"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -3,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 3,
+      "notes": []
+    },
+    {
+      "id": "weather-sense",
+      "name": "Weather Sense",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Predict upcoming weather after observation.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Weather_Sense_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Wisdom/Intuition",
+          "initialRating": 7,
+          "costCP": 2
+        },
+        "crossoverGroups": [],
+        "secretDMCheck": true,
+        "predictionWindowPHB": "6 hours",
+        "checkFrequency": "once per 6 hours",
+        "observationBonus": "+1 per 6 hours; lost by sleep or distracting activity"
+      }
+    },
+    {
+      "id": "weaving",
+      "name": "Weaving",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -1,
+      "source": "AD&D 2E PHB",
+      "sourceTable": 37,
+      "slotCost": 1,
+      "notes": [],
+      "description": "Spin and weave cloth, garments, tapestries, and draperies.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Weaving_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Intelligence/Reason, Dexterity/Aim",
+          "initialRating": 6,
+          "costCP": 3
+        },
+        "crossoverGroups": [],
+        "productionRate": "2 square yards per day",
+        "requirements": [
+          "spinning apparatus",
+          "loom"
+        ],
+        "racialBonuses": {
+          "halfling": 1
+        }
+      }
+    },
+    {
+      "id": "alertness",
+      "name": "Alertness",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 1,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ],
+      "description": "Notice nearby disturbances; a successful check reduces surprise chance by 1.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Alertness_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "boating",
+      "name": "Boating",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 1,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ],
+      "description": "Pilot small craft and handle difficult maneuvers on rivers, lakes, and near shore.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Boating_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "camouflage",
+      "name": "Camouflage",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ]
+    },
+    {
+      "id": "cartography",
+      "name": "Cartography",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ],
+      "description": "Create scaled maps and estimate distances.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Cartography_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "secretDMCheck": true,
+        "criticalResults": {
+          "natural20": "serious error invalidates map",
+          "natural1": "near-perfect map in Sages & Specialists"
+        },
+        "memoryCheckPenalty": -3,
+        "distanceEstimateAutomaticAccuracyPercent": 90
+      }
+    },
+    {
+      "id": "distance-sense",
+      "name": "Distance Sense",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ],
+      "description": "Estimate distance traveled with 90 percent accuracy.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Distance_Sense_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "accuracyPercent": 90,
+        "lookbackDays": "up to character level"
+      }
+    },
+    {
+      "id": "falconry",
+      "name": "Falconry",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ]
+    },
+    {
+      "id": "foraging",
+      "name": "Foraging",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ],
+      "description": "Search wilderness for a small amount of a desired available material.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Foraging_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [
+          "warrior",
+          "rogue",
+          "general"
+        ],
+        "searchTime": "2d4 hours",
+        "relatedProficiencyBonuses": [
+          {
+            "related": "survival",
+            "effect": "Shaman can find food and water for two people in known terrain."
+          }
+        ]
+      }
+    },
+    {
+      "id": "persuasion",
+      "name": "Persuasion",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": 0,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ]
+    },
+    {
+      "id": "riding-sea-based",
+      "name": "Riding, Sea-based",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": -2,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 2,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ],
+      "description": "Handle one selected species of sea mount and perform advanced aquatic riding feats.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Riding,_Sea-based_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "initialRating": 7,
+          "costCP": 4
+        },
+        "crossoverGroups": [],
+        "specializationRequired": true,
+        "specializationType": "mount species"
+      }
+    },
+    {
+      "id": "signaling",
+      "name": "Signaling",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ],
+      "description": "Send coded long-distance messages using one selected signalling method.",
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Signaling_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": "Intelligence",
+        "checkModifierText": "+2 Dwarf; -2 Ranger; -2 Barbarian; +2 Spacefarer",
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "specializationRequired": true,
+        "specializationType": "signal method",
+        "communicationSystem": {
+          "rate": "10 words per round",
+          "bothPartiesCheck": true,
+          "natural20OrBothFail": "opposite meaning"
+        }
+      }
+    },
+    {
+      "id": "spelunking",
+      "name": "Spelunking",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ]
+    },
+    {
+      "id": "trail-marking",
+      "name": "Trail Marking",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ]
+    },
+    {
+      "id": "trail-signs",
+      "name": "Trail Signs",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -1,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ]
+    },
+    {
+      "id": "veterinary-healing",
+      "name": "Veterinary Healing",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -3,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ]
+    },
+    {
+      "id": "weaponsmithing-crude",
+      "name": "Weaponsmithing, Crude",
+      "groups": [
+        "ranger"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -3,
+      "source": "PHBR11 - The Complete Ranger's Handbook",
+      "sourceTable": 55,
+      "slotCost": 1,
+      "notes": [
+        "Ranger availability is explicit in PHBR11 Table 55; crossover groups should be audited from each proficiency description before broader class-group integration."
+      ]
+    },
+    {
+      "id": "animal-husbandry-dragon247",
+      "name": "Animal Husbandry",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "Dragon Magazine #247",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": null,
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Animal_Husbandry_(Proficiency)",
+        "verificationLevel": "metadata-only",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "animal-rending",
+      "name": "Animal Rending",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 2,
+      "source": "The Complete Barbarian's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Skin and butcher carcasses for maximum food and undamaged animal products.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Animal_Rending_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [
+          "warrior"
+        ],
+        "requirements": [
+          "appropriate tools"
+        ],
+        "systemTables": {
+          "rationsByAnimalSize": {
+            "S": "1-2/2-3",
+            "M": "3-4/4-6",
+            "L": "5-8/-12",
+            "H": "9-15/15-25"
+          }
+        }
+      }
+    },
+    {
+      "id": "begging",
+      "name": "Begging",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": null,
+      "source": "The Complete Thief's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Pose as a beggar and seek minimal daily subsistence.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Begging_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": "Special",
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "automaticTasks": [
+          "pose convincingly as a beggar"
+        ],
+        "economicRules": {
+          "localeModifiers": {
+            "wilderness": "automatic failure",
+            "countryside": -7,
+            "hamletOrVillage": -5,
+            "town": -2,
+            "city": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "boat-piloting-posp",
+      "name": "Boat Piloting",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": null,
+      "checkModifier": null,
+      "source": "Player's Option: Skills & Powers",
+      "sourceTable": null,
+      "slotCost": null,
+      "description": "Handle small boats in difficult water and basic single-masted sailing.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [
+        "boating"
+      ],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Boat_Piloting_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": "N/A",
+        "checkModifierText": "N/A",
+        "slotCostText": "N/A",
+        "skillsAndPowers": {
+          "relevantAbilityText": "Strength/Muscle, Intelligence/Reason",
+          "initialRating": 6,
+          "costCP": 2
+        },
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "boatwright",
+      "name": "Boatwright",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "The Complete Book of Dwarves",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Construct watercraft up to 60 feet long.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Boatwright_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "constructionRules": {
+          "maximumLengthFeet": 60,
+          "baseTime": "1 week per foot",
+          "maximumSkilledWorkers": "1 per 5 feet",
+          "twoUnskilledEqualOneSkilled": true
+        }
+      }
+    },
+    {
+      "id": "chaos-shaping",
+      "name": "Chaos Shaping",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "The Planewalker's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Allows a trained anarch to maintain shaped Limbo terrain subconsciously.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [
+        "anarch ability"
+      ],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Chaos_Shaping_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "systemTables": {
+          "terrainMaintenance": {
+            "1-4": "10 feet per point; simple",
+            "5-10": "10 yards per point; complex",
+            "11-18": "100 yards per point; artificial",
+            "19+": "1 mile per point; includes native animals"
+          }
+        }
+      }
+    },
+    {
+      "id": "cheesemaking",
+      "name": "Cheesemaking",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "The Complete Book of Humanoids",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Create cheese from soured milk curds.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Cheesemaking_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "chitinworking",
+      "name": "Chitinworking",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": null,
+      "source": "Thri-Kreen of Athas",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Decorate and shape growing kreen chitin.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [
+        "artistic-ability"
+      ],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Chitinworking_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": "?",
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "city-familiarity",
+      "name": "City Familiarity",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "The Complete Ninja's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Detailed knowledge of one selected city and its people, streets, and organizations.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [
+        "Residence in the city for at least three months; DM permission except for hometown."
+      ],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/City_Familiarity_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "specializationRequired": true,
+        "specializationType": "specific city"
+      }
+    },
+    {
+      "id": "clothesmaking-crude",
+      "name": "Clothesmaking, Crude",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -1,
+      "source": "The Complete Barbarian's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Create simple functional garments from natural materials.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Clothesmaking,_Crude_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "contact-posp",
+      "name": "Contact",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "Player's Option: Skills & Powers",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Provides access to psionic attack forms; psionicists receive it automatically.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Contact_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "progressionRules": {
+          "psionicist": {
+            "automaticGranted": true,
+            "consumesSlot": false
+          },
+          "wildTalent": {
+            "consumesSlot": true,
+            "maximumAttackForms": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "curtain-cognizance",
+      "name": "Curtain Cognizance",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "A Guide to the Ethereal Plane",
+      "sourceTable": null,
+      "slotCost": 2,
+      "description": "Read the Wall of Color to chart a route near a desired destination.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Curtain_Cognizance_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "activationTime": "1 turn",
+        "travelTime": "1d10x10 hours",
+        "criticalResults": {
+          "natural1": "within 1 mile of target",
+          "natural20": "confidently travels in random direction"
+        },
+        "retryDelay": "48 hours"
+      }
+    },
+    {
+      "id": "danger-sense",
+      "name": "Danger Sense",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 1,
+      "source": "The Complete Book of Humanoids",
+      "sourceTable": null,
+      "slotCost": 2,
+      "description": "Receive warning of nearby traps, hazards, or ambushes.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Danger_Sense_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [
+          "general"
+        ],
+        "secretDMCheck": true,
+        "warningLeadTime": "approximately 1 round"
+      }
+    },
+    {
+      "id": "dark-lore",
+      "name": "Dark Lore",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -3,
+      "source": "Dragon Magazine #198",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Knowledge of supernatural evil creatures, wards, weaknesses, and customs.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Dark_Lore_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "interactionModifiers": {
+          "bribery": 2,
+          "haggling": 2,
+          "reaction": 2
+        },
+        "classInteractions": [
+          "Priest gains minor Protection sphere access, or major if already minor."
+        ],
+        "exclusions": [
+          "genies"
+        ]
+      }
+    },
+    {
+      "id": "debate-cow",
+      "name": "Debate",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": -1,
+      "source": "Campaign Option: Council of Wyrms",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Conduct formal arguments and improve reactions through successful debate.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Debate_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "debate-aa",
+      "name": "Debate",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "Arabian Adventures",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Engage others in absorbing formal argument and gain reaction benefits.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Debate_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "deep-diving-posp",
+      "name": "Deep Diving",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": null,
+      "checkModifier": null,
+      "source": "Player's Option: Skills & Powers",
+      "sourceTable": null,
+      "slotCost": null,
+      "description": "Descend and surface faster in water and hold breath longer.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Deep_Diving_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": "N/A",
+        "checkModifierText": "N/A",
+        "slotCostText": "N/A",
+        "skillsAndPowers": {
+          "relevantAbilityText": "Dexterity/Balance, Constitution/Health",
+          "initialRating": 5,
+          "costCP": 2
+        },
+        "crossoverGroups": [],
+        "movementModifiers": {
+          "descentFeetPerRound": 30,
+          "ascentFeetPerRound": 30
+        },
+        "breathHolding": "2/3 Constitution score in rounds"
+      }
+    },
+    {
+      "id": "planar-direction-sense",
+      "name": "Planar Direction Sense",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 1,
+      "source": "The Planewalker's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Navigate planar locations by landmarks where compass directions do not apply.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Planar_Direction_Sense_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "dragon-lore",
+      "name": "Dragon Lore",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -4,
+      "source": "Dragon Magazine #230",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Identify dragon evidence, approximate age category, types, and common lair traps.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Dragon_Lore_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "drinking",
+      "name": "Drinking",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "The Complete Book of Humanoids",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Consume twice the normal drink and delay dehydration or alcohol effects.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Drinking_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "sourceAbilityText": "Dexterity",
+        "consumptionMultiplier": 2,
+        "durationBeforeAdverseEffectsMultiplier": 2
+      }
+    },
+    {
+      "id": "dwarf-runes",
+      "name": "Dwarf Runes",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 2,
+      "source": "The Complete Book of Dwarves",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Read and use conceptual dwarven runes; all dwarves know them at no cost.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Dwarf_Runes_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "automaticForRace": [
+          "dwarf"
+        ],
+        "consumesSlotForAutomaticRace": false
+      }
+    },
+    {
+      "id": "eating",
+      "name": "Eating",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "constitution",
+      "checkModifier": 0,
+      "source": "The Complete Book of Humanoids",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Consume twice the normal food and go twice as long before hunger effects.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Eating_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "ethereal-sight",
+      "name": "Ethereal Sight",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "A Guide to the Ethereal Plane",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Extend visual range on the Ethereal Plane for 10 rounds.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Ethereal_Sight_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "duration": "10 rounds",
+        "cooldown": "1 turn"
+      }
+    },
+    {
+      "id": "excavation",
+      "name": "Excavation",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "Dragon Magazine #241",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Excavate sites carefully while preserving finds and structural evidence.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Excavation_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "feign-magic",
+      "name": "Feign Magic",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -1,
+      "source": "Dragon Magazine #255",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Convincingly imitate spellcasting to conceal or misdirect the source of an effect.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Feign_Magic_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "interactionModifiers": {
+          "watcherNotSpellcaster": -1,
+          "watcherHasSpellcraft": 2,
+          "watcherKnowsFourLanguages": 1,
+          "userHasSpellcraft": -2
+        }
+      }
+    },
+    {
+      "id": "flintworking",
+      "name": "Flintworking",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 1,
+      "source": "Dragon Magazine #265",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Create flint or stone tools and weapons.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Flintworking_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "craftTime": "15 minutes per arrowhead or axe",
+        "weaponEffects": {
+          "breakChanceOnMaximumDamage": "1-in-6",
+          "damagePenalty": "-1 or weapon description"
+        }
+      }
+    },
+    {
+      "id": "folklore",
+      "name": "Folklore",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": 0,
+      "source": "Warriors & Priests of the Realms",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Know myths, legends, rumors, religion, and culture of one selected region.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Folklore_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "specializationRequired": true,
+        "specializationType": "geographic area",
+        "relatedProficiencyBonuses": [
+          {
+            "related": "local-history",
+            "bonus": 1,
+            "condition": "same geographic area; reciprocal"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fungi-recognition",
+      "name": "Fungi Recognition",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 3,
+      "source": "The Complete Book of Dwarves",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Distinguish edible underground fungi from poisonous varieties.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Fungi_Recognition_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "automaticConditions": "10 minutes examination in good light",
+        "checkRequiredConditions": [
+          "poor visibility",
+          "hasty decision"
+        ]
+      }
+    },
+    {
+      "id": "haggling",
+      "name": "Haggling",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "Arabian Adventures",
+      "sourceTable": null,
+      "slotCost": 2,
+      "description": "Resolve bargaining between asking, normal, and bargain prices.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Haggling_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "opposedCheck": true,
+        "merchantDefaultWisdom": 14,
+        "economicRules": {
+          "unlistedItem": {
+            "askingPrice": "normal +50%",
+            "bargainPrice": "normal -25%"
+          }
+        }
+      }
+    },
+    {
+      "id": "hands-off-mount-control",
+      "name": "Hands-Off Mount Control",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "Dragon Magazine #260",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Train and control a mount without using the hands.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [
+        "riding-airborne",
+        "riding-land-based"
+      ],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Hands-Off_Mount_Control_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "trainingTime": "2d4+2 weeks",
+        "requirements": [
+          "specific trained mount of animal intelligence or better"
+        ]
+      }
+    },
+    {
+      "id": "heraldry-space",
+      "name": "Heraldry, Space",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "The Complete Spacefarer's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Identify spacefaring ships, pennants, races, and captains.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Heraldry,_Space_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "herding",
+      "name": "Herding",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 1,
+      "source": "Dragon Magazine #247",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Maintain, move, breed, and live from domestic herd animals.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Herding_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "hiding",
+      "name": "Hiding",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -1,
+      "source": "The Complete Book of Humanoids",
+      "sourceTable": null,
+      "slotCost": 2,
+      "description": "Select natural concealment and remain motionless and silent to avoid sight.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [
+        "Requires visual cover.",
+        "Does not affect nonvisual senses."
+      ],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Hiding_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "requiresStillness": true,
+        "requiresSilence": true,
+        "automaticForTerrain": [
+          "barbarian homeland terrain"
+        ]
+      }
+    },
+    {
+      "id": "local-dwarf-history",
+      "name": "Local Dwarf History",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": 2,
+      "source": "The Complete Book of Dwarves",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Know dwarven clans, lineages, strongholds, battles, and migrations.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Local_Dwarf_History_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "mental-armor-posp",
+      "name": "Mental Armor",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -2,
+      "source": "Player's Option: Skills & Powers",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Permanently improve Mental Armor Class after successful activation.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Mental_Armor_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "advancementBenefit": {
+          "nonPsionicistMAC": 1,
+          "psionicistMAC": 2
+        },
+        "oncePerLevel": true,
+        "retryDelayOnFailure": "24 hours"
+      }
+    },
+    {
+      "id": "metalworking",
+      "name": "Metalworking",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "Arabian Adventures",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Create artistic and useful objects from soft metals.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Metalworking_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "relatedProficiencyBonuses": [
+          {
+            "related": "artistic-ability",
+            "bonus": 1
+          }
+        ],
+        "repairRules": {
+          "metalArmor": true,
+          "failureDestroysItem": true
+        }
+      }
+    },
+    {
+      "id": "nutriment",
+      "name": "Nutriment",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -2,
+      "source": "A Guide to the Ethereal Plane",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Draw one meal of bland nourishment from ethereal mists.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Nutriment_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "resourceConversion": {
+          "success": "one meal"
+        },
+        "cumulativePenaltyRules": {
+          "everyThreeConsecutiveUses": -1
+        }
+      }
+    },
+    {
+      "id": "observation",
+      "name": "Observation",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "The Complete Spacefarer's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Notice subtle irregularities with any sense and improve secret-door detection in some variants.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Observation_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [
+          {
+            "source": "The Complete Book of Humanoids",
+            "secretDoorChance": "2-in-6",
+            "concealedDoorChance": "3-in-6"
+          },
+          {
+            "source": "Council of Wyrms",
+            "dragonSensesBonusPercent": 10
+          }
+        ],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "secretDMCheck": true
+      }
+    },
+    {
+      "id": "orienteering-posp",
+      "name": "Orienteering",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": null,
+      "checkModifier": null,
+      "source": "Player's Option: Skills & Powers",
+      "sourceTable": null,
+      "slotCost": null,
+      "description": "Keep bearings in trackless terrain when sky or compass is available.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Orienteering_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": "N/A",
+        "checkModifierText": "N/A",
+        "slotCostText": "N/A",
+        "skillsAndPowers": {
+          "relevantAbilityText": "Intelligence/Knowledge, Wisdom/Intuition",
+          "initialRating": 7,
+          "costCP": 3
+        },
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "painting-posp",
+      "name": "Painting",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": null,
+      "checkModifier": null,
+      "source": "Player's Option: Skills & Powers",
+      "sourceTable": null,
+      "slotCost": null,
+      "description": "Render realistic images with knowledge of perspective, shading, and composition.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Painting_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": "N/A",
+        "checkModifierText": "N/A",
+        "slotCostText": "N/A",
+        "skillsAndPowers": {
+          "relevantAbilityText": "Dexterity/Aim, Wisdom/Intuition",
+          "initialRating": 7,
+          "costCP": 2
+        },
+        "crossoverGroups": [],
+        "traitBonuses": {
+          "artisticTalent": 2
+        }
+      }
+    },
+    {
+      "id": "pilot-airship",
+      "name": "Pilot Airship",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": -3,
+      "source": "Dragon Magazine #244",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Crew, steer, and maintain a Xan Kraban airship.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Pilot_Airship_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "plane-knowledge",
+      "name": "Plane Knowledge",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "Dragon Magazine #213",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Know hazards, denizens, refuges, gates, and destinations of one selected plane.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Plane_Knowledge_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "specializationRequired": true,
+        "specializationType": "plane",
+        "trainingTime": "about 1 month general; 4-8 months layer expertise",
+        "advancementBenefit": {
+          "extraSlot": "layer specialization"
+        }
+      }
+    },
+    {
+      "id": "planar-sense",
+      "name": "Planar Sense",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -1,
+      "source": "The Planewalker's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Predict imminent planar environmental changes up to one hour ahead.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Planar_Sense_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "planar-survival",
+      "name": "Planar Survival",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "The Planewalker's Handbook",
+      "sourceTable": null,
+      "slotCost": 2,
+      "description": "Assess established environmental hazards on one selected plane.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [
+        "Covers established environmental hazards, not planar denizens."
+      ],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Planar_Survival_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "specializationRequired": true,
+        "specializationType": "plane"
+      }
+    },
+    {
+      "id": "poetry",
+      "name": "Poetry",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "The Complete Bard's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Recite, judge, memorize, and compose poetry.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Poetry_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [
+          {
+            "source": "The Complete Paladin's Handbook",
+            "specialization": "lyric or narrative; two slots for both",
+            "titheSubstitutionValue": "3d20 gp"
+          }
+        ],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "portal-feel",
+      "name": "Portal Feel",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": null,
+      "source": "The Planewalker's Handbook",
+      "sourceTable": null,
+      "slotCost": 2,
+      "description": "Sense immediate portal danger or determine the destination plane.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Portal_Feel_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": "-3 or -5",
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "checkModes": [
+          {
+            "mode": "immediate safety",
+            "modifier": -3
+          },
+          {
+            "mode": "destination",
+            "modifier": -5
+          }
+        ]
+      }
+    },
+    {
+      "id": "psychic-defense",
+      "name": "Psychic Defense",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": -2,
+      "source": "The Will and the Way",
+      "sourceTable": null,
+      "slotCost": 2,
+      "description": "Attempt to block individual telepathic contact attacks.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [
+        "Cannot cast spells or initiate wild talents while defending."
+      ],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Psychic_Defense_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "cumulativePenaltyRules": {
+          "eachSubsequentMentalAttack": -4
+        },
+        "attackRollPenaltyWhileDefending": -4
+      }
+    },
+    {
+      "id": "realmspace-lore",
+      "name": "Realmspace Lore",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "Demihumans of the Realms",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "General spelljamming knowledge and special knowledge of Realmspace.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Realmspace_Lore_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "relic-dating",
+      "name": "Relic Dating",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -2,
+      "source": "Dragon Magazine #241",
+      "sourceTable": null,
+      "slotCost": 2,
+      "description": "Estimate an object's age and detect some artificial aging.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [
+        "ancient-history"
+      ],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Relic_Dating_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "automaticConditions": "Objects made within last 20 years unless artificially aged."
+      }
+    },
+    {
+      "id": "sculpting-posp",
+      "name": "Sculpting",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": null,
+      "checkModifier": null,
+      "source": "Player's Option: Skills & Powers",
+      "sourceTable": null,
+      "slotCost": null,
+      "description": "Create realistic objects from stone and clay.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Sculpting_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": "N/A",
+        "checkModifierText": "N/A",
+        "slotCostText": "N/A",
+        "skillsAndPowers": {
+          "relevantAbilityText": "Dexterity/Aim, Wisdom/Intuition",
+          "initialRating": 5,
+          "costCP": 2
+        },
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "shipwright",
+      "name": "Shipwright",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 1,
+      "source": "The Complete Spacefarer's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Design, build, maintain, and repair ships including spelljamming vessels.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Shipwright_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "sign-language",
+      "name": "Sign Language",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": null,
+      "checkModifier": null,
+      "source": "Multiple sources",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Communicate silently using visible hand signs.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Sign_Language_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": "Intelligence - Dwarf; Dexterity - Barbarian",
+        "checkModifierText": "+2 Dwarf; +0 Barbarian",
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "communicationSystem": {
+          "requiresLineOfSight": true,
+          "participantChecks": true,
+          "natural20": "opposite meaning"
+        }
+      }
+    },
+    {
+      "id": "slow-respiration",
+      "name": "Slow Respiration",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": null,
+      "checkModifier": 0,
+      "source": "The Complete Book of Dwarves",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Enter a trance that reduces air consumption to one tenth normal.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Slow_Respiration_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": "N/A (Dwarf); Wisdom (Spacefarer)",
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "activationTime": "1 turn",
+        "airConsumptionMultiplier": 0.1,
+        "tranceRequired": true
+      }
+    },
+    {
+      "id": "smelting",
+      "name": "Smelting",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "The Complete Book of Dwarves",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Operate a smelter to process mined ore.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Smelting_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "sound-analysis",
+      "name": "Sound Analysis",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "wisdom",
+      "checkModifier": 0,
+      "source": "The Complete Book of Dwarves",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Analyze echoes to estimate underground dimensions and passage details.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [
+        "User cannot retry same area after failure.",
+        "Noise alerts nearby creatures."
+      ],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Sound_Analysis_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "requirements": [
+          "absolute silence",
+          "sharp staccato sound"
+        ],
+        "accuracy": "plus or minus 25 percent",
+        "criticalResults": {
+          "check5OrLess": "reveals branches, corridor form, and water"
+        }
+      }
+    },
+    {
+      "id": "spacemanship",
+      "name": "Spacemanship",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 1,
+      "source": "The Complete Spacefarer's Handbook",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Serve as trained crew aboard a spelljamming vessel.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Spacemanship_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "statecraft",
+      "name": "Statecraft",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": null,
+      "checkModifier": null,
+      "source": "Charlemagne's Paladins Campaign Sourcebook",
+      "sourceTable": null,
+      "slotCost": null,
+      "description": "Understand politics, diplomacy, foreign affairs, and state personalities.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Statecraft_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": "Unknown",
+        "checkModifierText": "Unknown",
+        "slotCostText": "Unknown",
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "storytelling",
+      "name": "Storytelling",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": 0,
+      "source": "Dragon Magazine #245",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Entertain, educate, or recall legends through storytelling.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Storytelling_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {
+          "relevantAbilityText": "Charisma/Leadership",
+          "initialRating": 6,
+          "costCP": 5
+        },
+        "crossoverGroups": [],
+        "durationOfReactionBenefit": "24 hours",
+        "reactionModifier": -1
+      }
+    },
+    {
+      "id": "survival-underground",
+      "name": "Survival, Underground",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "The Complete Book of Dwarves",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Assess underground food sources and structural safety.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Survival,_Underground_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "tribal-lore",
+      "name": "Tribal Lore",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 1,
+      "source": "Dragon Magazine #247",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Know genealogies, legends, and laws of one selected tribe.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Tribal_Lore_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "specializationRequired": true,
+        "specializationType": "tribe"
+      }
+    },
+    {
+      "id": "underground-navigation",
+      "name": "Underground Navigation",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "The Complete Book of Dwarves",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Determine underground direction, shortest route to the surface, and poisonous gas pockets.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Underground_Navigation_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "underwater-communication",
+      "name": "Underwater Communication",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": -3,
+      "source": "Sea of Fallen Stars",
+      "sourceTable": null,
+      "slotCost": 2,
+      "description": "Communicate underwater; some priests of water powers receive it after extended time in the depths.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Underwater_Communication_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "automaticForClassCondition": "Surface-world priests of water powers after more than a tenday in the depths."
+      }
+    },
+    {
+      "id": "voice-mimicry",
+      "name": "Voice Mimicry",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "charisma",
+      "checkModifier": null,
+      "source": "The Complete Book of Humanoids",
+      "sourceTable": null,
+      "slotCost": 2,
+      "description": "Imitate accents and familiar individual voices.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [
+        "disguise"
+      ],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Voice_Mimicry_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": "Special",
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": [],
+        "interactionModifiers": {
+          "nativeAccentListener": 2,
+          "acquaintance": 0,
+          "friend": -2,
+          "closeFriend": -5,
+          "extremelyClose": -7,
+          "successfulDisguiseFirst": 5,
+          "successfulVoiceFirstToDisguise": 1
+        }
+      }
+    },
+    {
+      "id": "wind-sailing",
+      "name": "Wind-Sailing",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "dexterity",
+      "checkModifier": 0,
+      "source": "Earth, Air, Fire and Water",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Build and control wind-powered gliders and carts without granting navigation.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Wind-Sailing_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": null,
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    },
+    {
+      "id": "winemaking",
+      "name": "Winemaking",
+      "groups": [
+        "general"
+      ],
+      "relevantAbility": "intelligence",
+      "checkModifier": 0,
+      "source": "The Complete Book of Humanoids",
+      "sourceTable": null,
+      "slotCost": 1,
+      "description": "Produce wine reliably; checks are required for exceptional vintages.",
+      "benefit": null,
+      "checkProcedure": null,
+      "successEffect": null,
+      "failureEffect": null,
+      "specialRules": [],
+      "prerequisites": [],
+      "synergies": [],
+      "restrictions": [],
+      "relatedProficiencies": [],
+      "sourceText": null,
+      "sourceLocation": {
+        "page": null,
+        "table": null,
+        "ocrLineRange": [
+          null,
+          null
+        ]
+      },
+      "notes": [],
+      "unmapped": {
+        "sourceUrl": "https://adnd2e.fandom.com/wiki/Winemaking_(Proficiency)",
+        "verificationLevel": "individual-page",
+        "sourceVariants": [],
+        "abilityText": "Inteligence",
+        "checkModifierText": null,
+        "slotCostText": null,
+        "skillsAndPowers": {},
+        "crossoverGroups": []
+      }
+    }
+  ]
+}
