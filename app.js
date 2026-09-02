@@ -112,6 +112,7 @@ const FIXED = {
     languages: [],
     languageTracking: { availableBonusLanguages: null },
     nwpSettings: { autoCalculate: true, exemptBonusProficiencies: true, availableSlots: 0 },
+    trackingCalculator: { activeTrackingRow: null, sessions: {} },
     rangerThiefSettings: { environment: 'wilderness', rounding: 'floor', optionalHeavyArmor: false, allowHeavyArmor: false, other: { hideInShadows: 0, moveSilently: 0 }, manualOverrides: { hideInShadows: null, moveSilently: null } },
     rangerThiefCalculations: {},
     adviserSettings: { enabled: true, dismissed: false, currentAdviceId: null },
@@ -155,6 +156,7 @@ let classAbilityRecords = [];
 let classAbilityValidation = [];
 let weaponProficiencyCatalog = [];
 let proficiencyRules = {};
+let trackingProficiencyRule = null;
 let languageCatalog = [];
 let languageRecords = [];
 let languageValidation = [];
@@ -227,8 +229,8 @@ function normalize(x = {}) {
         id: item.id ?? '',
         name: typeof item.name === 'string' ? item.name : '',
         slotCost: item.slotCost ?? item.slots ?? 1,
-        acquisition: ['purchased', 'class', 'kit', 'race', 'language', 'campaign', 'custom'].includes(item.acquisition) ? item.acquisition : 'purchased',
-        usesNwpSlot: item.usesNwpSlot === false || item.usesNwpSlot === 'false' ? false : item.usesNwpSlot ?? !['class', 'kit', 'race', 'language', 'campaign'].includes(item.acquisition),
+        acquisition: ['purchased', 'class', 'kit', 'race', 'language', 'campaign', 'ranger-granted', 'barbarian-homeland', 'barbarian-expertise', 'custom'].includes(item.acquisition) ? item.acquisition : 'purchased',
+        usesNwpSlot: item.usesNwpSlot === false || item.usesNwpSlot === 'false' ? false : item.usesNwpSlot ?? !['class', 'kit', 'race', 'language', 'campaign', 'ranger-granted', 'barbarian-homeland'].includes(item.acquisition),
         exemptFromNwpLimits: item.exemptFromNwpLimits === true || item.exemptFromNwpLimits === 'true',
         ability: item.ability ?? item.score ?? '',
         checkModifier: item.checkModifier ?? null,
@@ -246,6 +248,9 @@ function normalize(x = {}) {
     d.languages = Array.isArray(x.languages) && x.languages.length ? x.languages.map(language => ({ id: typeof language.id === 'string' ? language.id : '', name: typeof language.name === 'string' ? language.name : '', category: language.category ?? null, sourceType: ['native', 'racial', 'bonus', 'class', 'kit', 'campaign', 'magic'].includes(language.sourceType) ? language.sourceType : language.source === 'racial' ? 'racial' : 'native', isAutomatic: language.isAutomatic === true, speaks: language.speaks !== false, reads: language.reads === true, writes: language.writes === true, usesLanguageSlot: language.usesLanguageSlot === true, countsAgainstLanguageLimit: language.countsAgainstLanguageLimit === true, notes: language.notes ?? '' })) : d.languages;
     d.languageTracking = { ...d.languageTracking, ...(x.languageTracking || {}) };
     d.nwpSettings = { ...d.nwpSettings, ...(x.nwpSettings || {}) };
+    const savedTracking = x.trackingCalculator && typeof x.trackingCalculator === 'object' ? x.trackingCalculator : {};
+    d.trackingCalculator = { activeTrackingRow: Number.isInteger(savedTracking.activeTrackingRow) ? savedTracking.activeTrackingRow : null, sessions: {} };
+    if (savedTracking.sessions && typeof savedTracking.sessions === 'object') Object.entries(savedTracking.sessions).forEach(([key, session]) => { d.trackingCalculator.sessions[key] = TrackingCalculator.normalize(session); });
     d.rangerThiefSettings = { ...d.rangerThiefSettings, ...(x.rangerThiefSettings || {}), other: { ...d.rangerThiefSettings.other, ...(x.rangerThiefSettings?.other || {}) }, manualOverrides: { ...d.rangerThiefSettings.manualOverrides, ...(x.rangerThiefSettings?.manualOverrides || {}) } };
     d.rangerThiefCalculations = x.rangerThiefCalculations && typeof x.rangerThiefCalculations === 'object' ? x.rangerThiefCalculations : {};
     d.adviserSettings = { ...d.adviserSettings, ...(x.adviserSettings || {}), enabled: x.adviserSettings?.enabled !== false, dismissed: x.adviserSettings?.dismissed === true, currentAdviceId: typeof x.adviserSettings?.currentAdviceId === 'string' ? x.adviserSettings.currentAdviceId : null };
@@ -1072,6 +1077,17 @@ async function loadProficiencyRules() {
         proficiencyRules = await response.json();
     } catch {
         proficiencyRules = {};
+    }
+}
+
+async function loadTrackingProficiencyRule() {
+    try {
+        const response = await fetch('data/tracking-proficiency-calculator.json');
+        if (!response.ok) throw new Error('Tracking proficiency rule unavailable');
+        const rule = await response.json();
+        trackingProficiencyRule = rule?.id === 'tracking-proficiency-calculator' && rule.recordType === 'proficiency-rule' ? rule : null;
+    } catch {
+        trackingProficiencyRule = null;
     }
 }
 
@@ -2802,9 +2818,10 @@ function setupClassAbilitiesSection() {
                     calculated.title = calculation.available ? `Base ${calculation.base}; race ${calculation.modifiers.race}; DEX ${calculation.modifiers.dexterity}; kit ${calculation.modifiers.kit}; armor ${calculation.modifiers.armor}; other ${calculation.modifiers.other}; environment x${calculation.environmentMultiplier}.` : calculation.unavailableReason;
                 valueCell.prepend(calculated);
             });
-            thiefGroup.append(panel);
+            section.querySelector('.class-abilities-grid')?.append(panel);
         }
     }
+    setupTrackingCalculator(section);
     updateClassAbilitiesVisibility();
 }
 
@@ -3617,9 +3634,9 @@ function inventoryMarkup() {
     return `<div class="inventory-controls"><label>Search catalogue<input id="inventory-search" type="search" placeholder="Search name or alias"></label><label>Category<select id="inventory-category"><option value="">All categories</option>${categories.map(category => `<option value="${esc(category)}">${esc(category)}</option>`).join('')}</select></label></div>${validation}<div id="inventory-results" class="inventory-results" aria-live="polite"></div><div class="tableWrap"><table class="inventory-table"><thead><tr><th>Item</th><th>Category</th><th>Subcategory</th><th>Qty</th><th>Status</th><th>Weight lb</th><th>Value</th><th>Notes</th><th></th></tr></thead><tbody>${data.inventory.map((item, index) => { const record = catalogueItem(item); return `<tr><td><input list="equipment-options" data-array="inventory" data-index="${index}" data-key="item" value="${esc(itemName(item))}" placeholder="Custom item"><input type="hidden" data-array="inventory" data-index="${index}" data-key="itemId" value="${esc(item.itemId)}"></td><td>${esc(record?.category || 'custom')}</td><td>${esc(record?.subcategory || '-')}</td><td><input type="number" min="0" step="1" data-array="inventory" data-index="${index}" data-key="quantity" value="${esc(item.quantity)}"></td><td><select data-array="inventory" data-index="${index}" data-key="location"><option value="carried"${item.location === 'carried' ? ' selected' : ''}>Carried</option><option value="stored"${item.location === 'stored' ? ' selected' : ''}>Stored</option></select></td><td><input type="number" min="0" step="0.01" data-array="inventory" data-index="${index}" data-key="weightOverride" value="${item.weightOverride ?? ''}" placeholder="${itemWeight(item)}"></td><td>${esc(formatCost(record?.cost))}</td><td><input data-array="inventory" data-index="${index}" data-key="notes" value="${esc(item.notes)}"></td><td><button class="remove" data-remove="inventory" data-index="${index}" aria-label="Remove item">×</button></td></tr>`; }).join('')}</tbody></table></div><datalist id="equipment-options">${equipmentCatalogue.map(item => `<option value="${esc(item.name)}">${esc(item.category || '')}</option>`).join('')}</datalist><button class="add" data-add="inventory">Add custom item</button>`;
 }
 
-const nwpAcquisitionLabels = { purchased: 'Purchased', class: 'Class Bonuses', kit: 'Kit Bonuses', race: 'Racial Bonuses', language: 'Languages', campaign: 'Campaign Awards', custom: 'Custom' };
+const nwpAcquisitionLabels = { purchased: 'Purchased', class: 'Class Bonuses', kit: 'Kit Bonuses', race: 'Racial Bonuses', language: 'Languages', campaign: 'Campaign Awards', 'ranger-granted': 'Ranger Outdoor Grant', 'barbarian-homeland': 'Barbarian Homeland Grant', 'barbarian-expertise': 'Barbarian Two-Slot Expertise', custom: 'Custom' };
 function nwpUsesSlot(item) {
-    return item.usesNwpSlot !== false && item.exemptFromNwpLimits !== true && !(data.nwpSettings.exemptBonusProficiencies && ['class', 'kit', 'race', 'language', 'campaign'].includes(item.acquisition));
+    return item.usesNwpSlot !== false && item.exemptFromNwpLimits !== true && !['ranger-granted', 'barbarian-homeland'].includes(item.acquisition) && !(data.nwpSettings.exemptBonusProficiencies && ['class', 'kit', 'race', 'language', 'campaign'].includes(item.acquisition));
 }
 function nwpAvailableSlots() {
     if (!data.nwpSettings.autoCalculate) return Number.parseInt(data.nwpSettings.availableSlots, 10) || 0;
@@ -3649,6 +3666,43 @@ function updateNwpTargets() {
         const modifier = Number.parseInt(item?.checkModifier, 10);
         output.textContent = Number.isInteger(score) && Number.isInteger(modifier) ? `Target: ${score + modifier}` : 'Target: Special';
     });
+}
+function trackingRowKey(index) { return `tracking:${index}`; }
+function isTrackingProficiency(item) { return item?.id === 'tracking' || String(item?.name || '').trim().toLowerCase() === 'tracking'; }
+function trackingCharacter() {
+    const classes = (data.identity.classEntries || []).map(entry => String(entry.className || '')).join(' ').toLowerCase();
+    const race = `${data.raceSelection || ''} ${data.identity.race || ''}`.toLowerCase();
+    return { wisdom: Number.parseInt(data.abilities.wis, 10), isRanger: /ranger/.test(classes), isBarbarian: /barbarian/.test(classes), isDragon: /dragon/.test(race) };
+}
+function trackingCalculatorMarkup(index) {
+    if (!trackingProficiencyRule) return '<small class="tracking-warning">Tracking Calculator rules could not be loaded.</small>';
+    const key = trackingRowKey(index);
+    const session = data.trackingCalculator.sessions[key] ||= TrackingCalculator.defaults();
+    const result = TrackingCalculator.calculate(trackingProficiencyRule, session, trackingCharacter());
+    const field = (label, keyName, type = 'number', extra = '') => `<label>${label}<input type="${type}" data-tracking-input="${keyName}" ${extra} value="${esc(session[keyName] ?? '')}"></label>`;
+    const check = (label, keyName) => `<label class="tracking-check"><input type="checkbox" data-tracking-input="${keyName}" ${session[keyName] ? 'checked' : ''}>${label}</label>`;
+    const terrainOptions = Object.keys(trackingProficiencyRule.calculator.modifierRules.terrain).map(value => `<option value="${value}"${session.terrain === value ? ' selected' : ''}>${value.replaceAll('-', ' ')}</option>`).join('');
+    const environmentOptions = ['outdoor-land', 'urban', 'man-made', 'aquatic', 'kit-alternative', 'other'].map(value => `<option value="${value}"${session.environment === value ? ' selected' : ''}>${value.replaceAll('-', ' ')}</option>`).join('');
+    return `<section class="tracking-calculator" data-tracking-row="${index}"><header><h3>Tracking Calculator</h3><button type="button" data-tracking-close title="Close Tracking Calculator" aria-label="Close Tracking Calculator">×</button></header><div class="tracking-settings"><label>Rules mode<select data-tracking-input="rulesMode"><option value="core"${session.rulesMode === 'core' ? ' selected' : ''}>Core</option><option value="skills-and-powers"${session.rulesMode === 'skills-and-powers' ? ' selected' : ''}>Skills & Powers</option></select></label>${field('Tracking rating', 'trackingProficiencyRating', 'number', 'min="0"')}<label>Terrain<select data-tracking-input="terrain">${terrainOptions}</select></label><label>Environment<select data-tracking-input="environment">${environmentOptions}</select></label>${field('Creature count', 'trackedCreatureCount', 'number', 'min="1"')}${field('Group override', 'groupSizeOverride', 'number', 'placeholder="floor(count / 2)"')}${field('Trail age hours', 'trailAgeHours', 'number', 'min="0" step="0.5"')}${field('Precipitation hours', 'precipitationHours', 'number', 'min="0" step="0.5"')}${field('DM modifier', 'manualModifierOverride', 'number', 'placeholder="Calculated other modifier"')}${field('Other modifier', 'otherModifiers', 'number')}<label>Halving rounding<select data-tracking-input="environmentRounding"><option value="floor"${session.environmentRounding === 'floor' ? ' selected' : ''}>Floor</option><option value="ceil"${session.environmentRounding === 'ceil' ? ' selected' : ''}>Ceil</option><option value="round"${session.environmentRounding === 'round' ? ' selected' : ''}>Round</option></select></label><label>Movement at 14<select data-tracking-input="trackingMovementAt14"><option value=""${!session.trackingMovementAt14 ? ' selected' : ''}>Unresolved</option><option value="half"${session.trackingMovementAt14 === 'half' ? ' selected' : ''}>Half movement</option><option value="three-quarters"${session.trackingMovementAt14 === 'three-quarters' ? ' selected' : ''}>Three-quarter movement</option></select></label></div><div class="tracking-checks">${check('Poor lighting', 'poorLighting')}${check('Trail hidden', 'trackedPartyHidingTrail')}${check('Animal Empathy: non-domesticated animal', 'animalEmpathyApplies')}${check('Animal Lore: animal', 'animalLoreApplies')}${check('Kit overrides terrain penalty', 'kitOverridesEnvironmentPenalty')}${check('Indoor tracking', 'indoor')}${check('Saw creature within 30 minutes', 'sawCreatureRecently')}${check('Begin where last seen', 'beginsWhereLastSeen')}${check('Outdoor evidence available', 'outdoorEvidence')}${check('Physical trail exists', 'physicalTrail')}${check('Flying or noncorporeal target', 'flyingOrNoncorporeal')}${check('Use identification check', 'identificationCheck')}${check('This is the lead (most adept) tracker', 'leadTracker')}${field('Additional trackers', 'additionalTrackers', 'number', 'min="0"')}</div><div class="tracking-result"><strong>Target: ${result.finalTargetNumber}</strong><span>${result.trailStatus === 'permanently-lost' ? 'Trail permanently lost; no roll.' : result.eligible ? session.rulesMode === 'core' ? 'd20 succeeds at or below target; natural 20 fails.' : 'Resolve using the campaign Skills & Powers rule.' : 'Eligibility conditions are not met.'}</span><span>Movement: ${result.movementMultiplier == null ? 'Configure target 14 setting' : `x${result.movementMultiplier}`}</span><span>Trail status: ${result.trailStatus}</span><span>Next check: ${esc(session.nextCheckTrigger || 'When conditions worsen, another track crosses, or tracking resumes after a halt.')}</span><span>${esc(result.rerollAvailability)}</span><small>${esc(result.breakdown.join('; '))}</small>${result.warnings.map(warning => `<small class="tracking-warning">${esc(warning)}</small>`).join('')}<div class="tracking-actions"><button type="button" data-tracking-found>Record successful check</button><button type="button" data-tracking-failure ${result.trailStatus !== 'found' ? 'disabled' : ''}>Record failed follow check</button><button type="button" data-tracking-new-sign ${result.trailStatus !== 'lost' || Number(session.newSignSearchHours) >= 1 ? 'disabled' : ''}>Record one hour new-sign search</button><button type="button" data-tracking-reset>Reset to rules</button></div></div><small>Acquisition: ${esc(data.proficiencies[index].acquisition)}; ${data.proficiencies[index].usesNwpSlot === false ? 'does not use an NWP slot' : 'uses its recorded NWP slot cost'}. Ranger grants and barbarian homeland/expertise remain separate acquisition choices on the proficiency row.</small></section>`;
+}
+function setupTrackingCalculator(classAbilitiesSection) {
+    const trackers = data.proficiencies.map((item, index) => isTrackingProficiency(item) ? index : -1).filter(index => index >= 0);
+    classAbilitiesSection.querySelector('.tracking-calculator')?.remove();
+    const hasRanger = (data.identity.classEntries || []).some(entry => /ranger/i.test(entry.className || ''));
+    if (!hasRanger || !trackers.length) return;
+    const active = data.trackingCalculator.activeTrackingRow;
+    const trackingIndex = trackers.includes(active) ? active : trackers[0];
+    if (data.trackingCalculator.activeTrackingRow !== trackingIndex) data.trackingCalculator.activeTrackingRow = trackingIndex;
+    classAbilitiesSection.querySelector('.class-abilities-grid')?.insertAdjacentHTML('beforeend', trackingCalculatorMarkup(trackingIndex));
+    const panel = classAbilitiesSection.querySelector('.tracking-calculator');
+    if (!panel) return;
+    const session = data.trackingCalculator.sessions[trackingRowKey(data.trackingCalculator.activeTrackingRow)];
+    panel.querySelectorAll('[data-tracking-input]').forEach(input => input.onchange = () => { const key = input.dataset.trackingInput; session[key] = input.type === 'checkbox' ? input.checked : input.type === 'number' ? (input.value === '' ? null : Number(input.value)) : (input.value || null); changed(); render(); });
+    panel.querySelector('[data-tracking-close]').onclick = () => { data.trackingCalculator.activeTrackingRow = null; panel.remove(); changed(); };
+    panel.querySelector('[data-tracking-reset]').onclick = () => { data.trackingCalculator.sessions[trackingRowKey(data.trackingCalculator.activeTrackingRow)] = TrackingCalculator.defaults(); changed(); render(); };
+    panel.querySelector('[data-tracking-found]').onclick = () => { session.trailStatus = 'found'; session.failureCount = 0; session.newSignSearchHours = 0; changed(); render(); };
+    panel.querySelector('[data-tracking-new-sign]').onclick = () => { session.newSignSearchHours = Math.max(1, Number(session.newSignSearchHours) || 0); session.trailStatus = 'found'; changed(); render(); };
+    panel.querySelector('[data-tracking-failure]').onclick = () => { if (session.trailStatus !== 'found') return; session.failureCount = Math.min(2, (Number(session.failureCount) || 0) + 1); session.trailStatus = session.failureCount >= 2 ? 'ended' : 'lost'; changed(); render(); };
 }
 function languagesMarkup() {
     const intelligence = Number.parseInt(data.abilities.int, 10);
@@ -4334,7 +4388,7 @@ try {
 } catch {}
 setupFiligreeParallax();
 render();
-Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadPriestSpellProgression(), loadWizardSpellProgression(), loadRangerSpellProgression(), loadDruidSphereAccess(), loadRangerSpellAccess(), loadPaladinSpellData(), loadBardSpellProgression(), loadShamanSpellcasting(), loadRangerThiefAbilities(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadLanguageCatalog(), loadRaceCards()]).then(() => {
+Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadPriestSpellProgression(), loadWizardSpellProgression(), loadRangerSpellProgression(), loadDruidSphereAccess(), loadRangerSpellAccess(), loadPaladinSpellData(), loadBardSpellProgression(), loadShamanSpellcasting(), loadRangerThiefAbilities(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadTrackingProficiencyRule(), loadLanguageCatalog(), loadRaceCards()]).then(() => {
     const enrichmentResult = applySpellMaterialEnrichments(spellCatalogSourceRecords, spellMaterialEnrichmentRecords);
     spellCatalogSourceRecords = enrichmentResult.records;
     spellMaterialEnrichmentConflicts = enrichmentResult.conflicts;

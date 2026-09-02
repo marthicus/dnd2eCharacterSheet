@@ -1,0 +1,21 @@
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const { calculate } = require('../tracking-calculator.js');
+const rule = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'tracking-proficiency-calculator.json'), 'utf8'));
+const run = (state = {}, character = {}) => calculate(rule, { physicalTrail: true, outdoorEvidence: true, ...state }, { wisdom: 14, ...character });
+
+test('core ranger has no universal penalty', () => assert.equal(run({}, { isRanger: true }).finalTargetNumber, 14));
+test('core non-ranger receives minus six', () => assert.equal(run().finalTargetNumber, 8));
+test('Skills & Powers ranger uses rating and ranger bonus only', () => assert.equal(run({ rulesMode: 'skills-and-powers', trackingProficiencyRating: 7 }, { isRanger: true }).finalTargetNumber, 12));
+test('Skills & Powers animal bonuses are conditional', () => assert.equal(run({ rulesMode: 'skills-and-powers', trackingProficiencyRating: 7, animalEmpathyApplies: true, animalLoreApplies: true }).finalTargetNumber, 11));
+test('weather and trail age accumulate', () => assert.equal(run({ trailAgeHours: 25, precipitationHours: 2 }).finalTargetNumber, -4));
+test('core target below zero permanently loses the trail', () => assert.equal(run({ terrain: 'rocky-ground-or-shallow-water' }).trailStatus, 'permanently-lost'));
+test('one retry follows an hour searching for new signs', () => assert.match(run({ failureCount: 1, newSignSearchHours: 1 }).rerollAvailability, /available/));
+test('multiple trackers grant only one bonus to lead', () => assert.equal(run({ additionalTrackers: 3, leadTracker: true }, { isRanger: true }).teamBonus, 1));
+test('indoor eligibility requires both required conditions', () => assert.equal(run({ indoor: true, sawCreatureRecently: true, beginsWhereLastSeen: false }).eligible, false));
+test('flying warning is reported', () => assert.match(run({ flyingOrNoncorporeal: true }).warnings.join(' '), /Flying/));
+test('ranger environmental halving follows additive modifiers', () => assert.equal(run({ environment: 'urban' }, { isRanger: true }).finalTargetNumber, 7));
+test('kit override avoids ranger terrain halving', () => assert.equal(run({ environment: 'urban', kitOverridesEnvironmentPenalty: true }, { isRanger: true }).finalTargetNumber, 14));
+test('movement target fourteen honors both campaign settings', () => { assert.equal(run({ trackingMovementAt14: 'half' }, { isRanger: true }).movementMultiplier, .5); assert.equal(run({ trackingMovementAt14: 'three-quarters' }, { isRanger: true }).movementMultiplier, .75); });

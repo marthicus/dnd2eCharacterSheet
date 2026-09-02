@@ -1,0 +1,345 @@
+{
+  "schemaVersion": "1.0",
+  "id": "tracking-proficiency-calculator",
+  "name": "Tracking",
+  "recordType": "proficiency-rule",
+  "source": "Player's Handbook",
+  "sourceTable": 37,
+  "groups": [
+    "warrior"
+  ],
+  "relevantAbility": "wisdom",
+  "checkModifier": 0,
+  "slotCost": 2,
+  "description": "Calculates the modified target number and movement rate for following a trail, with separate core and Skills & Powers modes.",
+  "sourceOccurrences": [
+    {
+      "source": "Player's Handbook",
+      "tables": [
+        39,
+        40
+      ]
+    },
+    {
+      "source": "Player's Option: Skills & Powers"
+    },
+    {
+      "source": "The Complete Thief's Handbook"
+    },
+    {
+      "source": "The Complete Ranger's Handbook"
+    },
+    {
+      "source": "The Complete Barbarian's Handbook"
+    },
+    {
+      "source": "Campaign Option: Council of Wyrms Setting"
+    }
+  ],
+  "skillsAndPowers": {
+    "relevantAbilityText": "Wisdom/Intuition",
+    "initialRating": 7,
+    "costCP": 4
+  },
+  "calculator": {
+    "modes": {
+      "core": {
+        "baseValue": "wisdom",
+        "nonRangerPenalty": -6,
+        "rangerPenalty": 0,
+        "formula": "wisdom + classPenalty + terrainModifier + groupSizeModifier + trailAgeModifier + weatherModifier + lightingModifier + concealmentModifier + otherModifiers",
+        "successRule": "Roll 1d20 less than or equal to the modified target number.",
+        "natural20AlwaysFails": true
+      },
+      "skills-and-powers": {
+        "baseValue": "trackingProficiencyRating",
+        "nonRangerPenalty": 0,
+        "rangerBonus": 5,
+        "formula": "trackingProficiencyRating + rangerBonus + animalEmpathyBonus + animalLoreBonus + terrainModifier + groupSizeModifier + trailAgeModifier + weatherModifier + lightingModifier + concealmentModifier + otherModifiers",
+        "successRule": "Use the campaign's Skills & Powers proficiency resolution rule against the final rating.",
+        "natural20AlwaysFails": null
+      }
+    },
+    "inputs": [
+      {
+        "id": "rulesMode",
+        "type": "enum",
+        "values": [
+          "core",
+          "skills-and-powers"
+        ],
+        "required": true
+      },
+      {
+        "id": "wisdom",
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 25,
+        "requiredWhen": "rulesMode == core"
+      },
+      {
+        "id": "trackingProficiencyRating",
+        "type": "integer",
+        "minimum": 0,
+        "maximum": null,
+        "requiredWhen": "rulesMode == skills-and-powers"
+      },
+      {
+        "id": "isRanger",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "isDragon",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "isBarbarian",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "terrain",
+        "type": "enum",
+        "values": [
+          "soft-or-muddy",
+          "thick-brush-vines-reeds",
+          "occasional-signs-or-dust",
+          "normal-ground-or-wood-floor",
+          "rocky-ground-or-shallow-water",
+          "other"
+        ]
+      },
+      {
+        "id": "trackedCreatureCount",
+        "type": "integer",
+        "minimum": 1,
+        "default": 1
+      },
+      {
+        "id": "trailAgeHours",
+        "type": "number",
+        "minimum": 0,
+        "default": 0
+      },
+      {
+        "id": "precipitationHours",
+        "type": "number",
+        "minimum": 0,
+        "default": 0
+      },
+      {
+        "id": "poorLighting",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "trackedPartyHidingTrail",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "animalEmpathyApplies",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "animalLoreApplies",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "environment",
+        "type": "enum",
+        "values": [
+          "outdoor-land",
+          "urban",
+          "man-made",
+          "aquatic",
+          "kit-alternative",
+          "other"
+        ],
+        "default": "outdoor-land"
+      },
+      {
+        "id": "kitOverridesEnvironmentPenalty",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "otherModifiers",
+        "type": "integer",
+        "default": 0
+      }
+    ],
+    "modifierRules": {
+      "terrain": {
+        "soft-or-muddy": 4,
+        "thick-brush-vines-reeds": 3,
+        "occasional-signs-or-dust": 2,
+        "normal-ground-or-wood-floor": 0,
+        "rocky-ground-or-shallow-water": -10,
+        "other": null
+      },
+      "groupSize": {
+        "sourceText": "Every two creatures in the group: +1",
+        "suggestedFormula": "floor(trackedCreatureCount / 2)",
+        "overrideAllowed": true
+      },
+      "trailAge": {
+        "modifier": -1,
+        "perHours": 12,
+        "suggestedFormula": "-floor(trailAgeHours / 12)"
+      },
+      "precipitation": {
+        "modifier": -5,
+        "perHours": 1,
+        "suggestedFormula": "-5 * precipitationHours"
+      },
+      "poorLighting": -6,
+      "hideTrail": -5,
+      "skillsAndPowersBonuses": {
+        "ranger": 5,
+        "animalEmpathyWhenTrackingNonDomesticatedAnimals": 2,
+        "animalLoreWhenTrackingAnyAnimal": 2
+      }
+    },
+    "postCalculationRules": [
+      {
+        "id": "ranger-environment-halving",
+        "appliesWhen": "isRanger && !kitOverridesEnvironmentPenalty && environment in [urban, man-made, aquatic]",
+        "effect": "finalTargetNumber = finalTargetNumber / 2",
+        "rounding": null,
+        "source": "The Complete Ranger's Handbook",
+        "notes": [
+          "The supplied source says success chances are generally halved but does not specify rounding."
+        ]
+      },
+      {
+        "id": "barbarian-environment-halving",
+        "appliesWhen": "isBarbarian && environment in [urban, man-made]",
+        "effect": "finalTargetNumber = finalTargetNumber / 2",
+        "rounding": null,
+        "source": "The Complete Barbarian's Handbook"
+      }
+    ],
+    "movementWhileTracking": {
+      "input": "finalTargetNumberBeforeRoll",
+      "bands": [
+        {
+          "minimum": 1,
+          "maximum": 6,
+          "movementMultiplier": 0.25
+        },
+        {
+          "minimum": 7,
+          "maximum": 14,
+          "movementMultiplier": 0.5
+        },
+        {
+          "minimum": 14,
+          "maximum": null,
+          "movementMultiplier": 0.75
+        }
+      ],
+      "boundaryConflict": {
+        "value": 14,
+        "sourceValues": [
+          0.5,
+          0.75
+        ],
+        "resolution": null,
+        "notes": [
+          "The supplied Table 40 text places 14 in both the 7-14 band and the 14-or-greater band. Require a campaign setting or source verification before resolving."
+        ]
+      }
+    },
+    "trailEligibility": {
+      "requiresPhysicalTrail": true,
+      "flyingOrNoncorporeal": "normally virtually impossible; DM may allow with substantial penalties",
+      "indoors": [
+        "Tracker saw the creature within the last 30 minutes.",
+        "Tracking begins where the creature was last seen."
+      ],
+      "outdoorsAnyOf": [
+        "Tracker saw the creature.",
+        "Eyewitnesses report recent movement.",
+        "Obvious evidence indicates the creature is in the area."
+      ]
+    },
+    "checkTriggersAfterTrailFound": [
+      "The chance to track decreases.",
+      "A second track crosses the first.",
+      "Tracking resumes after a halt."
+    ],
+    "failureRules": {
+      "initialFindFailure": "No trail is found; another attempt requires the qualifying conditions to be met again under different circumstances.",
+      "followTrailFailure": "After at least one hour searching for new signs, one additional check may be attempted.",
+      "secondFailure": "No further attempts may be made by that tracker.",
+      "targetBelowZero": "The trail is totally lost to that character and later improvement does not restore it.",
+      "multipleTrackers": "Add +1 to the most adept tracker's ability score; when that tracker loses the trail, it is lost to all."
+    },
+    "identificationCheck": {
+      "available": true,
+      "usesNormalTrackingModifiers": true,
+      "frequency": "Once whenever a check is rolled to follow the trail.",
+      "success": "Identify a known creature type and roughly estimate numbers; exact accuracy is determined by the DM."
+    },
+    "outputs": [
+      "baseValue",
+      "modifierBreakdown",
+      "preEnvironmentTargetNumber",
+      "environmentMultiplier",
+      "finalTargetNumber",
+      "trailStatus",
+      "movementMultiplier",
+      "rerollAvailability",
+      "identificationCheckAvailable",
+      "warnings"
+    ]
+  },
+  "classAndSettingRules": {
+    "ranger": {
+      "coreNonRangerPenaltyIgnored": true,
+      "generallyFreeInOutdoorLandTerrain": true,
+      "alternativeTerrainMayComeFromKit": true
+    },
+    "barbarian": {
+      "automaticInHomelandTerrain": true,
+      "twoSlotsGrantRangerEquivalentExpertise": true
+    },
+    "dragon": {
+      "treatedAsRangerForPenalty": true,
+      "hatchlingsCanSelect": false
+    },
+    "thiefHandbook": {
+      "normallyRestrictedToWarriors": true,
+      "requiredForKit": [
+        "Bounty Hunter"
+      ],
+      "recommendedForKit": [
+        "Assassin"
+      ]
+    }
+  },
+  "ui": {
+    "section": "nonweapon-proficiencies",
+    "actionLabel": "Tracking Calculator",
+    "showRuleSummary": true,
+    "showModifierBreakdown": true,
+    "showMovementRate": true,
+    "showTrailEligibility": true,
+    "showIdentificationOption": true,
+    "allowDMOverride": true
+  },
+  "unmapped": {
+    "sourceUrl": "https://adnd2e.fandom.com/wiki/Tracking_(Proficiency)",
+    "uncertainties": [
+      "Table 40 overlaps at a modified chance of 14.",
+      "Ranger and barbarian halving rules do not specify rounding in the supplied text.",
+      "The exact interpretation of 'Every two creatures in the group' should remain overrideable.",
+      "Skills & Powers natural-20 handling is not specified in the supplied page text."
+    ]
+  }
+}
