@@ -322,7 +322,7 @@ main{position:relative;z-index:1}
 .tooltip-resize{position:sticky;align-self:flex-end;top:auto;right:auto;bottom:0;z-index:2;flex:0 0 22px;margin:-29px -30px -48px 0;cursor:nwse-resize;touch-action:none}
 .hero.character-header{grid-template-columns:minmax(0,1fr) 240px;align-items:center;margin-bottom:14px}
 .hero.character-header>.wide{grid-column:auto}
-.portrait-area{min-width:0;display:flex;flex-direction:column;justify-content:center;min-height:100%}
+.portrait-area{min-width:0;display:flex;flex-direction:column;justify-content:flex-start;height:100%}
 .portrait-frame{display:flex;justify-content:center}
 .portrait-frame .portrait{width:240px;height:300px}
 .portrait-frame .portrait.portrait-placeholder{background:#3a332d;box-shadow:inset 0 0 0 1px #8a7a67,inset 0 -42px 70px #0000008f,0 10px 18px #0000003d}
@@ -333,15 +333,16 @@ main{position:relative;z-index:1}
 .portrait-controls .field input{min-width:0}
 .portrait-action{padding:6px 8px;white-space:nowrap}
 .portrait-refresh{padding:6px 9px;font-size:15px;line-height:1}
-.portrait-meta{display:grid;gap:8px;width:100%;margin-top:10px;padding:8px;border:1px solid #8f7b61;background:#f3ece0}
+.portrait-meta{display:flex;flex-direction:column;gap:8px;width:100%;flex:1 1 auto;min-height:0;margin-top:10px;padding:8px;border:1px solid #8f7b61;background:#f3ece0}
 .portrait-emblem{display:flex;align-items:center;gap:8px;padding:6px;border:1px solid #8f7b61;background:#e9deca}
 .portrait-emblem strong{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:#4a3a2f;color:#f8f2e7;font:700 14px system-ui;letter-spacing:.04em}
 .portrait-emblem small{display:block;color:var(--muted);font:11px/1.3 system-ui;text-transform:uppercase}
+.portrait-session{display:flex;flex-direction:column;flex:1 1 auto;min-height:0}
 .portrait-session h3{margin:0 0 4px;font-size:11px;text-transform:uppercase;color:var(--muted)}
-.portrait-session p{margin:0;color:var(--ink);font:12px/1.35 Georgia,serif}
+.portrait-session p{flex:1 1 auto;margin:0;overflow:auto;color:var(--ink);font:12px/1.35 Georgia,serif}
 .portrait-session small{display:block;margin-top:5px;color:var(--muted);font:11px system-ui}
 .character-details{grid-column:1/-1!important;width:100%;min-width:0;margin-top:10px}
-.hero.character-header{display:grid;grid-template-columns:minmax(0,1fr) 240px!important;align-items:start}
+.hero.character-header{display:grid;grid-template-columns:minmax(0,1fr) 240px!important;align-items:stretch}
 .hero.character-header>.wide{grid-column:1!important;grid-row:1!important}
 .hero.character-header>.portrait-area{grid-column:2!important;grid-row:1!important}
 .quick-facts-footer{margin-top:12px}
