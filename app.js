@@ -187,6 +187,12 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
     '"': '&quot;',
     "'": '&#39;'
 } [c]));
+const paginateCatalog = (records, page, pageSize) => {
+    const pageCount = Math.max(1, Math.ceil(records.length / pageSize));
+    const currentPage = Math.max(0, Math.min(page, pageCount - 1));
+    return { currentPage, pageCount, records: records.slice(currentPage * pageSize, (currentPage + 1) * pageSize) };
+};
+const catalogPaginationMarkup = (pagination, control) => `<nav class="catalog-pagination" aria-label="Catalogue pages"><button type="button" data-${control}-page="${pagination.currentPage - 1}" aria-label="Previous page" ${pagination.currentPage === 0 ? 'disabled' : ''}>&larr;</button><span>Page ${pagination.currentPage + 1} of ${pagination.pageCount}</span><button type="button" data-${control}-page="${pagination.currentPage + 1}" aria-label="Next page" ${pagination.currentPage === pagination.pageCount - 1 ? 'disabled' : ''}>&rarr;</button></nav>`;
 const PORTRAIT_PLACEHOLDER_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" role="img" aria-label="Upload character portrait"><defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5f564d"/><stop offset="100%" stop-color="#2e2924"/></linearGradient><radialGradient id="shade" cx="0.5" cy="0.28" r="0.9"><stop offset="0%" stop-color="#8d8378" stop-opacity="0.35"/><stop offset="70%" stop-color="#1b1714" stop-opacity="0.62"/><stop offset="100%" stop-color="#0f0d0b" stop-opacity="0.78"/></radialGradient><radialGradient id="halo" cx="0.5" cy="0.43" r="0.42"><stop offset="0%" stop-color="#c2c7cc" stop-opacity="0.22"/><stop offset="100%" stop-color="#11100f" stop-opacity="0"/></radialGradient></defs><rect width="240" height="300" fill="url(#bg)"/><rect width="240" height="300" fill="url(#shade)"/><rect width="240" height="300" fill="url(#halo)"/><circle cx="120" cy="102" r="40" fill="#868e96"/><path d="M58 252c0-41 28-74 62-74s62 33 62 74" fill="#7a838c"/><rect x="20" y="20" width="200" height="260" rx="8" ry="8" fill="none" stroke="#a79a8a" stroke-opacity="0.42" stroke-width="2"/><text x="120" y="279" fill="#d9cec0" fill-opacity="0.92" font-family="Georgia, serif" font-size="13" text-anchor="middle" letter-spacing="0.5">Upload character portrait</text></svg>`;
 const PORTRAIT_PLACEHOLDER_DATA_URI = `data:image/svg+xml,${encodeURIComponent(PORTRAIT_PLACEHOLDER_SVG)}`;
 
@@ -656,7 +662,7 @@ function mergeSpellCatalogRecords(existingRecords, incomingRecords) {
             return;
         }
         const existing = merged[existingIndex];
-        const comparedKeys = [...new Set([...Object.keys(existing), ...Object.keys(normalizedIncoming)])].filter(key => !['id', 'source', 'sourceRefs', 'sourceLabel', 'notes', 'components', 'spellGroup', 'sourceRecordId'].includes(key));
+        const comparedKeys = [...new Set([...Object.keys(existing), ...Object.keys(normalizedIncoming)])].filter(key => !['id', 'name', 'source', 'sourceRefs', 'sourceLabel', 'notes', 'components', 'spellGroup', 'sourceRecordId'].includes(key));
         const conflictingFields = comparedKeys.filter(key => {
             const before = existing[key];
             mergeSpellField(existing, normalizedIncoming, key);
@@ -2703,12 +2709,21 @@ function setupClassAbilitiesSection() {
         const sourceFilter = catalogPanel.querySelector('#class-ability-source');
         const abilityTypeOption = catalogPanel.querySelector('#class-ability-catalogue-type option[value="ability"]');
         if (abilityTypeOption) abilityTypeOption.textContent = 'Abil.';
-        const renderCatalog = () => {
+        let catalogPage = 0;
+        const renderCatalog = (resetPage = false) => {
+            if (resetPage) catalogPage = 0;
             const records = spellsAndAbilitiesCatalogueRecords();
             const query = search.value.trim().toLowerCase();
             const matches = classAbilityLookup({ className: classFilter.value, abilityType: typeFilter.value, source: sourceFilter.value, catalogueType: catalogueTypeFilter.value }, records).filter(record => classFilter.value !== 'druid' || druidSpellIsAccessible(record)).filter(record => classFilter.value !== 'ranger' || rangerSpellIsAccessible(record)).filter(record => classFilter.value !== 'paladin' || paladinSpellIsAccessible(record)).filter(record => !query || [record.name, record.source, ...(record.classes || [])].join(' ').toLowerCase().includes(query));
-            const visibleMatches = matches.slice(0, 40);
+            const pagination = paginateCatalog(matches, catalogPage, 40);
+            catalogPage = pagination.currentPage;
+            const visibleMatches = pagination.records;
             const results = catalogPanel.querySelector('#class-ability-catalog-results');
+            const paginationControls = catalogPanel.querySelector('[data-class-ability-pagination]') || document.createElement('div');
+            if (!paginationControls.parentElement) {
+                paginationControls.dataset.classAbilityPagination = '';
+                results.after(paginationControls);
+            }
             results.innerHTML = visibleMatches.map(record => {
                 const trackedKey = record.catalogueType === 'spell' ? 'spellCatalogId' : 'classAbilityId';
                 const tracked = data.spells.some(item => item[trackedKey] === record.id);
@@ -2716,6 +2731,7 @@ function setupClassAbilitiesSection() {
                 const metadata = record.catalogueType === 'spell' ? [`Spell${record.level != null ? ` · L${record.level}` : ''}`, classNames, readableSourceSummary(record.source)] : ['Ability', record.abilityType, classNames, readableSourceSummary(record.source)];
                 return `<button type="button" class="class-ability-result" data-class-ability-add="${esc(record.id)}" data-class-ability-type="${record.catalogueType}"${tracked ? ' disabled' : ''}><strong>${esc(record.name)}</strong><small>${esc(metadata.filter(Boolean).join(' · '))}${tracked ? ' · Tracked' : ''}</small></button>`;
             }).join('') || '<small>No matching class abilities.</small>';
+            paginationControls.innerHTML = catalogPaginationMarkup(pagination, 'class-ability');
             results.querySelectorAll('[data-class-ability-add]').forEach(button => button.onclick = () => {
                 const record = spellsAndAbilitiesCatalogueRecords().find(item => item.id === button.dataset.classAbilityAdd && item.catalogueType === button.dataset.classAbilityType);
                 if (!record) return;
@@ -2727,12 +2743,13 @@ function setupClassAbilitiesSection() {
                 changed();
                 render();
             });
+            paginationControls.querySelectorAll('[data-class-ability-page]').forEach(button => button.onclick = () => { catalogPage = Number(button.dataset.classAbilityPage); renderCatalog(); });
         };
-        search.oninput = renderCatalog;
-        classFilter.onchange = renderCatalog;
-        catalogueTypeFilter.onchange = renderCatalog;
-        typeFilter.onchange = renderCatalog;
-        sourceFilter.onchange = renderCatalog;
+        search.oninput = () => renderCatalog(true);
+        classFilter.onchange = () => renderCatalog(true);
+        catalogueTypeFilter.onchange = () => renderCatalog(true);
+        typeFilter.onchange = () => renderCatalog(true);
+        sourceFilter.onchange = () => renderCatalog(true);
         renderCatalog();
     }
     const toggle = section.querySelector('.class-abilities-toggle');
@@ -3049,6 +3066,10 @@ function setupReferenceLibrary() {
     const sourceFilter = section.querySelector('[data-reference-source]');
     const results = section.querySelector('[data-reference-results]');
     const detail = section.querySelector('[data-reference-detail]');
+    const paginationControls = document.createElement('div');
+    paginationControls.dataset.referencePagination = '';
+    results.after(paginationControls);
+    let referencePage = 0;
     const getName = record => record.name || record.spellName || record.proficiencyName || record.languageName || 'Unnamed record';
     const renderDetail = record => {
         const fields = record.referenceType === 'spell'
@@ -3056,7 +3077,8 @@ function setupReferenceLibrary() {
             : [['Description', record.description || record.effect], ['Notes', Array.isArray(record.notes) ? record.notes.join('; ') : record.notes], ...Object.entries(record).filter(([key]) => !['id', 'name', 'spellName', 'description', 'effect', 'notes', 'referenceType', 'referenceLabel'].includes(key)).slice(0, 8).map(([key, value]) => [key, referenceValueText(value)])];
         detail.innerHTML = `<strong>${esc(getName(record))}</strong><dl>${fields.filter(([, value]) => value !== undefined && value !== null && value !== '').map(([label, value]) => `<dt>${esc(label)}</dt><dd>${esc(value)}</dd>`).join('')}</dl>`;
     };
-    const renderResults = () => {
+    const renderResults = (resetPage = false) => {
+        if (resetPage) referencePage = 0;
         const needle = String(search?.value || '').trim().toLowerCase();
         const matches = records.filter(record => {
             const name = getName(record).toLowerCase();
@@ -3064,7 +3086,10 @@ function setupReferenceLibrary() {
             const recordClasses = record.classLists || record.classes || [];
             const group = record.category || record.group || record.abilityType || '';
             return (!needle || name.includes(needle) || source.includes(needle)) && (!classFilter || !classFilter.value || recordClasses.includes(classFilter.value)) && (!groupFilter || !groupFilter.value || group === groupFilter.value) && (!sourceFilter || !sourceFilter.value || spellSources(record).includes(sourceFilter.value));
-        }).slice(0, 40);
+        });
+        const pagination = paginateCatalog(matches, referencePage, 40);
+        referencePage = pagination.currentPage;
+        const visibleMatches = pagination.records;
         const loadingMessage = mode === 'spells' && spellCatalogStatus === 'loading'
             ? 'Loading spell reference records...'
             : mode === 'languages' && languageCatalogStatus === 'loading'
@@ -3076,11 +3101,13 @@ function setupReferenceLibrary() {
                 ? 'Language reference records unavailable.'
                 : '';
         const emptyMessage = loadingMessage || unavailableMessage || 'No matching reference records.';
-        results.innerHTML = matches.map((record, index) => `<button type="button" class="reference-library-result" title="${esc(referenceTooltip(record))}" data-reference-result="${index}"><strong>${esc(getName(record))}</strong><small>${esc(record.referenceLabel || record.abilityType || record.category || '')} · ${esc(readableSourceSummary(record.source))}</small></button>`).join('') || `<small>${esc(emptyMessage)}</small>`;
-        results.querySelectorAll('[data-reference-result]').forEach(button => button.onclick = () => renderDetail(matches[+button.dataset.referenceResult]));
+        results.innerHTML = visibleMatches.map((record, index) => `<button type="button" class="reference-library-result" title="${esc(referenceTooltip(record))}" data-reference-result="${index}"><strong>${esc(getName(record))}</strong><small>${esc(record.referenceLabel || record.abilityType || record.category || '')} · ${esc(readableSourceSummary(record.source))}</small></button>`).join('') || `<small>${esc(emptyMessage)}</small>`;
+        paginationControls.innerHTML = catalogPaginationMarkup(pagination, 'reference');
+        results.querySelectorAll('[data-reference-result]').forEach(button => button.onclick = () => renderDetail(visibleMatches[+button.dataset.referenceResult]));
+        paginationControls.querySelectorAll('[data-reference-page]').forEach(button => button.onclick = () => { referencePage = Number(button.dataset.referencePage); renderResults(); });
     };
     section.querySelectorAll('[data-reference-mode]').forEach(button => button.onclick = () => { section.dataset.mode = button.dataset.referenceMode; setupReferenceLibrary(); });
-    [search, classFilter, groupFilter, sourceFilter].filter(Boolean).forEach(control => control.oninput = renderResults);
+    [search, classFilter, groupFilter, sourceFilter].filter(Boolean).forEach(control => control.oninput = () => renderResults(true));
     renderResults();
 }
 
@@ -3753,14 +3780,30 @@ function setupProficiencyAndInventorySections() {
     if (proficiencyCard) {
         const picker = document.createElement('div');
         picker.className = 'proficiency-picker';
-        picker.innerHTML = '<label for="proficiency-search">Find proficiency</label><input id="proficiency-search" type="search" placeholder="Type a name to search"><div id="proficiency-results" class="proficiency-results" aria-live="polite"></div>';
+        const groups = [...new Set(nonweaponCatalog.flatMap(item => item.groups || []))].sort();
+        const abilities = [...new Set(nonweaponCatalog.map(item => item.relevantAbility).filter(Boolean))].sort();
+        const sources = [...new Set(nonweaponCatalog.map(item => item.source).filter(Boolean))].sort();
+        const slotCosts = [...new Set(nonweaponCatalog.map(item => item.slotCost == null ? 'unknown' : String(item.slotCost)))].sort((left, right) => left === 'unknown' ? 1 : right === 'unknown' ? -1 : Number(left) - Number(right));
+        picker.innerHTML = `<label for="proficiency-search">Find proficiency</label><input id="proficiency-search" type="search" placeholder="Type a name to search"><div class="proficiency-filters"><label>Group<select id="proficiency-group-filter"><option value="">All groups</option>${groups.map(group => `<option value="${esc(group)}">${esc(group)}</option>`).join('')}</select></label><label>Ability<select id="proficiency-ability-filter"><option value="">All abilities</option>${abilities.map(ability => `<option value="${esc(ability)}">${esc(ability)}</option>`).join('')}</select></label><label>Source<select id="proficiency-source-filter"><option value="">All sources</option>${sources.map(source => `<option value="${esc(source)}">${esc(source)}</option>`).join('')}</select></label><label>Slot cost<select id="proficiency-slot-cost-filter"><option value="">All costs</option>${slotCosts.map(cost => `<option value="${cost}">${cost === 'unknown' ? 'Unknown' : `${esc(cost)} slot${cost === '1' ? '' : 's'}`}</option>`).join('')}</select></label></div><div id="proficiency-results" class="proficiency-results" aria-live="polite"></div>`;
         proficiencyCard.insertBefore(picker, proficiencyCard.querySelector('.tableWrap'));
         const search = picker.querySelector('#proficiency-search');
+        const groupFilter = picker.querySelector('#proficiency-group-filter');
+        const abilityFilter = picker.querySelector('#proficiency-ability-filter');
+        const sourceFilter = picker.querySelector('#proficiency-source-filter');
+        const slotCostFilter = picker.querySelector('#proficiency-slot-cost-filter');
         const results = picker.querySelector('#proficiency-results');
-        const renderProficiencyResults = () => {
+        const paginationControls = document.createElement('div');
+        paginationControls.dataset.proficiencyPagination = '';
+        results.after(paginationControls);
+        let proficiencyPage = 0;
+        const renderProficiencyResults = (resetPage = false) => {
+            if (resetPage) proficiencyPage = 0;
             const query = search.value.trim().toLowerCase();
-            const matches = nonweaponCatalog.filter(item => !query || item.name.toLowerCase().includes(query)).slice(0, 30);
-            results.innerHTML = `${matches.length} result${matches.length === 1 ? '' : 's'}${matches.map(item => `<button type="button" class="proficiency-result" data-proficiency-id="${esc(item.id)}"><strong>${esc(item.name)}</strong><small>${esc((item.groups || []).join(', '))} · ${esc(item.relevantAbility || 'N/A')} · ${item.checkModifier == null ? 'N/A' : `check ${item.checkModifier >= 0 ? '+' : ''}${item.checkModifier}`}</small></button>`).join('')}`;
+            const matches = nonweaponCatalog.filter(item => (!query || item.name.toLowerCase().includes(query)) && (!groupFilter.value || item.groups?.includes(groupFilter.value)) && (!abilityFilter.value || item.relevantAbility === abilityFilter.value) && (!sourceFilter.value || item.source === sourceFilter.value) && (!slotCostFilter.value || (slotCostFilter.value === 'unknown' ? item.slotCost == null : String(item.slotCost) === slotCostFilter.value)));
+            const pagination = paginateCatalog(matches, proficiencyPage, 30);
+            proficiencyPage = pagination.currentPage;
+            results.innerHTML = `${matches.length} result${matches.length === 1 ? '' : 's'}${pagination.records.map(item => `<button type="button" class="proficiency-result" data-proficiency-id="${esc(item.id)}"><strong>${esc(item.name)}</strong><small>${esc((item.groups || []).join(', '))} · ${esc(item.relevantAbility || 'N/A')} · ${item.checkModifier == null ? 'N/A' : `check ${item.checkModifier >= 0 ? '+' : ''}${item.checkModifier}`} · ${item.slotCost == null ? 'slot cost unknown' : `${item.slotCost} slot${item.slotCost === 1 ? '' : 's'}`} · ${esc(item.source || 'Source unknown')}</small></button>`).join('')}`;
+            paginationControls.innerHTML = catalogPaginationMarkup(pagination, 'proficiency');
             results.querySelectorAll('[data-proficiency-id]').forEach(button => button.onclick = () => {
                 const item = nonweaponCatalog.find(record => record.id === button.dataset.proficiencyId);
                 if (!item) return;
@@ -3768,8 +3811,10 @@ function setupProficiencyAndInventorySections() {
                 changed();
                 render();
             });
+            paginationControls.querySelectorAll('[data-proficiency-page]').forEach(button => button.onclick = () => { proficiencyPage = Number(button.dataset.proficiencyPage); renderProficiencyResults(); });
         };
-        search.oninput = renderProficiencyResults;
+        search.oninput = () => renderProficiencyResults(true);
+        [groupFilter, abilityFilter, sourceFilter, slotCostFilter].forEach(filter => filter.onchange = () => renderProficiencyResults(true));
         renderProficiencyResults();
         const datalist = document.createElement('datalist');
         datalist.id = 'nonweapon-proficiency-options';
@@ -3811,22 +3856,31 @@ function setupProficiencyAndInventorySections() {
         const languageSource = languageSection.querySelector('#language-source-filter');
         const languageLiteracy = languageSection.querySelector('#language-literacy-filter');
         const languageResults = languageSection.querySelector('#language-results');
-        const renderLanguageResults = () => {
+        const languagePaginationControls = document.createElement('div');
+        languagePaginationControls.dataset.languagePagination = '';
+        languageResults.after(languagePaginationControls);
+        let languagePage = 0;
+        const renderLanguageResults = (resetPage = false) => {
+            if (resetPage) languagePage = 0;
             const query = languageSearch.value.trim().toLowerCase();
             const literacy = languageLiteracy.value;
-            const matches = languageRecords.filter(item => (!query || item.name.toLowerCase().includes(query)) && (!languageCategory.value || item.category === languageCategory.value) && (!languageSource.value || item.source === languageSource.value) && (!literacy || String(item.literacySupported) === literacy)).slice(0, 30);
-            languageResults.innerHTML = matches.map(item => `<button type="button" data-language-add="${esc(item.id)}">${esc(item.name)} <small>${esc(item.category || '')} / ${esc(item.source || '')} / ${item.literacySupported ? 'literacy supported' : 'no literacy'}</small></button>`).join('') || '<small>No matching languages.</small>';
+            const matches = languageRecords.filter(item => (!query || item.name.toLowerCase().includes(query)) && (!languageCategory.value || item.category === languageCategory.value) && (!languageSource.value || item.source === languageSource.value) && (!literacy || String(item.literacySupported) === literacy));
+            const pagination = paginateCatalog(matches, languagePage, 30);
+            languagePage = pagination.currentPage;
+            languageResults.innerHTML = pagination.records.map(item => `<button type="button" data-language-add="${esc(item.id)}">${esc(item.name)} <small>${esc(item.category || '')} / ${esc(item.source || '')} / ${item.literacySupported ? 'literacy supported' : 'no literacy'}</small></button>`).join('') || '<small>No matching languages.</small>';
+            languagePaginationControls.innerHTML = catalogPaginationMarkup(pagination, 'language');
             languageResults.querySelectorAll('[data-language-add]').forEach(button => button.onclick = () => { const item = languageLookup(button.dataset.languageAdd); if (!item) return; data.languages.push({ id: item.id, name: item.name, category: item.category || null, sourceType: 'native', speaks: true, reads: item.literacySupported === true, writes: item.literacySupported === true, usesLanguageSlot: false, notes: Array.isArray(item.notes) ? item.notes.join('; ') : item.notes || '' }); changed(); render(); });
+            languagePaginationControls.querySelectorAll('[data-language-page]').forEach(button => button.onclick = () => { languagePage = Number(button.dataset.languagePage); renderLanguageResults(); });
         };
-        const renderLanguageResultsWithStatus = () => {
-            renderLanguageResults();
+        const renderLanguageResultsWithStatus = (resetPage = false) => {
+            renderLanguageResults(resetPage);
             if (languageCatalogStatus === 'loading') languageResults.innerHTML = '<small>Loading language catalogue...</small>';
             if (languageCatalogStatus === 'error') languageResults.innerHTML = '<small>Language catalogue unavailable.</small>';
         };
-        languageSearch.oninput = renderLanguageResultsWithStatus;
-        languageCategory.onchange = renderLanguageResultsWithStatus;
-        languageSource.onchange = renderLanguageResultsWithStatus;
-        languageLiteracy.onchange = renderLanguageResultsWithStatus;
+        languageSearch.oninput = () => renderLanguageResultsWithStatus(true);
+        languageCategory.onchange = () => renderLanguageResultsWithStatus(true);
+        languageSource.onchange = () => renderLanguageResultsWithStatus(true);
+        languageLiteracy.onchange = () => renderLanguageResultsWithStatus(true);
         renderLanguageResultsWithStatus();
     }
     const inventoryCard = cards.find(card => card.querySelector(':scope > h2')?.textContent.includes('Inventory'));
@@ -3844,11 +3898,22 @@ function setupProficiencyAndInventorySections() {
         }
         const search = inventoryCard.querySelector('#inventory-search');
         const category = inventoryCard.querySelector('#inventory-category');
-        const refreshOptions = () => {
+        let inventoryPage = 0;
+        const refreshOptions = (resetPage = false) => {
+            if (resetPage) inventoryPage = 0;
             const matches = inventoryCatalogueOptions(search.value, category.value);
+            const pagination = paginateCatalog(matches, inventoryPage, 25);
+            inventoryPage = pagination.currentPage;
             const list = inventoryCard.querySelector('#equipment-options');
             list.innerHTML = matches.map(item => `<option value="${esc(item.name)}">${esc(item.category || '')}</option>`).join('');
-            inventoryCard.querySelector('#inventory-results').innerHTML = search.value.trim() || category.value ? `<strong>${matches.length} catalogue result${matches.length === 1 ? '' : 's'}</strong>${matches.slice(0, 25).map(item => `<button type="button" class="inventory-result" data-catalogue-id="${esc(item.id)}"><span>${esc(item.name)}</span><small>${esc(item.category || '')} · ${esc(item.subcategory || '-')} · ${esc(formatCost(item.cost))} · ${item.weightLb == null ? 'weight unknown' : `${item.weightLb} lb`}</small></button>`).join('')}` : '<span>Type to search the catalogue or choose a category.</span>';
+            const results = inventoryCard.querySelector('#inventory-results');
+            const paginationControls = inventoryCard.querySelector('[data-inventory-pagination]') || document.createElement('div');
+            if (!paginationControls.parentElement) {
+                paginationControls.dataset.inventoryPagination = '';
+                results.after(paginationControls);
+            }
+            results.innerHTML = `<strong>${matches.length} catalogue result${matches.length === 1 ? '' : 's'}</strong>${pagination.records.map(item => `<button type="button" class="inventory-result" data-catalogue-id="${esc(item.id)}"><span>${esc(item.name)}</span><small>${esc(item.category || '')} · ${esc(item.subcategory || '-')} · ${esc(formatCost(item.cost))} · ${item.weightLb == null ? 'weight unknown' : `${item.weightLb} lb`}</small></button>`).join('')}`;
+            paginationControls.innerHTML = catalogPaginationMarkup(pagination, 'inventory');
             inventoryCard.querySelectorAll('[data-catalogue-id]').forEach(button => button.onclick = () => {
                 const item = equipmentCatalogue.find(record => record.id === button.dataset.catalogueId);
                 if (!item) return;
@@ -3856,9 +3921,10 @@ function setupProficiencyAndInventorySections() {
                 changed();
                 render();
             });
+            paginationControls.querySelectorAll('[data-inventory-page]').forEach(button => button.onclick = () => { inventoryPage = Number(button.dataset.inventoryPage); refreshOptions(); });
         };
-        search.oninput = refreshOptions;
-        category.onchange = refreshOptions;
+        search.oninput = () => refreshOptions(true);
+        category.onchange = () => refreshOptions(true);
         refreshOptions();
     }
 }

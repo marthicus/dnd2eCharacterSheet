@@ -378,6 +378,17 @@ test('Wizard Compendium imports the reported records and preserves source occurr
     assert.equal(wizardCompendiumSpells.every(record => record.source === 'Wizard Spell Compendium Volume 1'), true);
 });
 
+test('Combine keeps priest and wizard spell lineages separate', () => {
+    const phbCombine = spells.find(record => record.id === 'combine');
+    const priestCombine = compendiumSpells.find(record => record.id === 'combine');
+    const wizardCombine = wizardCompendiumSpells.find(record => record.id === 'combine-wizard');
+    const materialEnrichment = materialBatchThree.find(record => record.sourceRecordId === 'wsc-v1-combine');
+    assert.deepEqual({ id: phbCombine.id, level: phbCombine.level, classLists: phbCombine.classLists, source: phbCombine.source }, { id: 'combine', level: 1, classLists: ['priest'], source: 'AD&D 2E PHB' });
+    assert.deepEqual({ id: priestCombine.id, level: priestCombine.level, classLists: priestCombine.classLists, source: priestCombine.source }, { id: 'combine', level: 1, classLists: ['priest'], source: 'Priest Spell Compendium Volume 1' });
+    assert.deepEqual({ id: wizardCombine.id, sourceRecordId: wizardCombine.sourceRecordId, level: wizardCombine.level, classLists: wizardCombine.classLists, source: wizardCombine.source }, { id: 'combine-wizard', sourceRecordId: 'wsc-v1-combine', level: 9, classLists: ['wizard'], source: 'Wizard Spell Compendium Volume 1' });
+    assert.equal(materialEnrichment.id, 'combine-wizard');
+});
+
 test('Wizard Compendium preserves reversible, descriptor, location, and unmapped fields', () => {
     const sample = wizardCompendiumSpells.find(record => record.id === 'accelerate-animal-growth');
     assert.deepEqual(sample.descriptorSchools, ['Chronomancy']);
