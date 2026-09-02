@@ -276,7 +276,8 @@ main{position:relative;z-index:1}
 .henchmen-table th:nth-child(5){width:76px}
 .henchmen-table select{min-width:78px}
 @media(max-width:700px){.movement-layout{grid-template-columns:1fr}.movement-base{padding:8px}}
-@media(max-width:900px){.class-abilities-grid{grid-template-columns:1fr}.tracking-settings{grid-template-columns:1fr}}
+@media(max-width:900px){.class-abilities-grid{grid-template-columns:1fr}.tracking-settings{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.tracking-settings{grid-template-columns:1fr}}
 @media(max-width:700px){.race-rule-columns{grid-template-columns:1fr}}
 .hp-heart{position:relative;grid-row:1 / span 2;display:flex;flex-direction:column;align-items:center;justify-content:center;width:150px;height:150px;min-width:150px;min-height:150px;margin-right:10px;padding:12px;overflow:hidden;color:#fff;background:transparent;clip-path:polygon(0 20%,20% 20%,20% 10%,30% 10%,30% 0,40% 0,40% 10%,50% 10%,50% 20%,60% 20%,60% 10%,70% 10%,70% 0,80% 0,80% 10%,90% 10%,90% 20%,100% 20%,100% 60%,90% 60%,90% 70%,80% 70%,80% 80%,70% 80%,70% 90%,60% 90%,60% 100%,40% 100%,40% 90%,30% 90%,30% 80%,20% 80%,20% 70%,10% 70%,10% 60%,0 60%)}
 .hp-heart::before,.hp-heart::after{content:'';position:absolute;clip-path:inherit}
