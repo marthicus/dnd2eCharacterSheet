@@ -3689,6 +3689,11 @@ function setupTrackingCalculator(classAbilitiesSection) {
     const trackers = data.proficiencies.map((item, index) => isTrackingProficiency(item) ? index : -1).filter(index => index >= 0);
     classAbilitiesSection.querySelector('.tracking-calculator')?.remove();
     const hasRanger = (data.identity.classEntries || []).some(entry => /ranger/i.test(entry.className || ''));
+    const hasTrackingClassAbility = data.spells.some(item => item?.classAbilityId === 'tracking' || (item?.type === 'Class ability' && String(item.name || '').trim().toLowerCase() === 'tracking'));
+    if (!trackers.length && hasTrackingClassAbility) {
+        trackers.push(-1);
+        data.proficiencies[-1] = { acquisition: 'class ability', usesNwpSlot: false };
+    }
     if (!hasRanger || !trackers.length) return;
     const active = data.trackingCalculator.activeTrackingRow;
     const trackingIndex = trackers.includes(active) ? active : trackers[0];

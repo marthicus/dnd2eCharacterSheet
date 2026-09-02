@@ -4,6 +4,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { calculate } = require('../tracking-calculator.js');
 const rule = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'tracking-proficiency-calculator.json'), 'utf8'));
+const app = fs.readFileSync(path.join(__dirname, '..', 'app.js'), 'utf8');
+const classAbilities = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'class-abilities-catalog.json'), 'utf8')).abilities;
 const run = (state = {}, character = {}) => calculate(rule, { physicalTrail: true, outdoorEvidence: true, ...state }, { wisdom: 14, ...character });
 
 test('core ranger has no universal penalty', () => assert.equal(run({}, { isRanger: true }).finalTargetNumber, 14));
@@ -19,3 +21,5 @@ test('flying warning is reported', () => assert.match(run({ flyingOrNoncorporeal
 test('ranger environmental halving follows additive modifiers', () => assert.equal(run({ environment: 'urban' }, { isRanger: true }).finalTargetNumber, 7));
 test('kit override avoids ranger terrain halving', () => assert.equal(run({ environment: 'urban', kitOverridesEnvironmentPenalty: true }, { isRanger: true }).finalTargetNumber, 14));
 test('movement target fourteen honors both campaign settings', () => { assert.equal(run({ trackingMovementAt14: 'half' }, { isRanger: true }).movementMultiplier, .5); assert.equal(run({ trackingMovementAt14: 'three-quarters' }, { isRanger: true }).movementMultiplier, .75); });
+test('Ranger Tracking class ability can activate the calculator without a duplicate NWP', () => assert.match(app, /hasTrackingClassAbility = data\.spells\.some\(item => item\?\.classAbilityId === 'tracking'/));
+test('racial secret-door abilities are available in the abilities catalogue', () => assert.deepEqual(classAbilities.filter(ability => ability.id.startsWith('racial-detect-secret-doors-')).map(ability => [ability.name, ability.races, ability.description]), [['Detect Secret Doors - Passive', ['Elves', 'Half-Elf'], 'Detect secret doors - Passive (10′ radius) - 1 on 1d6'], ['Detect Secret Doors - Active', ['Elves', 'Half-Elf'], 'Detect secret doors - Active (10′ radius) - 1-3 on 1d6']]));
