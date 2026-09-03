@@ -254,7 +254,7 @@ function normalize(x = {}) {
     d.rangerThiefSettings = { ...d.rangerThiefSettings, ...(x.rangerThiefSettings || {}), other: { ...d.rangerThiefSettings.other, ...(x.rangerThiefSettings?.other || {}) }, manualOverrides: { ...d.rangerThiefSettings.manualOverrides, ...(x.rangerThiefSettings?.manualOverrides || {}) } };
     d.rangerThiefCalculations = x.rangerThiefCalculations && typeof x.rangerThiefCalculations === 'object' ? x.rangerThiefCalculations : {};
     d.adviserSettings = { ...d.adviserSettings, ...(x.adviserSettings || {}), enabled: x.adviserSettings?.enabled !== false, dismissed: x.adviserSettings?.dismissed === true, currentAdviceId: typeof x.adviserSettings?.currentAdviceId === 'string' ? x.adviserSettings.currentAdviceId : null };
-    d.resistances = d.resistances.map(item => ({ type: typeof item.type === 'string' ? item.type : 'Other', appliesTo: item.appliesTo ?? '', value: item.value ?? '', source: item.source ?? '', active: item.active !== false, notes: item.notes ?? '' }));
+    d.resistances = d.resistances.map(item => ({ type: typeof item.type === 'string' ? item.type : 'Other', appliesTo: item.appliesTo ?? '', value: item.value ?? '', source: item.source ?? '', active: item.active !== false, notes: item.notes ?? '', racialAuto: item.racialAuto === true }));
     d.surpriseBonus = { ...d.surpriseBonus, ...(x.surpriseBonus || {}) };
     d.globalModifiers = Array.isArray(x.globalModifiers) ? x.globalModifiers.map(item => ({ category: typeof item.category === 'string' ? item.category : 'Other', value: item.value ?? '', appliesTo: item.appliesTo ?? '', source: item.source ?? '', active: item.active !== false, condition: item.condition ?? '', notes: item.notes ?? '' })) : [];
     d.xpHistory = Array.isArray(x.xpHistory) ? x.xpHistory : [];
@@ -1312,6 +1312,26 @@ function updateSurpriseFromRace(race) {
     if (summary) summary.textContent = `Enemy surprise: ${data.surpriseBonus.fullModifier} / ${data.surpriseBonus.reducedModifier}`;
 }
 
+const raceResistancePresets = {
+    Elves: ['Elf: Sleep and Charm'],
+    'Half-Elf': ['Half-Elf: Sleep and Charm'],
+    Dwarf: ['Dwarf: saving throw bonus'],
+    Halfling: ['Halfling: saving throw bonus'],
+    Goblins: ['Goblin: enemy attack penalty'],
+    Lizardfolk: ['Lizardfolk: hold breath']
+};
+
+function updateResistancesFromRace(race) {
+    data.resistances = (data.resistances || []).filter(item => !item.racialAuto);
+    (raceResistancePresets[race] || []).forEach(label => {
+        const preset = resistancePresets.find(item => item[0] === label);
+        if (!preset) return;
+        data.resistances.push({ type: preset[1], appliesTo: preset[2], value: preset[3], source: preset[4], active: true, notes: '', racialAuto: true });
+    });
+    const section = document.querySelector('.resistance-section');
+    if (section) { section.remove(); setupResistanceSection(); }
+}
+
 function updateVisionFromRace(race) {
     const cardVision = raceCardRecords[race]?.vision;
     const vision = cardVision?.type === 'Infravision' && cardVision.rangeFeet ? `Infravision ${cardVision.rangeFeet}'`
@@ -1373,6 +1393,7 @@ function setupRaceSystem() {
         if (preset?.choiceAbilities?.includes(data.racialBonusChoice)) data.racialBonuses[data.racialBonusChoice] = 1;
         data.racialFeatures = preset?.features || '';
         updateSurpriseFromRace(race);
+        updateResistancesFromRace(race);
         data.selectedBackground = preset ? data.selectedBackground : '';
         classList.innerHTML = (preset?.classes || []).map(className => `<option value="${esc(className)}"></option>`).join('');
         const backgrounds = preset ? Object.entries(preset.backgrounds) : [];
@@ -3522,9 +3543,9 @@ function setupResistanceSection() {
     if (heading) heading.outerHTML = '<h3>Resistances and immunities</h3>';
     const target = document.querySelector('.hit-points-section');
     if (target) target.append(section); else document.querySelector('.grid').append(section);
-    section.querySelector('[data-resistance-add]').onclick = () => { data.resistances.push({ type: 'Other', appliesTo: '', value: '', source: '', active: true, notes: '' }); changed(); render(); };
+    section.querySelector('[data-resistance-add]').onclick = () => { data.resistances.push({ type: 'Other', appliesTo: '', value: '', source: '', active: true, notes: '', racialAuto: false }); changed(); render(); };
     section.querySelectorAll('[data-resistance-item]').forEach(input => input.oninput = () => { const item = data.resistances[+input.dataset.resistanceItem]; item[input.dataset.resistanceKey] = input.type === 'checkbox' ? input.checked : input.value; changed(); });
-    section.querySelectorAll('[data-resistance-preset]').forEach(select => select.onchange = () => { const preset = resistancePresets.find(item => item[0] === select.value); if (!preset) return; data.resistances[+select.dataset.resistancePreset] = { type: preset[1], appliesTo: preset[2], value: preset[3], source: preset[4], active: true, notes: '' }; changed(); render(); });
+    section.querySelectorAll('[data-resistance-preset]').forEach(select => select.onchange = () => { const preset = resistancePresets.find(item => item[0] === select.value); if (!preset) return; data.resistances[+select.dataset.resistancePreset] = { type: preset[1], appliesTo: preset[2], value: preset[3], source: preset[4], active: true, notes: '', racialAuto: false }; changed(); render(); });
     section.querySelectorAll('[data-resistance-remove]').forEach(button => button.onclick = () => { data.resistances.splice(+button.dataset.resistanceRemove, 1); changed(); render(); });
 }
 
