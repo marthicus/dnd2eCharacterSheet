@@ -165,6 +165,7 @@ let languageSourceTypes = [];
 let intelligenceBonusLanguages = [];
 let languageRaceRules = {};
 let raceCardRecords = {};
+let encumbranceRules = null;
 let priestSpellProgression = null;
 let wizardSpellProgression = null;
 let rangerSpellProgression = null;
@@ -355,6 +356,17 @@ async function loadRaceCards() {
         integrateRaceCards(dataset.races);
     } catch {
         raceCardRecords = {};
+    }
+}
+
+async function loadEncumbranceRules() {
+    try {
+        const response = await fetch('data/encumbrance-rules.json');
+        if (!response.ok) throw new Error('Encumbrance rules unavailable');
+        const rule = await response.json();
+        encumbranceRules = rule?.id === 'character-encumbrance-phb' && Array.isArray(rule.strengthRows) ? rule : null;
+    } catch {
+        encumbranceRules = null;
     }
 }
 
@@ -3613,25 +3625,14 @@ function table(key, cols) {
     return `<div class="tableWrap"><table><thead><tr>${cols.map(c=>`<th>${c[1]}</th>`).join('')}<th></th></tr></thead><tbody>${data[key].map((r,i)=>`<tr>${cols.map(c=>`<td><input data-array="${key}" data-index="${i}" data-key="${c[0]}" value="${esc(r[c[0]])}"></td>`).join('')}<td><button class="remove" data-remove="${key}" data-index="${i}">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="${key}">Add row</button>`
 }
 
-const encumbranceBands = {
-    '1': [1, 2, 3, 5, 10, 10], '2': [1, 2, 3, 5, 10, 10], '3': [5, 10, 20, 30, 50, 50],
-    '4-5': [10, 20, 30, 40, 50, 50], '6-7': [20, 30, 50, 60, 90, 90], '8-9': [30, 50, 70, 90, 120, 120],
-    '10-11': [40, 50, 70, 90, 110, 110], '12-13': [45, 65, 95, 115, 140, 140], '14-15': [55, 85, 115, 145, 170, 170],
-    '16': [70, 105, 155, 185, 195, 195], '17': [85, 121, 157, 193, 220, 220], '18': [110, 149, 187, 227, 255, 255],
-    '18/01-50': [135, 174, 213, 252, 280, 280], '18/51-75': [160, 199, 239, 278, 305, 305],
-    '18/76-90': [185, 224, 263, 302, 330, 330], '18/91-99': [235, 274, 313, 352, 380, 380], '18/00': [335, 374, 413, 452, 480, 480],
-    '19': [485, 524, 563, 602, 640, 640], '20': [535, 574, 613, 652, 700, 700], '21': [535, 574, 613, 652, 700, 700],
-    '22': [635, 674, 713, 752, 810, 810], '23': [785, 824, 863, 902, 970, 970], '24': [935, 974, 1013, 1052, 1130, 1130],
-    '25': [1535, 1574, 1613, 1652, 1750, 1750]
-};
-
 function encumbranceStrengthKey(score) {
     const text = String(score ?? '').trim();
-    if (encumbranceBands[text]) return text;
+    if (encumbranceRules?.strengthRows.some(row => row.strength === text)) return text;
     const value = Number.parseInt(text, 10);
     if (!Number.isInteger(value)) return '10-11';
     if (value >= 25) return '25';
     if (value >= 19) return String(value);
+    if (value <= 2) return '2';
     if (value >= 18) return '18';
     if (value >= 16) return String(value);
     if (value >= 14) return '14-15';
@@ -3651,15 +3652,29 @@ function inventoryTotalWeight() {
     return data.inventory.reduce((total, item) => total + (Number.parseFloat(item.quantity) || 0) * itemWeight(item), 0);
 }
 
+const encumbranceCategoryLabels = { unencumbered: 'Unencumbered', light: 'Light', moderate: 'Moderate', heavy: 'Heavy', severe: 'Severe' };
+
+function encumbranceCategoriesForRow(row) {
+    const populated = ['unencumbered', 'light', 'moderate', 'heavy', 'severe'].filter(key => Array.isArray(row[key]));
+    return populated.map((key, index) => ({
+        label: encumbranceCategoryLabels[key],
+        // the last populated category always extends to the maximum carried weight, even if Table 47 leaves later columns blank
+        upperBound: index === populated.length - 1 ? row.maximumWeight : row[key][1]
+    }));
+}
+
 function encumbranceSummary() {
     const strength = encumbranceStrengthKey(data.abilities.str);
-    const bands = encumbranceBands[strength];
+    const row = encumbranceRules?.strengthRows.find(item => item.strength === strength);
     const total = inventoryWeight();
-    const labels = ['Unencumbered', 'Light', 'Moderate', 'Heavy', 'Severe'];
-    const index = bands.findIndex(limit => total <= limit);
-    const category = index < 0 ? 'Over max carried weight' : labels[index];
     const allWeight = inventoryTotalWeight();
-    return `<div class="encumbrance-summary"><strong>Carried weight: ${total % 1 ? total.toFixed(2) : total} lb</strong><span>Total weight: ${allWeight % 1 ? allWeight.toFixed(2) : allWeight} lb</span><span>Strength ${esc(strength)} | ${category}</span><span>Unencumbered through ${bands[0]} lb | Max carried ${bands[5]} lb</span></div>`;
+    const carriedLine = `<strong>Carried weight: ${total % 1 ? total.toFixed(2) : total} lb</strong><span>Total weight: ${allWeight % 1 ? allWeight.toFixed(2) : allWeight} lb</span>`;
+    if (!row) return `<div class="encumbrance-summary">${carriedLine}<span>Strength ${esc(strength)} | Encumbrance data unavailable</span></div>`;
+    const categories = encumbranceCategoriesForRow(row);
+    const match = categories.find(category => total <= category.upperBound);
+    const category = total > row.maximumWeight ? 'Over capacity' : match ? match.label : categories.length ? categories[categories.length - 1].label : 'Within capacity';
+    const unencumberedThrough = Array.isArray(row.unencumbered) ? row.unencumbered[1] : '-';
+    return `<div class="encumbrance-summary">${carriedLine}<span>Strength ${esc(strength)} | ${category}</span><span>Unencumbered through ${unencumberedThrough} lb | Max carried ${row.maximumWeight} lb</span></div>`;
 }
 
 function updateEncumbranceSummary() {
@@ -4437,7 +4452,7 @@ try {
 } catch {}
 setupFiligreeParallax();
 render();
-Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadPriestSpellProgression(), loadWizardSpellProgression(), loadRangerSpellProgression(), loadDruidSphereAccess(), loadRangerSpellAccess(), loadPaladinSpellData(), loadBardSpellProgression(), loadShamanSpellcasting(), loadRangerThiefAbilities(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadTrackingProficiencyRule(), loadLanguageCatalog(), loadRaceCards()]).then(() => {
+Promise.all([loadEquipmentCatalogue(), loadNonweaponCatalog(), loadSpellCatalog(), loadPriestSpellProgression(), loadWizardSpellProgression(), loadRangerSpellProgression(), loadDruidSphereAccess(), loadRangerSpellAccess(), loadPaladinSpellData(), loadBardSpellProgression(), loadShamanSpellcasting(), loadRangerThiefAbilities(), loadSpellMaterialEnrichments(), loadClassAbilitiesCatalog(), loadWeaponProficiencyCatalog(), loadProficiencyRules(), loadTrackingProficiencyRule(), loadLanguageCatalog(), loadRaceCards(), loadEncumbranceRules()]).then(() => {
     const enrichmentResult = applySpellMaterialEnrichments(spellCatalogSourceRecords, spellMaterialEnrichmentRecords);
     spellCatalogSourceRecords = enrichmentResult.records;
     spellMaterialEnrichmentConflicts = enrichmentResult.conflicts;
