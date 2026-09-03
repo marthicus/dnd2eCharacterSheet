@@ -1313,15 +1313,20 @@ function updateSurpriseFromRace(race) {
 }
 
 function updateVisionFromRace(race) {
-    const vision = race === 'Humans' ? 'Normal Vision' : ['Elves', 'Goblins', 'Dwarf', 'Halfling', 'Half-Elf'].includes(race) ? "Infravision 60'" : '';
+    const cardVision = raceCardRecords[race]?.vision;
+    const vision = cardVision?.type === 'Infravision' && cardVision.rangeFeet ? `Infravision ${cardVision.rangeFeet}'`
+        : cardVision?.type ? cardVision.type
+        : race === 'Humans' ? 'Normal Vision'
+        : ['Elves', 'Goblins', 'Dwarf', 'Halfling', 'Half-Elf'].includes(race) ? "Infravision 60'" : '';
     if (!vision) return;
     data.identity.visionType = vision;
     const select = document.querySelector('#vision-type');
     const manual = document.querySelector('#manual-vision-type');
-    if (select) select.value = vision;
+    const isPreset = visionTypes.includes(vision);
+    if (select) select.value = isPreset ? vision : 'Other';
     if (manual) {
-        manual.value = '';
-        manual.hidden = true;
+        manual.value = isPreset ? '' : vision;
+        manual.hidden = isPreset;
     }
 }
 
