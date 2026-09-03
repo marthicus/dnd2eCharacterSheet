@@ -2322,10 +2322,12 @@ function currentBenefitValues(ability, score) {
     const aliases = { 'hit point': ['hit point', 'hit points'], 'resurrection survival': ['resurrection survival'], 'maximum henchmen': ['maximum henchmen'] };
     const values = benefitColumns[ability].map(([, key]) => {
         const labels = aliases[key] || [key];
-        const match = segments.map(segment => ({ segment, lower: segment.toLowerCase() })).find(({ lower }) => labels.some(label => lower.startsWith(label)));
+        const match = segments.map(segment => ({ segment, lower: segment.toLowerCase() })).find(({ lower }) => labels.some(label => lower.includes(label)));
         if (!match) return '-';
-        const label = labels.find(value => match.lower.startsWith(value));
-        return match.segment.slice(label.length).trim() || match.segment;
+        const label = labels.find(value => match.lower.includes(value));
+        const labelStart = match.lower.indexOf(label);
+        const stripped = labelStart === 0 ? match.segment.slice(label.length).trim() : '';
+        return stripped || match.segment;
     });
     return { score: value, values };
 }
