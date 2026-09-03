@@ -3771,7 +3771,7 @@ function setupTrackingCalculator(classAbilitiesSection) {
 function languagesMarkup() {
     const intelligence = Number.parseInt(data.abilities.int, 10);
     const available = Number.isInteger(intelligence) && intelligence >= 1 ? intelligenceBonusLanguages[intelligence - 1] || 0 : 0;
-    const used = data.languages.filter(language => language.sourceType === 'bonus' || language.source === 'bonus').length;
+    const used = data.languages.filter(language => language.usesLanguageSlot === true || language.sourceType === 'bonus' || language.source === 'bonus').length;
     const remaining = available - used;
     return `<section class="card wide languages-section"><h2>Languages</h2><div class="language-summary"><strong>Known Languages: ${data.languages.length}</strong><span>Available Bonus Languages: ${available}</span><span>Used Bonus Languages: ${used}</span><strong>Remaining Bonus Languages: ${remaining}</strong></div><div class="language-picker"><label for="language-search">Search language catalogue</label><input id="language-search" type="search" placeholder="Search language name"><div class="language-filters"><label>Category<select id="language-category-filter"><option value="">All categories</option>${[...new Set(languageRecords.map(item => item.category))].sort().map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label><label>Source<select id="language-source-filter"><option value="">All sources</option>${[...new Set(languageRecords.map(item => item.source).filter(Boolean))].sort().map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('')}</select></label><label>Literacy<select id="language-literacy-filter"><option value="">Any literacy</option><option value="true">Supported</option><option value="false">Not supported</option></select></label></div><div id="language-results" class="language-results"></div></div><div class="tableWrap"><table class="languages-table"><thead><tr><th>Language</th><th>Category</th><th>Source</th><th>Speaks</th><th>Reads</th><th>Writes</th><th>Uses Language Slot</th><th>Notes</th><th></th></tr></thead><tbody>${data.languages.map((language, index) => `<tr><td><input data-array="languages" data-index="${index}" data-key="name" value="${esc(language.name)}"></td><td><input data-array="languages" data-index="${index}" data-key="category" value="${esc(language.category || '')}"></td><td><select data-array="languages" data-index="${index}" data-key="sourceType">${languageSourceTypes.map(source => `<option value="${source}"${language.sourceType === source ? ' selected' : ''}>${source}</option>`).join('')}</select></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="speaks" ${language.speaks ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="reads" ${language.reads ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="writes" ${language.writes ? 'checked' : ''}></td><td><input type="checkbox" data-array="languages" data-index="${index}" data-key="usesLanguageSlot" ${language.usesLanguageSlot ? 'checked' : ''}></td><td><input data-array="languages" data-index="${index}" data-key="notes" value="${esc(language.notes)}"></td><td><button class="remove" data-remove="languages" data-index="${index}" aria-label="Remove language">×</button></td></tr>`).join('')}</tbody></table></div><button class="add" data-add="languages">Add custom language</button></section>`;
 }
@@ -3781,7 +3781,7 @@ function updateLanguageSummary() {
     if (!summary) return;
     const intelligence = Number.parseInt(data.abilities.int, 10);
     const available = Number.isInteger(intelligence) && intelligence >= 1 ? intelligenceBonusLanguages[intelligence - 1] || 0 : 0;
-    const used = data.languages.filter(language => language.sourceType === 'bonus' || language.source === 'bonus').length;
+    const used = data.languages.filter(language => language.usesLanguageSlot === true || language.sourceType === 'bonus' || language.source === 'bonus').length;
     summary.children[0].textContent = `Known Languages: ${data.languages.length}`;
     summary.children[1].textContent = `Available Bonus Languages: ${available}`;
     summary.children[2].textContent = `Used Bonus Languages: ${used}`;
@@ -3796,11 +3796,11 @@ function syncAutomaticLanguages(race) {
         const catalog = languageLookup(id);
         if (!catalog) return;
         const existing = data.languages.find(language => language.id === id || language.name.toLowerCase() === catalog.name.toLowerCase());
-        const language = existing || { id: catalog.id, name: catalog.name, category: catalog.category || null, sourceType: 'racial', speaks: catalog.speaks !== false, reads: catalog.reads === true, writes: catalog.writes === true, usesLanguageSlot: false, notes: '' };
+        const language = existing || { id: catalog.id, name: catalog.name, category: catalog.category || null, sourceType: 'racial', speaks: catalog.speaks !== false, reads: catalog.reads === true, writes: catalog.writes === true, usesLanguageSlot: true, notes: '' };
         language.id = catalog.id;
         language.name = catalog.name;
         language.isAutomatic = true;
-        language.usesLanguageSlot = false;
+        language.usesLanguageSlot = true;
         language.sourceType = 'racial';
         if (!existing) data.languages.push(language);
     });

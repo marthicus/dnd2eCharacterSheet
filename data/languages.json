@@ -43,8 +43,7 @@
     },
     "half-elf": {
       "automatic": [
-        "common",
-        "elven"
+        "common"
       ]
     },
     "halfling": {

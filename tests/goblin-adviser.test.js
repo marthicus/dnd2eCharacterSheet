@@ -26,7 +26,7 @@ test('goblin adviser is keyboard-accessible and uses a transparent sprite', () =
     assert.match(app, /setTimeout\(\(\) => \{ sprite\.src = 'goblin-adviser-think-left-clean\.png'/);
     assert.match(app, /goblin_hut_transparent\.png/);
     assert.match(app, /setAttribute\('aria-label', 'summon advisor goblin'\)/);
-    assert.match(html, /app\.js\?v=goblin-adviser-32/);
+    assert.match(html, /app\.js\?v=goblin-adviser-33/);
     ['goblin-adviser-idle-left-clean.png', 'goblin-adviser-talk-point-left-clean-v2.png', 'goblin-adviser-knife-left-clean-v2.png', 'goblin-adviser-think-left-clean.png'].forEach(file => assert.ok(fs.existsSync(path.join(__dirname, '..', file)), `${file} should exist`));
     assert.match(styles, /\.goblin-adviser-bubble\{[^}]*background:#fffaf0/);
     assert.match(styles, /\.goblin-adviser-toggle:focus-visible/);
