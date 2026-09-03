@@ -1152,6 +1152,11 @@ function updateNextLevel(index) {
     const table = experienceTables[experienceTableId(entry?.className)];
     const level = Number.parseInt(entry?.level, 10);
     if (!table || !Number.isInteger(level) || level < 1 || level >= table.length - 1) return;
+    if (!String(entry.xp ?? '').trim()) {
+        entry.xp = String(table[level]);
+        if (index === 0) data.identity.xp = entry.xp;
+        document.querySelectorAll(`[data-class-entry="${index}"][data-key="xp"]`).forEach(input => { input.value = entry.xp; });
+    }
     entry.nextLevel = String(table[level + 1]);
     document.querySelectorAll(`[data-class-entry="${index}"][data-key="nextLevel"]`).forEach(input => { input.value = entry.nextLevel; input.title = `Next level XP: level ${level + 1} threshold from the ${experienceTableId(entry.className)} table = ${formatExperience(table[level + 1])}.`; });
 }
